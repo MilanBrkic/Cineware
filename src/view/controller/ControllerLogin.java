@@ -5,6 +5,10 @@
  */
 package view.controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.security.MessageDigest;
 import javax.swing.ImageIcon;
@@ -15,7 +19,7 @@ import view.FormLogin;
  * @author Milan
  */
 public class ControllerLogin {
-    
+
     private static ControllerLogin instance;
     private FormLogin form;
 
@@ -23,24 +27,24 @@ public class ControllerLogin {
         this.form = form;
     }
 
-    
-    public void openForm(){
+    public void openForm() {
         form.setLocationRelativeTo(null);
         setIcon();
+        setListeners();
         form.setVisible(true);
     }
-    
-    public void setIcon(){
+
+    public void setIcon() {
         String basePath = new File("").getAbsolutePath();
-        String iconPath = basePath+ "\\resources\\cineware-icon.png";
-        
+        String iconPath = basePath + "\\resources\\cineware-icon.png";
+
         ImageIcon img = new ImageIcon(iconPath);
         form.setIconImage(img.getImage());
-        
+
     }
-    
-    public void encrypt(String password){
-        
+
+    public void encrypt(String password) {
+
         String algorithm = "SHA";
 
         byte[] plainText = password.getBytes();
@@ -67,4 +71,64 @@ public class ControllerLogin {
             e.printStackTrace();
         }
     }
+
+    private void setListeners() {
+        setLoginListener();
+        setEnterListeners();
+    }
+
+    private void setLoginListener() {
+        form.getBtnLogin().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!validate()) return;
+            }
+
+            private boolean validate() {
+                form.getLblError().setText("");
+                String error = "";
+                String username = form.getTxtUsername().getText().trim();
+                if(username.equals("")){
+                    error = "Username can not be empty";
+                    form.getLblError().setText(error);
+                    return false;
+                }
+                
+                String password = String.valueOf(form.getTxtPassword().getPassword());
+                if(password.equals("")){
+                    error += "Password can not be empty";
+                    form.getLblError().setText(error);
+                    return false;
+                }
+                return true;
+            }
+        });
+    }
+
+    private void setEnterListeners() {
+        form.getTxtUsername().addKeyListener(new EnterListener());
+        form.getTxtPassword().addKeyListener(new EnterListener());
+    }
+    
+
+    class EnterListener implements KeyListener {
+
+        @Override
+        public void keyTyped(KeyEvent e) {
+            
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                form.getBtnLogin().doClick();
+            }
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+        }
+
+    }
 }
+
