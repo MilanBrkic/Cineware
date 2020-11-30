@@ -5,13 +5,19 @@
  */
 package view.controller;
 
+import controller.Controller;
+import domen.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
 import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import view.FormLogin;
 
 /**
@@ -43,7 +49,71 @@ public class ControllerLogin {
 
     }
 
-    public void encrypt(String password) {
+    
+
+    private void setListeners() {
+        setLoginListener();
+        setEnterListeners();
+    }
+
+    private void setLoginListener() {
+        form.getBtnLogin().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String username = form.getTxtUsername().getText().trim();
+                String password = String.valueOf(form.getTxtPassword().getPassword());
+                if (!validate(username, password)) {
+                    return;
+                }
+                try {
+                   User user = login(username, encrypt(password));
+                    System.out.println(user);
+                } catch (Exception ex) {
+                    form.getLblError().setText(ex.getMessage());
+                }
+
+            }
+
+            private boolean validate(String username, String password) {
+                form.getLblError().setText("");
+                String error = "";
+
+                if (username.equals("")) {
+                    error = "Username can not be empty";
+                    form.getLblError().setText(error);
+                    return false;
+                }
+
+                if (password.equals("")) {
+                    error += "Password can not be empty";
+                    form.getLblError().setText(error);
+                    return false;
+                }
+                return true;
+            }
+
+            private User login(String username, String password) throws Exception {
+
+                ArrayList<User> users = new ArrayList<>();
+                try {
+                    users = Controller.getInstance().getDbUser().getAll();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                
+                for (User user : users) {
+                    if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
+                        return user;
+                    }
+                }
+                throw new Exception("username or password incorrect");
+
+            }
+        });
+    }
+
+    public String encrypt(String password) {
 
         String algorithm = "SHA";
 
@@ -65,57 +135,23 @@ public class ControllerLogin {
                 sb.append(Long.toString(encodedPassword[i] & 0xff, 16));
             }
 
-            System.out.println("Plain    : " + password);
-            System.out.println("Encrypted: " + sb.toString());
+            return sb.toString();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return "";
     }
-
-    private void setListeners() {
-        setLoginListener();
-        setEnterListeners();
-    }
-
-    private void setLoginListener() {
-        form.getBtnLogin().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(!validate()) return;
-            }
-
-            private boolean validate() {
-                form.getLblError().setText("");
-                String error = "";
-                String username = form.getTxtUsername().getText().trim();
-                if(username.equals("")){
-                    error = "Username can not be empty";
-                    form.getLblError().setText(error);
-                    return false;
-                }
-                
-                String password = String.valueOf(form.getTxtPassword().getPassword());
-                if(password.equals("")){
-                    error += "Password can not be empty";
-                    form.getLblError().setText(error);
-                    return false;
-                }
-                return true;
-            }
-        });
-    }
-
+    
     private void setEnterListeners() {
         form.getTxtUsername().addKeyListener(new EnterListener());
         form.getTxtPassword().addKeyListener(new EnterListener());
     }
-    
 
     class EnterListener implements KeyListener {
 
         @Override
         public void keyTyped(KeyEvent e) {
-            
+
         }
 
         @Override
@@ -131,4 +167,3 @@ public class ControllerLogin {
 
     }
 }
-
