@@ -27,10 +27,11 @@ import view.util.IconSetter;
  * @author Milan
  */
 public class ControllerLogin {
+
     private IconSetter icon;
     private static ControllerLogin instance;
     private FormLogin form;
-    
+
     public ControllerLogin(FormLogin form) {
         this.form = form;
         icon = new IconSetter(form);
@@ -43,11 +44,9 @@ public class ControllerLogin {
         form.setVisible(true);
     }
 
-    public void setIcon(){
+    public void setIcon() {
         icon.setIcon();
     }
-
-    
 
     private void setListeners() {
         setLoginListener();
@@ -61,15 +60,18 @@ public class ControllerLogin {
                 String username = form.getTxtUsername().getText().trim();
                 String password = String.valueOf(form.getTxtPassword().getPassword());
                 if (!validate(username, password)) {
+
                     return;
                 }
                 try {
-                   User user = login(username, encrypt(password));
-                   Controller.getInstance().setUser(user);
-                   form.dispose();
-                   MainCoordinator.getInstance().openFormMain();
+                    User user = login(username, Controller.getInstance().encrypt(password));
+                    Controller.getInstance().setUser(user);
+                    form.dispose();
+                    MainCoordinator.getInstance().openFormMain();
                 } catch (Exception ex) {
                     form.getLblError().setText(ex.getMessage());
+                    form.getTxtUsername().grabFocus();
+                    
                 }
 
             }
@@ -101,7 +103,6 @@ public class ControllerLogin {
                     e.printStackTrace();
                 }
 
-                
                 for (User user : users) {
                     if (username.equals(user.getUsername()) && password.equals(user.getPassword())) {
                         return user;
@@ -113,35 +114,8 @@ public class ControllerLogin {
         });
     }
 
-    public String encrypt(String password) {
-
-        String algorithm = "SHA";
-
-        byte[] plainText = password.getBytes();
-
-        try {
-            MessageDigest md = MessageDigest.getInstance(algorithm);
-
-            md.reset();
-            md.update(plainText);
-            byte[] encodedPassword = md.digest();
-
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < encodedPassword.length; i++) {
-                if ((encodedPassword[i] & 0xff) < 0x10) {
-                    sb.append("0");
-                }
-
-                sb.append(Long.toString(encodedPassword[i] & 0xff, 16));
-            }
-
-            return sb.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
-    }
     
+
     private void setEnterListeners() {
         form.getTxtUsername().addKeyListener(new EnterListener());
         form.getTxtPassword().addKeyListener(new EnterListener());

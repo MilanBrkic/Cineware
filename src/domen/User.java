@@ -5,6 +5,8 @@
  */
 package domen;
 
+import controller.Controller;
+
 /**
  *
  * @author Brka
@@ -19,9 +21,17 @@ public class User {
 
     public User() {
     }
-
-    public User(int id, String firstname, String lastname, String username, String password, boolean admin) {
+    
+    public User(int id,String firstname, String lastname, String username, String password, boolean admin) {
         this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.username = username;
+        this.password = password;
+        this.admin = admin;
+    }
+    
+    public User(String firstname, String lastname, String username, String password, boolean admin) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;

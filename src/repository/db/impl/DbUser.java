@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import repository.db.DbRepository;
-import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
 /**
@@ -35,9 +35,11 @@ public class DbUser implements DbRepository<User>{
                 String username = rs.getString("username");
                 String password = rs.getString("password");
                 boolean admin = rs.getBoolean("admin");
-                User user = new User(id, firstname, lastname, username, password, admin);
+                User user = new User(id,firstname, lastname, username, password, admin);
                 users.add(user);
             }
+            s.close();
+            rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(DbUser.class.getName()).log(Level.SEVERE, null, ex);
         }    
@@ -46,8 +48,22 @@ public class DbUser implements DbRepository<User>{
     }
 
     @Override
-    public void add(User t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void add(User user) throws Exception {
+        String query = "INSERT INTO user(firstname, lastname, username, password, admin) VALUES(?,?,?,?,?)";
+        PreparedStatement ps = connect().prepareStatement(query);
+        ps.setString(1, user.getFirstname());
+        ps.setString(2, user.getLastname());
+        ps.setString(3, user.getUsername());
+        ps.setString(4, user.getPassword());
+        ps.setBoolean(5, user.isAdmin());
+        ps.executeUpdate();
+        ps.close();
+        try {
+            commit();
+        } catch (SQLException e) {
+            rollback();
+            throw new Exception("User could not be saved!");
+        }
     }
 
     @Override

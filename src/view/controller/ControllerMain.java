@@ -46,6 +46,7 @@ public class ControllerMain {
         setListeners();
         
         form.setLocationRelativeTo(null);
+        
         form.setVisible(true);
     }
 
