@@ -34,6 +34,7 @@ public class FormMain extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         menuItemUserAdd = new javax.swing.JMenuItem();
+        menuItemUserView = new javax.swing.JMenuItem();
 
         jLabel3.setText("jLabel3");
 
@@ -53,6 +54,9 @@ public class FormMain extends javax.swing.JFrame {
         menuItemUserAdd.setText("Add");
         jMenu3.add(menuItemUserAdd);
 
+        menuItemUserView.setText("View");
+        jMenu3.add(menuItemUserView);
+
         jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
@@ -67,14 +71,19 @@ public class FormMain extends javax.swing.JFrame {
     public JMenuItem getMenuItemUserAdd() {
         return menuItemUserAdd;
     }
-    
 
+    public JMenuItem getMenuItemUserView() {
+        return menuItemUserView;
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel lblWelcomeUser;
     private javax.swing.JMenuItem menuItemUserAdd;
+    private javax.swing.JMenuItem menuItemUserView;
     // End of variables declaration//GEN-END:variables
 
 }

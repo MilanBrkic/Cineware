@@ -7,6 +7,7 @@ package view.panel;
 
 import controller.Controller;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -53,6 +54,8 @@ public class PanelUserAdd extends javax.swing.JPanel {
         btnCancel = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
         btnX = new javax.swing.JButton();
+        txtID = new javax.swing.JTextField();
+        lblID = new javax.swing.JLabel();
 
         jLabel9.setForeground(new java.awt.Color(255, 0, 0));
         jLabel9.setText("jLabel6");
@@ -96,25 +99,20 @@ public class PanelUserAdd extends javax.swing.JPanel {
             }
         });
 
+        txtID.setEditable(false);
+
+        lblID.setText("ID:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 351, Short.MAX_VALUE)
+                .addComponent(btnX))
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtFirstname)
-                            .addComponent(txtLastname)
-                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
-                            .addComponent(txtUsername)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -136,17 +134,33 @@ public class PanelUserAdd extends javax.swing.JPanel {
                                 .addComponent(radioYes)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(radioNo)
-                                .addGap(109, 109, 109)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnX))
+                                .addGap(109, 109, 109))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(lblID))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtID, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtFirstname)
+                                .addComponent(txtLastname)
+                                .addComponent(txtPassword)
+                                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(btnX)
-                .addGap(17, 17, 17)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblID)
+                    .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -167,14 +181,14 @@ public class PanelUserAdd extends javax.swing.JPanel {
                     .addComponent(jLabel5)
                     .addComponent(radioYes)
                     .addComponent(radioNo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
                     .addComponent(btnEdit)
                     .addComponent(btnDelete)
                     .addComponent(btnEnableChanges)
                     .addComponent(btnCancel))
-                .addGap(33, 33, 33))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -196,10 +210,12 @@ public class PanelUserAdd extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel lblID;
     private javax.swing.ButtonGroup radioGroup;
     private javax.swing.JRadioButton radioNo;
     private javax.swing.JRadioButton radioYes;
     private javax.swing.JTextField txtFirstname;
+    private javax.swing.JTextField txtID;
     private javax.swing.JTextField txtLastname;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
@@ -258,5 +274,14 @@ public class PanelUserAdd extends javax.swing.JPanel {
     public JButton getBtnX() {
         return btnX;
     }
+
+    public JLabel getLblID() {
+        return lblID;
+    }
+
+    public JTextField getTxtID() {
+        return txtID;
+    }
+    
     
 }

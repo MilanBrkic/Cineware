@@ -30,6 +30,11 @@
                 <Property name="text" type="java.lang.String" value="Add"/>
               </Properties>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuItemUserView">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="View"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
       </SubComponents>

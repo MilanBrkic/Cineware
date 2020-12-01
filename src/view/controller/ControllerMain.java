@@ -57,11 +57,25 @@ public class ControllerMain {
     }
 
     private void setListeners() {
+        setUserListeners(); 
+        
+        
+    }
+
+    private void setUserListeners() {
         form.getMenuItemUserAdd().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 form.getLblWelcomeUser().setVisible(false);
-                MainCoordinator.getInstance().openPanelUserAdd(UserMode.ADD, form);
+                MainCoordinator.getInstance().openPanelUserAdd(UserMode.ADD);
+            }
+        });
+        
+        form.getMenuItemUserView().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                form.getLblWelcomeUser().setVisible(false);
+                MainCoordinator.getInstance().openPanelUserView();
             }
         });
     }

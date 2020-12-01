@@ -32,9 +32,9 @@ public class ControllerUserAdd {
     }
 
     public void openPanel() {
-        panel.setVisible(true);
         prepareForm(mode, Controller.getInstance().getUser().isAdmin());
         setListeners();
+        panel.setVisible(true);
     }
 
     public PanelUserAdd getPanel() {
@@ -54,6 +54,8 @@ public class ControllerUserAdd {
                 panel.getBtnDelete().setVisible(false);
                 panel.getBtnEnableChanges().setVisible(false);
                 panel.getBtnCancel().setVisible(true);
+                panel.getTxtID().setVisible(false);
+                panel.getLblID().setVisible(false);
                 break;
             case EDIT:
                 panel.getBtnAdd().setVisible(false);
@@ -61,6 +63,8 @@ public class ControllerUserAdd {
                 panel.getBtnDelete().setVisible(true);
                 panel.getBtnEnableChanges().setVisible(true);
                 panel.getBtnCancel().setVisible(true);
+                panel.getTxtID().setVisible(true);
+                panel.getLblID().setVisible(true);
                 break;
         }
     }

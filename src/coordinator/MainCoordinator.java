@@ -10,7 +10,9 @@ import view.FormMain;
 import view.controller.ControllerLogin;
 import view.controller.ControllerMain;
 import view.controller.ControllerUserAdd;
+import view.controller.ControllerUserView;
 import view.panel.PanelUserAdd;
+import view.panel.PanelUserView;
 import view.panel.mode.UserMode;
 
 /**
@@ -45,10 +47,22 @@ public class MainCoordinator {
         return controllerMain;
     }
     
-    public void openPanelUserAdd(UserMode mode, FormMain formMain){
-        ControllerUserAdd controllerUser = new ControllerUserAdd(new PanelUserAdd(), mode);
-        formMain.getContentPane().add(controllerUser.getPanel());
-        controllerUser.openPanel();
+    public void openPanelUserAdd(UserMode mode){
+        ControllerUserAdd userAdd = new ControllerUserAdd(new PanelUserAdd(), mode);
+        controllerMain.getForm().getContentPane().add(userAdd.getPanel());
+        userAdd.openPanel();
+        
+    }
+
+    public void openPanelUserView() {
+        ControllerUserView userView = new ControllerUserView(new PanelUserView());
+        controllerMain.getForm().getContentPane().removeAll();
+        controllerMain.getForm().getContentPane().add(userView.getPanel());
+        controllerMain.getForm().invalidate();
+        controllerMain.getForm().validate();
+        controllerMain.getForm().repaint();
+        
+        userView.openPanel();
         
     }
     
