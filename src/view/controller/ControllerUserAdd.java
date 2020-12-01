@@ -10,6 +10,7 @@ import coordinator.MainCoordinator;
 import domen.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -87,6 +88,7 @@ public class ControllerUserAdd {
                     
                     User user = new User(firstname, lastname, username, Controller.getInstance().encrypt(password), admin);
                     Controller.getInstance().getDbUser().add(user);
+                    
                     JOptionPane.showMessageDialog(panel, "User "+user+" is saved", "Saved", JOptionPane.INFORMATION_MESSAGE);
                     clearAll();
                 } catch (Exception ex) {
@@ -96,25 +98,40 @@ public class ControllerUserAdd {
 
             private void isEmptyValidation(String firstname, String lastname, String username, String password) throws Exception {
                 String error = "";
-                if (firstname.length() < 3) {
-                    error += "Firstname can not have less than 3 chars\n";
+                if (firstname.length() < 3) error += "Firstname can not have less than 3 chars\n";
+                else{
+                    String regex="[A-Z]+[a-z0-9]+";
+                    if(!firstname.matches(regex)) error+="Firstname must start with a capital\n";
+                    else{
+                       regex="[A-Z]+[a-z]+";
+                        if(!firstname.matches(regex)) error+="Firstname can not have a number\n"; 
+                    }                    
                 }
-                if(firstname.contains("0123456789")) error+="Firstname can not contain a number";
                 
-                if (lastname.length() < 3) {
-                    error += "Lastname can not have less than 3 chars\n";
-                }
-                if(lastname.contains("0123456789")) error+="Firstname can not contain a number";
                 
-                if (username.length() < 4) {
-                    error += "Username can not have less than 4 chars\n";
+                if (lastname.length() < 3) error += "Lastname can not have less than 3 chars\n";
+                else{
+                    String regex="[A-Z]+[a-z0-9]+";
+                    if(!lastname.matches(regex)) error+="Lastname must start with a capital\n";
+                    else{
+                       regex="[A-Z]+[a-z]+";
+                        if(!lastname.matches(regex)) error+="Lastname can not have a number\n"; 
+                    }
                 }
-                if (password.length() < 4) {
-                    error += "Password can not have less than 4 chars";
+                
+                
+                if (username.length() < 4) error += "Username can not have less than 4 chars\n";
+                else{
+                    String regex ="[A-Za-z0-9.]+";
+                    if(!username.matches(regex)) error+="Username can not gave blanks and special characters";
+                    else{
+                        if(!isUnique(username)) error+="Username already taken";
+                    }
                 }
-                if (!error.isEmpty()) {
-                    throw new Exception(error);
-                }
+                
+                if (password.length() < 4) error += "Password can not have less than 4 chars";
+                
+                if (!error.isEmpty()) throw new Exception(error);
             }
 
             private void clearAll() {
@@ -123,6 +140,14 @@ public class ControllerUserAdd {
                 panel.getTxtUsername().setText("");
                 panel.getTxtPassword().setText("");
                 panel.getRadioNo().setSelected(true);
+            }
+
+            private boolean isUnique(String username) {
+                ArrayList<User> users = Controller.getInstance().getDbUser().getAll();
+                for (User user : users) {
+                    if(user.getUsername().equals(username)) return false;
+                }
+                return true;
             }
         });
     }
