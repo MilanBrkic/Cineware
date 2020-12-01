@@ -7,6 +7,7 @@
 package view;
 
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 
 /**
  *
@@ -30,6 +31,9 @@ public class FormMain extends javax.swing.JFrame {
 
         jLabel3 = new javax.swing.JLabel();
         lblWelcomeUser = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        menuItemUserAdd = new javax.swing.JMenuItem();
 
         jLabel3.setText("jLabel3");
 
@@ -40,17 +44,33 @@ public class FormMain extends javax.swing.JFrame {
         lblWelcomeUser.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         getContentPane().add(lblWelcomeUser);
 
+        jMenu3.setText("User");
+
+        menuItemUserAdd.setText("Add");
+        jMenu3.add(menuItemUserAdd);
+
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     public JLabel getLblWelcomeUser() {
         return lblWelcomeUser;
     }
+
+    public JMenuItem getMenuItemUserAdd() {
+        return menuItemUserAdd;
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel lblWelcomeUser;
+    private javax.swing.JMenuItem menuItemUserAdd;
     // End of variables declaration//GEN-END:variables
 
 }

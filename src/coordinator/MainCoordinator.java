@@ -9,6 +9,9 @@ import view.FormLogin;
 import view.FormMain;
 import view.controller.ControllerLogin;
 import view.controller.ControllerMain;
+import view.controller.ControllerUserAdd;
+import view.panel.PanelUserAdd;
+import view.panel.mode.UserMode;
 
 /**
  *
@@ -42,5 +45,11 @@ public class MainCoordinator {
         return controllerMain;
     }
     
+    public void openPanelUserAdd(UserMode mode, FormMain formMain){
+        ControllerUserAdd controllerUser = new ControllerUserAdd(new PanelUserAdd(), mode);
+        formMain.getContentPane().add(controllerUser.getPanel());
+        controllerUser.openPanel();
+        
+    }
     
 }

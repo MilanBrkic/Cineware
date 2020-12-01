@@ -6,8 +6,14 @@
 package view.controller;
 
 import controller.Controller;
+import coordinator.MainCoordinator;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import view.FormMain;
+import view.panel.PanelUserAdd;
+import view.panel.mode.UserMode;
 import view.util.IconSetter;
 
 /**
@@ -32,14 +38,29 @@ public class ControllerMain {
     }
     
     public void openForm(){
+        form.setMinimumSize(new Dimension(600, 400));
         form.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        
         form.getLblWelcomeUser().setText("Welcome: "+Controller.getInstance().getUser());
         setIcon();
+        setListeners();
+        
+        form.setLocationRelativeTo(null);
         form.setVisible(true);
     }
 
     public void setIcon(IconSetter icon) {
         this.icon = icon;
+    }
+
+    private void setListeners() {
+        form.getMenuItemUserAdd().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                form.getLblWelcomeUser().setVisible(false);
+                MainCoordinator.getInstance().openPanelUserAdd(UserMode.ADD, form);
+            }
+        });
     }
     
     
