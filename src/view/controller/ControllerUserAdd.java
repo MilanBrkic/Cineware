@@ -84,7 +84,7 @@ public class ControllerUserAdd {
                         admin = true;
                     }
 
-                    isEmptyValidation(firstname, lastname, username, password);
+                    validation(firstname, lastname, username, password);
                     
                     User user = new User(firstname, lastname, username, Controller.getInstance().encrypt(password), admin);
                     Controller.getInstance().getDbUser().add(user);
@@ -96,7 +96,7 @@ public class ControllerUserAdd {
                 }
             }
 
-            private void isEmptyValidation(String firstname, String lastname, String username, String password) throws Exception {
+            private void validation(String firstname, String lastname, String username, String password) throws Exception {
                 String error = "";
                 if (firstname.length() < 3) error += "Firstname can not have less than 3 chars\n";
                 else{

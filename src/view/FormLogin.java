@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
@@ -22,6 +23,7 @@ public class FormLogin extends javax.swing.JFrame {
     public FormLogin() {
         initComponents();
         
+
     }
 
     public JTextField getTxtUsername() {
@@ -64,6 +66,8 @@ public class FormLogin extends javax.swing.JFrame {
 
         jLabel2.setText("Password:");
 
+        btnLogin.setBackground(new java.awt.Color(0, 0, 0));
+        btnLogin.setForeground(new java.awt.Color(255, 255, 255));
         btnLogin.setText("Login");
 
         lblError.setForeground(new java.awt.Color(255, 0, 0));

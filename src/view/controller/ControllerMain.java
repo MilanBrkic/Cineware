@@ -7,6 +7,7 @@ package view.controller;
 
 import controller.Controller;
 import coordinator.MainCoordinator;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,6 +47,7 @@ public class ControllerMain {
         setListeners();
         
         form.setLocationRelativeTo(null);
+        form.getJMenuBar().setOpaque(false);
         
         form.setVisible(true);
     }

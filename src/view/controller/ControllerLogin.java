@@ -39,6 +39,7 @@ public class ControllerLogin {
 
     public void openForm() {
         form.setLocationRelativeTo(null);
+        form.setResizable(false);
         setIcon();
         setListeners();
         form.setVisible(true);

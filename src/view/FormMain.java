@@ -44,8 +44,12 @@ public class FormMain extends javax.swing.JFrame {
         lblWelcomeUser.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         getContentPane().add(lblWelcomeUser);
 
+        jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jMenu3.setBackground(new java.awt.Color(255, 255, 255));
         jMenu3.setText("User");
 
+        menuItemUserAdd.setBackground(new java.awt.Color(255, 255, 255));
         menuItemUserAdd.setText("Add");
         jMenu3.add(menuItemUserAdd);
 
