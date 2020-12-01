@@ -6,7 +6,9 @@
 package coordinator;
 
 import view.FormLogin;
+import view.FormMain;
 import view.controller.ControllerLogin;
+import view.controller.ControllerMain;
 
 /**
  *
@@ -14,8 +16,11 @@ import view.controller.ControllerLogin;
  */
 public class MainCoordinator {
     private static MainCoordinator instance;
-
+    private ControllerMain controllerMain;
+            
+            
     private MainCoordinator() {
+        controllerMain=new ControllerMain(new FormMain());
     }
     
     
@@ -28,5 +33,14 @@ public class MainCoordinator {
         ControllerLogin login = new ControllerLogin(new FormLogin());
         login.openForm();
     }
+    
+    public void openFormMain(){
+        controllerMain.openForm();
+    }
+
+    public ControllerMain getControllerMain() {
+        return controllerMain;
+    }
+    
     
 }

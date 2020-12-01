@@ -6,6 +6,7 @@
 package view.controller;
 
 import controller.Controller;
+import coordinator.MainCoordinator;
 import domen.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,18 +20,20 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import view.FormLogin;
+import view.util.IconSetter;
 
 /**
  *
  * @author Milan
  */
 public class ControllerLogin {
-
+    private IconSetter icon;
     private static ControllerLogin instance;
     private FormLogin form;
-
+    
     public ControllerLogin(FormLogin form) {
         this.form = form;
+        icon = new IconSetter(form);
     }
 
     public void openForm() {
@@ -40,13 +43,8 @@ public class ControllerLogin {
         form.setVisible(true);
     }
 
-    public void setIcon() {
-        String basePath = new File("").getAbsolutePath();
-        String iconPath = basePath + "\\resources\\cineware-icon.png";
-
-        ImageIcon img = new ImageIcon(iconPath);
-        form.setIconImage(img.getImage());
-
+    public void setIcon(){
+        icon.setIcon();
     }
 
     
@@ -67,7 +65,9 @@ public class ControllerLogin {
                 }
                 try {
                    User user = login(username, encrypt(password));
-                    System.out.println(user);
+                   Controller.getInstance().setUser(user);
+                   form.dispose();
+                   MainCoordinator.getInstance().openFormMain();
                 } catch (Exception ex) {
                     form.getLblError().setText(ex.getMessage());
                 }

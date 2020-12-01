@@ -6,6 +6,7 @@
 package controller;
 import domen.User;
 import java.util.ArrayList;
+import java.util.Map;
 import repository.Repository;
 import repository.db.impl.DbUser;
 /**
@@ -15,6 +16,8 @@ import repository.db.impl.DbUser;
 public class Controller {
     private Repository dbUser;
     private static Controller instance;
+    private User user;
+    
     
     private Controller(){
         dbUser = new DbUser();
@@ -27,6 +30,14 @@ public class Controller {
 
     public Repository getDbUser() {
         return dbUser;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     
