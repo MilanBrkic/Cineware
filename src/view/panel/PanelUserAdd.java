@@ -12,6 +12,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import view.panel.mode.UserMode;
+import view.util.ExitButton;
 
 /**
  *
@@ -53,9 +54,9 @@ public class PanelUserAdd extends javax.swing.JPanel {
         btnEnableChanges = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
-        btnX = new javax.swing.JButton();
         txtID = new javax.swing.JTextField();
         lblID = new javax.swing.JLabel();
+        exitButton1 = new view.util.ExitButton();
 
         jLabel9.setForeground(new java.awt.Color(255, 0, 0));
         jLabel9.setText("jLabel6");
@@ -89,16 +90,6 @@ public class PanelUserAdd extends javax.swing.JPanel {
 
         btnCancel.setText("Cancel");
 
-        btnX.setBackground(new java.awt.Color(204, 0, 0));
-        btnX.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnX.setForeground(new java.awt.Color(255, 255, 255));
-        btnX.setText("X");
-        btnX.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnXActionPerformed(evt);
-            }
-        });
-
         txtID.setEditable(false);
 
         lblID.setText("ID:");
@@ -107,9 +98,6 @@ public class PanelUserAdd extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 351, Short.MAX_VALUE)
-                .addComponent(btnX))
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,12 +138,16 @@ public class PanelUserAdd extends javax.swing.JPanel {
                                 .addComponent(txtLastname)
                                 .addComponent(txtPassword)
                                 .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(exitButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(btnX)
+                .addComponent(exitButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblID)
@@ -192,9 +184,7 @@ public class PanelUserAdd extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnXActionPerformed
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -203,7 +193,7 @@ public class PanelUserAdd extends javax.swing.JPanel {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnEnableChanges;
-    private javax.swing.JButton btnX;
+    private view.util.ExitButton exitButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -271,9 +261,7 @@ public class PanelUserAdd extends javax.swing.JPanel {
         return txtPassword;
     }
 
-    public JButton getBtnX() {
-        return btnX;
-    }
+    
 
     public JLabel getLblID() {
         return lblID;
@@ -282,6 +270,11 @@ public class PanelUserAdd extends javax.swing.JPanel {
     public JTextField getTxtID() {
         return txtID;
     }
+
+    public ExitButton getExitButton1() {
+        return exitButton1;
+    }
+    
     
     
 }

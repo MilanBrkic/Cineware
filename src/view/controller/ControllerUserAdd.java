@@ -34,6 +34,7 @@ public class ControllerUserAdd {
     public void openPanel() {
         prepareForm(mode, Controller.getInstance().getUser().isAdmin());
         setListeners();
+        prepareExitButton();
         panel.setVisible(true);
     }
 
@@ -157,8 +158,11 @@ public class ControllerUserAdd {
     }
 
     private void setExitListeners() {
-        panel.getBtnX().addActionListener(new ExitListener());
         panel.getBtnCancel().addActionListener(new ExitListener());
+    }
+
+    private void prepareExitButton() {
+        panel.getExitButton1().setPanel(panel);
     }
 
     class ExitListener implements ActionListener {

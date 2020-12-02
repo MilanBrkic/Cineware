@@ -29,6 +29,7 @@ public class ControllerUserView {
     public void openPanel() {
         panel.getTableUser().setModel(model);
         setListeners();
+        prepareExitButton();
         panel.setVisible(true);
     }
 
@@ -43,6 +44,10 @@ public class ControllerUserView {
                 MainCoordinator.getInstance().openPanelUserAdd(UserMode.ADD);
             }
         });
+    }
+
+    private void prepareExitButton() {
+        panel.getExitButton1().setPanel(panel);
     }
     
     

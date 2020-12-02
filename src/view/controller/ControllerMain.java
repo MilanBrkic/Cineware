@@ -66,6 +66,7 @@ public class ControllerMain {
         form.getMenuItemUserAdd().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                form.getMenuItemUserAdd().setEnabled(false);
                 form.getLblWelcomeUser().setVisible(false);
                 MainCoordinator.getInstance().openPanelUserAdd(UserMode.ADD);
             }
@@ -74,11 +75,16 @@ public class ControllerMain {
         form.getMenuItemUserView().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                form.getMenuItemUserView().setEnabled(false);
                 form.getLblWelcomeUser().setVisible(false);
                 MainCoordinator.getInstance().openPanelUserView();
             }
         });
     }
     
+    public void enableAll(){
+        form.getMenuItemUserAdd().setEnabled(true);
+        form.getMenuItemUserView().setEnabled(true);
+    }
     
 }
