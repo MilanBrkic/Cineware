@@ -64,7 +64,7 @@ public class ControllerMain {
         form.getMenuItemUserAdd().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                removeAllPanels();
+                MainCoordinator.getInstance().removeAllPanels();
                 enableAll();
                 form.getMenuItemUserAdd().setEnabled(false);
                 form.getLblWelcomeUser().setVisible(false);
@@ -75,7 +75,7 @@ public class ControllerMain {
         form.getMenuItemUserView().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                removeAllPanels();
+                MainCoordinator.getInstance().removeAllPanels();
                 enableAll();
                 form.getMenuItemUserView().setEnabled(false);
                 form.getLblWelcomeUser().setVisible(false);
@@ -89,11 +89,6 @@ public class ControllerMain {
         form.getMenuItemUserView().setEnabled(true);
     }
     
-    public void removeAllPanels(){
-        form.getContentPane().removeAll();
-        form.invalidate();
-        form.validate();
-        form.repaint();
-    }
+    
     
 }

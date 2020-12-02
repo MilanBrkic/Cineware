@@ -7,6 +7,7 @@ package coordinator;
 
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JPanel;
 import view.FormLogin;
 import view.FormMain;
 import view.controller.ControllerLogin;
@@ -65,14 +66,28 @@ public class MainCoordinator {
 
     public void openPanelUserView() {
         ControllerUserView userView = new ControllerUserView(new PanelUserView());
-        controllerMain.getForm().getContentPane().removeAll();
         controllerMain.getForm().getContentPane().add(userView.getPanel());
         controllerMain.getForm().invalidate();
         controllerMain.getForm().validate();
         controllerMain.getForm().repaint();
-        
         userView.openPanel();
         
     }
+    
+    
+    public void removePanel(JPanel panel){
+        controllerMain.getForm().getContentPane().remove(panel);
+        controllerMain.getForm().invalidate();
+        controllerMain.getForm().validate();
+        controllerMain.getForm().repaint();
+    }
+    
+    public void removeAllPanels(){
+        controllerMain.getForm().getContentPane().removeAll();
+        controllerMain.getForm().invalidate();
+        controllerMain.getForm().validate();
+        controllerMain.getForm().repaint();
+    }
+    
     
 }
