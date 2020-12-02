@@ -7,13 +7,11 @@ package view.controller;
 
 import controller.Controller;
 import coordinator.MainCoordinator;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import view.FormMain;
-import view.panel.PanelUserAdd;
 import view.panel.mode.UserMode;
 import view.util.IconSetter;
 
@@ -66,6 +64,8 @@ public class ControllerMain {
         form.getMenuItemUserAdd().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                removeAllPanels();
+                enableAll();
                 form.getMenuItemUserAdd().setEnabled(false);
                 form.getLblWelcomeUser().setVisible(false);
                 MainCoordinator.getInstance().openPanelUserAdd(UserMode.ADD);
@@ -75,6 +75,8 @@ public class ControllerMain {
         form.getMenuItemUserView().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                removeAllPanels();
+                enableAll();
                 form.getMenuItemUserView().setEnabled(false);
                 form.getLblWelcomeUser().setVisible(false);
                 MainCoordinator.getInstance().openPanelUserView();
@@ -85,6 +87,13 @@ public class ControllerMain {
     public void enableAll(){
         form.getMenuItemUserAdd().setEnabled(true);
         form.getMenuItemUserView().setEnabled(true);
+    }
+    
+    public void removeAllPanels(){
+        form.getContentPane().removeAll();
+        form.invalidate();
+        form.validate();
+        form.repaint();
     }
     
 }

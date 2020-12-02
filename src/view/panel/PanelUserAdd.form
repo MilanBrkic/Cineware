@@ -72,8 +72,9 @@
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblPassword" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblID" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblNewPassword" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -83,6 +84,7 @@
                               <Component id="txtLastname" max="32767" attributes="0"/>
                               <Component id="txtPassword" max="32767" attributes="0"/>
                               <Component id="txtUsername" alignment="0" min="-2" pref="268" max="-2" attributes="0"/>
+                              <Component id="txtNewPassword" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -122,8 +124,13 @@
               </Group>
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblNewPassword" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtNewPassword" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -166,7 +173,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtUsername">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel4">
+    <Component class="javax.swing.JLabel" name="lblPassword">
       <Properties>
         <Property name="text" type="java.lang.String" value="Password:"/>
       </Properties>
@@ -231,6 +238,13 @@
       </Properties>
     </Component>
     <Component class="view.util.ExitButton" name="exitButton1">
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="txtNewPassword">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblNewPassword">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="New Password:"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

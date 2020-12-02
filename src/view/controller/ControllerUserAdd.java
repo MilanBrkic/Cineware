@@ -5,6 +5,7 @@
  */
 package view.controller;
 
+import constant.Constant;
 import controller.Controller;
 import coordinator.MainCoordinator;
 import domen.User;
@@ -47,7 +48,10 @@ public class ControllerUserAdd {
             panel.getRadioYes().setEnabled(false);
             panel.getRadioNo().setEnabled(false);
         }
-
+        
+        panel.getLblNewPassword().setVisible(false);
+        panel.getTxtNewPassword().setVisible(false);
+        
         switch (mode) {
             case ADD:
                 panel.getBtnAdd().setVisible(true);
@@ -65,11 +69,35 @@ public class ControllerUserAdd {
                 panel.getBtnEnableChanges().setVisible(true);
                 panel.getBtnCancel().setVisible(true);
                 panel.getTxtID().setVisible(true);
+                panel.getTxtID().setEnabled(false);
                 panel.getLblID().setVisible(true);
+                panel.getTxtPassword().setVisible(false);
+                panel.getLblPassword().setVisible(false);
+                
+                fillUserDetails();
+                disableSwitch();
                 break;
         }
     }
-
+    
+    
+    public void disableSwitch(){
+        panel.getBtnEdit().setEnabled(!panel.getBtnEdit().isEnabled());
+        panel.getBtnDelete().setEnabled(!panel.getBtnDelete().isEnabled());
+        panel.getTxtFirstname().setEnabled(!panel.getTxtFirstname().isEnabled());
+        panel.getTxtLastname().setEnabled(!panel.getTxtLastname().isEnabled());
+        panel.getTxtUsername().setEnabled(!panel.getTxtUsername().isEnabled());
+    }
+    
+    private void fillUserDetails() {
+        User user = (User) MainCoordinator.getInstance().getParams().get(Constant.USER_DETAILS);
+        panel.getTxtID().setText(String.valueOf(user.getId()));
+        panel.getTxtFirstname().setText(user.getFirstname());
+        panel.getTxtLastname().setText(user.getLastname());
+        panel.getTxtUsername().setText(user.getUsername());
+        
+    }
+    
     private void setListeners() {
         setAddListener();
         setExitListeners();
@@ -164,6 +192,8 @@ public class ControllerUserAdd {
     private void prepareExitButton() {
         panel.getExitButton1().setPanel(panel);
     }
+
+    
 
     class ExitListener implements ActionListener {
 

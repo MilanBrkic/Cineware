@@ -5,8 +5,10 @@
  */
 package view.controller;
 
+import constant.Constant;
 import controller.Controller;
 import coordinator.MainCoordinator;
+import domen.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import view.model.table.UserTableModel;
@@ -41,7 +43,14 @@ public class ControllerUserView {
         panel.getBtnDetails().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MainCoordinator.getInstance().openPanelUserAdd(UserMode.ADD);
+                int index = panel.getTableUser().getSelectedRow();
+                if(index>=0){
+                    User user = model.getUsersList().get(index);
+                    
+                    MainCoordinator.getInstance().getParams().put(Constant.USER_DETAILS, user);
+                    MainCoordinator.getInstance().openPanelUserAdd(UserMode.EDIT);
+                }
+                
             }
         });
     }

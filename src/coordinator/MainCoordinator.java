@@ -5,6 +5,8 @@
  */
 package coordinator;
 
+import java.util.HashMap;
+import java.util.Map;
 import view.FormLogin;
 import view.FormMain;
 import view.controller.ControllerLogin;
@@ -22,10 +24,11 @@ import view.panel.mode.UserMode;
 public class MainCoordinator {
     private static MainCoordinator instance;
     private ControllerMain controllerMain;
-            
+    private Map<String,Object> params;
             
     private MainCoordinator() {
         controllerMain=new ControllerMain(new FormMain());
+        params = new HashMap<>();
     }
     
     
@@ -46,6 +49,12 @@ public class MainCoordinator {
     public ControllerMain getControllerMain() {
         return controllerMain;
     }
+
+    public Map<String, Object> getParams() {
+        return params;
+    }
+    
+
     
     public void openPanelUserAdd(UserMode mode){
         ControllerUserAdd userAdd = new ControllerUserAdd(new PanelUserAdd(), mode);
