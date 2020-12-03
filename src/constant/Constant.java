@@ -11,4 +11,5 @@ package constant;
  */
 public class Constant {
     public static final String USER_DETAILS="USER";
+    public static final String USER_TABLE_MODEL="USER_TABLE_MODEL";
 }

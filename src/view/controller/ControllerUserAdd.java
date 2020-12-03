@@ -12,7 +12,10 @@ import domen.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import view.model.table.UserTableModel;
 import view.panel.PanelUserAdd;
 import view.panel.mode.UserMode;
 
@@ -103,13 +106,59 @@ public class ControllerUserAdd {
         if(user.isAdmin()) panel.getRadioYes().setSelected(true);
     }
     
-    private void setListeners() {;
+    private void setListeners() {
         setAddListener();
         setExitListeners();
         setEnableChangesListener();
-        
+        setEditListener();
     }
 
+    private void setEditListener(){
+            panel.getBtnEdit().addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        User user = new User();
+                        if(Controller.getInstance().getUser().isAdmin()) user = forAdmin();
+                        else forUser();
+                        
+                        UserTableModel model =  (UserTableModel) MainCoordinator.getInstance().getParams().get(Constant.USER_TABLE_MODEL);
+                        model.refresh();
+                        JOptionPane.showMessageDialog(panel, "Updated user: "+user, "Updated", JOptionPane.INFORMATION_MESSAGE);
+                        panel.getExitButton1().doClick();
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                }
+                
+                public User forAdmin() throws Exception{
+                    int id = Integer.parseInt(panel.getTxtID().getText());
+                    String firstname = panel.getTxtFirstname().getText().trim();
+                    String lastname = panel.getTxtLastname().getText().trim();
+                    String username = panel.getTxtUsername().getText().trim();
+                        
+                    validationUpdate(firstname, lastname, username);
+                    
+                    
+                    
+                    User user = new User();
+                    user.setId(id);
+                    user.setFirstname(firstname);
+                    user.setLastname(lastname);
+                    user.setUsername(username);
+                    if(panel.getRadioYes().isSelected()) user.setAdmin(true);
+                    else user.setAdmin(false);
+                    Controller.getInstance().getDbUser().update(user);
+                    return user;
+                }
+
+                private void forUser() {
+                }
+            });
+    }
+    
+    
     private void setEnableChangesListener() {
         panel.getBtnEnableChanges().addActionListener(new ActionListener() {
             @Override
@@ -149,6 +198,8 @@ public class ControllerUserAdd {
                     }
 
                     validation(firstname, lastname, username, password);
+                    
+
                     
                     User user = new User(firstname, lastname, username, Controller.getInstance().encrypt(password), admin);
                     Controller.getInstance().getDbUser().add(user);
@@ -197,13 +248,24 @@ public class ControllerUserAdd {
         else{
             String regex ="[A-Za-z0-9.]+";
             if(!username.matches(regex)) error+="Username can not gave blanks and special characters";
-            else{
-                if(!isUnique(username)) error+="Username already taken";
-            }
+            
         }
         return error;
     }
     
+    private void validationUpdate(String firstname, String lastname, String username) throws Exception {
+        String error = "";
+        
+        error += firstnameValidation(firstname);
+        error += lastnameValidation(lastname);                
+        error += usernameValidation(username);
+
+        if(!isUniqueUpdate(username)) error+="Username already taken";
+        
+                
+                
+        if (!error.isEmpty()) throw new Exception(error);
+    }
     
     
     private void validation(String firstname, String lastname, String username, String password) throws Exception {
@@ -213,6 +275,8 @@ public class ControllerUserAdd {
         error += lastnameValidation(lastname);                
         error += usernameValidation(username);
         
+        if(!isUnique(username)) error+="Username already taken";
+
                 
         if (password.length() < 4) error += "Password can not have less than 4 chars";
                 
@@ -235,6 +299,16 @@ public class ControllerUserAdd {
         }
         return true;
     }
+    
+    private boolean isUniqueUpdate(String username) {
+        User currentUser = (User) MainCoordinator.getInstance().getParams().get(Constant.USER_DETAILS);
+        ArrayList<User> users = Controller.getInstance().getDbUser().getAll();
+        for (User user : users) {
+            if(user.getUsername().equals(username) && !user.getUsername().equals(currentUser.getUsername())) return false;
+        }
+        return true;
+    }
+    
     
     private void setExitListeners() {
         panel.getBtnCancel().addActionListener(new ExitListener());

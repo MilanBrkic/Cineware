@@ -49,10 +49,13 @@ public class ControllerUserView {
                     User user = model.getUsersList().get(index);
                     if(Controller.getInstance().getUser().isAdmin()) {
                         MainCoordinator.getInstance().getParams().put(Constant.USER_DETAILS, user);
-                        MainCoordinator.getInstance().openPanelUserAdd(UserMode.EDIT);                        
+                        MainCoordinator.getInstance().getParams().put(Constant.USER_TABLE_MODEL, model);
+                        MainCoordinator.getInstance().openPanelUserAdd(UserMode.EDIT);   
+                        
                     }
                     else if(user.equals(Controller.getInstance().getUser())){
                         MainCoordinator.getInstance().getParams().put(Constant.USER_DETAILS, user);
+                        MainCoordinator.getInstance().getParams().put(Constant.USER_TABLE_MODEL, model);                        
                         MainCoordinator.getInstance().openPanelUserAdd(UserMode.EDIT);
                     }
                     else JOptionPane.showMessageDialog(panel, "Non admin can only see details of his account", "Error", JOptionPane.ERROR_MESSAGE);

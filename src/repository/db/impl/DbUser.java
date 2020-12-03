@@ -67,13 +67,33 @@ public class DbUser implements DbRepository<User>{
     }
 
     @Override
-    public void update(User t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(User user) throws Exception {
+        updateWithoutPassword(user);
     }
 
+    private void updateWithoutPassword(User user) throws SQLException {
+        String query = "UPDATE user SET firstname=?, lastname=?, username=?, admin=? WHERE userID=?";
+        PreparedStatement ps = connect().prepareStatement(query);
+        ps.setString(1, user.getFirstname());
+        ps.setString(2, user.getLastname());
+        ps.setString(3, user.getUsername());
+        ps.setBoolean(4, user.isAdmin());
+        ps.setInt(5, user.getId());
+        ps.executeUpdate();
+        ps.close();
+        try {
+            connect().commit();
+        } catch (Exception e) {
+            connect().rollback();
+            throw e;
+        }
+    }
+    
     @Override
     public void delete(User t) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    
     
 }
