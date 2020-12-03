@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
 import view.FormMain;
@@ -53,6 +54,7 @@ public class ControllerMain {
         form.getJMenuBar().setOpaque(false);
         if(!Controller.getInstance().getUser().isAdmin()) form.getMenuItemUserAdd().setEnabled(false);
         setMenuLogout();
+        
         
         form.setVisible(true);
     }

@@ -59,14 +59,14 @@ public class MainCoordinator {
     
     public void openPanelUserAdd(UserMode mode){
         ControllerUserAdd userAdd = new ControllerUserAdd(new PanelUserAdd(), mode);
-        controllerMain.getForm().getContentPane().add(userAdd.getPanel());
+        controllerMain.getForm().getPanelMain().add(userAdd.getPanel());
         userAdd.openPanel();
         
     }
 
     public void openPanelUserView() {
         ControllerUserView userView = new ControllerUserView(new PanelUserView());
-        controllerMain.getForm().getContentPane().add(userView.getPanel());
+        controllerMain.getForm().getPanelMain().add(userView.getPanel());
         controllerMain.getForm().invalidate();
         controllerMain.getForm().validate();
         controllerMain.getForm().repaint();
@@ -76,14 +76,14 @@ public class MainCoordinator {
     
     
     public void removePanel(JPanel panel){
-        controllerMain.getForm().getContentPane().remove(panel);
+        controllerMain.getForm().getPanelMain().remove(panel);
         controllerMain.getForm().invalidate();
         controllerMain.getForm().validate();
         controllerMain.getForm().repaint();
     }
     
     public void removeAllPanels(){
-        controllerMain.getForm().getContentPane().removeAll();
+        controllerMain.getForm().getPanelMain().removeAll();
         controllerMain.getForm().invalidate();
         controllerMain.getForm().validate();
         controllerMain.getForm().repaint();

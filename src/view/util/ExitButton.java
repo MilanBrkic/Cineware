@@ -40,10 +40,8 @@ public class ExitButton extends JButton{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            MainCoordinator.getInstance().getControllerMain().getForm().getContentPane().remove(panel);
-            MainCoordinator.getInstance().getControllerMain().getForm().invalidate();
-            MainCoordinator.getInstance().getControllerMain().getForm().validate();
-            MainCoordinator.getInstance().getControllerMain().getForm().repaint();
+            MainCoordinator.getInstance().removePanel(panel);
+            
             MainCoordinator.getInstance().getControllerMain().enableAll();
         }
 

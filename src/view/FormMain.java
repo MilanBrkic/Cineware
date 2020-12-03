@@ -7,8 +7,11 @@
 package view;
 
 import java.awt.MenuBar;
+import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 /**
  *
@@ -19,6 +22,7 @@ public class FormMain extends javax.swing.JFrame {
     /** Creates new form FormMain */
     public FormMain() {
         initComponents();
+        
     }
 
     /** This method is called from within the constructor to
@@ -30,21 +34,23 @@ public class FormMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        PanelStatusBar = new javax.swing.JPanel();
+        PanelMain = new javax.swing.JPanel();
         lblWelcomeUser = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
         menuUser = new javax.swing.JMenu();
         menuItemUserAdd = new javax.swing.JMenuItem();
         menuItemUserView = new javax.swing.JMenuItem();
 
-        jLabel3.setText("jLabel3");
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cineware");
-        getContentPane().setLayout(new java.awt.FlowLayout());
+        getContentPane().add(PanelStatusBar, java.awt.BorderLayout.PAGE_END);
 
         lblWelcomeUser.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        getContentPane().add(lblWelcomeUser);
+        PanelMain.add(lblWelcomeUser);
+
+        getContentPane().add(PanelMain, java.awt.BorderLayout.CENTER);
 
         menuBar.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -81,10 +87,25 @@ public class FormMain extends javax.swing.JFrame {
     public MenuBar getMenuBar() {
         return super.getMenuBar(); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public JPanel getPanelMain() {
+        return PanelMain;
+    }
+
+    public JPanel getPanelStatusBar() {
+        return PanelStatusBar;
+    }
+
+    
+    
+   
+    
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel PanelMain;
+    private javax.swing.JPanel PanelStatusBar;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblWelcomeUser;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuItemUserAdd;
