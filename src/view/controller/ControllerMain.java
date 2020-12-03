@@ -7,16 +7,13 @@ package view.controller;
 
 import controller.Controller;
 import coordinator.MainCoordinator;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import view.FormMain;
 import view.panel.mode.UserMode;
 import view.util.IconSetter;
@@ -28,7 +25,9 @@ import view.util.IconSetter;
 public class ControllerMain {
     private IconSetter icon;
     private FormMain form;
-
+    private JMenuItem menuItemLogOut;
+    
+    
     public ControllerMain(FormMain form) {
         this.form = form;
         icon = new IconSetter(form);
@@ -59,6 +58,15 @@ public class ControllerMain {
         addMenuAccount();
     }
     
+    private void addMenuAccount() {
+        JMenu menu = new JMenu("Account");
+        form.returnMenuBar().add(Box.createHorizontalGlue());
+        form.returnMenuBar().add(menu);
+        menuItemLogOut = new JMenuItem("Log-out");
+        menu.add(menuItemLogOut);
+    }
+    
+    
     public void setSizeAndLocation(){
         form.setMinimumSize(new Dimension(600, 400));
         form.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -70,11 +78,7 @@ public class ControllerMain {
     }
     
     
-    private void addMenuAccount() {
-        JMenu menu = new JMenu("Account");
-        form.returnMenuBar().add(Box.createHorizontalGlue());
-        form.returnMenuBar().add(menu);
-    }
+    
     
 
     public void setIcon(IconSetter icon) {
@@ -82,9 +86,19 @@ public class ControllerMain {
     }
 
     private void setListeners() {
+        setLogoutListener();
         setUserListeners();     
     }
 
+    public void setLogoutListener(){
+        menuItemLogOut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainCoordinator.getInstance().logout();
+            }
+        });
+    }
+    
     private void setUserListeners() {
         form.getMenuItemUserAdd().addActionListener(new ActionListener() {
             @Override

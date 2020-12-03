@@ -5,6 +5,7 @@
  */
 package coordinator;
 
+import controller.Controller;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JPanel;
@@ -87,6 +88,13 @@ public class MainCoordinator {
         controllerMain.getForm().invalidate();
         controllerMain.getForm().validate();
         controllerMain.getForm().repaint();
+    }
+
+    public void logout() {
+        Controller.getInstance().setUser(null);
+        controllerMain.getForm().dispose();
+        openFormLogin();
+        controllerMain = new ControllerMain(new FormMain());
     }
     
     

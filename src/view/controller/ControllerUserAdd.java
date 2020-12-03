@@ -64,13 +64,17 @@ public class ControllerUserAdd {
                 panel.getBtnAdd().setVisible(false);
                 panel.getBtnEdit().setVisible(true);
                 panel.getBtnDelete().setVisible(true);
+                if(!admin) panel.getBtnEnableChanges().setText("Change password");
                 panel.getBtnEnableChanges().setVisible(true);
+                panel.getBtnEnableChanges().setEnabled(false);
                 panel.getBtnCancel().setVisible(true);
                 panel.getTxtID().setVisible(true);
                 panel.getTxtID().setEnabled(false);
                 panel.getLblID().setVisible(true);
                 panel.getTxtPassword().setVisible(false);
                 panel.getLblPassword().setVisible(false);
+                
+                
                 
                 fillUserDetails();
                 disableSwitch();
@@ -82,6 +86,7 @@ public class ControllerUserAdd {
     public void disableSwitch(){
         panel.getBtnEdit().setEnabled(!panel.getBtnEdit().isEnabled());
         panel.getBtnDelete().setEnabled(!panel.getBtnDelete().isEnabled());
+        panel.getBtnEnableChanges().setEnabled(!panel.getBtnEnableChanges().isEnabled());
         panel.getTxtFirstname().setEnabled(!panel.getTxtFirstname().isEnabled());
         panel.getTxtLastname().setEnabled(!panel.getTxtLastname().isEnabled());
         panel.getTxtUsername().setEnabled(!panel.getTxtUsername().isEnabled());
@@ -98,7 +103,7 @@ public class ControllerUserAdd {
         if(user.isAdmin()) panel.getRadioYes().setSelected(true);
     }
     
-    private void setListeners() {
+    private void setListeners() {;
         setAddListener();
         setExitListeners();
         setEnableChangesListener();
@@ -109,14 +114,23 @@ public class ControllerUserAdd {
         panel.getBtnEnableChanges().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panel.getBtnEnableChanges().setEnabled(false);
+                if(Controller.getInstance().getUser().isAdmin()) forAdmin();
+                else forUser();
+            }
+            
+            private void forAdmin(){
                 disableSwitch();
+            }
+        
+            private void forUser(){
                 panel.getLblNewPassword().setVisible(true);
                 panel.getTxtNewPassword().setVisible(true);
                 panel.getLblPassword().setVisible(true);
                 panel.getTxtPassword().setVisible(true);
+                panel.getBtnEnableChanges().setEnabled(false);
             }
         });
+        
         
     }
     
@@ -148,9 +162,8 @@ public class ControllerUserAdd {
         });
     }
 
-    
-    private void validation(String firstname, String lastname, String username, String password) throws Exception {
-        String error = "";
+    public String firstnameValidation(String firstname){
+        String error="";
         if (firstname.length() < 3) error += "Firstname can not have less than 3 chars\n";
         else{
             String regex="[A-Z]+[a-z0-9]+";
@@ -160,8 +173,11 @@ public class ControllerUserAdd {
                 if(!firstname.matches(regex)) error+="Firstname can not have a number\n"; 
             }                    
         }
-                
-                
+        return error;
+    }
+    
+    public String lastnameValidation(String lastname){
+        String error = "";
         if (lastname.length() < 3) error += "Lastname can not have less than 3 chars\n";
         else{
             String regex="[A-Z]+[a-z0-9]+";
@@ -171,8 +187,12 @@ public class ControllerUserAdd {
                 if(!lastname.matches(regex)) error+="Lastname can not have a number\n"; 
             }
         }
-                
-                
+        return error;
+    }
+    
+    public String usernameValidation(String username){
+        String error = "";
+        
         if (username.length() < 4) error += "Username can not have less than 4 chars\n";
         else{
             String regex ="[A-Za-z0-9.]+";
@@ -181,6 +201,18 @@ public class ControllerUserAdd {
                 if(!isUnique(username)) error+="Username already taken";
             }
         }
+        return error;
+    }
+    
+    
+    
+    private void validation(String firstname, String lastname, String username, String password) throws Exception {
+        String error = "";
+        
+        error += firstnameValidation(firstname);
+        error += lastnameValidation(lastname);                
+        error += usernameValidation(username);
+        
                 
         if (password.length() < 4) error += "Password can not have less than 4 chars";
                 
