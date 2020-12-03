@@ -43,36 +43,46 @@ public class ControllerMain {
     }
     
     public void openForm(){
-        form.setMinimumSize(new Dimension(600, 400));
-        form.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        
-        form.getLblWelcomeUser().setText("Welcome: "+Controller.getInstance().getUser());
+        setSizeAndLocation();
         setIcon();
+        setMenuBar();
+        setStatusBar();
         setListeners();
-        
-        form.setLocationRelativeTo(null);
-        form.getJMenuBar().setOpaque(false);
-        if(!Controller.getInstance().getUser().isAdmin()) form.getMenuItemUserAdd().setEnabled(false);
-        setMenuLogout();
-        form.getLblStatusBarUser().setText("User: "+ Controller.getInstance().getUser());
-        
+       
+        form.getLblWelcomeUser().setText("Welcome: "+Controller.getInstance().getUser()); 
         form.setVisible(true);
     }
     
-    private void setMenuLogout() {
-        JMenu logout = new JMenu("Account");
-        
-        
+    public void setMenuBar(){
+        form.getJMenuBar().setOpaque(false);
+        if(!Controller.getInstance().getUser().isAdmin()) form.getMenuItemUserAdd().setEnabled(false);
+        addMenuAccount();
     }
+    
+    public void setSizeAndLocation(){
+        form.setMinimumSize(new Dimension(600, 400));
+        form.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        form.setLocationRelativeTo(null);
+    }
+    
+    public void setStatusBar(){
+        form.getLblStatusBarUser().setText("User: "+ Controller.getInstance().getUser());
+    }
+    
+    
+    private void addMenuAccount() {
+        JMenu menu = new JMenu("Account");
+        form.returnMenuBar().add(Box.createHorizontalGlue());
+        form.returnMenuBar().add(menu);
+    }
+    
 
     public void setIcon(IconSetter icon) {
         this.icon = icon;
     }
 
     private void setListeners() {
-        setUserListeners(); 
-        
-        
+        setUserListeners();     
     }
 
     private void setUserListeners() {
@@ -100,14 +110,8 @@ public class ControllerMain {
     }
     
     public void enableAll(){
-        
         if(Controller.getInstance().getUser().isAdmin()) form.getMenuItemUserAdd().setEnabled(true);
         form.getMenuItemUserView().setEnabled(true);
     }
 
-
-    
-    
-    
-    
 }

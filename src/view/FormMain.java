@@ -7,9 +7,10 @@
 package view;
 
 import java.awt.MenuBar;
-import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
+import javax.swing.Box;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
@@ -95,10 +96,11 @@ public class FormMain extends javax.swing.JFrame {
         return menuItemUserView;
     }
 
-    @Override
-    public MenuBar getMenuBar() {
-        return super.getMenuBar(); //To change body of generated methods, choose Tools | Templates.
+    public JMenuBar returnMenuBar(){
+        return menuBar;
     }
+    
+    
 
     public JPanel getPanelMain() {
         return PanelMain;
