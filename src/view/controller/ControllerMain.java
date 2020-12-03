@@ -54,7 +54,7 @@ public class ControllerMain {
         form.getJMenuBar().setOpaque(false);
         if(!Controller.getInstance().getUser().isAdmin()) form.getMenuItemUserAdd().setEnabled(false);
         setMenuLogout();
-        
+        form.getLblStatusBarUser().setText("User: "+ Controller.getInstance().getUser());
         
         form.setVisible(true);
     }

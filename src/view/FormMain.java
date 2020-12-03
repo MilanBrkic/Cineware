@@ -36,6 +36,7 @@ public class FormMain extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         PanelStatusBar = new javax.swing.JPanel();
+        lblStatusBarUser = new javax.swing.JLabel();
         PanelMain = new javax.swing.JPanel();
         lblWelcomeUser = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
@@ -45,6 +46,17 @@ public class FormMain extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cineware");
+
+        PanelStatusBar.setBackground(new java.awt.Color(0, 0, 0));
+        PanelStatusBar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        PanelStatusBar.setForeground(new java.awt.Color(255, 255, 255));
+        PanelStatusBar.setLayout(new java.awt.BorderLayout());
+
+        lblStatusBarUser.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lblStatusBarUser.setForeground(new java.awt.Color(255, 255, 255));
+        lblStatusBarUser.setText("User:");
+        PanelStatusBar.add(lblStatusBarUser, java.awt.BorderLayout.CENTER);
+
         getContentPane().add(PanelStatusBar, java.awt.BorderLayout.PAGE_END);
 
         lblWelcomeUser.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -96,6 +108,10 @@ public class FormMain extends javax.swing.JFrame {
         return PanelStatusBar;
     }
 
+    public JLabel getLblStatusBarUser() {
+        return lblStatusBarUser;
+    }
+
     
     
    
@@ -106,6 +122,7 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JPanel PanelMain;
     private javax.swing.JPanel PanelStatusBar;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblStatusBarUser;
     private javax.swing.JLabel lblWelcomeUser;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuItemUserAdd;
