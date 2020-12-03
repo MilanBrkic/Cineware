@@ -11,6 +11,7 @@ import coordinator.MainCoordinator;
 import domen.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 import view.model.table.UserTableModel;
 import view.panel.PanelUserView;
 import view.panel.mode.UserMode;
@@ -46,9 +47,16 @@ public class ControllerUserView {
                 int index = panel.getTableUser().getSelectedRow();
                 if(index>=0){
                     User user = model.getUsersList().get(index);
+                    if(Controller.getInstance().getUser().isAdmin()) {
+                        MainCoordinator.getInstance().getParams().put(Constant.USER_DETAILS, user);
+                        MainCoordinator.getInstance().openPanelUserAdd(UserMode.EDIT);                        
+                    }
+                    else if(user.equals(Controller.getInstance().getUser())){
+                        MainCoordinator.getInstance().getParams().put(Constant.USER_DETAILS, user);
+                        MainCoordinator.getInstance().openPanelUserAdd(UserMode.EDIT);
+                    }
+                    else JOptionPane.showMessageDialog(panel, "Non admin can only see details of his account", "Error", JOptionPane.ERROR_MESSAGE);
                     
-                    MainCoordinator.getInstance().getParams().put(Constant.USER_DETAILS, user);
-                    MainCoordinator.getInstance().openPanelUserAdd(UserMode.EDIT);
                 }
                 
             }

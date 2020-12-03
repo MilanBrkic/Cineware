@@ -6,6 +6,7 @@
 
 package view;
 
+import java.awt.MenuBar;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 
@@ -31,8 +32,8 @@ public class FormMain extends javax.swing.JFrame {
 
         jLabel3 = new javax.swing.JLabel();
         lblWelcomeUser = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu3 = new javax.swing.JMenu();
+        menuBar = new javax.swing.JMenuBar();
+        menuUser = new javax.swing.JMenu();
         menuItemUserAdd = new javax.swing.JMenuItem();
         menuItemUserView = new javax.swing.JMenuItem();
 
@@ -45,21 +46,21 @@ public class FormMain extends javax.swing.JFrame {
         lblWelcomeUser.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         getContentPane().add(lblWelcomeUser);
 
-        jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
+        menuBar.setBackground(new java.awt.Color(255, 255, 255));
 
-        jMenu3.setBackground(new java.awt.Color(255, 255, 255));
-        jMenu3.setText("User");
+        menuUser.setBackground(new java.awt.Color(255, 255, 255));
+        menuUser.setText("User");
 
         menuItemUserAdd.setBackground(new java.awt.Color(255, 255, 255));
         menuItemUserAdd.setText("Add");
-        jMenu3.add(menuItemUserAdd);
+        menuUser.add(menuItemUserAdd);
 
         menuItemUserView.setText("View");
-        jMenu3.add(menuItemUserView);
+        menuUser.add(menuItemUserView);
 
-        jMenuBar1.add(jMenu3);
+        menuBar.add(menuUser);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menuBar);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -75,15 +76,20 @@ public class FormMain extends javax.swing.JFrame {
     public JMenuItem getMenuItemUserView() {
         return menuItemUserView;
     }
+
+    @Override
+    public MenuBar getMenuBar() {
+        return super.getMenuBar(); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel lblWelcomeUser;
+    private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuItemUserAdd;
     private javax.swing.JMenuItem menuItemUserView;
+    private javax.swing.JMenu menuUser;
     // End of variables declaration//GEN-END:variables
 
 }

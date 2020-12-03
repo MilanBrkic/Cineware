@@ -7,10 +7,15 @@ package view.controller;
 
 import controller.Controller;
 import coordinator.MainCoordinator;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
 import view.FormMain;
 import view.panel.mode.UserMode;
 import view.util.IconSetter;
@@ -46,8 +51,16 @@ public class ControllerMain {
         
         form.setLocationRelativeTo(null);
         form.getJMenuBar().setOpaque(false);
+        if(!Controller.getInstance().getUser().isAdmin()) form.getMenuItemUserAdd().setEnabled(false);
+        setMenuLogout();
         
         form.setVisible(true);
+    }
+    
+    private void setMenuLogout() {
+        JMenu logout = new JMenu("Account");
+        
+        
     }
 
     public void setIcon(IconSetter icon) {
@@ -85,9 +98,13 @@ public class ControllerMain {
     }
     
     public void enableAll(){
-        form.getMenuItemUserAdd().setEnabled(true);
+        
+        if(Controller.getInstance().getUser().isAdmin()) form.getMenuItemUserAdd().setEnabled(true);
         form.getMenuItemUserView().setEnabled(true);
     }
+
+
+    
     
     
     
