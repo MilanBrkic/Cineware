@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 /**
  *
- * @author Brka
+ * @author Milan
  */
 public interface DbRepository<T> extends Repository<T>{
     public default Connection connect() throws SQLException{

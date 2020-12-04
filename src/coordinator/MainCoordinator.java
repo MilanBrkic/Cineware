@@ -5,6 +5,7 @@
  */
 package coordinator;
 
+import clock.MyClock;
 import controller.Controller;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class MainCoordinator {
     private static MainCoordinator instance;
     private ControllerMain controllerMain;
     private Map<String,Object> params;
-            
+
     private MainCoordinator() {
         controllerMain=new ControllerMain(new FormMain());
         params = new HashMap<>();
@@ -38,6 +39,9 @@ public class MainCoordinator {
         if(instance==null) instance=new MainCoordinator();
         return instance;
     }
+
+    
+
     
     public void openFormLogin(){
         ControllerLogin login = new ControllerLogin(new FormLogin());
@@ -46,6 +50,7 @@ public class MainCoordinator {
     
     public void openFormMain(){
         controllerMain.openForm();
+        
     }
 
     public ControllerMain getControllerMain() {
@@ -93,8 +98,10 @@ public class MainCoordinator {
     public void logout() {
         Controller.getInstance().setUser(null);
         controllerMain.getForm().dispose();
+        controllerMain.getClock().interrupt();
         openFormLogin();
         controllerMain = new ControllerMain(new FormMain());
+        
     }
     
     

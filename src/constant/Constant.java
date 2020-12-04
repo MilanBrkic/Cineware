@@ -7,7 +7,7 @@ package constant;
 
 /**
  *
- * @author Brka
+ * @author Milan
  */
 public class Constant {
     public static final String USER_DETAILS="USER";

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Brka
+ * @author Milan
  */
 public interface Repository<T> {
     public ArrayList<T> getAll();

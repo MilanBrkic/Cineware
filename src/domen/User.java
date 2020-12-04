@@ -9,7 +9,7 @@ import controller.Controller;
 
 /**
  *
- * @author Brka
+ * @author Milan
  */
 public class User {
     private int id;

@@ -5,6 +5,7 @@
  */
 package view.controller;
 
+import clock.MyClock;
 import controller.Controller;
 import coordinator.MainCoordinator;
 import java.awt.Dimension;
@@ -26,11 +27,12 @@ public class ControllerMain {
     private IconSetter icon;
     private FormMain form;
     private JMenuItem menuItemLogOut;
-    
+    private MyClock clock;
     
     public ControllerMain(FormMain form) {
         this.form = form;
         icon = new IconSetter(form);
+        clock = new MyClock(form.getLblTime());
     }
     
     public void setIcon(){
@@ -43,6 +45,7 @@ public class ControllerMain {
     
     public void openForm(){
         setSizeAndLocation();
+        startClock();
         setIcon();
         setMenuBar();
         setStatusBar();
@@ -51,6 +54,12 @@ public class ControllerMain {
         form.getLblWelcomeUser().setText("Welcome: "+Controller.getInstance().getUser()); 
         form.setVisible(true);
     }
+    
+    public void startClock(){
+        clock.start();
+    }
+    
+    
     
     public void setMenuBar(){
         form.getJMenuBar().setOpaque(false);
@@ -125,4 +134,9 @@ public class ControllerMain {
         form.getMenuItemUserView().setEnabled(true);
     }
 
+    public MyClock getClock() {
+        return clock;
+    }
+
+    
 }

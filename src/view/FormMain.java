@@ -38,6 +38,7 @@ public class FormMain extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         PanelStatusBar = new javax.swing.JPanel();
         lblStatusBarUser = new javax.swing.JLabel();
+        lblTime = new javax.swing.JLabel();
         PanelMain = new javax.swing.JPanel();
         lblWelcomeUser = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
@@ -57,6 +58,10 @@ public class FormMain extends javax.swing.JFrame {
         lblStatusBarUser.setForeground(new java.awt.Color(255, 255, 255));
         lblStatusBarUser.setText("User:");
         PanelStatusBar.add(lblStatusBarUser, java.awt.BorderLayout.CENTER);
+
+        lblTime.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lblTime.setForeground(new java.awt.Color(255, 255, 255));
+        PanelStatusBar.add(lblTime, java.awt.BorderLayout.LINE_END);
 
         getContentPane().add(PanelStatusBar, java.awt.BorderLayout.PAGE_END);
 
@@ -114,6 +119,10 @@ public class FormMain extends javax.swing.JFrame {
         return lblStatusBarUser;
     }
 
+    public JLabel getLblTime() {
+        return lblTime;
+    }
+
     
     
    
@@ -125,6 +134,7 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JPanel PanelStatusBar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblStatusBarUser;
+    private javax.swing.JLabel lblTime;
     private javax.swing.JLabel lblWelcomeUser;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenuItem menuItemUserAdd;

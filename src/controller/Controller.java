@@ -12,7 +12,7 @@ import repository.Repository;
 import repository.db.impl.DbUser;
 /**
  *
- * @author Brka
+ * @author Milan
  */
 public class Controller {
     private Repository dbUser;

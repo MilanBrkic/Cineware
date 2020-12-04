@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.sql.DriverManager;
 /**
  *
- * @author Brka
+ * @author Milan
  */
 public class DbConnectionFactory {
     private static DbConnectionFactory instance;
