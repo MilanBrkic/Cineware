@@ -9,6 +9,7 @@ import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Map;
 import repository.Repository;
+import repository.db.impl.DbHall;
 import repository.db.impl.DbUser;
 /**
  *
@@ -16,12 +17,14 @@ import repository.db.impl.DbUser;
  */
 public class Controller {
     private Repository dbUser;
+    private Repository dbHall;
     private static Controller instance;
     private User user;
     
     
     private Controller(){
         dbUser = new DbUser();
+        dbHall = new DbHall();
     }
     
     public static Controller getInstance(){
@@ -32,6 +35,11 @@ public class Controller {
     public Repository getDbUser() {
         return dbUser;
     }
+
+    public Repository getDbHall() {
+        return dbHall;
+    }
+   
 
     public User getUser() {
         return user;

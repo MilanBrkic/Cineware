@@ -93,7 +93,8 @@ public class ControllerMain {
 
     private void setListeners() {
         setLogoutListener();
-        setUserListeners();     
+        setUserListeners();   
+        setHallListeners();
     }
 
     public void setLogoutListener(){
@@ -129,14 +130,31 @@ public class ControllerMain {
         });
     }
     
+    private void setHallListeners() {
+        form.getMenuItemHallView().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainCoordinator.getInstance().removeAllPanels();
+                enableAll();
+                form.getMenuItemHallView().setEnabled(false);
+                form.getLblWelcomeUser().setVisible(false);
+                MainCoordinator.getInstance().openPanelHallView();
+            }
+        });
+    }
+    
     public void enableAll(){
         if(Controller.getInstance().getUser().isAdmin()) form.getMenuItemUserAdd().setEnabled(true);
         form.getMenuItemUserView().setEnabled(true);
+        form.getMenuItemHallView().setEnabled(true);
+        
     }
 
     public MyClock getClock() {
         return clock;
     }
+
+    
 
     
 }

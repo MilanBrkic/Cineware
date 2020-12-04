@@ -42,6 +42,8 @@ public class FormMain extends javax.swing.JFrame {
         PanelMain = new javax.swing.JPanel();
         lblWelcomeUser = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
+        menuHall = new javax.swing.JMenu();
+        menuItemHallView = new javax.swing.JMenuItem();
         menuUser = new javax.swing.JMenu();
         menuItemUserAdd = new javax.swing.JMenuItem();
         menuItemUserView = new javax.swing.JMenuItem();
@@ -71,6 +73,13 @@ public class FormMain extends javax.swing.JFrame {
         getContentPane().add(PanelMain, java.awt.BorderLayout.CENTER);
 
         menuBar.setBackground(new java.awt.Color(255, 255, 255));
+
+        menuHall.setText("Hall");
+
+        menuItemHallView.setText("View");
+        menuHall.add(menuItemHallView);
+
+        menuBar.add(menuHall);
 
         menuUser.setBackground(new java.awt.Color(255, 255, 255));
         menuUser.setText("User");
@@ -123,10 +132,10 @@ public class FormMain extends javax.swing.JFrame {
         return lblTime;
     }
 
-    
-    
-   
-    
+    public JMenuItem getMenuItemHallView() {
+        return menuItemHallView;
+    }
+
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -137,6 +146,8 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JLabel lblTime;
     private javax.swing.JLabel lblWelcomeUser;
     private javax.swing.JMenuBar menuBar;
+    private javax.swing.JMenu menuHall;
+    private javax.swing.JMenuItem menuItemHallView;
     private javax.swing.JMenuItem menuItemUserAdd;
     private javax.swing.JMenuItem menuItemUserView;
     private javax.swing.JMenu menuUser;

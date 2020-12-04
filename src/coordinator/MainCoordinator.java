@@ -12,10 +12,12 @@ import java.util.Map;
 import javax.swing.JPanel;
 import view.FormLogin;
 import view.FormMain;
+import view.controller.ControllerHallView;
 import view.controller.ControllerLogin;
 import view.controller.ControllerMain;
 import view.controller.ControllerUserAdd;
 import view.controller.ControllerUserView;
+import view.panel.PanelHallView;
 import view.panel.PanelUserAdd;
 import view.panel.PanelUserView;
 import view.panel.mode.UserMode;
@@ -65,24 +67,33 @@ public class MainCoordinator {
     
     public void openPanelUserAdd(UserMode mode){
         ControllerUserAdd userAdd = new ControllerUserAdd(new PanelUserAdd(), mode);
-        controllerMain.getForm().getPanelMain().add(userAdd.getPanel());
+        addPanel(userAdd.getPanel());
         userAdd.openPanel();
         
     }
 
     public void openPanelUserView() {
         ControllerUserView userView = new ControllerUserView(new PanelUserView());
-        controllerMain.getForm().getPanelMain().add(userView.getPanel());
-        controllerMain.getForm().invalidate();
-        controllerMain.getForm().validate();
-        controllerMain.getForm().repaint();
+        addPanel(userView.getPanel());
         userView.openPanel();
         
     }
     
+    public void openPanelHallView() {
+        ControllerHallView hallView = new ControllerHallView(new PanelHallView());
+        addPanel(hallView.getPanel());
+        hallView.openPanel();
+    }
     
     public void removePanel(JPanel panel){
         controllerMain.getForm().getPanelMain().remove(panel);
+        controllerMain.getForm().invalidate();
+        controllerMain.getForm().validate();
+        controllerMain.getForm().repaint();
+    }
+    
+    public void addPanel(JPanel panel){
+        controllerMain.getForm().getPanelMain().add(panel);
         controllerMain.getForm().invalidate();
         controllerMain.getForm().validate();
         controllerMain.getForm().repaint();
@@ -103,6 +114,8 @@ public class MainCoordinator {
         controllerMain = new ControllerMain(new FormMain());
         
     }
+
+    
     
     
 }
