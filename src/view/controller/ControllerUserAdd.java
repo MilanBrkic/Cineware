@@ -11,10 +11,12 @@ import coordinator.MainCoordinator;
 import domen.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import repository.db.impl.DbUser;
 import view.model.table.UserTableModel;
 import view.panel.PanelUserAdd;
 import view.panel.mode.UserMode;
@@ -45,10 +47,7 @@ public class ControllerUserAdd {
     }
 
     private void prepareForm(UserMode mode, boolean admin) {
-        if (!admin) {
-            panel.getRadioYes().setEnabled(false);
-            panel.getRadioNo().setEnabled(false);
-        }
+        
         
         panel.getLblNewPassword().setVisible(false);
         panel.getTxtNewPassword().setVisible(false);
@@ -67,16 +66,23 @@ public class ControllerUserAdd {
                 panel.getBtnAdd().setVisible(false);
                 panel.getBtnEdit().setVisible(true);
                 panel.getBtnDelete().setVisible(true);
-                if(!admin) panel.getBtnEnableChanges().setText("Change password");
                 panel.getBtnEnableChanges().setVisible(true);
                 panel.getBtnEnableChanges().setEnabled(false);
                 panel.getBtnCancel().setVisible(true);
                 panel.getTxtID().setVisible(true);
                 panel.getTxtID().setEnabled(false);
                 panel.getLblID().setVisible(true);
-                panel.getTxtPassword().setVisible(false);
-                panel.getLblPassword().setVisible(false);
-                
+                if(admin){
+                    panel.getTxtPassword().setVisible(false);
+                    panel.getLblPassword().setVisible(false);
+                }
+                else{
+                    panel.getLblNewPassword().setVisible(true);
+                    panel.getTxtNewPassword().setVisible(true);
+                    panel.getLblPassword().setVisible(true);
+                    panel.getTxtPassword().setVisible(true);
+                    panel.getBtnEnableChanges().setText("Change password");
+                }
                 
                 
                 fillUserDetails();
@@ -108,9 +114,9 @@ public class ControllerUserAdd {
     
     private void setListeners() {
         setAddListener();
+        setEditListener();
         setExitListeners();
         setEnableChangesListener();
-        setEditListener();
     }
 
     private void setEditListener(){
@@ -118,9 +124,8 @@ public class ControllerUserAdd {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     try {
-                        User user = new User();
-                        if(Controller.getInstance().getUser().isAdmin()) user = forAdmin();
-                        else forUser();
+                        User user = forAdmin();
+                        
                         
                         UserTableModel model =  (UserTableModel) MainCoordinator.getInstance().getParams().get(Constant.USER_TABLE_MODEL);
                         model.refresh();
@@ -153,8 +158,7 @@ public class ControllerUserAdd {
                     return user;
                 }
 
-                private void forUser() {
-                }
+                
             });
     }
     
@@ -172,15 +176,24 @@ public class ControllerUserAdd {
             }
         
             private void forUser(){
-                panel.getLblNewPassword().setVisible(true);
-                panel.getTxtNewPassword().setVisible(true);
-                panel.getLblPassword().setVisible(true);
-                panel.getTxtPassword().setVisible(true);
-                panel.getBtnEnableChanges().setEnabled(false);
+                try {
+                    String oldPassword = String.valueOf(panel.getTxtPassword().getPassword());
+                    oldPassword = Controller.getInstance().encrypt(oldPassword);
+                    User user = (User) MainCoordinator.getInstance().getParams().get(Constant.USER_DETAILS);
+                    DbUser db = (DbUser) Controller.getInstance().getDbUser();
+                    if(!db.checkPassword(user.getUsername(), oldPassword)) throw new Exception("Incorrect old password");
+                    
+                    String newPassword = String.valueOf(panel.getTxtNewPassword().getPassword());
+                    newPassword = Controller.getInstance().encrypt(newPassword);
+                    if(newPassword.equals(oldPassword)) throw new Exception("You have entered the same password");
+                    
+                    db.updatePasswordOnly(user.getUsername(), newPassword);
+                    JOptionPane.showMessageDialog(panel, "User: "+user+" has changed his password", "Password changed", JOptionPane.INFORMATION_MESSAGE);                    
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
-        
-        
     }
     
     private void setAddListener() {

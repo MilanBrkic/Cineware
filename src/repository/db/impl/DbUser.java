@@ -89,6 +89,35 @@ public class DbUser implements DbRepository<User>{
         }
     }
     
+    public void updatePasswordOnly(String username, String password) throws SQLException{
+        String query = "UPDATE user SET password=? WHERE username=?";
+        PreparedStatement ps = connect().prepareStatement(query);
+        ps.setString(1, password);
+        ps.setString(2, username);
+        ps.executeUpdate();
+        ps.close();
+        try {
+            connect().commit();
+        } catch (Exception e) {
+            connect().rollback();
+            throw e;
+        }
+    }
+    
+    public boolean checkPassword(String username, String password) throws SQLException{
+        String query = "SELECT * FROM user WHERE username='"+username+"'";
+        Statement s = connect().createStatement();
+        ResultSet rs = s.executeQuery(query);
+        boolean rez = false;
+        rs.next();
+        if(rs.getString("password").equals(password)){
+            rez = true;
+        }
+        rs.close();
+        s.close();
+        return rez;
+    }
+    
     @Override
     public void delete(User t) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
