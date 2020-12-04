@@ -11,7 +11,6 @@ import coordinator.MainCoordinator;
 import domen.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -117,6 +116,27 @@ public class ControllerUserAdd {
         setEditListener();
         setExitListeners();
         setEnableChangesListener();
+        setDeleteListener();
+    }
+    
+    private void setDeleteListener(){
+        panel.getBtnDelete().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    User user = (User) MainCoordinator.getInstance().getParams().get(Constant.USER_DETAILS);
+                    int number = JOptionPane.showConfirmDialog(panel, "Are you sure you what to delete user "+user, "Delete", 0);
+                    if(number==0) Controller.getInstance().getDbUser().delete(user);
+                    UserTableModel model =  (UserTableModel) MainCoordinator.getInstance().getParams().get(Constant.USER_TABLE_MODEL);
+                    model.refresh();
+                    MainCoordinator.getInstance().removePanel(panel);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                
+            }
+        });
+        
     }
 
     private void setEditListener(){
@@ -130,7 +150,15 @@ public class ControllerUserAdd {
                         UserTableModel model =  (UserTableModel) MainCoordinator.getInstance().getParams().get(Constant.USER_TABLE_MODEL);
                         model.refresh();
                         JOptionPane.showMessageDialog(panel, "Updated user: "+user, "Updated", JOptionPane.INFORMATION_MESSAGE);
-                        panel.getExitButton1().doClick();
+                        if(user.getId()==Controller.getInstance().getUser().getId()){
+                            Controller.getInstance().getUser().setFirstname(user.getFirstname());
+                            Controller.getInstance().getUser().setLastname(user.getLastname());
+                            Controller.getInstance().getUser().setUsername(user.getUsername());
+                            
+                            Controller.getInstance().getUser().setAdmin(user.isAdmin());
+                            MainCoordinator.getInstance().getControllerMain().setStatusBar();
+                        }
+                        MainCoordinator.getInstance().removePanel(panel);
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     }

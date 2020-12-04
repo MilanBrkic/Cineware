@@ -119,8 +119,18 @@ public class DbUser implements DbRepository<User>{
     }
     
     @Override
-    public void delete(User t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete(User user) throws Exception {
+        String query = "DELETE FROM user where userID="+user.getId();
+        Statement s = connect().createStatement();
+        s.executeUpdate(query);
+        s.close();
+        
+        try {
+            connect().commit();
+        } catch (Exception e) {
+            connect().rollback();
+            throw e;
+        }
     }
 
     
