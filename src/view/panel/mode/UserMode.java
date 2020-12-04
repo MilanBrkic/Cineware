@@ -10,5 +10,5 @@ package view.panel.mode;
  * @author Brka
  */
 public enum UserMode {
-    ADD, EDIT
+    ADD, EDIT, EDIT_PASSWORD
 }

@@ -47,16 +47,20 @@ public class ControllerUserView {
                 int index = panel.getTableUser().getSelectedRow();
                 if(index>=0){
                     User user = model.getUsersList().get(index);
+                    MainCoordinator.getInstance().getParams().put(Constant.USER_DETAILS, user);
+                    MainCoordinator.getInstance().getParams().put(Constant.USER_TABLE_MODEL, model); 
                     if(Controller.getInstance().getUser().isAdmin()) {
-                        MainCoordinator.getInstance().getParams().put(Constant.USER_DETAILS, user);
-                        MainCoordinator.getInstance().getParams().put(Constant.USER_TABLE_MODEL, model);
-                        MainCoordinator.getInstance().openPanelUserAdd(UserMode.EDIT);   
-                        
+                        if(user.getUsername().equals(Controller.getInstance().getUser().getUsername())){    
+                            if(adminUserOptionPane()==1){
+                                MainCoordinator.getInstance().openPanelUserAdd(UserMode.EDIT_PASSWORD);
+                                return;
+                            }
+                        }
+                        MainCoordinator.getInstance().openPanelUserAdd(UserMode.EDIT);
                     }
                     else if(user.equals(Controller.getInstance().getUser())){
-                        MainCoordinator.getInstance().getParams().put(Constant.USER_DETAILS, user);
-                        MainCoordinator.getInstance().getParams().put(Constant.USER_TABLE_MODEL, model);                        
-                        MainCoordinator.getInstance().openPanelUserAdd(UserMode.EDIT);
+                                               
+                        MainCoordinator.getInstance().openPanelUserAdd(UserMode.EDIT_PASSWORD);
                     }
                     else JOptionPane.showMessageDialog(panel, "Non admin can only see details of his account", "Error", JOptionPane.ERROR_MESSAGE);
                     
@@ -64,6 +68,19 @@ public class ControllerUserView {
                 
             }
         });
+    }
+    
+    public int adminUserOptionPane(){
+        String[] options = new String[]{"Admin", "User"};
+        int number = JOptionPane.showOptionDialog(panel,
+                "Do you want to go as Admin or as User",
+                "Question",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options
+                , options[0]);
+        return number;
     }
 
     private void prepareExitButton() {

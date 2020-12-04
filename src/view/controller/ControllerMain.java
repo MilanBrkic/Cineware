@@ -78,9 +78,6 @@ public class ControllerMain {
     }
     
     
-    
-    
-
     public void setIcon(IconSetter icon) {
         this.icon = icon;
     }

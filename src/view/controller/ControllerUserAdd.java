@@ -35,7 +35,7 @@ public class ControllerUserAdd {
     }
 
     public void openPanel() {
-        prepareForm(mode, Controller.getInstance().getUser().isAdmin());
+        prepareForm(Controller.getInstance().getUser().isAdmin());
         setListeners();
         prepareExitButton();
         panel.setVisible(true);
@@ -45,7 +45,7 @@ public class ControllerUserAdd {
         return panel;
     }
 
-    private void prepareForm(UserMode mode, boolean admin) {
+    private void prepareForm(boolean admin) {
         
         
         panel.getLblNewPassword().setVisible(false);
@@ -62,34 +62,36 @@ public class ControllerUserAdd {
                 panel.getLblID().setVisible(false);
                 break;
             case EDIT:
-                panel.getBtnAdd().setVisible(false);
-                panel.getBtnEdit().setVisible(true);
-                panel.getBtnDelete().setVisible(true);
-                panel.getBtnEnableChanges().setVisible(true);
-                panel.getBtnEnableChanges().setEnabled(false);
-                panel.getBtnCancel().setVisible(true);
-                panel.getTxtID().setVisible(true);
-                panel.getTxtID().setEnabled(false);
-                panel.getLblID().setVisible(true);
-                if(admin){
-                    panel.getTxtPassword().setVisible(false);
-                    panel.getLblPassword().setVisible(false);
-                }
-                else{
-                    panel.getLblNewPassword().setVisible(true);
-                    panel.getTxtNewPassword().setVisible(true);
-                    panel.getLblPassword().setVisible(true);
-                    panel.getTxtPassword().setVisible(true);
-                    panel.getBtnEnableChanges().setText("Change password");
-                }
-                
-                
+                buttonsForEdit();
+                panel.getTxtPassword().setVisible(false);
+                panel.getLblPassword().setVisible(false);             
+                fillUserDetails();
+                disableSwitch();
+                break;
+            case EDIT_PASSWORD:
+                buttonsForEdit();
+                panel.getLblNewPassword().setVisible(true);
+                panel.getTxtNewPassword().setVisible(true);
+                panel.getLblPassword().setVisible(true);
+                panel.getTxtPassword().setVisible(true);
+                panel.getBtnEnableChanges().setText("Change password");
                 fillUserDetails();
                 disableSwitch();
                 break;
         }
     }
     
+    public void buttonsForEdit(){
+        panel.getBtnAdd().setVisible(false);
+        panel.getBtnEdit().setVisible(true);
+        panel.getBtnDelete().setVisible(true);
+        panel.getBtnEnableChanges().setVisible(true);
+        panel.getBtnEnableChanges().setEnabled(false);
+        panel.getBtnCancel().setVisible(true);
+        panel.getTxtID().setVisible(true);
+        panel.getTxtID().setEnabled(false);
+        panel.getLblID().setVisible(true);
+    }
     
     public void disableSwitch(){
         panel.getBtnEdit().setEnabled(!panel.getBtnEdit().isEnabled());
@@ -195,8 +197,8 @@ public class ControllerUserAdd {
         panel.getBtnEnableChanges().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(Controller.getInstance().getUser().isAdmin()) forAdmin();
-                else forUser();
+                if(mode==mode.EDIT) forAdmin();
+                else if(mode==mode.EDIT_PASSWORD) forUser();
             }
             
             private void forAdmin(){
@@ -216,7 +218,8 @@ public class ControllerUserAdd {
                     if(newPassword.equals(oldPassword)) throw new Exception("You have entered the same password");
                     
                     db.updatePasswordOnly(user.getUsername(), newPassword);
-                    JOptionPane.showMessageDialog(panel, "User: "+user+" has changed his password", "Password changed", JOptionPane.INFORMATION_MESSAGE);                    
+                    JOptionPane.showMessageDialog(panel, "User: "+user+" has changed his password", "Password changed", JOptionPane.INFORMATION_MESSAGE);
+                    MainCoordinator.getInstance().logout();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
