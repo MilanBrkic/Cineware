@@ -37,7 +37,7 @@ public class MyClock extends Thread{
         putTime();
         Long seconds = clock.instant().getEpochSecond();
         while(true){
-            if(clock.instant().getEpochSecond()>seconds+1){
+            if(clock.instant().getEpochSecond()>=seconds+1){
                 seconds++;
                 
                 putTime();
