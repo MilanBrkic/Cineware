@@ -5,7 +5,7 @@
  */
 package repository.db.impl;
 
-import domen.User;
+import domain.User;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;

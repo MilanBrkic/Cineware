@@ -6,7 +6,7 @@
 package view.model.table;
 
 import controller.Controller;
-import domen.User;
+import domain.User;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 

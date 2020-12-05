@@ -5,8 +5,8 @@
  */
 package repository.db.impl;
 
-import domen.Seat;
-import domen.User;
+import domain.Seat;
+import domain.User;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;

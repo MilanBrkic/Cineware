@@ -5,8 +5,8 @@
  */
 package repository.db.impl;
 
-import domen.Hall;
-import domen.User;
+import domain.Hall;
+import domain.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;

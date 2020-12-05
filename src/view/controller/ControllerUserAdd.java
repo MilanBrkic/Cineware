@@ -8,7 +8,7 @@ package view.controller;
 import constant.Constant;
 import controller.Controller;
 import coordinator.MainCoordinator;
-import domen.User;
+import domain.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;

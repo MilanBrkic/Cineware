@@ -13,7 +13,8 @@ import coordinator.MainCoordinator;
  */
 public class Main {
     public static void main(String[] args) {
-        MainCoordinator.getInstance().openFormLogin();
+//        MainCoordinator.getInstance().openFormLogin();
+        controller.Controller.getInstance();
     }
     
     

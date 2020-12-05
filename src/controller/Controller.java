@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 package controller;
-import domen.User;
+import domain.User;
+import java.io.File;
 import java.security.MessageDigest;
 import java.util.ArrayList;
-import java.util.Map;
 import repository.Repository;
 import repository.db.impl.DbHall;
 import repository.db.impl.DbUser;
@@ -20,11 +20,12 @@ public class Controller {
     private Repository dbHall;
     private static Controller instance;
     private User user;
-    
+    private ArrayList<String> countries;
     
     private Controller(){
         dbUser = new DbUser();
         dbHall = new DbHall();
+        countries = readCoutries();
     }
     
     public static Controller getInstance(){
@@ -77,6 +78,18 @@ public class Controller {
             e.printStackTrace();
         }
         return "";
+    }
+    
+    public ArrayList<String> readCoutries(){
+        ArrayList<String> coutries = new ArrayList<>();
+        
+        String basePath = new File("").getAbsolutePath();
+        String jsonPath = basePath + "\\resources\\coutries.json";
+        System.out.println(jsonPath);
+        
+        
+        
+        return coutries;
     }
     
 }

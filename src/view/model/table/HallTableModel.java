@@ -5,7 +5,7 @@
  */
 package view.model.table;
 
-import domen.Hall;
+import domain.Hall;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
