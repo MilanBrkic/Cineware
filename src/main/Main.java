@@ -6,7 +6,7 @@
 package main;
 
 import coordinator.MainCoordinator;
-import java.security.MessageDigest;
+
 /**
  *
  * @author Milan
@@ -14,7 +14,6 @@ import java.security.MessageDigest;
 public class Main {
     public static void main(String[] args) {
         MainCoordinator.getInstance().openFormLogin();
-        
     }
     
     
