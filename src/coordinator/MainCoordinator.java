@@ -12,11 +12,13 @@ import java.util.Map;
 import javax.swing.JPanel;
 import view.FormLogin;
 import view.FormMain;
+import view.controller.ControllerDirectorAdd;
 import view.controller.ControllerHallView;
 import view.controller.ControllerLogin;
 import view.controller.ControllerMain;
 import view.controller.ControllerUserAdd;
 import view.controller.ControllerUserView;
+import view.panel.PanelDirectorAdd;
 import view.panel.PanelHallView;
 import view.panel.PanelUserAdd;
 import view.panel.PanelUserView;
@@ -79,6 +81,12 @@ public class MainCoordinator {
         
     }
     
+    public void openPanelDirectorAdd() {
+        ControllerDirectorAdd directorAdd = new ControllerDirectorAdd(new PanelDirectorAdd());
+        addPanel(directorAdd.getPanel());
+        directorAdd.openPanel();
+    }
+    
     public void openPanelHallView() {
         ControllerHallView hallView = new ControllerHallView(new PanelHallView());
         addPanel(hallView.getPanel());
@@ -114,6 +122,8 @@ public class MainCoordinator {
         controllerMain = new ControllerMain(new FormMain());
         
     }
+
+    
 
     
     

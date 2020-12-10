@@ -5,10 +5,6 @@
  */
 package controller;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import domain.User;
 import java.io.File;
@@ -18,11 +14,8 @@ import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.RowFilter.Entry;
 import repository.Repository;
 import repository.db.impl.DbHall;
 import repository.db.impl.DbUser;
@@ -107,7 +100,6 @@ public class Controller {
             
             String basePath = new File("").getAbsolutePath();
             String jsonPath = basePath + "\\resources\\countries.json";
-            System.out.println(jsonPath);
             
             Gson gson = new Gson();
             JsonReader reader = new JsonReader(new FileReader(jsonPath));

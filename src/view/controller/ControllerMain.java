@@ -95,6 +95,7 @@ public class ControllerMain {
         setLogoutListener();
         setUserListeners();   
         setHallListeners();
+        setDirectorListeners();
     }
 
     public void setLogoutListener(){
@@ -143,16 +144,33 @@ public class ControllerMain {
         });
     }
     
+    private void setDirectorListeners() {
+        form.getMenuItemDirectorAdd().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainCoordinator.getInstance().removeAllPanels();
+                enableAll();
+                form.getMenuItemDirectorAdd().setEnabled(false);
+                form.getLblWelcomeUser().setVisible(false);
+                MainCoordinator.getInstance().openPanelDirectorAdd();
+            }
+        });
+        
+    }
+    
     public void enableAll(){
         if(Controller.getInstance().getUser().isAdmin()) form.getMenuItemUserAdd().setEnabled(true);
         form.getMenuItemUserView().setEnabled(true);
         form.getMenuItemHallView().setEnabled(true);
+        form.getMenuItemDirectorAdd().setEnabled(true);
         
     }
 
     public MyClock getClock() {
         return clock;
     }
+
+    
 
     
 
