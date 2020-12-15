@@ -24,6 +24,7 @@ import repository.db.impl.DbUser;
  * @author Milan
  */
 public class Controller {
+    int test;
     private Repository dbUser;
     private Repository dbHall;
     private static Controller instance;
