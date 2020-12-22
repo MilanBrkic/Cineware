@@ -5,7 +5,7 @@
  */
 package view.util;
 
-import coordinator.MainCoordinator;
+import view.coordinator.MainCoordinator;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;

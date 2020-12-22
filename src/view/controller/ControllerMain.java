@@ -6,8 +6,7 @@
 package view.controller;
 
 import clock.MyClock;
-import controller.Controller;
-import coordinator.MainCoordinator;
+import view.coordinator.MainCoordinator;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,7 +20,7 @@ import view.util.IconSetter;
 
 /**
  *
- * @author Brka
+ * @author Milan
  */
 public class ControllerMain {
     private IconSetter icon;
@@ -51,7 +50,7 @@ public class ControllerMain {
         setStatusBar();
         setListeners();
        
-        form.getLblWelcomeUser().setText("Welcome: "+Controller.getInstance().getUser()); 
+        form.getLblWelcomeUser().setText("Welcome: "+MainCoordinator.getInstance().getUser()); 
         form.setVisible(true);
     }
     
@@ -63,7 +62,7 @@ public class ControllerMain {
     
     public void setMenuBar(){
         form.getJMenuBar().setOpaque(false);
-        if(!Controller.getInstance().getUser().isAdmin()) form.getMenuItemUserAdd().setEnabled(false);
+        if(!MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemUserAdd().setEnabled(false);
         addMenuAccount();
     }
     
@@ -83,7 +82,7 @@ public class ControllerMain {
     }
     
     public void setStatusBar(){
-        form.getLblStatusBarUser().setText("User: "+ Controller.getInstance().getUser());
+        form.getLblStatusBarUser().setText("User: "+ MainCoordinator.getInstance().getUser());
     }
     
     
@@ -159,7 +158,7 @@ public class ControllerMain {
     }
     
     public void enableAll(){
-        if(Controller.getInstance().getUser().isAdmin()) form.getMenuItemUserAdd().setEnabled(true);
+        if(MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemUserAdd().setEnabled(true);
         form.getMenuItemUserView().setEnabled(true);
         form.getMenuItemHallView().setEnabled(true);
         form.getMenuItemDirectorAdd().setEnabled(true);

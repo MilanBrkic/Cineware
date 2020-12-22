@@ -6,6 +6,9 @@
 package view.controller;
 
 import controller.Controller;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import view.model.table.HallTableModel;
 import view.panel.PanelHallView;
 
@@ -18,8 +21,13 @@ public class ControllerHallView {
     private HallTableModel model;
     
     public ControllerHallView(PanelHallView panel) {
-        this.panel = panel;
-        model = new HallTableModel(Controller.getInstance().getDbHall().getAll());
+        try {
+            this.panel = panel;
+            model = new HallTableModel(Controller.getInstance().getAllHalls());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(panel, ex.getMessage());
+            Logger.getLogger(ControllerHallView.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public PanelHallView getPanel() {

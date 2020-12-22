@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package coordinator;
+package view.coordinator;
 
 import clock.MyClock;
 import controller.Controller;
+import domain.User;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JPanel;
 import view.FormLogin;
 import view.FormMain;
+import view.constant.Constant;
 import view.controller.ControllerDirectorAdd;
 import view.controller.ControllerHallView;
 import view.controller.ControllerLogin;
@@ -115,7 +117,7 @@ public class MainCoordinator {
     }
 
     public void logout() {
-        Controller.getInstance().setUser(null);
+        setUser(null);
         controllerMain.getForm().dispose();
         controllerMain.getClock().interrupt();
         openFormLogin();
@@ -125,7 +127,12 @@ public class MainCoordinator {
 
     
 
+    public void setUser(User user){
+        params.put(Constant.LOGGED_USER, user);
+    }
     
-    
+    public User getUser(){
+        return (User) params.get(Constant.LOGGED_USER);
+    }
     
 }

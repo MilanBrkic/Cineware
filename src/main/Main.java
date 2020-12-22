@@ -5,7 +5,7 @@
  */
 package main;
 
-import coordinator.MainCoordinator;
+import view.coordinator.MainCoordinator;
 
 /**
  *

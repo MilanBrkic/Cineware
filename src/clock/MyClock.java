@@ -5,19 +5,12 @@
  */
 package clock;
 
-import java.text.SimpleDateFormat;
+
 import javax.swing.JLabel;
 import java.time.Clock;
-import java.time.Instant;
-import java.time.LocalTime;
 import java.time.ZoneId;
-import java.time.temporal.ChronoField;
-import java.time.temporal.TemporalField;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 /**
  *
  * @author Milan

@@ -5,9 +5,9 @@
  */
 package view.controller;
 
-import constant.Constant;
+import view.constant.Constant;
 import controller.Controller;
-import coordinator.MainCoordinator;
+import view.coordinator.MainCoordinator;
 import domain.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +26,7 @@ public class ControllerUserView {
     
     public ControllerUserView(PanelUserView panel) {
         this.panel = panel;
-        model = new UserTableModel(Controller.getInstance().getDbUser().getAll());
+        model = new UserTableModel(Controller.getInstance().getAllUsers());
     }
 
     public void openPanel() {
@@ -49,8 +49,8 @@ public class ControllerUserView {
                     User user = model.getUsersList().get(index);
                     MainCoordinator.getInstance().getParams().put(Constant.USER_DETAILS, user);
                     MainCoordinator.getInstance().getParams().put(Constant.USER_TABLE_MODEL, model); 
-                    if(Controller.getInstance().getUser().isAdmin()) {
-                        if(user.getUsername().equals(Controller.getInstance().getUser().getUsername())){    
+                    if(MainCoordinator.getInstance().getUser().isAdmin()) {
+                        if(user.getUsername().equals(MainCoordinator.getInstance().getUser().getUsername())){    
                             if(adminUserOptionPane()==1){
                                 MainCoordinator.getInstance().openPanelUserAdd(UserMode.EDIT_PASSWORD);
                                 return;
@@ -58,7 +58,7 @@ public class ControllerUserView {
                         }
                         MainCoordinator.getInstance().openPanelUserAdd(UserMode.EDIT);
                     }
-                    else if(user.equals(Controller.getInstance().getUser())){
+                    else if(user.equals(MainCoordinator.getInstance().getUser())){
                                                
                         MainCoordinator.getInstance().openPanelUserAdd(UserMode.EDIT_PASSWORD);
                     }

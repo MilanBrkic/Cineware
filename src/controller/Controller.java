@@ -6,6 +6,7 @@
 package controller;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
+import domain.Hall;
 import domain.User;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import repository.Repository;
+import repository.db.DbRepository;
 import repository.db.impl.DbHall;
 import repository.db.impl.DbUser;
 /**
@@ -28,7 +30,6 @@ public class Controller {
     private Repository dbUser;
     private Repository dbHall;
     private static Controller instance;
-    private User user;
     private ArrayList<String> countries;
     
     private Controller(){
@@ -51,14 +52,7 @@ public class Controller {
     }
    
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
+    
     
     public String encrypt(String password) {
 
@@ -117,6 +111,54 @@ public class Controller {
         return list;
     }
 
+    public ArrayList<Hall> getAllHalls() throws Exception{
+        ArrayList<Hall> halls = null;
+        try {
+            halls = dbHall.getAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return halls;
+    }
+
+    public ArrayList<User> getAllUsers() {
+        ArrayList<User> users = null;
+        try {
+            users = dbUser.getAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return users;
+    }
+
+    public void deleteUser(User user) throws Exception {
+        try {
+            dbUser.delete(user);
+            ((DbRepository)dbUser).commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            ((DbRepository)dbUser).rollback();
+            throw e;
+        }finally{
+            ((DbRepository)dbUser).disconnect();
+        }
+    }
+
+    public void updateUser(User user) throws Exception {
+        try {
+            dbUser.update(user);
+            ((DbRepository)dbUser).commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            ((DbRepository)dbUser).rollback();
+            throw e;
+        }finally{
+            ((DbRepository)dbUser).disconnect();
+        }
+    }
+
     
     
     class Countries{
@@ -131,8 +173,6 @@ public class Controller {
         public String toString() {
             return name;
         }
-        
-        
-        
+
     }
 }

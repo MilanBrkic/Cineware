@@ -5,9 +5,9 @@
  */
 package view.controller;
 
-import constant.Constant;
+import view.constant.Constant;
 import controller.Controller;
-import coordinator.MainCoordinator;
+import view.coordinator.MainCoordinator;
 import domain.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,7 +35,7 @@ public class ControllerUserAdd {
     }
 
     public void openPanel() {
-        prepareForm(Controller.getInstance().getUser().isAdmin());
+        prepareForm(MainCoordinator.getInstance().getUser().isAdmin());
         setListeners();
         prepareExitButton();
         panel.setVisible(true);
@@ -128,7 +128,7 @@ public class ControllerUserAdd {
                 try {
                     User user = (User) MainCoordinator.getInstance().getParams().get(Constant.USER_DETAILS);
                     int number = JOptionPane.showConfirmDialog(panel, "Are you sure you what to delete user "+user, "Delete", 0);
-                    if(number==0) Controller.getInstance().getDbUser().delete(user);
+                    if(number==0) Controller.getInstance().deleteUser(user);
                     UserTableModel model =  (UserTableModel) MainCoordinator.getInstance().getParams().get(Constant.USER_TABLE_MODEL);
                     model.refresh();
                     MainCoordinator.getInstance().removePanel(panel);
@@ -152,12 +152,12 @@ public class ControllerUserAdd {
                         UserTableModel model =  (UserTableModel) MainCoordinator.getInstance().getParams().get(Constant.USER_TABLE_MODEL);
                         model.refresh();
                         JOptionPane.showMessageDialog(panel, "Updated user: "+user, "Updated", JOptionPane.INFORMATION_MESSAGE);
-                        if(user.getId()==Controller.getInstance().getUser().getId()){
-                            Controller.getInstance().getUser().setFirstname(user.getFirstname());
-                            Controller.getInstance().getUser().setLastname(user.getLastname());
-                            Controller.getInstance().getUser().setUsername(user.getUsername());
+                        if(user.getId()==MainCoordinator.getInstance().getUser().getId()){
+                            MainCoordinator.getInstance().getUser().setFirstname(user.getFirstname());
+                            MainCoordinator.getInstance().getUser().setLastname(user.getLastname());
+                            MainCoordinator.getInstance().getUser().setUsername(user.getUsername());
                             
-                            Controller.getInstance().getUser().setAdmin(user.isAdmin());
+                            MainCoordinator.getInstance().getUser().setAdmin(user.isAdmin());
                             MainCoordinator.getInstance().getControllerMain().setStatusBar();
                         }
                         MainCoordinator.getInstance().removePanel(panel);
@@ -184,7 +184,7 @@ public class ControllerUserAdd {
                     user.setUsername(username);
                     if(panel.getRadioYes().isSelected()) user.setAdmin(true);
                     else user.setAdmin(false);
-                    Controller.getInstance().getDbUser().update(user);
+                    Controller.getInstance().updateUser(user);
                     return user;
                 }
 
