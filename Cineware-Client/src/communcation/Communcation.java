@@ -5,6 +5,8 @@
  */
 package communcation;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import common.communication.Operation;
 import common.communication.Receiver;
 import common.communication.Request;
@@ -15,6 +17,7 @@ import domain.User;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -25,12 +28,13 @@ public class Communcation {
     private Sender sender;
     private Receiver receiver;
     private static Communcation instance;
-    
+    private Gson gson;
     
     private Communcation() throws IOException {
         this.socket = new Socket("localhost", 9000);
         sender = new Sender(socket);
         receiver = new Receiver(socket);
+        gson = new GsonBuilder().setPrettyPrinting().create();
     }
 
     public static Communcation getInstance() throws IOException {
@@ -47,7 +51,9 @@ public class Communcation {
         sender.send(request);
         Response response = (Response) receiver.receive();
         if(response.getException()==null){
-            return (ArrayList<String>) response.getResult();
+            String s = (String) response.getResult();
+            ArrayList<String> countries = new ArrayList<>(Arrays.asList(gson.fromJson(s, String[].class)));
+            return countries;
         }
         else throw response.getException();
     }
@@ -58,7 +64,9 @@ public class Communcation {
         sender.send(request);
         Response response = (Response) receiver.receive();
         if(response.getException()==null){
-            return (ArrayList<Hall>) response.getResult();
+            String s = (String) response.getResult();
+            ArrayList<Hall> halls = new ArrayList<>(Arrays.asList(gson.fromJson(s, Hall[].class)));
+            return halls;
         }
         else throw response.getException();
     }
@@ -69,14 +77,17 @@ public class Communcation {
         sender.send(request);
         Response response = (Response) receiver.receive();
         if(response.getException()==null){
-            return (ArrayList<User>) response.getResult();
+            String s = (String) response.getResult();
+            ArrayList<User> users = new ArrayList<>(Arrays.asList(gson.fromJson(s, User[].class)));
+            return users;
         }
         else throw response.getException();
     }
     
     
     public void addUser(User user) throws  Exception{
-        Request request = new Request(Operation.ADD_USER, user);
+        String s = gson.toJson(user);
+        Request request = new Request(Operation.ADD_USER, s);
         sender.send(request);
         Response response = (Response) receiver.receive();
         if(response.getException()==null){
@@ -86,7 +97,8 @@ public class Communcation {
     }
     
     public void updateUser(User user) throws Exception {
-        Request request = new Request(Operation.UPDATE_USER, user);
+        String s = gson.toJson(user);
+        Request request = new Request(Operation.UPDATE_USER, s);
         sender.send(request);
         Response response = (Response) receiver.receive();
         if(response.getException()==null){
@@ -96,7 +108,8 @@ public class Communcation {
     }
     
     public void deleteUser(User user) throws Exception {
-        Request request = new Request(Operation.DELETE_USER, user);
+        String s = gson.toJson(user);
+        Request request = new Request(Operation.DELETE_USER, s);
         sender.send(request);
         Response response = (Response) receiver.receive();
         if(response.getException()==null){
@@ -109,7 +122,8 @@ public class Communcation {
        User user = new User();
        user.setUsername(username);
        user.setPassword(password);
-       Request request = new Request(Operation.CHECK_PASSWORD, user);
+       String s = gson.toJson(user);
+       Request request = new Request(Operation.CHECK_PASSWORD, s);
        sender.send(request);
        Response response = (Response) receiver.receive();
        if(response.getException()==null){
@@ -122,7 +136,8 @@ public class Communcation {
        User user = new User();
        user.setUsername(username);
        user.setPassword(password);
-       Request request = new Request(Operation.UPDATE_PASSWORD_ONLY, user);
+       String s = gson.toJson(user);
+       Request request = new Request(Operation.UPDATE_PASSWORD_ONLY, s);
        sender.send(request);
        Response response = (Response) receiver.receive();
        if(response.getException()==null){

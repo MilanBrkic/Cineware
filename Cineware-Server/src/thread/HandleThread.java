@@ -5,13 +5,19 @@
  */
 package thread;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import common.communication.Receiver;
 import common.communication.Request;
 import common.communication.Response;
 import common.communication.Sender;
 import controller.Controller;
+import domain.Hall;
 import domain.User;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,11 +30,12 @@ public class HandleThread extends Thread {
     Socket socket;
     Receiver receiver;
     Sender sender;
-
+    Gson gson;
     public HandleThread(Socket socket) {
         this.socket = socket;
         sender = new Sender(socket);
         receiver = new Receiver(socket);
+        gson = new GsonBuilder().setPrettyPrinting().create();
     }
 
     @Override
@@ -46,32 +53,43 @@ public class HandleThread extends Thread {
                 try {
                     switch (request.getOperation()) {
                         case GET_COUNTRIES:
-                            response.setResult(Controller.getInstance().getCountries());
+                            ArrayList<String> countries = Controller.getInstance().getCountries();
+                            String jsonCountries = gson.toJson(countries);
+                            response.setResult(jsonCountries);
                             break;
                         case GET_ALL_HALLS:
-                            response.setResult(Controller.getInstance().getAllHalls());
+                            ArrayList<Hall> halls = Controller.getInstance().getAllHalls();
+                            String jsonHalls = gson.toJson(halls);
+                            response.setResult(jsonHalls);
                             break;
                         case GET_ALL_USERS:
-                            response.setResult(Controller.getInstance().getAllUsers());
+                            ArrayList<User> users = Controller.getInstance().getAllUsers();
+                            String jsonUsers = gson.toJson(users);
+                            response.setResult(jsonUsers);
                             break;
                         case ADD_USER:
-                            User userAdd = (User) request.getArguments();
+                            String jsonUserAdd = (String) request.getArguments();
+                            User userAdd = gson.fromJson(jsonUserAdd, User.class);
                             Controller.getInstance().addUser(userAdd);
                             break;
                         case DELETE_USER:
-                            User user = (User) request.getArguments();
-                            Controller.getInstance().deleteUser(user);
+                            String jsonUserDelete = (String) request.getArguments();
+                            User userDelete = gson.fromJson(jsonUserDelete, User.class);
+                            Controller.getInstance().deleteUser(userDelete);
                             break;
                         case UPDATE_USER:
-                            User userUpdate = (User) request.getArguments();
+                            String jsonUserUpdate = (String) request.getArguments();
+                            User userUpdate = gson.fromJson(jsonUserUpdate, User.class);
                             Controller.getInstance().updateUser(userUpdate);
                             break;
                         case CHECK_PASSWORD:
-                            User userPassword = (User) request.getArguments();
+                            String jsonUserPassword = (String) request.getArguments();
+                            User userPassword = gson.fromJson(jsonUserPassword, User.class);
                             response.setResult(Controller.getInstance().checkPassword(userPassword.getUsername(), userPassword.getPassword()));
                             break;
                         case UPDATE_PASSWORD_ONLY:
-                            User userUpdatePassword = (User) request.getArguments();
+                            String jsonUserUpdatePassword = (String) request.getArguments();
+                            User userUpdatePassword = gson.fromJson(jsonUserUpdatePassword, User.class);
                             Controller.getInstance().updatePasswordOnly(userUpdatePassword.getUsername(), userUpdatePassword.getPassword());
                     }
                 } catch (Exception e) {
