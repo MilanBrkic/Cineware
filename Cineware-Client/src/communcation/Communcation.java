@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author user
+ * @author Milan
  */
 public class Communcation {
     private Socket socket;
