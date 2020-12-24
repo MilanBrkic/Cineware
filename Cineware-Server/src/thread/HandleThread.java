@@ -69,33 +69,36 @@ public class HandleThread extends Thread {
                             response.setResult(jsonUsers);
                             break;
                         case ADD_USER:
-                            String jsonUserAdd = (String) request.getArguments();
+                            String jsonUserAdd =  request.getArguments();
                             User userAdd = gson.fromJson(jsonUserAdd, User.class);
                             Controller.getInstance().addUser(userAdd);
                             break;
                         case DELETE_USER:
-                            String jsonUserDelete = (String) request.getArguments();
+                            String jsonUserDelete = request.getArguments();
                             User userDelete = gson.fromJson(jsonUserDelete, User.class);
                             Controller.getInstance().deleteUser(userDelete);
                             break;
                         case UPDATE_USER:
-                            String jsonUserUpdate = (String) request.getArguments();
+                            String jsonUserUpdate =  request.getArguments();
                             User userUpdate = gson.fromJson(jsonUserUpdate, User.class);
                             Controller.getInstance().updateUser(userUpdate);
                             break;
                         case CHECK_PASSWORD:
-                            String jsonUserPassword = (String) request.getArguments();
+                            String jsonUserPassword = request.getArguments();
                             User userPassword = gson.fromJson(jsonUserPassword, User.class);
-                            response.setResult(Controller.getInstance().checkPassword(userPassword.getUsername(), userPassword.getPassword()));
+                            boolean rezBool = Controller.getInstance().checkPassword(userPassword.getUsername(), userPassword.getPassword());
+                            response.setResult(gson.toJson(rezBool));
                             break;
                         case UPDATE_PASSWORD_ONLY:
-                            String jsonUserUpdatePassword = (String) request.getArguments();
+                            String jsonUserUpdatePassword = request.getArguments();
                             User userUpdatePassword = gson.fromJson(jsonUserUpdatePassword, User.class);
                             Controller.getInstance().updatePasswordOnly(userUpdatePassword.getUsername(), userUpdatePassword.getPassword());
+                            break;
                         case ADD_DIRECTOR:
-                            String jsonAddDirector = (String) request.getArguments();
+                            String jsonAddDirector = request.getArguments();
                             Director addDirector = gson.fromJson(jsonAddDirector, Director.class);
                             Controller.getInstance().addDirector(addDirector);
+                            break;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

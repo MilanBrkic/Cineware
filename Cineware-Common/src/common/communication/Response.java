@@ -12,22 +12,22 @@ import java.io.Serializable;
  * @author user
  */
 public class Response implements Serializable{
-    Object result;
+    String result;
     Exception exception;
 
     public Response() {
     }
 
-    public Response(Object result, Exception exception) {
+    public Response(String result, Exception exception) {
         this.result = result;
         this.exception = exception;
     }
 
-    public Object getResult() {
+    public String getResult() {
         return result;
     }
 
-    public void setResult(Object result) {
+    public void setResult(String result) {
         this.result = result;
     }
 

@@ -52,7 +52,7 @@ public class Communcation {
         sender.send(request);
         Response response = (Response) receiver.receive();
         if(response.getException()==null){
-            String s = (String) response.getResult();
+            String s = response.getResult();
             ArrayList<String> countries = new ArrayList<>(Arrays.asList(gson.fromJson(s, String[].class)));
             return countries;
         }
@@ -65,7 +65,7 @@ public class Communcation {
         sender.send(request);
         Response response = (Response) receiver.receive();
         if(response.getException()==null){
-            String s = (String) response.getResult();
+            String s = response.getResult();
             ArrayList<Hall> halls = new ArrayList<>(Arrays.asList(gson.fromJson(s, Hall[].class)));
             return halls;
         }
@@ -78,7 +78,7 @@ public class Communcation {
         sender.send(request);
         Response response = (Response) receiver.receive();
         if(response.getException()==null){
-            String s = (String) response.getResult();
+            String s = response.getResult();
             ArrayList<User> users = new ArrayList<>(Arrays.asList(gson.fromJson(s, User[].class)));
             return users;
         }
@@ -128,7 +128,9 @@ public class Communcation {
        sender.send(request);
        Response response = (Response) receiver.receive();
        if(response.getException()==null){
-           return (boolean) response.getResult();
+           String json = response.getResult();
+           boolean bu = gson.fromJson(json, Boolean.class);
+           return bu;
        }
        else throw response.getException();
     }

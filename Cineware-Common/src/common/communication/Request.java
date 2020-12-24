@@ -13,12 +13,12 @@ import java.io.Serializable;
  */
 public class Request implements Serializable{
     Operation operation;
-    Object arguments;
+    String arguments;
 
     public Request() {
     }
 
-    public Request(Operation operation, Object arguments) {
+    public Request(Operation operation, String arguments) {
         this.operation = operation;
         this.arguments = arguments;
     }
@@ -31,11 +31,11 @@ public class Request implements Serializable{
         this.operation = operation;
     }
 
-    public Object getArguments() {
+    public String getArguments() {
         return arguments;
     }
 
-    public void setArguments(Object arguments) {
+    public void setArguments(String arguments) {
         this.arguments = arguments;
     }
     
