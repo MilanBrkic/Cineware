@@ -69,6 +69,7 @@ public class ControllerMain {
     public void setMenuBar(){
         form.getJMenuBar().setOpaque(false);
         if(!MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemUserAdd().setEnabled(false);
+        if(!MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemDirectorAdd().setEnabled(false);
         addMenuAccount();
     }
     
@@ -166,6 +167,7 @@ public class ControllerMain {
     
     public void enableAll(){
         if(MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemUserAdd().setEnabled(true);
+        if(MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemDirectorAdd().setEnabled(true);
         form.getMenuItemUserView().setEnabled(true);
         form.getMenuItemHallView().setEnabled(true);
         form.getMenuItemDirectorAdd().setEnabled(true);

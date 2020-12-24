@@ -19,7 +19,9 @@ public class PanelDateInput extends javax.swing.JPanel {
      */
     public PanelDateInput() {
         initComponents();
-        
+        fillYear();
+        fillMonth();
+        fillDays();
     }
 
     public JComboBox getCmbDay() {
@@ -35,7 +37,50 @@ public class PanelDateInput extends javax.swing.JPanel {
     }
 
     
-
+    public void fillYear(){
+        int currentYear = new GregorianCalendar().get(GregorianCalendar.YEAR);
+        for (int i = currentYear-15; i >=1900 ; i--) {
+            cmbYear.addItem(i);
+        }
+    }
+    
+    private void fillMonth() {
+        for(int i = 1;i<=12;i++){
+            cmbMonth.addItem(i);
+        }
+    }
+    
+    private void fillDays() {
+        month31();
+    }
+    
+    public void month31(){
+        cmbDay.removeAllItems();
+        for (int i = 1; i <= 31; i++) {
+            cmbDay.addItem(i);
+        }
+    }
+    
+    public void month30(){
+        cmbDay.removeAllItems();
+        for (int i = 1; i <= 30; i++) {
+            cmbDay.addItem(i);
+        }
+    }
+    
+    public void month28(){
+        cmbDay.removeAllItems();
+        for (int i = 1; i <= 28; i++) {
+            cmbDay.addItem(i);
+        }
+    }
+    
+    public void month29(){
+        cmbDay.removeAllItems();
+        for (int i = 1; i <= 29; i++) {
+            cmbDay.addItem(i);
+        }
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,6 +107,18 @@ public class PanelDateInput extends javax.swing.JPanel {
 
         jLabel4.setText("year:");
 
+        cmbMonth.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbMonthItemStateChanged(evt);
+            }
+        });
+
+        cmbYear.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbYearItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -69,7 +126,7 @@ public class PanelDateInput extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(cmbDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -81,7 +138,7 @@ public class PanelDateInput extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(cmbYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,6 +155,47 @@ public class PanelDateInput extends javax.swing.JPanel {
                     .addComponent(cmbDay, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmbMonthItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbMonthItemStateChanged
+        int month = (int) cmbMonth.getSelectedItem();
+        int year = (int) cmbYear.getSelectedItem();
+        switch(month){
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                month31();
+                break;
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                month30();
+                break;
+            case 2:
+                if(year%4!=0)month28();
+                else if(year%100!=0) month29();
+                else if(year%400!=0) month28();
+                else month29();
+                break;
+        }
+    }//GEN-LAST:event_cmbMonthItemStateChanged
+
+    private void cmbYearItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbYearItemStateChanged
+        if(cmbMonth.getSelectedItem()==null) return;
+        int month = (int) cmbMonth.getSelectedItem();
+        int year = (int) cmbYear.getSelectedItem();
+        
+        if(month==2){
+            if(year%4!=0)month28();
+            else if(year%100!=0) month29();
+            else if(year%400!=0) month28();
+            else month29();
+        }
+    }//GEN-LAST:event_cmbYearItemStateChanged
     
     
 
@@ -110,6 +208,10 @@ public class PanelDateInput extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
+
+    
+
+   
 
     
 }
