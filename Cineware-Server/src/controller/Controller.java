@@ -66,7 +66,7 @@ public class Controller {
             List<Countries> coutries = Arrays.asList(gson.fromJson(reader, Countries[].class));
             
             for (Countries coutry : coutries) {
-                list.add(coutry.getName());
+                list.add(coutry.getName().trim());
             }
             
         } catch (FileNotFoundException ex) {

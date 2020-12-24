@@ -21,7 +21,7 @@ public class Server {
         try {
             ServerSocket serverSocket = new ServerSocket(9000);
             while(true){
-                System.out.println("Waiting for connection");
+                System.out.println("Waiting for connection...");
                 Socket socket = serverSocket.accept();
                 System.out.println("Client connected!");
                 handleClient(socket);
