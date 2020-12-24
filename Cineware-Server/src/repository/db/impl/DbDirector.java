@@ -5,44 +5,43 @@
  */
 package repository.db.impl;
 
-import domain.Seat;
-import domain.User;
+import domain.Director;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import repository.db.DbRepository;
 
 /**
  *
- * @author Milan
+ * @author user
  */
-public class DbSeat implements DbRepository<Seat>{
+public class DbDirector implements DbRepository<Director>{
 
     @Override
-    public ArrayList<Seat> getAll() throws Exception{
+    public ArrayList<Director> getAll() throws Exception{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void add(Seat seat) throws Exception {
-        String query = "INSERT INTO seat(hallID, number, row) VALUES(?,?,?)";
+    public void add(Director director) throws Exception {
+        String query = "INSERT INTO director(firstname, lastname, dateOfBirth, nationality, userID) VALUES(?,?,?,?,?)";
         PreparedStatement ps = connect().prepareStatement(query);
-        ps.setInt(1, seat.getHall().getId());
-        ps.setInt(2, seat.getNumber());
-        ps.setString(3, String.valueOf(seat.getRow()));
+        ps.setString(1, director.getFirstname());
+        ps.setString(2, director.getLastname());
+        ps.setDate(3, new java.sql.Date(director.getDateOfBirth().getTime()));
+        ps.setString(4, director.getNationality());
+        ps.setInt(5, director.getUser().getId());
         ps.executeUpdate();
         ps.close();
     }
 
     @Override
-    public void update(Seat t) throws Exception {
+    public void update(Director t) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void delete(Seat t) throws Exception {
+    public void delete(Director t) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
     
 }

@@ -7,13 +7,18 @@ package view.controller;
 
 
 import communcation.Communcation;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.io.IOException;
+import domain.Director;
+import domain.User;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import validation.Validation;
+import view.coordinator.MainCoordinator;
 import view.panel.PanelDirectorAdd;
 
 /**
@@ -31,6 +36,7 @@ public class ControllerDirectorAdd {
     public void openPanel() {
         setExitButton();
         fillNation();
+        addListener();
         panel.setVisible(true);
     }
 
@@ -52,7 +58,49 @@ public class ControllerDirectorAdd {
             Logger.getLogger(ControllerDirectorAdd.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 
+    private void addListener() {
+        panel.getBtnAdd().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String firstname = panel.getTxtFirstname().getText();
+                    String lastname = panel.getTxtLastname().getText();
+                    String error = "";
+                    
+                    error += Validation.firstnameValidation(firstname);
+                    error += Validation.lastnameValidation(lastname);
+                    
+                    if(!error.isEmpty()) throw new Exception(error);
+                    
+                    int day = (int) panel.getPanelDateInput().getCmbDay().getSelectedItem();
+                    int month = (int) panel.getPanelDateInput().getCmbMonth().getSelectedItem();
+                    int year = (int) panel.getPanelDateInput().getCmbYear().getSelectedItem();
+                    
+                    String datum = day+"."+month+"."+year+".";
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy.");
+                    Date dayOfBirth = sdf.parse(datum);
+                    
+                    String country = (String) panel.getCmbNation().getSelectedItem();
+                    User user = MainCoordinator.getInstance().getUser();
+                    Director director = new Director(firstname, lastname, dayOfBirth, country, user);
+                    
+                    Communcation.getInstance().addDirector(director);
+                    JOptionPane.showMessageDialog(panel, "Director added", "Added", JOptionPane.INFORMATION_MESSAGE);
+                    clearFields();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+    }
+    
+    public void clearFields(){
+        panel.getTxtFirstname().setText("");
+        panel.getTxtLastname().setText("");
+        panel.getPanelDateInput().getCmbDay().setSelectedItem(1);
+        panel.getPanelDateInput().getCmbMonth().setSelectedItem(1);
+        panel.getPanelDateInput().getCmbYear().setSelectedItem(2005);
+    }
 
 }

@@ -19,5 +19,6 @@ public enum Operation implements Serializable{
     UPDATE_USER,
     DELETE_USER,
     CHECK_PASSWORD,
-    UPDATE_PASSWORD_ONLY
+    UPDATE_PASSWORD_ONLY,
+    ADD_DIRECTOR
 }

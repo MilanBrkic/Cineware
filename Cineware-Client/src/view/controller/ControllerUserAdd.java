@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import validation.Validation;
 
 import view.model.table.UserTableModel;
 import view.panel.PanelUserAdd;
@@ -258,52 +259,14 @@ public class ControllerUserAdd {
         });
     }
 
-    public String firstnameValidation(String firstname){
-        String error="";
-        if (firstname.length() < 3) error += "Firstname can not have less than 3 chars\n";
-        else{
-            String regex="[A-Z]+[a-z0-9]+";
-            if(!firstname.matches(regex)) error+="Firstname must start with a capital\n";
-            else{
-                regex="[A-Z]+[a-z]+";
-                if(!firstname.matches(regex)) error+="Firstname can not have a number\n"; 
-            }                    
-        }
-        return error;
-    }
-    
-    public String lastnameValidation(String lastname){
-        String error = "";
-        if (lastname.length() < 3) error += "Lastname can not have less than 3 chars\n";
-        else{
-            String regex="[A-Z]+[a-z0-9]+";
-            if(!lastname.matches(regex)) error+="Lastname must start with a capital\n";
-            else{
-                regex="[A-Z]+[a-z]+";
-                if(!lastname.matches(regex)) error+="Lastname can not have a number\n"; 
-            }
-        }
-        return error;
-    }
-    
-    public String usernameValidation(String username){
-        String error = "";
-        
-        if (username.length() < 4) error += "Username can not have less than 4 chars\n";
-        else{
-            String regex ="[A-Za-z0-9.]+";
-            if(!username.matches(regex)) error+="Username can not gave blanks and special characters";
-            
-        }
-        return error;
-    }
+   
     
     private void validationUpdate(String firstname, String lastname, String username) throws Exception {
         String error = "";
         
-        error += firstnameValidation(firstname);
-        error += lastnameValidation(lastname);                
-        error += usernameValidation(username);
+        error += Validation.firstnameValidation(firstname);
+        error += Validation.lastnameValidation(lastname);                
+        error += Validation.usernameValidation(username);
 
         if(!isUniqueUpdate(username)) error+="Username already taken";
         
@@ -316,9 +279,9 @@ public class ControllerUserAdd {
     private void validation(String firstname, String lastname, String username, String password) throws Exception {
         String error = "";
         
-        error += firstnameValidation(firstname);
-        error += lastnameValidation(lastname);                
-        error += usernameValidation(username);
+        error += Validation.firstnameValidation(firstname);
+        error += Validation.lastnameValidation(lastname);                
+        error += Validation.usernameValidation(username);
         
         if(!isUnique(username)) error+="Username already taken";
 

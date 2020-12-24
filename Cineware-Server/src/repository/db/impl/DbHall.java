@@ -19,28 +19,25 @@ import repository.db.DbRepository;
  *
  * @author Milan
  */
-public class DbHall implements DbRepository<Hall>{
+public class DbHall implements DbRepository<Hall> {
 
     @Override
-    public ArrayList<Hall> getAll() {
+    public ArrayList<Hall> getAll() throws Exception {
         ArrayList<Hall> halls = new ArrayList<>();
 
-        try {
-            String query = "SELECT * FROM hall";
-            Statement s = connect().createStatement();
-            ResultSet rs = s.executeQuery(query);
-            while(rs.next()){
-                int id = rs.getInt("hallID");
-                String hallName = rs.getString("hallName");
-                int number = rs.getInt("numberOfSeats");
-                Hall hall = new Hall(id, hallName, number);
-                halls.add(hall);
-            }
-            s.close();
-            rs.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DbUser.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        String query = "SELECT * FROM hall";
+        Statement s = connect().createStatement();
+        ResultSet rs = s.executeQuery(query);
+        while (rs.next()) {
+            int id = rs.getInt("hallID");
+            String hallName = rs.getString("hallName");
+            int number = rs.getInt("numberOfSeats");
+            Hall hall = new Hall(id, hallName, number);
+            halls.add(hall);
+        }
+        s.close();
+        rs.close();
+
         return halls;
     }
 
@@ -58,5 +55,5 @@ public class DbHall implements DbRepository<Hall>{
     public void delete(Hall t) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

@@ -8,42 +8,37 @@ package repository.db.impl;
 import domain.User;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import repository.db.DbRepository;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
+
 /**
  *
  * @author Brka
  */
-public class DbUser implements DbRepository<User>{
+public class DbUser implements DbRepository<User> {
 
     @Override
-    public ArrayList<User> getAll() {
+    public ArrayList<User> getAll() throws Exception {
         ArrayList<User> users = new ArrayList<>();
 
-        try {
-            String query = "SELECT * FROM user";
-            Statement s = connect().createStatement();
-            ResultSet rs = s.executeQuery(query);
-            while(rs.next()){
-                int id = rs.getInt("userID");
-                String firstname = rs.getString("firstname");
-                String lastname = rs.getString("lastname");
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                boolean admin = rs.getBoolean("admin");
-                User user = new User(id,firstname, lastname, username, password, admin);
-                users.add(user);
-            }
-            s.close();
-            rs.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(DbUser.class.getName()).log(Level.SEVERE, null, ex);
-        }    
-        
+        String query = "SELECT * FROM user";
+        Statement s = connect().createStatement();
+        ResultSet rs = s.executeQuery(query);
+        while (rs.next()) {
+            int id = rs.getInt("userID");
+            String firstname = rs.getString("firstname");
+            String lastname = rs.getString("lastname");
+            String username = rs.getString("username");
+            String password = rs.getString("password");
+            boolean admin = rs.getBoolean("admin");
+            User user = new User(id, firstname, lastname, username, password, admin);
+            users.add(user);
+        }
+        s.close();
+        rs.close();
+
         return users;
     }
 
@@ -58,12 +53,6 @@ public class DbUser implements DbRepository<User>{
         ps.setBoolean(5, user.isAdmin());
         ps.executeUpdate();
         ps.close();
-        try {
-            commit();
-        } catch (SQLException e) {
-            rollback();
-            throw new Exception("User could not be saved!");
-        }
     }
 
     @Override
@@ -81,58 +70,36 @@ public class DbUser implements DbRepository<User>{
         ps.setInt(5, user.getId());
         ps.executeUpdate();
         ps.close();
-        try {
-            connect().commit();
-        } catch (Exception e) {
-            connect().rollback();
-            throw e;
-        }
     }
-    
-    public void updatePasswordOnly(String username, String password) throws SQLException{
+
+    public void updatePasswordOnly(String username, String password) throws SQLException {
         String query = "UPDATE user SET password=? WHERE username=?";
         PreparedStatement ps = connect().prepareStatement(query);
         ps.setString(1, password);
         ps.setString(2, username);
         ps.executeUpdate();
         ps.close();
-        try {
-            connect().commit();
-        } catch (Exception e) {
-            connect().rollback();
-            throw e;
-        }
     }
-    
-    public boolean checkPassword(String username, String password) throws SQLException{
-        String query = "SELECT * FROM user WHERE username='"+username+"'";
+
+    public boolean checkPassword(String username, String password) throws SQLException {
+        String query = "SELECT * FROM user WHERE username='" + username + "'";
         Statement s = connect().createStatement();
         ResultSet rs = s.executeQuery(query);
         boolean rez = false;
         rs.next();
-        if(rs.getString("password").equals(password)){
+        if (rs.getString("password").equals(password)) {
             rez = true;
         }
         rs.close();
         s.close();
         return rez;
     }
-    
+
     @Override
     public void delete(User user) throws Exception {
-        String query = "DELETE FROM user where userID="+user.getId();
+        String query = "DELETE FROM user where userID=" + user.getId();
         Statement s = connect().createStatement();
         s.executeUpdate(query);
         s.close();
-        
-        try {
-            connect().commit();
-        } catch (Exception e) {
-            connect().rollback();
-            throw e;
-        }
     }
-
-    
-    
 }

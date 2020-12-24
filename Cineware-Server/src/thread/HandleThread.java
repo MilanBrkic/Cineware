@@ -12,6 +12,7 @@ import common.communication.Request;
 import common.communication.Response;
 import common.communication.Sender;
 import controller.Controller;
+import domain.Director;
 import domain.Hall;
 import domain.User;
 import java.net.Socket;
@@ -91,6 +92,10 @@ public class HandleThread extends Thread {
                             String jsonUserUpdatePassword = (String) request.getArguments();
                             User userUpdatePassword = gson.fromJson(jsonUserUpdatePassword, User.class);
                             Controller.getInstance().updatePasswordOnly(userUpdatePassword.getUsername(), userUpdatePassword.getPassword());
+                        case ADD_DIRECTOR:
+                            String jsonAddDirector = (String) request.getArguments();
+                            Director addDirector = gson.fromJson(jsonAddDirector, Director.class);
+                            Controller.getInstance().addDirector(addDirector);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -6,12 +6,12 @@
 package controller;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
+import domain.Director;
 import domain.Hall;
 import domain.User;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.security.MessageDigest;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import repository.Repository;
 import repository.db.DbRepository;
+import repository.db.impl.DbDirector;
 import repository.db.impl.DbHall;
 import repository.db.impl.DbUser;
 /**
@@ -30,12 +31,14 @@ public class Controller {
     int test;
     private Repository dbUser;
     private Repository dbHall;
+    private Repository dbDirector;
     private static Controller instance;
     private ArrayList<String> countries;
     
     private Controller(){
         dbUser = new DbUser();
         dbHall = new DbHall();
+        dbDirector = new DbDirector();
         countries = readCoutries();
     }
     
@@ -86,7 +89,7 @@ public class Controller {
         return halls;
     }
 
-    public ArrayList<User> getAllUsers() {
+    public ArrayList<User> getAllUsers() throws Exception {
         ArrayList<User> users = null;
         try {
             users = dbUser.getAll();
@@ -138,10 +141,7 @@ public class Controller {
         }
     }
 
-   
 
-    
-    
     public boolean checkPassword(String username,String password) throws Exception{
         try {
             return ((DbUser)dbUser).checkPassword(username, password);
@@ -162,6 +162,19 @@ public class Controller {
             throw e;
         }finally{
             ((DbRepository)dbUser).disconnect();
+        }
+    }
+
+    public void addDirector(Director director) throws Exception {
+        try {
+            dbDirector.add(director);
+            ((DbRepository)dbDirector).commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            ((DbRepository)dbDirector).rollback();
+            throw e;
+        }finally{
+            ((DbRepository)dbDirector).disconnect();
         }
     }
     

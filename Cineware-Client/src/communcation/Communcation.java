@@ -12,6 +12,7 @@ import common.communication.Receiver;
 import common.communication.Request;
 import common.communication.Response;
 import common.communication.Sender;
+import domain.Director;
 import domain.Hall;
 import domain.User;
 import java.io.IOException;
@@ -143,5 +144,15 @@ public class Communcation {
        if(response.getException()==null){
        }
        else throw response.getException();
+    }
+
+    public void addDirector(Director director) throws Exception {
+        String s = gson.toJson(director);
+        Request request = new Request(Operation.ADD_DIRECTOR, s);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException()==null){
+        }
+        else throw response.getException();
     }
 }

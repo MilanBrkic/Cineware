@@ -22,6 +22,14 @@ public class Director implements Serializable{
 
     public Director() {
     }
+    
+    public Director(String firstname, String lastname, Date dateOfBirth, String nationality, User user) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.dateOfBirth = dateOfBirth;
+        this.nationality = nationality;
+        this.user = user;
+    }
 
     public Director(int id, String firstname, String lastname, Date dateOfBirth, String nationality, User user) {
         this.id = id;
