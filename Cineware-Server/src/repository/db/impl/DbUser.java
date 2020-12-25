@@ -102,4 +102,22 @@ public class DbUser implements DbRepository<User> {
         s.executeUpdate(query);
         s.close();
     }
+    
+    public User getUser(int id) throws SQLException{
+        String query = "SELECT * FROM user where userID="+id;
+        Statement s = connect().createStatement();
+        ResultSet rs = s.executeQuery(query);
+        rs.next();
+        
+        String firstname = rs.getString("firstname");
+        String lastname = rs.getString("lastname");
+        String username = rs.getString("username");
+        String password = rs.getString("password");
+        boolean admin = rs.getBoolean("admin");
+        User user = new User(id, firstname, lastname, username, password, admin);
+        
+        rs.close();
+        s.close();
+        return user;
+    }
 }

@@ -5,9 +5,14 @@
  */
 package repository.db.impl;
 
+import controller.Controller;
 import domain.Director;
+import domain.User;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import repository.db.DbRepository;
 
 /**
@@ -18,7 +23,25 @@ public class DbDirector implements DbRepository<Director>{
 
     @Override
     public ArrayList<Director> getAll() throws Exception{
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Director> directors = new ArrayList<>();
+
+        String query = "SELECT * FROM director";
+        Statement s = connect().createStatement();
+        ResultSet rs = s.executeQuery(query);
+        while (rs.next()) {
+            int id = rs.getInt("directorID");
+            String firstname = rs.getString("firstname");
+            String lastname = rs.getString("lastname");
+            Date date = new Date(rs.getDate("dateOfBirth").getTime());
+            String nationality = rs.getString("nationality");
+            User user = Controller.getInstance().getUser(rs.getInt("userID"));
+            Director director = new Director(id, firstname, lastname, date, nationality, user);
+            directors.add(director);
+        }
+        s.close();
+        rs.close();
+
+        return directors;
     }
 
     @Override

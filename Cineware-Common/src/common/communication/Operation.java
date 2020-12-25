@@ -20,5 +20,8 @@ public enum Operation implements Serializable{
     DELETE_USER,
     CHECK_PASSWORD,
     UPDATE_PASSWORD_ONLY,
-    ADD_DIRECTOR
+    GET_ALL_DIRECTORS,
+    ADD_DIRECTOR,
+    UPDATE_DIRECTOR,
+    DELETE_DIRECTOR
 }

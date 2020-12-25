@@ -16,12 +16,14 @@ import view.FormLogin;
 import view.FormMain;
 import view.constant.Constant;
 import view.controller.ControllerDirectorAdd;
+import view.controller.ControllerDirectorView;
 import view.controller.ControllerHallView;
 import view.controller.ControllerLogin;
 import view.controller.ControllerMain;
 import view.controller.ControllerUserAdd;
 import view.controller.ControllerUserView;
 import view.panel.PanelDirectorAdd;
+import view.panel.PanelDirectorView;
 import view.panel.PanelHallView;
 import view.panel.PanelUserAdd;
 import view.panel.PanelUserView;
@@ -96,6 +98,13 @@ public class MainCoordinator {
         hallView.openPanel();
     }
     
+    public void openPanelDirectorView() {
+        ControllerDirectorView directorView = new ControllerDirectorView(new PanelDirectorView());
+        addPanel(directorView.getPanel());
+        directorView.openPanel();
+    }
+    
+    
     public void removePanel(JPanel panel){
         controllerMain.getForm().getPanelMain().remove(panel);
         controllerMain.getForm().invalidate();
@@ -164,5 +173,7 @@ public class MainCoordinator {
             }
             return "";
         }
+
+    
     
 }

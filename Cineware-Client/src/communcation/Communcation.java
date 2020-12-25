@@ -85,6 +85,17 @@ public class Communcation {
         else throw response.getException();
     }
     
+    public ArrayList<Director> getAllDirectors()throws Exception{
+        Request request = new Request(Operation.GET_ALL_DIRECTORS, null);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException()==null){
+            String s = response.getResult();
+            ArrayList<Director> directors = new ArrayList<>(Arrays.asList(gson.fromJson(s, Director[].class)));
+            return directors;
+        }
+        else throw response.getException();
+    }
     
     public void addUser(User user) throws  Exception{
         String s = gson.toJson(user);
@@ -157,4 +168,6 @@ public class Communcation {
         }
         else throw response.getException();
     }
+    
+    
 }

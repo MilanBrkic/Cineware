@@ -44,6 +44,7 @@ public class FormMain extends javax.swing.JFrame {
         menuBar = new javax.swing.JMenuBar();
         menuDirector = new javax.swing.JMenu();
         menuItemDirectorAdd = new javax.swing.JMenuItem();
+        menuItemDirectorView = new javax.swing.JMenuItem();
         menuHall = new javax.swing.JMenu();
         menuItemHallView = new javax.swing.JMenuItem();
         menuUser = new javax.swing.JMenu();
@@ -80,6 +81,9 @@ public class FormMain extends javax.swing.JFrame {
 
         menuItemDirectorAdd.setText("Add");
         menuDirector.add(menuItemDirectorAdd);
+
+        menuItemDirectorView.setText("View");
+        menuDirector.add(menuItemDirectorView);
 
         menuBar.add(menuDirector);
 
@@ -149,6 +153,10 @@ public class FormMain extends javax.swing.JFrame {
         return menuItemDirectorAdd;
     }
 
+    public JMenuItem getMenuItemDirectorView() {
+        return menuItemDirectorView;
+    }
+
     
 
     
@@ -165,6 +173,7 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JMenu menuDirector;
     private javax.swing.JMenu menuHall;
     private javax.swing.JMenuItem menuItemDirectorAdd;
+    private javax.swing.JMenuItem menuItemDirectorView;
     private javax.swing.JMenuItem menuItemHallView;
     private javax.swing.JMenuItem menuItemUserAdd;
     private javax.swing.JMenuItem menuItemUserView;

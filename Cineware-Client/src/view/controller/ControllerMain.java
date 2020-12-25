@@ -103,6 +103,7 @@ public class ControllerMain {
         setHallListeners();
         setDirectorListeners();
         setWindowListener();
+        
     }
 
     public void setLogoutListener(){
@@ -162,7 +163,16 @@ public class ControllerMain {
                 MainCoordinator.getInstance().openPanelDirectorAdd();
             }
         });
-        
+        form.getMenuItemDirectorView().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainCoordinator.getInstance().removeAllPanels();
+                enableAll();
+                form.getMenuItemDirectorView().setEnabled(false);
+                form.getLblWelcomeUser().setVisible(false);
+                MainCoordinator.getInstance().openPanelDirectorView();
+            }
+        });
     }
     
     public void enableAll(){

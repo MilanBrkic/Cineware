@@ -141,7 +141,18 @@ public class Controller {
         }
     }
 
-
+    public User getUser(int id) throws Exception{
+        User user = null;
+        try {
+            user = ((DbUser)dbUser).getUser(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return user;
+    }
+    
+    
     public boolean checkPassword(String username,String password) throws Exception{
         try {
             return ((DbUser)dbUser).checkPassword(username, password);
@@ -176,6 +187,17 @@ public class Controller {
         }finally{
             ((DbRepository)dbDirector).disconnect();
         }
+    }
+    
+    public ArrayList<Director> getAllDirectors()throws Exception{
+        ArrayList<Director> directors = null;
+        try {
+            directors = dbDirector.getAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return directors;
     }
     
     class Countries{

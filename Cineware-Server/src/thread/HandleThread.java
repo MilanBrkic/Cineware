@@ -68,6 +68,11 @@ public class HandleThread extends Thread {
                             String jsonUsers = gson.toJson(users);
                             response.setResult(jsonUsers);
                             break;
+                        case GET_ALL_DIRECTORS:
+                            ArrayList<Director> directors = Controller.getInstance().getAllDirectors();
+                            String jsonDirectors = gson.toJson(directors);
+                            response.setResult(jsonDirectors);
+                            break;
                         case ADD_USER:
                             String jsonUserAdd =  request.getArguments();
                             User userAdd = gson.fromJson(jsonUserAdd, User.class);
