@@ -12,5 +12,7 @@ package view.constant;
 public class Constant {
     public static final String LOGGED_USER="LOGGED_USER";
     public static final String USER_DETAILS="USER_DETAILS";
+    public static final String DIRECTOR_DETAILS="DIRECTOR_DETAILS";
     public static final String USER_TABLE_MODEL="USER_TABLE_MODEL";
+    public static final String DIRECTOR_TABLE_MODEL="DIRECTOR_TABLE_MODEL";
 }

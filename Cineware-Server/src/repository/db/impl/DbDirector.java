@@ -58,13 +58,27 @@ public class DbDirector implements DbRepository<Director>{
     }
 
     @Override
-    public void update(Director t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(Director director) throws Exception {
+        String query = "UPDATE director SET firstname=?, lastname=?, dateOfBirth=?, nationality=?, userID=? WHERE directorID=?";
+        
+        PreparedStatement ps = connect().prepareStatement(query);
+        ps.setString(1, director.getFirstname());
+        ps.setString(2, director.getLastname());
+        ps.setDate(3, new java.sql.Date(director.getDateOfBirth().getTime()));
+        ps.setString(4, director.getNationality());
+        ps.setInt(5, director.getUser().getId());
+        ps.setInt(6, director.getId());
+        
+        ps.executeUpdate();
+        ps.close();
     }
 
     @Override
-    public void delete(Director t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete(Director director) throws Exception {
+        String query = "DELETE FROM director where directorID=" + director.getId();
+        Statement s = connect().createStatement();
+        s.executeUpdate(query);
+        s.close();
     }
     
 }

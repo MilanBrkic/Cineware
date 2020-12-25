@@ -104,6 +104,17 @@ public class HandleThread extends Thread {
                             Director addDirector = gson.fromJson(jsonAddDirector, Director.class);
                             Controller.getInstance().addDirector(addDirector);
                             break;
+                        case UPDATE_DIRECTOR:
+                            String jsonUpdateDirector = request.getArguments();
+                            Director updateDirector = gson.fromJson(jsonUpdateDirector, Director.class);
+                            System.out.println(updateDirector);
+                            Controller.getInstance().updateDirector(updateDirector);
+                            break;
+                        case DELETE_DIRECTOR:
+                            String jsonDeleteDirector = request.getArguments();
+                            Director deleteDirector = gson.fromJson(jsonDeleteDirector, Director.class);
+                            Controller.getInstance().deleteDirector(deleteDirector);
+                            break;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

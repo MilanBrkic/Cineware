@@ -21,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import view.FormMain;
+import view.panel.mode.DirectorMode;
 import view.panel.mode.UserMode;
 import view.util.IconSetter;
 
@@ -160,7 +161,7 @@ public class ControllerMain {
                 enableAll();
                 form.getMenuItemDirectorAdd().setEnabled(false);
                 form.getLblWelcomeUser().setVisible(false);
-                MainCoordinator.getInstance().openPanelDirectorAdd();
+                MainCoordinator.getInstance().openPanelDirectorAdd(DirectorMode.ADD);
             }
         });
         form.getMenuItemDirectorView().addActionListener(new ActionListener() {
@@ -181,7 +182,7 @@ public class ControllerMain {
         form.getMenuItemUserView().setEnabled(true);
         form.getMenuItemHallView().setEnabled(true);
         form.getMenuItemDirectorAdd().setEnabled(true);
-        
+        form.getMenuItemDirectorView().setEnabled(true);
     }
 
     public MyClock getClock() {

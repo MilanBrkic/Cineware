@@ -49,6 +49,18 @@ public class PanelDirectorAdd extends javax.swing.JPanel {
     public PanelDateInput getPanelDateInput() {
         return panelDateInput;
     }
+
+    public JButton getBtnEdit() {
+        return btnEdit;
+    }
+
+    public JButton getBtnDelete() {
+        return btnDelete;
+    }
+
+    public JButton getBtnEnableChanges() {
+        return btnEnableChanges;
+    }
     
 
     
@@ -70,6 +82,9 @@ public class PanelDirectorAdd extends javax.swing.JPanel {
         btnAdd = new javax.swing.JButton();
         exitButton1 = new view.util.ExitButton();
         panelDateInput = new view.panel.util.PanelDateInput();
+        btnEdit = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnEnableChanges = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Director"));
 
@@ -80,6 +95,12 @@ public class PanelDirectorAdd extends javax.swing.JPanel {
         jLabel3.setText("Nationality:");
 
         btnAdd.setText("Add");
+
+        btnEdit.setText("Edit");
+
+        btnDelete.setText("Delete");
+
+        btnEnableChanges.setText("Enable changes");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -104,10 +125,17 @@ public class PanelDirectorAdd extends javax.swing.JPanel {
                                     .addComponent(jLabel2)
                                     .addGap(27, 27, 27)
                                     .addComponent(txtLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(26, 26, 26)
-                                .addComponent(cmbNation, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnEdit)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnDelete)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btnEnableChanges))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(26, 26, 26)
+                                    .addComponent(cmbNation, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(45, 45, 45))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnAdd)
@@ -132,7 +160,11 @@ public class PanelDirectorAdd extends javax.swing.JPanel {
                     .addComponent(cmbNation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(26, 26, 26)
-                .addComponent(btnAdd)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd)
+                    .addComponent(btnEdit)
+                    .addComponent(btnDelete)
+                    .addComponent(btnEnableChanges))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -140,6 +172,9 @@ public class PanelDirectorAdd extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnEnableChanges;
     private javax.swing.JComboBox cmbNation;
     private view.util.ExitButton exitButton1;
     private javax.swing.JLabel jLabel1;

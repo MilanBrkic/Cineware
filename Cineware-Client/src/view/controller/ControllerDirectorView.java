@@ -6,14 +6,19 @@
 package view.controller;
 
 import communcation.Communcation;
+import domain.Director;
 import domain.User;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import view.constant.Constant;
 import view.coordinator.MainCoordinator;
 import view.model.table.DirectorTableModel;
 import view.panel.PanelDirectorView;
+import view.panel.mode.DirectorMode;
 
 /**
  *
@@ -40,6 +45,7 @@ public class ControllerDirectorView {
         User user = MainCoordinator.getInstance().getUser();
         if(user.isAdmin()) panel.getBtnDetails().setVisible(true);
         else panel.getBtnDetails().setVisible(false);
+        fillListeners();
     }
 
     private void setExitButton() {
@@ -48,5 +54,20 @@ public class ControllerDirectorView {
 
     public PanelDirectorView getPanel() {
         return panel;
+    }
+
+    private void fillListeners() {
+        panel.getBtnDetails().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = panel.getTableDirector().getSelectedRow();
+                if(index>=0){
+                    Director d = model.getDirectors().get(index);
+                    MainCoordinator.getInstance().getParams().put(Constant.DIRECTOR_DETAILS, d);
+                    MainCoordinator.getInstance().getParams().put(Constant.DIRECTOR_TABLE_MODEL, model);
+                    MainCoordinator.getInstance().openPanelDirectorAdd(DirectorMode.EDIT);
+                }
+            }
+        });
     }
 }

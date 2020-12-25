@@ -27,6 +27,7 @@ import view.panel.PanelDirectorView;
 import view.panel.PanelHallView;
 import view.panel.PanelUserAdd;
 import view.panel.PanelUserView;
+import view.panel.mode.DirectorMode;
 import view.panel.mode.UserMode;
 
 /**
@@ -86,8 +87,8 @@ public class MainCoordinator {
         
     }
     
-    public void openPanelDirectorAdd() {
-        ControllerDirectorAdd directorAdd = new ControllerDirectorAdd(new PanelDirectorAdd());
+    public void openPanelDirectorAdd(DirectorMode mode) {
+        ControllerDirectorAdd directorAdd = new ControllerDirectorAdd(new PanelDirectorAdd(), mode);
         addPanel(directorAdd.getPanel());
         directorAdd.openPanel();
     }

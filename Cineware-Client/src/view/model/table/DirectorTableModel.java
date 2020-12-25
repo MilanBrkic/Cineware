@@ -5,7 +5,9 @@
  */
 package view.model.table;
 
+import communcation.Communcation;
 import domain.Director;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
@@ -50,6 +52,15 @@ public class DirectorTableModel extends AbstractTableModel{
     @Override
     public String getColumnName(int column) {
         return columnNames[column];
+    }
+
+    public ArrayList<Director> getDirectors() {
+        return directors;
+    }
+    
+    public void refresh() throws  Exception{
+        directors = Communcation.getInstance().getAllDirectors();
+        fireTableDataChanged();
     }
     
     

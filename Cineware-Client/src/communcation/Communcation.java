@@ -169,5 +169,25 @@ public class Communcation {
         else throw response.getException();
     }
     
+    public void updateDirector(Director director) throws Exception {
+        String s = gson.toJson(director);
+        Request request = new Request(Operation.UPDATE_DIRECTOR, s);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException()==null){
+            
+        }
+        else throw response.getException();
+    }
     
+    public void deleteDirector(Director director) throws Exception {
+        String s = gson.toJson(director);
+        Request request = new Request(Operation.DELETE_DIRECTOR, s);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException()==null){
+            
+        }
+        else throw response.getException();
+    }
 }

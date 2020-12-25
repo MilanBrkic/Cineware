@@ -200,6 +200,34 @@ public class Controller {
         return directors;
     }
     
+    public void updateDirector(Director director) throws Exception {
+        try {
+            dbDirector.update(director);
+            ((DbRepository)dbDirector).commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            ((DbRepository)dbDirector).rollback();
+            throw e;
+        }finally{
+            ((DbRepository)dbDirector).disconnect();
+        }
+    }
+    
+    public void deleteDirector(Director director) throws Exception {
+        try {
+            dbDirector.delete(director);
+            ((DbRepository)dbDirector).commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            ((DbRepository)dbDirector).rollback();
+            throw e;
+        }finally{
+            ((DbRepository)dbDirector).disconnect();
+        }
+    }
+    
+    
+    
     class Countries{
         String name;
 
