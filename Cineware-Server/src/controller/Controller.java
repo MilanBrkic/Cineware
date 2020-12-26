@@ -6,6 +6,7 @@
 package controller;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
+import domain.Actor;
 import domain.Director;
 import domain.Hall;
 import domain.User;
@@ -20,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import repository.Repository;
 import repository.db.DbRepository;
+import repository.db.impl.DbActor;
 import repository.db.impl.DbDirector;
 import repository.db.impl.DbHall;
 import repository.db.impl.DbUser;
@@ -32,6 +34,7 @@ public class Controller {
     private Repository dbUser;
     private Repository dbHall;
     private Repository dbDirector;
+    private Repository dbActor;
     private static Controller instance;
     private ArrayList<String> countries;
     
@@ -39,6 +42,7 @@ public class Controller {
         dbUser = new DbUser();
         dbHall = new DbHall();
         dbDirector = new DbDirector();
+        dbActor = new DbActor();
         countries = readCoutries();
     }
     
@@ -225,6 +229,59 @@ public class Controller {
             ((DbRepository)dbDirector).disconnect();
         }
     }
+    
+    
+    
+    public void addActor(Actor actor) throws Exception {
+        try {
+            dbActor.add(actor);
+            ((DbRepository)dbActor).commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            ((DbRepository)dbActor).rollback();
+            throw e;
+        }finally{
+            ((DbRepository)dbActor).disconnect();
+        }
+    }
+    
+    public ArrayList<Actor> getAllActors()throws Exception{
+        ArrayList<Actor> actors = null;
+        try {
+            actors = dbActor.getAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return actors;
+    }
+    
+    public void updateActor(Actor actor) throws Exception {
+        try {
+            dbActor.update(actor);
+            ((DbRepository)dbActor).commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            ((DbRepository)dbActor).rollback();
+            throw e;
+        }finally{
+            ((DbRepository)dbActor).disconnect();
+        }
+    }
+    
+    public void deleteActor(Actor actor) throws Exception {
+        try {
+            dbActor.delete(actor);
+            ((DbRepository)dbActor).commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            ((DbRepository)dbActor).rollback();
+            throw e;
+        }finally{
+            ((DbRepository)dbActor).disconnect();
+        }
+    }
+    
     
     
     

@@ -12,6 +12,7 @@ import common.communication.Receiver;
 import common.communication.Request;
 import common.communication.Response;
 import common.communication.Sender;
+import domain.Actor;
 import domain.Director;
 import domain.Hall;
 import domain.User;
@@ -60,6 +61,7 @@ public class Communcation {
     }
     
     
+    //HALL
     public ArrayList<Hall> getAllHalls() throws Exception{
         Request request = new Request(Operation.GET_ALL_HALLS, null);
         sender.send(request);
@@ -72,6 +74,7 @@ public class Communcation {
         else throw response.getException();
     }
     
+    //USER
     
     public ArrayList<User> getAllUsers() throws Exception {
         Request request = new Request(Operation.GET_ALL_USERS, null);
@@ -85,17 +88,7 @@ public class Communcation {
         else throw response.getException();
     }
     
-    public ArrayList<Director> getAllDirectors()throws Exception{
-        Request request = new Request(Operation.GET_ALL_DIRECTORS, null);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-        if(response.getException()==null){
-            String s = response.getResult();
-            ArrayList<Director> directors = new ArrayList<>(Arrays.asList(gson.fromJson(s, Director[].class)));
-            return directors;
-        }
-        else throw response.getException();
-    }
+    
     
     public void addUser(User user) throws  Exception{
         String s = gson.toJson(user);
@@ -159,12 +152,26 @@ public class Communcation {
        else throw response.getException();
     }
 
+    //DIRECTOR
+    
     public void addDirector(Director director) throws Exception {
         String s = gson.toJson(director);
         Request request = new Request(Operation.ADD_DIRECTOR, s);
         sender.send(request);
         Response response = (Response) receiver.receive();
         if(response.getException()==null){
+        }
+        else throw response.getException();
+    }
+    
+    public ArrayList<Director> getAllDirectors()throws Exception{
+        Request request = new Request(Operation.GET_ALL_DIRECTORS, null);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException()==null){
+            String s = response.getResult();
+            ArrayList<Director> directors = new ArrayList<>(Arrays.asList(gson.fromJson(s, Director[].class)));
+            return directors;
         }
         else throw response.getException();
     }
@@ -190,4 +197,53 @@ public class Communcation {
         }
         else throw response.getException();
     }
+    
+    
+    //ACTOR
+    
+    
+    public void addActor(Actor actor) throws Exception {
+        String s = gson.toJson(actor);
+        Request request = new Request(Operation.ADD_ACTOR, s);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException()==null){
+        }
+        else throw response.getException();
+    }
+    
+    public ArrayList<Actor> getAllActors()throws Exception{
+        Request request = new Request(Operation.GET_ALL_ACTORS, null);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException()==null){
+            String s = response.getResult();
+            ArrayList<Actor> actors = new ArrayList<>(Arrays.asList(gson.fromJson(s, Actor[].class)));
+            return actors;
+        }
+        else throw response.getException();
+    }
+    
+    public void updateActor(Actor actor) throws Exception {
+        String s = gson.toJson(actor);
+        Request request = new Request(Operation.UPDATE_ACTOR, s);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException()==null){
+            
+        }
+        else throw response.getException();
+    }
+    
+    public void deleteActor(Actor actor) throws Exception {
+        String s = gson.toJson(actor);
+        Request request = new Request(Operation.DELETE_ACTOR, s);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException()==null){
+            
+        }
+        else throw response.getException();
+    }
+    
 }

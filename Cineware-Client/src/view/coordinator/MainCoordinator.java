@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import view.FormLogin;
 import view.FormMain;
 import view.constant.Constant;
+import view.controller.ControllerActorAdd;
+import view.controller.ControllerActorView;
 import view.controller.ControllerDirectorAdd;
 import view.controller.ControllerDirectorView;
 import view.controller.ControllerHallView;
@@ -22,11 +24,14 @@ import view.controller.ControllerLogin;
 import view.controller.ControllerMain;
 import view.controller.ControllerUserAdd;
 import view.controller.ControllerUserView;
+import view.panel.PanelActorAdd;
+import view.panel.PanelActorView;
 import view.panel.PanelDirectorAdd;
 import view.panel.PanelDirectorView;
 import view.panel.PanelHallView;
 import view.panel.PanelUserAdd;
 import view.panel.PanelUserView;
+import view.panel.mode.ActorMode;
 import view.panel.mode.DirectorMode;
 import view.panel.mode.UserMode;
 
@@ -87,22 +92,35 @@ public class MainCoordinator {
         
     }
     
-    public void openPanelDirectorAdd(DirectorMode mode) {
-        ControllerDirectorAdd directorAdd = new ControllerDirectorAdd(new PanelDirectorAdd(), mode);
-        addPanel(directorAdd.getPanel());
-        directorAdd.openPanel();
-    }
-    
+
     public void openPanelHallView() {
         ControllerHallView hallView = new ControllerHallView(new PanelHallView());
         addPanel(hallView.getPanel());
         hallView.openPanel();
     }
     
+     public void openPanelDirectorAdd(DirectorMode mode) {
+        ControllerDirectorAdd directorAdd = new ControllerDirectorAdd(new PanelDirectorAdd(), mode);
+        addPanel(directorAdd.getPanel());
+        directorAdd.openPanel();
+    }
+    
     public void openPanelDirectorView() {
         ControllerDirectorView directorView = new ControllerDirectorView(new PanelDirectorView());
         addPanel(directorView.getPanel());
         directorView.openPanel();
+    }
+    
+    public void openPanelActorAdd(ActorMode mode) {
+        ControllerActorAdd actorAdd = new ControllerActorAdd(new PanelActorAdd(), mode);
+        addPanel(actorAdd.getPanel());
+        actorAdd.openPanel();
+    }
+    
+    public void openPanelActorView() {
+        ControllerActorView actorView = new ControllerActorView(new PanelActorView());
+        addPanel(actorView.getPanel());
+        actorView.openPanel();
     }
     
     

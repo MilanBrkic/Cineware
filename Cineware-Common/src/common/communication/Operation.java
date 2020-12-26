@@ -23,5 +23,9 @@ public enum Operation implements Serializable{
     GET_ALL_DIRECTORS,
     ADD_DIRECTOR,
     UPDATE_DIRECTOR,
-    DELETE_DIRECTOR
+    DELETE_DIRECTOR,
+    GET_ALL_ACTORS,
+    ADD_ACTOR,
+    UPDATE_ACTOR,
+    DELETE_ACTOR
 }

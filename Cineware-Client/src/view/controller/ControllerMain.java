@@ -21,6 +21,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import view.FormMain;
+import view.panel.mode.ActorMode;
 import view.panel.mode.DirectorMode;
 import view.panel.mode.UserMode;
 import view.util.IconSetter;
@@ -71,6 +72,7 @@ public class ControllerMain {
         form.getJMenuBar().setOpaque(false);
         if(!MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemUserAdd().setEnabled(false);
         if(!MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemDirectorAdd().setEnabled(false);
+        if(!MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemActorAdd().setEnabled(false);
         addMenuAccount();
     }
     
@@ -103,6 +105,7 @@ public class ControllerMain {
         setUserListeners();   
         setHallListeners();
         setDirectorListeners();
+        setActorListeners();
         setWindowListener();
         
     }
@@ -176,13 +179,41 @@ public class ControllerMain {
         });
     }
     
+    
+    private void setActorListeners() {
+        form.getMenuItemActorAdd().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainCoordinator.getInstance().removeAllPanels();
+                enableAll();
+                form.getMenuItemActorAdd().setEnabled(false);
+                form.getLblWelcomeUser().setVisible(false);
+                MainCoordinator.getInstance().openPanelActorAdd(ActorMode.ADD);
+            }
+        });
+        form.getMenuItemActorView().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainCoordinator.getInstance().removeAllPanels();
+                enableAll();
+                form.getMenuItemActorView().setEnabled(false);
+                form.getLblWelcomeUser().setVisible(false);
+                MainCoordinator.getInstance().openPanelActorView();
+            }
+        });
+    }
+    
+    
     public void enableAll(){
         if(MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemUserAdd().setEnabled(true);
         if(MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemDirectorAdd().setEnabled(true);
+        if(MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemActorAdd().setEnabled(true);
         form.getMenuItemUserView().setEnabled(true);
         form.getMenuItemHallView().setEnabled(true);
         form.getMenuItemDirectorAdd().setEnabled(true);
         form.getMenuItemDirectorView().setEnabled(true);
+        form.getMenuItemActorAdd().setEnabled(true);
+        form.getMenuItemActorView().setEnabled(true);
     }
 
     public MyClock getClock() {
@@ -227,6 +258,7 @@ public class ControllerMain {
             }
         });
     }
+
 
     
 

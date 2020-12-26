@@ -12,6 +12,7 @@ import common.communication.Request;
 import common.communication.Response;
 import common.communication.Sender;
 import controller.Controller;
+import domain.Actor;
 import domain.Director;
 import domain.Hall;
 import domain.User;
@@ -68,11 +69,6 @@ public class HandleThread extends Thread {
                             String jsonUsers = gson.toJson(users);
                             response.setResult(jsonUsers);
                             break;
-                        case GET_ALL_DIRECTORS:
-                            ArrayList<Director> directors = Controller.getInstance().getAllDirectors();
-                            String jsonDirectors = gson.toJson(directors);
-                            response.setResult(jsonDirectors);
-                            break;
                         case ADD_USER:
                             String jsonUserAdd =  request.getArguments();
                             User userAdd = gson.fromJson(jsonUserAdd, User.class);
@@ -104,6 +100,11 @@ public class HandleThread extends Thread {
                             Director addDirector = gson.fromJson(jsonAddDirector, Director.class);
                             Controller.getInstance().addDirector(addDirector);
                             break;
+                        case GET_ALL_DIRECTORS:
+                            ArrayList<Director> directors = Controller.getInstance().getAllDirectors();
+                            String jsonDirectors = gson.toJson(directors);
+                            response.setResult(jsonDirectors);
+                            break;
                         case UPDATE_DIRECTOR:
                             String jsonUpdateDirector = request.getArguments();
                             Director updateDirector = gson.fromJson(jsonUpdateDirector, Director.class);
@@ -114,6 +115,27 @@ public class HandleThread extends Thread {
                             String jsonDeleteDirector = request.getArguments();
                             Director deleteDirector = gson.fromJson(jsonDeleteDirector, Director.class);
                             Controller.getInstance().deleteDirector(deleteDirector);
+                            break;
+                        case ADD_ACTOR:
+                            String jsonAddActor = request.getArguments();
+                            Actor addActor = gson.fromJson(jsonAddActor, Actor.class);
+                            Controller.getInstance().addActor(addActor);
+                            break;
+                        case GET_ALL_ACTORS:
+                            ArrayList<Actor> actors = Controller.getInstance().getAllActors();
+                            String jsonActors = gson.toJson(actors);
+                            response.setResult(jsonActors);
+                            break;
+                        case UPDATE_ACTOR:
+                            String jsonUpdateActor = request.getArguments();
+                            Actor updateActor = gson.fromJson(jsonUpdateActor, Actor.class);
+                            System.out.println(updateActor);
+                            Controller.getInstance().updateActor(updateActor);
+                            break;
+                        case DELETE_ACTOR:
+                            String jsonDeleteActor = request.getArguments();
+                            Actor deleteActor = gson.fromJson(jsonDeleteActor, Actor.class);
+                            Controller.getInstance().deleteActor(deleteActor);
                             break;
                     }
                 } catch (Exception e) {
