@@ -9,6 +9,7 @@ import com.google.gson.stream.JsonReader;
 import domain.Actor;
 import domain.Director;
 import domain.Hall;
+import domain.Movie;
 import domain.User;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,6 +25,7 @@ import repository.db.DbRepository;
 import repository.db.impl.DbActor;
 import repository.db.impl.DbDirector;
 import repository.db.impl.DbHall;
+import repository.db.impl.DbMovie;
 import repository.db.impl.DbUser;
 /**
  *
@@ -35,6 +37,7 @@ public class Controller {
     private Repository dbHall;
     private Repository dbDirector;
     private Repository dbActor;
+    private Repository dbMovie;
     private static Controller instance;
     private ArrayList<String> countries;
     
@@ -43,6 +46,7 @@ public class Controller {
         dbHall = new DbHall();
         dbDirector = new DbDirector();
         dbActor = new DbActor();
+        dbMovie = new DbMovie();
         countries = readCoutries();
     }
     
@@ -279,6 +283,19 @@ public class Controller {
             throw e;
         }finally{
             ((DbRepository)dbActor).disconnect();
+        }
+    }
+
+    public void addMovie(Movie movie) throws Exception {
+        try {
+            dbMovie.add(movie);
+            ((DbRepository)dbMovie).commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            ((DbRepository)dbMovie).rollback();
+            throw e;
+        }finally{
+           ((DbRepository)dbActor).disconnect();
         }
     }
     

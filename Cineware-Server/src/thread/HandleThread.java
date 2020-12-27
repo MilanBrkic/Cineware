@@ -15,6 +15,7 @@ import controller.Controller;
 import domain.Actor;
 import domain.Director;
 import domain.Hall;
+import domain.Movie;
 import domain.User;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -108,7 +109,6 @@ public class HandleThread extends Thread {
                         case UPDATE_DIRECTOR:
                             String jsonUpdateDirector = request.getArguments();
                             Director updateDirector = gson.fromJson(jsonUpdateDirector, Director.class);
-                            System.out.println(updateDirector);
                             Controller.getInstance().updateDirector(updateDirector);
                             break;
                         case DELETE_DIRECTOR:
@@ -129,13 +129,17 @@ public class HandleThread extends Thread {
                         case UPDATE_ACTOR:
                             String jsonUpdateActor = request.getArguments();
                             Actor updateActor = gson.fromJson(jsonUpdateActor, Actor.class);
-                            System.out.println(updateActor);
                             Controller.getInstance().updateActor(updateActor);
                             break;
                         case DELETE_ACTOR:
                             String jsonDeleteActor = request.getArguments();
                             Actor deleteActor = gson.fromJson(jsonDeleteActor, Actor.class);
                             Controller.getInstance().deleteActor(deleteActor);
+                            break;
+                        case ADD_MOVIE:
+                            String jsonAddMovie = request.getArguments();
+                            Movie addMovie = gson.fromJson(jsonAddMovie, Movie.class);
+                            Controller.getInstance().addMovie(addMovie);
                             break;
                     }
                 } catch (Exception e) {

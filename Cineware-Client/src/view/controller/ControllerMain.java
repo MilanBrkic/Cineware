@@ -23,6 +23,7 @@ import javax.swing.JMenuItem;
 import view.FormMain;
 import view.panel.mode.ActorMode;
 import view.panel.mode.DirectorMode;
+import view.panel.mode.MovieMode;
 import view.panel.mode.UserMode;
 import view.util.IconSetter;
 
@@ -73,6 +74,7 @@ public class ControllerMain {
         if(!MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemUserAdd().setEnabled(false);
         if(!MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemDirectorAdd().setEnabled(false);
         if(!MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemActorAdd().setEnabled(false);
+        if(!MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemMovieAdd().setEnabled(false);
         addMenuAccount();
     }
     
@@ -105,6 +107,7 @@ public class ControllerMain {
         setUserListeners();   
         setHallListeners();
         setDirectorListeners();
+        setMovieListeners();
         setActorListeners();
         setWindowListener();
         
@@ -203,11 +206,25 @@ public class ControllerMain {
         });
     }
     
+    private void setMovieListeners() {
+        form.getMenuItemMovieAdd().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainCoordinator.getInstance().removeAllPanels();
+                enableAll();
+                form.getMenuItemMovieAdd().setEnabled(false);
+                form.getLblWelcomeUser().setVisible(false);
+                MainCoordinator.getInstance().openPanelMovieAdd(MovieMode.ADD);
+            }
+        });
+    }
+    
     
     public void enableAll(){
         if(MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemUserAdd().setEnabled(true);
         if(MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemDirectorAdd().setEnabled(true);
         if(MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemActorAdd().setEnabled(true);
+        if(MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemMovieAdd().setEnabled(true);
         form.getMenuItemUserView().setEnabled(true);
         form.getMenuItemHallView().setEnabled(true);
         form.getMenuItemDirectorAdd().setEnabled(true);
@@ -258,11 +275,5 @@ public class ControllerMain {
             }
         });
     }
-
-
-    
-
-    
-
     
 }

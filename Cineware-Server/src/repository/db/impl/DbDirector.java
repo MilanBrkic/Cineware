@@ -25,7 +25,7 @@ public class DbDirector implements DbRepository<Director>{
     public ArrayList<Director> getAll() throws Exception{
         ArrayList<Director> directors = new ArrayList<>();
 
-        String query = "SELECT * FROM director";
+        String query = "SELECT * FROM director order by lastname";
         Statement s = connect().createStatement();
         ResultSet rs = s.executeQuery(query);
         while (rs.next()) {

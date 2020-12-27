@@ -25,7 +25,7 @@ public class DbActor implements DbRepository<Actor>{
     public ArrayList<Actor> getAll() throws Exception{
         ArrayList<Actor> actors = new ArrayList<>();
 
-        String query = "SELECT * FROM actor";
+        String query = "SELECT * FROM actor order by lastname";
         Statement s = connect().createStatement();
         ResultSet rs = s.executeQuery(query);
         while (rs.next()) {

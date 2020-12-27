@@ -27,5 +27,9 @@ public enum Operation implements Serializable{
     GET_ALL_ACTORS,
     ADD_ACTOR,
     UPDATE_ACTOR,
-    DELETE_ACTOR
+    DELETE_ACTOR,
+    ADD_MOVIE,
+    GET_ALL_MOVIES,
+    UPDATE_MOVIE,
+    DELETE_MOVIE
 }

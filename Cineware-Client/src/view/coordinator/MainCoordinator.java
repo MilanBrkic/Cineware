@@ -22,6 +22,7 @@ import view.controller.ControllerDirectorView;
 import view.controller.ControllerHallView;
 import view.controller.ControllerLogin;
 import view.controller.ControllerMain;
+import view.controller.ControllerMovieAdd;
 import view.controller.ControllerUserAdd;
 import view.controller.ControllerUserView;
 import view.panel.PanelActorAdd;
@@ -29,10 +30,12 @@ import view.panel.PanelActorView;
 import view.panel.PanelDirectorAdd;
 import view.panel.PanelDirectorView;
 import view.panel.PanelHallView;
+import view.panel.PanelMovieAdd;
 import view.panel.PanelUserAdd;
 import view.panel.PanelUserView;
 import view.panel.mode.ActorMode;
 import view.panel.mode.DirectorMode;
+import view.panel.mode.MovieMode;
 import view.panel.mode.UserMode;
 
 /**
@@ -123,6 +126,11 @@ public class MainCoordinator {
         actorView.openPanel();
     }
     
+    public void openPanelMovieAdd(MovieMode movieMode) {
+        ControllerMovieAdd movieAdd = new ControllerMovieAdd(new PanelMovieAdd(), movieMode);
+        addPanel(movieAdd.getPanel());
+        movieAdd.openPanel();
+    }
     
     public void removePanel(JPanel panel){
         controllerMain.getForm().getPanelMain().remove(panel);
@@ -193,6 +201,4 @@ public class MainCoordinator {
             return "";
         }
 
-    
-    
 }

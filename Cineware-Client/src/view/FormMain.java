@@ -42,6 +42,9 @@ public class FormMain extends javax.swing.JFrame {
         PanelMain = new javax.swing.JPanel();
         lblWelcomeUser = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        menuItemMovieAdd = new javax.swing.JMenuItem();
+        menuItemMovieView = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         menuItemActorAdd = new javax.swing.JMenuItem();
         menuItemActorView = new javax.swing.JMenuItem();
@@ -79,6 +82,16 @@ public class FormMain extends javax.swing.JFrame {
         getContentPane().add(PanelMain, java.awt.BorderLayout.CENTER);
 
         menuBar.setBackground(new java.awt.Color(255, 255, 255));
+
+        jMenu2.setText("Movie");
+
+        menuItemMovieAdd.setText("Add");
+        jMenu2.add(menuItemMovieAdd);
+
+        menuItemMovieView.setText("View");
+        jMenu2.add(menuItemMovieView);
+
+        menuBar.add(jMenu2);
 
         jMenu1.setText("Actor");
 
@@ -178,6 +191,14 @@ public class FormMain extends javax.swing.JFrame {
         return menuItemActorView;
     }
 
+    public JMenuItem getMenuItemMovieAdd() {
+        return menuItemMovieAdd;
+    }
+
+    public JMenuItem getMenuItemMovieView() {
+        return menuItemMovieView;
+    }
+
     
 
     
@@ -186,6 +207,7 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JPanel PanelMain;
     private javax.swing.JPanel PanelStatusBar;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblStatusBarUser;
     private javax.swing.JLabel lblTime;
@@ -198,6 +220,8 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemDirectorAdd;
     private javax.swing.JMenuItem menuItemDirectorView;
     private javax.swing.JMenuItem menuItemHallView;
+    private javax.swing.JMenuItem menuItemMovieAdd;
+    private javax.swing.JMenuItem menuItemMovieView;
     private javax.swing.JMenuItem menuItemUserAdd;
     private javax.swing.JMenuItem menuItemUserView;
     private javax.swing.JMenu menuUser;

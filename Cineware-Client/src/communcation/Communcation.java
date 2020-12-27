@@ -15,6 +15,7 @@ import common.communication.Sender;
 import domain.Actor;
 import domain.Director;
 import domain.Hall;
+import domain.Movie;
 import domain.User;
 import java.io.IOException;
 import java.net.Socket;
@@ -244,6 +245,15 @@ public class Communcation {
             
         }
         else throw response.getException();
+    }
+
+    public void addMovie(Movie movie) throws Exception {
+        String s = gson.toJson(movie);
+        Request request = new Request(Operation.ADD_MOVIE, s);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException()==null){
+        }else throw response.getException();
     }
     
 }
