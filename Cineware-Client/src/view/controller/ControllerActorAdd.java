@@ -41,9 +41,10 @@ public class ControllerActorAdd {
     }
 
     public void openPanel() {
+        fillNation();
         prepareForm();
         setExitButton();
-        fillNation();
+        
         setListeners();
         panel.setVisible(true);
     }
@@ -227,10 +228,12 @@ public class ControllerActorAdd {
         int day = greg.get(GregorianCalendar.DAY_OF_MONTH);
         int month = greg.get(GregorianCalendar.MONTH)+1;
         int year = greg.get(GregorianCalendar.YEAR);
-        panel.getPanelDateInput().getCmbDay().setSelectedItem(day);
-        panel.getPanelDateInput().getCmbMonth().setSelectedItem(month);
+        
+        
         panel.getPanelDateInput().getCmbYear().setSelectedItem(year);
-                
+        panel.getPanelDateInput().getCmbMonth().setSelectedItem(month); 
+        panel.getPanelDateInput().getCmbDay().setSelectedItem(day);
+        
         String nation = actor.getNationality();
         panel.getCmbNation().setSelectedItem(nation);
     }

@@ -24,6 +24,8 @@ import javax.swing.JOptionPane;
 import view.coordinator.MainCoordinator;
 import view.model.table.ActorForMovieTableModel;
 import view.panel.PanelMovieAdd;
+import view.panel.mode.ActorMode;
+import view.panel.mode.DirectorMode;
 import view.panel.mode.MovieMode;
 
 /**
@@ -66,12 +68,8 @@ public class ControllerMovieAdd {
             }
             
             fillcmbActor();
+            fillCmbDirector();
             
-            panel.getCmbDirector().removeAllItems();
-            ArrayList<Director> directors = Communcation.getInstance().getAllDirectors();
-            for (Director director : directors) {
-                panel.getCmbDirector().addItem(director);
-            }
             
             panel.getTableActor().setModel(model);
         } catch (Exception ex) {
@@ -88,10 +86,20 @@ public class ControllerMovieAdd {
             }
     }
     
+    public void fillCmbDirector() throws Exception{
+        panel.getCmbDirector().removeAllItems();
+            ArrayList<Director> directors = Communcation.getInstance().getAllDirectors();
+            for (Director director : directors) {
+                panel.getCmbDirector().addItem(director);
+            }
+    }
+    
     private void setListeners() {
         setAddActorListener();
         setDeleteActorListener();
         setSaveMovieListener();
+        setAddNewDirector();
+        setAddNewActor();
     }
 
     private void setAddActorListener() {
@@ -174,6 +182,48 @@ public class ControllerMovieAdd {
         });
     }
     
+    
+    private void setAddNewDirector() {
+        panel.getBtnAddNewDirector().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainCoordinator.getInstance().openPanelDirectorAdd(DirectorMode.ADD);
+                
+            }
+        });
+        
+        panel.getBtnRefreshDirectors().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    fillCmbDirector();
+                } catch (Exception ex) {
+                    Logger.getLogger(ControllerMovieAdd.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+    
+    private void setAddNewActor() {
+        panel.getBtnAddNewActor().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainCoordinator.getInstance().openPanelActorAdd(ActorMode.ADD);
+            }
+        });
+        
+        panel.getBtnRefreshActors().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    fillcmbActor();
+                } catch (Exception ex) {
+                    Logger.getLogger(ControllerMovieAdd.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+    
     public void clearFields() throws Exception{
         panel.getTxtName().setText("");
         panel.getTxtDescription().setText("");
@@ -182,5 +232,9 @@ public class ControllerMovieAdd {
         model.removeAllItems();
         fillcmbActor();
     }
+
+    
+
+    
     
 }
