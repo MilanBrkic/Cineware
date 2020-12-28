@@ -10,6 +10,7 @@ import domain.Director;
 import domain.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
@@ -81,4 +82,22 @@ public class DbDirector implements DbRepository<Director>{
         s.close();
     }
     
+    public Director get(int id) throws Exception{
+        String query = "Select * from director where directorID="+id;
+        Statement s = connect().createStatement();
+        ResultSet rs = s.executeQuery(query);
+        
+        while (rs.next()) {
+            String firstname = rs.getString("firstname");
+            String lastname = rs.getString("lastname");
+            Date date = new Date(rs.getDate("dateOfBirth").getTime());
+            String nationality = rs.getString("nationality");
+            User user = Controller.getInstance().getUser(rs.getInt("userID"));
+            Director director = new Director(id, firstname, lastname, date, nationality, user);
+            return director;
+        }
+        s.close();
+        rs.close();
+        return null;
+    }
 }

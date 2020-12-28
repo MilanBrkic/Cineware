@@ -234,6 +234,16 @@ public class Controller {
         }
     }
     
+    public Director getDirector(int id)throws Exception{
+        Director director = null;
+        try {
+            director = ((DbDirector)dbDirector).get(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return director;
+    }
     
     
     public void addActor(Actor actor) throws Exception {
@@ -297,6 +307,17 @@ public class Controller {
         }finally{
            ((DbRepository)dbActor).disconnect();
         }
+    }
+
+    public ArrayList<Movie> getAllMovies() throws Exception {
+        ArrayList<Movie> movies = null;
+        try {
+            movies = dbMovie.getAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return movies;
     }
     
     

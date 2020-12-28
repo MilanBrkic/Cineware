@@ -217,6 +217,17 @@ public class ControllerMain {
                 MainCoordinator.getInstance().openPanelMovieAdd(MovieMode.ADD);
             }
         });
+        
+        form.getMenuItemMovieView().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                MainCoordinator.getInstance().removeAllPanels();
+                enableAll();
+                form.getMenuItemMovieView().setEnabled(false);
+                form.getLblWelcomeUser().setVisible(false);
+                MainCoordinator.getInstance().openPanelMovieView();
+            }
+        });
     }
     
     
@@ -227,10 +238,9 @@ public class ControllerMain {
         if(MainCoordinator.getInstance().getUser().isAdmin()) form.getMenuItemMovieAdd().setEnabled(true);
         form.getMenuItemUserView().setEnabled(true);
         form.getMenuItemHallView().setEnabled(true);
-        form.getMenuItemDirectorAdd().setEnabled(true);
         form.getMenuItemDirectorView().setEnabled(true);
-        form.getMenuItemActorAdd().setEnabled(true);
         form.getMenuItemActorView().setEnabled(true);
+        form.getMenuItemMovieView().setEnabled(true);
     }
 
     public MyClock getClock() {

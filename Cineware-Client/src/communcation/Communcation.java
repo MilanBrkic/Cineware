@@ -255,5 +255,16 @@ public class Communcation {
         if(response.getException()==null){
         }else throw response.getException();
     }
+
+    public ArrayList<Movie> getAllMovies() throws Exception{
+        Request request = new Request(Operation.GET_ALL_MOVIES, null);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException()==null){
+            String json = response.getResult();
+            ArrayList<Movie> movies = new ArrayList<>(Arrays.asList(gson.fromJson(json, Movie[].class)));
+            return movies;
+        }else throw response.getException();
+    }
     
 }

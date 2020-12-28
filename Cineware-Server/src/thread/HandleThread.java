@@ -141,6 +141,10 @@ public class HandleThread extends Thread {
                             Movie addMovie = gson.fromJson(jsonAddMovie, Movie.class);
                             Controller.getInstance().addMovie(addMovie);
                             break;
+                        case GET_ALL_MOVIES:
+                            ArrayList<Movie> allMovies = Controller.getInstance().getAllMovies();
+                            String jsonAllMovies = gson.toJson(allMovies);
+                            response.setResult(jsonAllMovies);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
