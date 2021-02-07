@@ -21,7 +21,7 @@ import repository.db.DbRepository;
  */
 public class DbActor implements DbRepository<Actor>{
 
-    @Override
+   
     public ArrayList<Actor> getAll() throws Exception{
         ArrayList<Actor> actors = new ArrayList<>();
 
@@ -81,8 +81,14 @@ public class DbActor implements DbRepository<Actor>{
         s.close();
     }
 
+    
     @Override
-    public Actor get(int id) throws Exception {
+    public Actor get(Actor t) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Actor> getAll(Actor t) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

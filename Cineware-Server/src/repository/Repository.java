@@ -12,7 +12,8 @@ import java.util.ArrayList;
  * @author Milan
  */
 public interface Repository<T> {
-    public ArrayList<T> getAll() throws Exception;
+    public ArrayList<T> getAll(T t) throws Exception;
+    
     
     public void add(T t) throws Exception;
     
@@ -20,5 +21,8 @@ public interface Repository<T> {
     
     public void delete(T t)throws Exception;
     
-    public T get(int id) throws Exception;
+    public T get(T t) throws Exception;
+    
+    
+   
 }

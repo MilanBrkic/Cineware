@@ -24,7 +24,6 @@ import java.util.Date;
  */
 public class DbMovie implements DbRepository<Movie>{
 
-    @Override
     public ArrayList<Movie> getAll() throws Exception {
         ArrayList<Movie> movies = new ArrayList<>();
         String query = "SELECT * from movie order by name";
@@ -117,8 +116,15 @@ public class DbMovie implements DbRepository<Movie>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+   
+
     @Override
-    public Movie get(int id) throws Exception {
+    public Movie get(Movie t) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Movie> getAll(Movie t) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

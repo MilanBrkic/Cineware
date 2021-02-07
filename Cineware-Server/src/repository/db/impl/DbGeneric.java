@@ -5,23 +5,31 @@
  */
 package repository.db.impl;
 
+import controller.Controller;
+import domain.Director;
 import domain.GenericEntity;
+import domain.User;
 import java.util.ArrayList;
 import repository.db.DbRepository;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.sql.ResultSet;
+import java.util.Date;
 import repository.db.DbConnectionFactory;
 
 /**
  *
  * @author user
  */
-public class DbGeneric implements DbRepository<GenericEntity>{
+public class DbGeneric implements DbRepository<GenericEntity> {
 
+
+    
     @Override
-    public ArrayList<GenericEntity> getAll() throws Exception {
+    public ArrayList<GenericEntity> getAll(GenericEntity t) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 
     @Override
     public void add(GenericEntity g) throws Exception {
@@ -29,18 +37,18 @@ public class DbGeneric implements DbRepository<GenericEntity>{
             Connection connection = DbConnectionFactory.getInstance().getConnection();
             StringBuilder sb = new StringBuilder();
             sb.append("INSERT ")
-              .append(g.getTableName())
-              .append(" (").append(g.columnNamesForInsert()).append(")")
-              .append(" VALUES(")
-              .append(g.getInsertValues())
-              .append(")");
+                    .append(g.getTableName())
+                    .append(" (").append(g.columnNamesForInsert()).append(")")
+                    .append(" VALUES(")
+                    .append(g.getInsertValues())
+                    .append(")");
             String query = sb.toString();
             System.out.println(query);
-            Statement s  = connection.createStatement();
+            Statement s = connection.createStatement();
             s.executeUpdate(query);
-            
+
             s.close();
-              
+
         } catch (Exception e) {
             throw e;
         }
@@ -52,16 +60,16 @@ public class DbGeneric implements DbRepository<GenericEntity>{
             Connection connection = DbConnectionFactory.getInstance().getConnection();
             StringBuilder sb = new StringBuilder();
             sb.append("UPDATE ")
-              .append(g.getTableName())
-              .append(" SET ")
-              .append(g.columnNamesForUpdate())
-              .append(" WHERE ")
-              .append(g.whereCondition());  
+                    .append(g.getTableName())
+                    .append(" SET ")
+                    .append(g.columnNamesForUpdate())
+                    .append(" WHERE ")
+                    .append(g.whereCondition());
             String query = sb.toString();
             System.out.println(query);
-            Statement s  = connection.createStatement();
+            Statement s = connection.createStatement();
             s.executeUpdate(query);
-            
+
             s.close();
         } catch (Exception e) {
             throw e;
@@ -75,14 +83,14 @@ public class DbGeneric implements DbRepository<GenericEntity>{
             Connection connection = DbConnectionFactory.getInstance().getConnection();
             StringBuilder sb = new StringBuilder();
             sb.append("DELETE FROM ")
-              .append(g.getTableName())
-              .append(" WHERE ")
-              .append(g.whereCondition());  
+                    .append(g.getTableName())
+                    .append(" WHERE ")
+                    .append(g.whereCondition());
             String query = sb.toString();
             System.out.println(query);
-            Statement s  = connection.createStatement();
+            Statement s = connection.createStatement();
             s.executeUpdate(query);
-            
+
             s.close();
         } catch (Exception e) {
             throw e;
@@ -90,10 +98,29 @@ public class DbGeneric implements DbRepository<GenericEntity>{
     }
 
     @Override
-    public GenericEntity get(int id) throws Exception {
+    public GenericEntity get(GenericEntity g) throws Exception {
+        //Select * from director where directorID="+id;
+//        Connection connection = DbConnectionFactory.getInstance().getConnection();
+//        StringBuilder sb = new StringBuilder();
+//        sb.append("SELECT * FROM ")
+//          .append(g.getTableName())
+//          .append(" WHERE ")
+//          .append(g.whereCondition());
+//        
+//        String query = sb.toString();
+//        System.out.println(query);
+//        Statement s = connection.createStatement();
+//        ResultSet rs = s.executeQuery(query);
+//        
+//        s.close();
+//        rs.close();
+//        
+//        return result;
+        
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     
-    
+
 }

@@ -18,7 +18,6 @@ import repository.db.DbRepository;
  */
 public class DbSeat implements DbRepository<Seat>{
 
-    @Override
     public ArrayList<Seat> getAll() throws Exception{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -45,9 +44,16 @@ public class DbSeat implements DbRepository<Seat>{
     }
 
     @Override
-    public Seat get(int id) throws Exception {
+    public Seat get(Seat t) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public ArrayList<Seat> getAll(Seat t) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
     
     
 }

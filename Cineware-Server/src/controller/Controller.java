@@ -23,6 +23,8 @@ import java.util.logging.Logger;
 import operation.AbstractGenericOperation;
 import operation.director.AddDirector;
 import operation.director.DeleteDirector;
+import operation.director.GetAllDirectors;
+import operation.director.GetDirector;
 import operation.director.UpdateDirector;
 import repository.Repository;
 import repository.db.DbRepository;
@@ -43,9 +45,9 @@ public class Controller {
     private Repository dbDirector;
     private Repository dbActor;
     private Repository dbMovie;
-    private Repository dbGeneric;
+    private final Repository dbGeneric;
     private static Controller instance;
-    private ArrayList<String> countries;
+    private final ArrayList<String> countries;
     
     private Controller(){
         dbGeneric = new DbGeneric();
@@ -96,7 +98,7 @@ public class Controller {
     public ArrayList<Hall> getAllHalls() throws Exception{
         ArrayList<Hall> halls = null;
         try {
-            halls = dbHall.getAll();
+            halls = ((DbHall)dbHall).getAll();
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
@@ -107,7 +109,7 @@ public class Controller {
     public ArrayList<User> getAllUsers() throws Exception {
         ArrayList<User> users = null;
         try {
-            users = dbUser.getAll();
+            users = ((DbUser)dbUser).getAll();
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
@@ -197,14 +199,9 @@ public class Controller {
     }
     
     public ArrayList<Director> getAllDirectors()throws Exception{
-        ArrayList<Director> directors = null;
-        try {
-            directors = dbDirector.getAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-        return directors;
+       AbstractGenericOperation ago = new GetAllDirectors();
+       ago.execute(new Director()); 
+       return ((GetAllDirectors) ago).getResult();
     }
     
     public void updateDirector(Director director) throws Exception {
@@ -218,14 +215,11 @@ public class Controller {
     }
     
     public Director getDirector(int id)throws Exception{
-        Director director = null;
-        try {
-            director = ((DbDirector)dbDirector).get(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-        return director;
+       AbstractGenericOperation ago = new GetDirector();
+       Director dir = new Director();
+       dir.setId(id);
+       ago.execute(dir); 
+       return ((GetDirector) ago).getResult();
     }
     
     
@@ -245,7 +239,7 @@ public class Controller {
     public ArrayList<Actor> getAllActors()throws Exception{
         ArrayList<Actor> actors = null;
         try {
-            actors = dbActor.getAll();
+            actors = ((DbActor)dbActor).getAll();
         } catch (Exception e) {
             e.printStackTrace();
             throw e;
@@ -295,7 +289,7 @@ public class Controller {
     public ArrayList<Movie> getAllMovies() throws Exception {
         ArrayList<Movie> movies = null;
         try {
-            movies = dbMovie.getAll();
+            movies = ((DbMovie)dbMovie).getAll();
         } catch (Exception e) {
             e.printStackTrace();
             throw e;

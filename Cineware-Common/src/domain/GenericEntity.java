@@ -6,6 +6,7 @@
 package domain;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
 
 /**
  *
@@ -24,5 +25,5 @@ public interface GenericEntity extends Serializable{
 
     public String whereCondition();
 
-    
+
 }

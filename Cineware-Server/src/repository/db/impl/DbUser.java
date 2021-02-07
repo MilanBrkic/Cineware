@@ -19,7 +19,7 @@ import java.sql.ResultSet;
  */
 public class DbUser implements DbRepository<User> {
 
-    @Override
+    
     public ArrayList<User> getAll() throws Exception {
         ArrayList<User> users = new ArrayList<>();
 
@@ -121,8 +121,15 @@ public class DbUser implements DbRepository<User> {
         return user;
     }
 
+   
+
     @Override
-    public User get(int id) throws Exception {
+    public User get(User t) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<User> getAll(User t) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

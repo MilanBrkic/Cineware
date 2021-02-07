@@ -21,7 +21,6 @@ import repository.db.DbRepository;
  */
 public class DbHall implements DbRepository<Hall> {
 
-    @Override
     public ArrayList<Hall> getAll() throws Exception {
         ArrayList<Hall> halls = new ArrayList<>();
 
@@ -56,8 +55,15 @@ public class DbHall implements DbRepository<Hall> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    
+
     @Override
-    public Hall get(int id) throws Exception {
+    public Hall get(Hall hall) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Hall> getAll(Hall t) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

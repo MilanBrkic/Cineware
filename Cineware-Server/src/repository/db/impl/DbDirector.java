@@ -7,6 +7,7 @@ package repository.db.impl;
 
 import controller.Controller;
 import domain.Director;
+import domain.GenericEntity;
 import domain.User;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,9 +21,9 @@ import repository.db.DbRepository;
  *
  * @author user
  */
-public class DbDirector implements DbRepository<Director>{
+public class DbDirector extends DbGeneric{
 
-    @Override
+    
     public ArrayList<Director> getAll() throws Exception{
         ArrayList<Director> directors = new ArrayList<>();
 
@@ -45,45 +46,44 @@ public class DbDirector implements DbRepository<Director>{
         return directors;
     }
 
-    @Override
-    public void add(Director director) throws Exception {
-        String query = "INSERT INTO director(firstname, lastname, dateOfBirth, nationality, userID) VALUES(?,?,?,?,?)";
-        PreparedStatement ps = connect().prepareStatement(query);
-        ps.setString(1, director.getFirstname());
-        ps.setString(2, director.getLastname());
-        ps.setDate(3, new java.sql.Date(director.getDateOfBirth().getTime()));
-        ps.setString(4, director.getNationality());
-        ps.setInt(5, director.getUser().getId());
-        ps.executeUpdate();
-        ps.close();
-    }
-
-    @Override
-    public void update(Director director) throws Exception {
-        String query = "UPDATE director SET firstname=?, lastname=?, dateOfBirth=?, nationality=?, userID=? WHERE directorID=?";
-        
-        PreparedStatement ps = connect().prepareStatement(query);
-        ps.setString(1, director.getFirstname());
-        ps.setString(2, director.getLastname());
-        ps.setDate(3, new java.sql.Date(director.getDateOfBirth().getTime()));
-        ps.setString(4, director.getNationality());
-        ps.setInt(5, director.getUser().getId());
-        ps.setInt(6, director.getId());
-        
-        ps.executeUpdate();
-        ps.close();
-    }
-
-    @Override
-    public void delete(Director director) throws Exception {
-        String query = "DELETE FROM director where directorID=" + director.getId();
-        Statement s = connect().createStatement();
-        s.executeUpdate(query);
-        s.close();
-    }
+//    public void add(Director director) throws Exception {
+//        String query = "INSERT INTO director(firstname, lastname, dateOfBirth, nationality, userID) VALUES(?,?,?,?,?)";
+//        PreparedStatement ps = connect().prepareStatement(query);
+//        ps.setString(1, director.getFirstname());
+//        ps.setString(2, director.getLastname());
+//        ps.setDate(3, new java.sql.Date(director.getDateOfBirth().getTime()));
+//        ps.setString(4, director.getNationality());
+//        ps.setInt(5, director.getUser().getId());
+//        ps.executeUpdate();
+//        ps.close();
+//    }
+//
+//    public void update(Director director) throws Exception {
+//        String query = "UPDATE director SET firstname=?, lastname=?, dateOfBirth=?, nationality=?, userID=? WHERE directorID=?";
+//        
+//        PreparedStatement ps = connect().prepareStatement(query);
+//        ps.setString(1, director.getFirstname());
+//        ps.setString(2, director.getLastname());
+//        ps.setDate(3, new java.sql.Date(director.getDateOfBirth().getTime()));
+//        ps.setString(4, director.getNationality());
+//        ps.setInt(5, director.getUser().getId());
+//        ps.setInt(6, director.getId());
+//        
+//        ps.executeUpdate();
+//        ps.close();
+//    }
+//
+//    public void delete(Director director) throws Exception {
+//        String query = "DELETE FROM director where directorID=" + director.getId();
+//        Statement s = connect().createStatement();
+//        s.executeUpdate(query);
+//        s.close();
+//    }
+//    
     
     @Override
-    public Director get(int id) throws Exception{
+    public Director get(GenericEntity g) throws Exception{
+        int id = ((Director)g).getId();
         String query = "Select * from director where directorID="+id;
         Statement s = connect().createStatement();
         ResultSet rs = s.executeQuery(query);
@@ -101,4 +101,7 @@ public class DbDirector implements DbRepository<Director>{
         rs.close();
         return null;
     }
+
+   
+
 }

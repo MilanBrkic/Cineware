@@ -33,7 +33,9 @@ public abstract class AbstractGenericOperation {
             throw e;
         }
         finally{
-            disconnect();
+            if(!(this instanceof Getters)){
+                disconnect();
+            }
         }
     }
 
