@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author Milan
  */
-public class Seat implements Serializable{
+public class Seat implements GenericEntity{
     private int id;
     private Hall hall;
     private int number;
@@ -62,6 +62,38 @@ public class Seat implements Serializable{
     @Override
     public String toString() {
         return "row: "+row+" num: "+number;
+    }
+
+    @Override
+    public String getTableName() {
+        return "seat";
+    }
+
+    @Override
+    public String columnNamesForInsert() {
+        return "hallID, number, row";
+    }
+
+    @Override
+    public String getInsertValues() {
+       StringBuilder sb = new StringBuilder();
+       
+       sb.append(hall.getId()).append(", ")
+               .append(number).append(", '")
+               .append(row).append("'");
+       
+       return sb.toString();
+               
+    }
+
+    @Override
+    public String columnNamesForUpdate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String whereCondition() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     
