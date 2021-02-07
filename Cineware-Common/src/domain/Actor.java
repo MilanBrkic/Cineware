@@ -12,91 +12,27 @@ import java.util.Date;
  *
  * @author Milan
  */
-public class Actor implements Serializable{
-    private int id;
-    private String firstname;
-    private String lastname;
-    private Date dateOfBirth;
-    private String nationality;
-    private User user;
+public class Actor extends MoviePerson{
 
     public Actor() {
+        super();
     }
-    
+
     public Actor(String firstname, String lastname, Date dateOfBirth, String nationality, User user) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.dateOfBirth = dateOfBirth;
-        this.nationality = nationality;
-        this.user = user;
+        super(firstname, lastname, dateOfBirth, nationality, user);
     }
 
     public Actor(int id, String firstname, String lastname, Date dateOfBirth, String nationality, User user) {
-        this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.dateOfBirth = dateOfBirth;
-        this.nationality = nationality;
-        this.user = user;
+        super(id, firstname, lastname, dateOfBirth, nationality, user);
     }
-
     
-    
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
-
-    public Date getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
-    public String getNationality() {
-        return nationality;
-    }
-
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    @Override
+    public String whereCondition() {
+        return "actorID="+id;
     }
 
     @Override
-    public String toString() {
-        return lastname+" "+firstname;
+    public String getTableName() {
+       return "actor";
     }
-
-    
-    
-    
-    
 }
