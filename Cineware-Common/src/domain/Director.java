@@ -117,8 +117,28 @@ public class Director implements GenericEntity{
         return sb.toString();
     }
 
-    
-    
-    
+    @Override
+    public String columnNamesForUpdate() {
+        //firstname=?, lastname=?, dateOfBirth=?, nationality=?, userID=?
+        StringBuilder sb = new StringBuilder();
+        sb.append("firstname=")
+          .append("'").append(firstname).append("', ")
+          .append("lastname=")
+          .append("'").append(lastname).append("', ")
+          .append("dateOfBirth=")
+          .append("'").append(new java.sql.Date(dateOfBirth.getTime())).append("', ")
+          .append("nationality=")
+          .append("'").append(nationality).append("', ")  
+          .append("userID=")
+          .append(user.getId());
+        
+        return sb.toString();
+    }
+
+    @Override
+    public String conditionForUpdate() {
+        //WHERE directorID=?
+        return "directorID="+id;
+    }  
     
 }

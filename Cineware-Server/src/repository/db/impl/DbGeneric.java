@@ -48,7 +48,24 @@ public class DbGeneric implements DbRepository<GenericEntity>{
 
     @Override
     public void update(GenericEntity g) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            Connection connection = DbConnectionFactory.getInstance().getConnection();
+            StringBuilder sb = new StringBuilder();
+            sb.append("UPDATE ")
+              .append(g.getTableName())
+              .append(" SET ")
+              .append(g.columnNamesForUpdate())
+              .append(" WHERE ")
+              .append(g.conditionForUpdate());  
+            String query = sb.toString();
+            System.out.println(query);
+            Statement s  = connection.createStatement();
+            s.executeUpdate(query);
+            
+            s.close();
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     @Override

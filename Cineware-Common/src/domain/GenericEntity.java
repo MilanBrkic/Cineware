@@ -20,5 +20,9 @@ public interface GenericEntity extends Serializable{
 
     public String getInsertValues();
 
+    public String columnNamesForUpdate();
+
+    public String conditionForUpdate();
+
     
 }
