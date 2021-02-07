@@ -22,6 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import operation.AbstractGenericOperation;
 import operation.director.AddDirector;
+import operation.director.DeleteDirector;
 import operation.director.UpdateDirector;
 import repository.Repository;
 import repository.db.DbRepository;
@@ -212,16 +213,8 @@ public class Controller {
     }
     
     public void deleteDirector(Director director) throws Exception {
-        try {
-            dbDirector.delete(director);
-            ((DbRepository)dbDirector).commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            ((DbRepository)dbDirector).rollback();
-            throw e;
-        }finally{
-            ((DbRepository)dbDirector).disconnect();
-        }
+       AbstractGenericOperation ago = new DeleteDirector();
+       ago.execute(director);
     }
     
     public Director getDirector(int id)throws Exception{

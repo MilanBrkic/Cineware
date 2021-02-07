@@ -233,7 +233,6 @@ public class ControllerDirectorAdd {
         panel.getPanelDateInput().getCmbDay().setSelectedItem(day);
 
         String nation = director.getNationality();
-        System.out.println(nation);
         panel.getCmbNation().setSelectedItem(nation);
     }
 

@@ -22,7 +22,7 @@ public interface GenericEntity extends Serializable{
 
     public String columnNamesForUpdate();
 
-    public String conditionForUpdate();
+    public String whereCondition();
 
     
 }

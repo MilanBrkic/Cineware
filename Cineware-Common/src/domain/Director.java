@@ -136,7 +136,7 @@ public class Director implements GenericEntity{
     }
 
     @Override
-    public String conditionForUpdate() {
+    public String whereCondition() {
         //WHERE directorID=?
         return "directorID="+id;
     }  
