@@ -19,7 +19,7 @@ import repository.db.DbRepository;
  *
  * @author user
  */
-public class DbActor implements DbRepository<Actor>{
+public class DbActor extends DbGeneric{
 
    
     public ArrayList<Actor> getAll() throws Exception{
@@ -44,52 +44,41 @@ public class DbActor implements DbRepository<Actor>{
         return actors;
     }
 
-    @Override
-    public void add(Actor actor) throws Exception {
-        String query = "INSERT INTO actor(firstname, lastname, dateOfBirth, nationality, userID) VALUES(?,?,?,?,?)";
-        PreparedStatement ps = connect().prepareStatement(query);
-        ps.setString(1, actor.getFirstname());
-        ps.setString(2, actor.getLastname());
-        ps.setDate(3, new java.sql.Date(actor.getDateOfBirth().getTime()));
-        ps.setString(4, actor.getNationality());
-        ps.setInt(5, actor.getUser().getId());
-        ps.executeUpdate();
-        ps.close();
-    }
-
-    @Override
-    public void update(Actor actor) throws Exception {
-        String query = "UPDATE actor SET firstname=?, lastname=?, dateOfBirth=?, nationality=?, userID=? WHERE actorID=?";
-        
-        PreparedStatement ps = connect().prepareStatement(query);
-        ps.setString(1, actor.getFirstname());
-        ps.setString(2, actor.getLastname());
-        ps.setDate(3, new java.sql.Date(actor.getDateOfBirth().getTime()));
-        ps.setString(4, actor.getNationality());
-        ps.setInt(5, actor.getUser().getId());
-        ps.setInt(6, actor.getId());
-        
-        ps.executeUpdate();
-        ps.close();
-    }
-
-    @Override
-    public void delete(Actor actor) throws Exception {
-        String query = "DELETE FROM actor where actorID=" + actor.getId();
-        Statement s = connect().createStatement();
-        s.executeUpdate(query);
-        s.close();
-    }
-
-    
-    @Override
-    public Actor get(Actor t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public ArrayList<Actor> getAll(Actor t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+//    @Override
+//    public void add(Actor actor) throws Exception {
+//        String query = "INSERT INTO actor(firstname, lastname, dateOfBirth, nationality, userID) VALUES(?,?,?,?,?)";
+//        PreparedStatement ps = connect().prepareStatement(query);
+//        ps.setString(1, actor.getFirstname());
+//        ps.setString(2, actor.getLastname());
+//        ps.setDate(3, new java.sql.Date(actor.getDateOfBirth().getTime()));
+//        ps.setString(4, actor.getNationality());
+//        ps.setInt(5, actor.getUser().getId());
+//        ps.executeUpdate();
+//        ps.close();
+//    }
+//
+//    @Override
+//    public void update(Actor actor) throws Exception {
+//        String query = "UPDATE actor SET firstname=?, lastname=?, dateOfBirth=?, nationality=?, userID=? WHERE actorID=?";
+//        
+//        PreparedStatement ps = connect().prepareStatement(query);
+//        ps.setString(1, actor.getFirstname());
+//        ps.setString(2, actor.getLastname());
+//        ps.setDate(3, new java.sql.Date(actor.getDateOfBirth().getTime()));
+//        ps.setString(4, actor.getNationality());
+//        ps.setInt(5, actor.getUser().getId());
+//        ps.setInt(6, actor.getId());
+//        
+//        ps.executeUpdate();
+//        ps.close();
+//    }
+//
+//    @Override
+//    public void delete(Actor actor) throws Exception {
+//        String query = "DELETE FROM actor where actorID=" + actor.getId();
+//        Statement s = connect().createStatement();
+//        s.executeUpdate(query);
+//        s.close();
+//    }
 
 }

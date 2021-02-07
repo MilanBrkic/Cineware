@@ -3,28 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package operation.director;
-
-import domain.Director;
-import operation.AbstractGenericOperation;
+package operation;
 
 /**
  *
  * @author user
  */
-public class DeleteDirector extends AbstractGenericOperation{
+public class GenericUpdate<T> extends AbstractGenericOperation{
 
     @Override
     protected void preconditions(Object params) throws Exception {
-        if(params==null || !(params instanceof Director)){
+        if(params==null)
             throw new Exception("Invalid director data");
         }
-    }
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        repo.delete((Director)params);
-        
+        repo.update((T) params);
     }
+    
+
+    
     
 }

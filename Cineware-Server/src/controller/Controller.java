@@ -21,11 +21,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import operation.AbstractGenericOperation;
-import operation.director.AddDirector;
-import operation.director.DeleteDirector;
+import operation.GenericAdd;
+import operation.GenericDelete;
+import operation.GenericUpdate;
+import operation.actor.GetAllActors;
 import operation.director.GetAllDirectors;
 import operation.director.GetDirector;
-import operation.director.UpdateDirector;
 import repository.Repository;
 import repository.db.DbRepository;
 import repository.db.impl.DbActor;
@@ -194,7 +195,7 @@ public class Controller {
     }
 
     public void addDirector(Director director) throws Exception {
-        AbstractGenericOperation ago = new AddDirector();
+        AbstractGenericOperation ago = new GenericAdd<Director>();
         ago.execute(director);
     }
     
@@ -205,13 +206,13 @@ public class Controller {
     }
     
     public void updateDirector(Director director) throws Exception {
-        AbstractGenericOperation ago = new UpdateDirector();
+        AbstractGenericOperation ago = new GenericUpdate<Director>();
         ago.execute(director);
     }
     
     public void deleteDirector(Director director) throws Exception {
-       AbstractGenericOperation ago = new DeleteDirector();
-       ago.execute(director);
+        AbstractGenericOperation ago = new GenericDelete<Director>();
+        ago.execute(director);
     }
     
     public Director getDirector(int id)throws Exception{
@@ -222,56 +223,30 @@ public class Controller {
        return ((GetDirector) ago).getResult();
     }
     
+    //actor
     
     public void addActor(Actor actor) throws Exception {
-        try {
-            dbActor.add(actor);
-            ((DbRepository)dbActor).commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            ((DbRepository)dbActor).rollback();
-            throw e;
-        }finally{
-            ((DbRepository)dbActor).disconnect();
-        }
+        AbstractGenericOperation ago = new GenericAdd<Actor>();
+        ago.execute(actor);
     }
     
     public ArrayList<Actor> getAllActors()throws Exception{
-        ArrayList<Actor> actors = null;
-        try {
-            actors = ((DbActor)dbActor).getAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-        return actors;
+       AbstractGenericOperation ago = new GetAllActors();
+       ago.execute(new Actor()); 
+       return ((GetAllActors) ago).getResult();
     }
     
     public void updateActor(Actor actor) throws Exception {
-        try {
-            dbActor.update(actor);
-            ((DbRepository)dbActor).commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            ((DbRepository)dbActor).rollback();
-            throw e;
-        }finally{
-            ((DbRepository)dbActor).disconnect();
-        }
+        AbstractGenericOperation ago = new GenericUpdate<Actor>();
+        ago.execute(actor);
     }
     
     public void deleteActor(Actor actor) throws Exception {
-        try {
-            dbActor.delete(actor);
-            ((DbRepository)dbActor).commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            ((DbRepository)dbActor).rollback();
-            throw e;
-        }finally{
-            ((DbRepository)dbActor).disconnect();
-        }
+        AbstractGenericOperation ago = new GenericDelete<Actor>();
+        ago.execute(actor);
     }
+    
+    //movie
 
     public void addMovie(Movie movie) throws Exception {
         try {

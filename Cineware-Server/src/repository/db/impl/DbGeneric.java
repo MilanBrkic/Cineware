@@ -5,16 +5,11 @@
  */
 package repository.db.impl;
 
-import controller.Controller;
-import domain.Director;
 import domain.GenericEntity;
-import domain.User;
 import java.util.ArrayList;
 import repository.db.DbRepository;
 import java.sql.Connection;
 import java.sql.Statement;
-import java.sql.ResultSet;
-import java.util.Date;
 import repository.db.DbConnectionFactory;
 
 /**
