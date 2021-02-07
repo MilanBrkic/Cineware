@@ -5,13 +5,14 @@
  */
 package domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author user
  */
-public class Movie {
+public class Movie implements Serializable{
     private int id;
     private String name;
     private String description;

@@ -82,6 +82,7 @@ public class DbDirector implements DbRepository<Director>{
         s.close();
     }
     
+    @Override
     public Director get(int id) throws Exception{
         String query = "Select * from director where directorID="+id;
         Statement s = connect().createStatement();

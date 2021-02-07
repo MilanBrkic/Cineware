@@ -19,4 +19,6 @@ public interface Repository<T> {
     public void update(T t)throws Exception;
     
     public void delete(T t)throws Exception;
+    
+    public T get(int id) throws Exception;
 }

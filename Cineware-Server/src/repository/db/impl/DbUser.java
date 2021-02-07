@@ -120,4 +120,9 @@ public class DbUser implements DbRepository<User> {
         s.close();
         return user;
     }
+
+    @Override
+    public User get(int id) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

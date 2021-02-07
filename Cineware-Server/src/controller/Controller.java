@@ -20,10 +20,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import operation.AbstractGenericOperation;
+import operation.director.AddDirector;
 import repository.Repository;
 import repository.db.DbRepository;
 import repository.db.impl.DbActor;
 import repository.db.impl.DbDirector;
+import repository.db.impl.DbGeneric;
 import repository.db.impl.DbHall;
 import repository.db.impl.DbMovie;
 import repository.db.impl.DbUser;
@@ -38,10 +41,12 @@ public class Controller {
     private Repository dbDirector;
     private Repository dbActor;
     private Repository dbMovie;
+    private Repository dbGeneric;
     private static Controller instance;
     private ArrayList<String> countries;
     
     private Controller(){
+        dbGeneric = new DbGeneric();
         dbUser = new DbUser();
         dbHall = new DbHall();
         dbDirector = new DbDirector();
@@ -185,16 +190,8 @@ public class Controller {
     }
 
     public void addDirector(Director director) throws Exception {
-        try {
-            dbDirector.add(director);
-            ((DbRepository)dbDirector).commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            ((DbRepository)dbDirector).rollback();
-            throw e;
-        }finally{
-            ((DbRepository)dbDirector).disconnect();
-        }
+        AbstractGenericOperation ago = new AddDirector();
+        ago.execute(director);
     }
     
     public ArrayList<Director> getAllDirectors()throws Exception{

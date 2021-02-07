@@ -80,5 +80,10 @@ public class DbActor implements DbRepository<Actor>{
         s.executeUpdate(query);
         s.close();
     }
-    
+
+    @Override
+    public Actor get(int id) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author Milan
  */
-public class Director implements Serializable{
+public class Director implements GenericEntity{
     private int id;
     private String firstname;
     private String lastname;
@@ -93,6 +93,28 @@ public class Director implements Serializable{
     @Override
     public String toString() {
         return lastname+" "+firstname;
+    }
+
+    @Override
+    public String getTableName() {
+        return "director";
+    }
+
+    @Override
+    public String columnNamesForInsert() {
+        return "firstname, lastname, dateOfBirth, nationality, userID";
+    }
+
+    @Override
+    public String getInsertValues() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("'").append(firstname).append("', ")
+          .append("'").append(lastname).append("', ")
+          .append("'").append(new java.sql.Date(dateOfBirth.getTime())).append("', ")
+          .append("'").append(nationality).append("', ")
+          .append(user.getId());
+        
+        return sb.toString();
     }
 
     
