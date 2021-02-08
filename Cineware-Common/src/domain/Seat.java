@@ -6,6 +6,8 @@
 package domain;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  *
@@ -93,6 +95,11 @@ public class Seat implements GenericEntity{
 
     @Override
     public String whereCondition() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<GenericEntity> getFromResultSet(ResultSet rs) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

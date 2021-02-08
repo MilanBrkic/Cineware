@@ -6,12 +6,14 @@
 package domain;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  *
  * @author Milan
  */
-public class Hall implements Serializable{
+public class Hall implements GenericEntity{
     private int id;
     private String name;
     private int numberOfSeats;
@@ -52,6 +54,44 @@ public class Hall implements Serializable{
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public String getTableName() {
+        return "hall";
+    }
+
+    @Override
+    public String columnNamesForInsert() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getInsertValues() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String columnNamesForUpdate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String whereCondition() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<GenericEntity> getFromResultSet(ResultSet rs) throws Exception{
+        ArrayList<Hall> halls = new ArrayList<>();
+        while (rs.next()) {
+            int id = rs.getInt("hallID");
+            String hallName = rs.getString("hallName");
+            int number = rs.getInt("numberOfSeats");
+            Hall hall = new Hall(id, hallName, number);
+            halls.add(hall);
+        }
+        return new ArrayList<>(halls);
     }
     
     

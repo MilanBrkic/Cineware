@@ -9,6 +9,7 @@ import domain.GenericEntity;
 import java.util.ArrayList;
 import repository.db.DbRepository;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import repository.db.DbConnectionFactory;
 
@@ -21,8 +22,19 @@ public class DbGeneric implements DbRepository<GenericEntity> {
 
     
     @Override
-    public ArrayList<GenericEntity> getAll(GenericEntity t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<GenericEntity> getAll(GenericEntity g) throws Exception {
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT * FROM ")
+          .append(g.getTableName());
+        
+        String query = sb.toString();
+        Statement s = connect().createStatement();
+        ResultSet rs = s.executeQuery(query);
+        
+        ArrayList<GenericEntity> lista = new ArrayList<>(g.getFromResultSet(rs));
+        s.close();
+        rs.close();
+        return lista;
     }
     
 

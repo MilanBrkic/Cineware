@@ -7,6 +7,7 @@ package domain;
 
 import java.io.Serializable;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  *
@@ -25,5 +26,7 @@ public interface GenericEntity extends Serializable{
 
     public String whereCondition();
 
+    
+    public ArrayList<GenericEntity> getFromResultSet(ResultSet rs) throws Exception;
 
 }

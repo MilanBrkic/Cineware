@@ -6,6 +6,8 @@
 package domain;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -34,5 +36,10 @@ public class Actor extends MoviePerson{
     @Override
     public String getTableName() {
        return "actor";
+    }
+
+    @Override
+    public ArrayList<GenericEntity> getFromResultSet(ResultSet rs) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

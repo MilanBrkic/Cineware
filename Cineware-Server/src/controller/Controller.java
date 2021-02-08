@@ -23,16 +23,13 @@ import java.util.logging.Logger;
 import operation.AbstractGenericOperation;
 import operation.GenericAdd;
 import operation.GenericDelete;
+import operation.GenericGetAll;
 import operation.GenericUpdate;
 import operation.actor.GetAllActors;
 import operation.director.GetAllDirectors;
 import operation.director.GetDirector;
 import repository.Repository;
 import repository.db.DbRepository;
-import repository.db.impl.DbActor;
-import repository.db.impl.DbDirector;
-import repository.db.impl.DbGeneric;
-import repository.db.impl.DbHall;
 import repository.db.impl.DbMovie;
 import repository.db.impl.DbUser;
 /**
@@ -42,20 +39,12 @@ import repository.db.impl.DbUser;
 public class Controller {
     int test;
     private Repository dbUser;
-    private Repository dbHall;
-    private Repository dbDirector;
-    private Repository dbActor;
     private Repository dbMovie;
-    private final Repository dbGeneric;
     private static Controller instance;
     private final ArrayList<String> countries;
     
     private Controller(){
-        dbGeneric = new DbGeneric();
         dbUser = new DbUser();
-        dbHall = new DbHall();
-        dbDirector = new DbDirector();
-        dbActor = new DbActor();
         dbMovie = new DbMovie();
         countries = readCoutries();
     }
@@ -65,15 +54,10 @@ public class Controller {
         return instance;
     }
 
-    
-    
-
     public ArrayList<String> getCountries() {
         return countries;
     }
-    
-    
-    
+       
     public ArrayList<String> readCoutries(){
         ArrayList<String> list = new ArrayList<>();
         try {
@@ -97,14 +81,9 @@ public class Controller {
     }
 
     public ArrayList<Hall> getAllHalls() throws Exception{
-        ArrayList<Hall> halls = null;
-        try {
-            halls = ((DbHall)dbHall).getAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-        return halls;
+        AbstractGenericOperation ago = new GenericGetAll<Hall>();
+        ago.execute(new Hall());
+        return ((GenericGetAll)ago).getResult();
     }
 
     public ArrayList<User> getAllUsers() throws Exception {
@@ -257,7 +236,7 @@ public class Controller {
             ((DbRepository)dbMovie).rollback();
             throw e;
         }finally{
-           ((DbRepository)dbActor).disconnect();
+           ((DbRepository)dbMovie).disconnect();
         }
     }
 
