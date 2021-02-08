@@ -29,6 +29,8 @@ import operation.GenericUpdate;
 import operation.actor.GetAllActors;
 import operation.director.GetAllDirectors;
 import operation.director.GetDirector;
+import operation.movie.AddMovie;
+import operation.movie.GetAllMovies;
 import operation.user.CheckPassword;
 import operation.user.UpdatePasswordOnly;
 import operation.user.UpdateWithoutPassword;
@@ -196,27 +198,14 @@ public class Controller {
     //movie
 
     public void addMovie(Movie movie) throws Exception {
-        try {
-            dbMovie.add(movie);
-            ((DbRepository)dbMovie).commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            ((DbRepository)dbMovie).rollback();
-            throw e;
-        }finally{
-           ((DbRepository)dbMovie).disconnect();
-        }
+        AbstractGenericOperation ago = new AddMovie();
+        ago.execute(movie);
     }
 
     public ArrayList<Movie> getAllMovies() throws Exception {
-        ArrayList<Movie> movies = null;
-        try {
-            movies = ((DbMovie)dbMovie).getAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-        return movies;
+        AbstractGenericOperation ago = new GetAllMovies();
+        ago.execute(new Movie());
+        return ((GetAllMovies)ago).getResult();
     }
     
     

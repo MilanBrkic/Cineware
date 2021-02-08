@@ -115,7 +115,6 @@ public class DbGeneric implements DbRepository<GenericEntity> {
           .append(g.whereCondition());
         
         String query = sb.toString();
-        System.out.println(query);
         Statement s = connection.createStatement();
         ResultSet rs = s.executeQuery(query);
         
