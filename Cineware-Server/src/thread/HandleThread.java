@@ -41,6 +41,13 @@ public class HandleThread extends Thread {
         gson = new GsonBuilder().setPrettyPrinting().create();
     }
 
+    public Socket getSocket() {
+        return socket;
+    }
+
+    
+    
+    
     @Override
     public void run() {
         while (true) {

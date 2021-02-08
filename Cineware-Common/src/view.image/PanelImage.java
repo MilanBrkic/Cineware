@@ -29,7 +29,7 @@ public class PanelImage extends javax.swing.JPanel {
 
         jLabel2 = new javax.swing.JLabel();
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/image/Cineware-logo-extrasmall.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view.image/Cineware-logo-extrasmall.png"))); // NOI18N
         jLabel2.setText(" ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

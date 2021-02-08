@@ -5,7 +5,6 @@
  */
 package domain;
 
-import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 

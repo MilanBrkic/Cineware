@@ -16,23 +16,36 @@ import thread.HandleThread;
  *
  * @author user
  */
-public class Server {
-    public void startServer(){
+public class Server extends Thread {
+
+    ServerSocket serverSocket;
+    HandleThread[] clients = new HandleThread[10];
+
+    public Server() {
+        start();
+    }
+
+    @Override
+    public void run() {
         try {
-            ServerSocket serverSocket = new ServerSocket(9000);
-            while(true){
+            serverSocket = new ServerSocket(9000);
+            for (int i = 0; i < clients.length; i++) {
                 System.out.println("Waiting for connection...");
                 Socket socket = serverSocket.accept();
                 System.out.println("Client connected!");
-                handleClient(socket);
+                clients[i] = new HandleThread(socket);
+                clients[i].start();
             }
+
         } catch (Exception ex) {
-            ex.printStackTrace();
         }
+        System.out.println("Server stopped.");
     }
 
-    private void handleClient(Socket socket) {
-        HandleThread ht = new HandleThread(socket);
-        ht.start();
+    public void close() throws IOException {
+        serverSocket.close();
+        
     }
+
+    
 }
