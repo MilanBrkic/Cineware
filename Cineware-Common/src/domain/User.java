@@ -124,12 +124,19 @@ public class User implements GenericEntity{
 
     @Override
     public String columnNamesForInsert() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "firstname, lastname, username, password, admin";
     }
 
     @Override
     public String getInsertValues() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder sb = new StringBuilder();
+        sb.append("'").append(firstname).append("', ")
+          .append("'").append(lastname).append("', ")
+          .append("'").append(username).append("', ")
+          .append("'").append(password).append("', ")
+          .append(admin);
+        
+        return sb.toString();
     }
 
     @Override
@@ -139,7 +146,7 @@ public class User implements GenericEntity{
 
     @Override
     public String whereCondition() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "userID="+id;
     }
 
     @Override

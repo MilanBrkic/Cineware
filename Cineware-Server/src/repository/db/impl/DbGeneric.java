@@ -106,26 +106,23 @@ public class DbGeneric implements DbRepository<GenericEntity> {
 
     @Override
     public GenericEntity get(GenericEntity g) throws Exception {
-        //Select * from director where directorID="+id;
-//        Connection connection = DbConnectionFactory.getInstance().getConnection();
-//        StringBuilder sb = new StringBuilder();
-//        sb.append("SELECT * FROM ")
-//          .append(g.getTableName())
-//          .append(" WHERE ")
-//          .append(g.whereCondition());
-//        
-//        String query = sb.toString();
-//        System.out.println(query);
-//        Statement s = connection.createStatement();
-//        ResultSet rs = s.executeQuery(query);
-//        
-//        s.close();
-//        rs.close();
-//        
-//        return result;
+        //SELECT * FROM user where userID="+id
+        Connection connection = DbConnectionFactory.getInstance().getConnection();
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT * FROM ")
+          .append(g.getTableName())
+          .append(" WHERE ")
+          .append(g.whereCondition());
         
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = sb.toString();
+        System.out.println(query);
+        Statement s = connection.createStatement();
+        ResultSet rs = s.executeQuery(query);
         
+        ArrayList<GenericEntity> lista = new ArrayList<>(g.getFromResultSet(rs));
+        s.close();
+        rs.close();
+        return lista.get(0); 
     }
 
     

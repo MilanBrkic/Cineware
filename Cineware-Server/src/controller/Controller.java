@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import operation.AbstractGenericOperation;
 import operation.GenericAdd;
 import operation.GenericDelete;
+import operation.GenericGet;
 import operation.GenericGetAll;
 import operation.GenericUpdate;
 import operation.actor.GetAllActors;
@@ -93,16 +94,8 @@ public class Controller {
     }
 
     public void addUser(User user) throws  Exception{
-         try {
-            dbUser.add(user);
-            ((DbRepository)dbUser).commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            ((DbRepository)dbUser).rollback();
-            throw e;
-        }finally{
-            ((DbRepository)dbUser).disconnect();
-        }
+        AbstractGenericOperation ago = new GenericAdd<User>();
+        ago.execute(user);
     }
     
     
@@ -121,27 +114,16 @@ public class Controller {
     
     
     public void deleteUser(User user) throws Exception {
-        try {
-            dbUser.delete(user);
-            ((DbRepository)dbUser).commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            ((DbRepository)dbUser).rollback();
-            throw e;
-        }finally{
-            ((DbRepository)dbUser).disconnect();
-        }
+        AbstractGenericOperation ago = new GenericDelete<User>();
+        ago.execute(user);
     }
 
     public User getUser(int id) throws Exception{
-        User user = null;
-        try {
-            user = ((DbUser)dbUser).getUser(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-        return user;
+        AbstractGenericOperation ago = new GenericGet<User>();
+        User user = new User();
+        user.setId(id);
+        ago.execute(user);
+        return (User) ((GenericGet)ago).getResult();
     }
     
     
