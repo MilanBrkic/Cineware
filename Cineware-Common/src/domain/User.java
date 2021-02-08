@@ -5,14 +5,15 @@
  */
 package domain;
 
-import java.io.Serializable;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 
 /**
  *
  * @author Milan
  */
-public class User implements Serializable{
+public class User implements GenericEntity{
     private int id;
     private String firstname;
     private String lastname;
@@ -114,6 +115,47 @@ public class User implements Serializable{
     @Override
     public String toString() {
         return firstname+" "+lastname;
+    }
+
+    @Override
+    public String getTableName() {
+        return "user";
+    }
+
+    @Override
+    public String columnNamesForInsert() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getInsertValues() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String columnNamesForUpdate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String whereCondition() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<GenericEntity> getFromResultSet(ResultSet rs) throws Exception {
+        ArrayList<User> users = new ArrayList<>();
+        while (rs.next()) {
+            int id = rs.getInt("userID");
+            String firstname = rs.getString("firstname");
+            String lastname = rs.getString("lastname");
+            String username = rs.getString("username");
+            String password = rs.getString("password");
+            boolean admin = rs.getBoolean("admin");
+            User user = new User(id, firstname, lastname, username, password, admin);
+            users.add(user);
+        }
+        return new ArrayList<>(users);
     }
     
     

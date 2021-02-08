@@ -87,14 +87,9 @@ public class Controller {
     }
 
     public ArrayList<User> getAllUsers() throws Exception {
-        ArrayList<User> users = null;
-        try {
-            users = ((DbUser)dbUser).getAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-        return users;
+        AbstractGenericOperation ago = new GenericGetAll<User>();
+        ago.execute(new User());
+        return ((GenericGetAll)ago).getResult();
     }
 
     public void addUser(User user) throws  Exception{
