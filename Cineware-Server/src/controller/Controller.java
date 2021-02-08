@@ -29,6 +29,9 @@ import operation.GenericUpdate;
 import operation.actor.GetAllActors;
 import operation.director.GetAllDirectors;
 import operation.director.GetDirector;
+import operation.user.CheckPassword;
+import operation.user.UpdatePasswordOnly;
+import operation.user.UpdateWithoutPassword;
 import repository.Repository;
 import repository.db.DbRepository;
 import repository.db.impl.DbMovie;
@@ -100,16 +103,8 @@ public class Controller {
     
     
     public void updateUser(User user) throws Exception {
-        try {
-            dbUser.update(user);
-            ((DbRepository)dbUser).commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            ((DbRepository)dbUser).rollback();
-            throw e;
-        }finally{
-            ((DbRepository)dbUser).disconnect();
-        }
+        AbstractGenericOperation ago = new UpdateWithoutPassword();
+        ago.execute(user);
     }
     
     
@@ -128,28 +123,24 @@ public class Controller {
     
     
     public boolean checkPassword(String username,String password) throws Exception{
-        try {
-            return ((DbUser)dbUser).checkPassword(username, password);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
+        AbstractGenericOperation ago = new CheckPassword();
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        ago.execute(user);
+        return ((CheckPassword)ago).getResult();
     }
     
     
-    public void updatePasswordOnly(String username, String password) throws SQLException{
-        try {
-            ((DbUser)dbUser).updatePasswordOnly(username, password);
-            ((DbRepository)dbUser).commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            ((DbRepository)dbUser).rollback();
-            throw e;
-        }finally{
-            ((DbRepository)dbUser).disconnect();
-        }
+    public void updatePasswordOnly(String username, String password) throws Exception{
+        AbstractGenericOperation ago = new UpdatePasswordOnly();
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        ago.execute(user);
     }
 
+    //director
     public void addDirector(Director director) throws Exception {
         AbstractGenericOperation ago = new GenericAdd<Director>();
         ago.execute(director);
