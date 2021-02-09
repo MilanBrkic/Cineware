@@ -14,7 +14,6 @@ import domain.User;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -34,24 +33,16 @@ import operation.movie.GetAllMovies;
 import operation.user.CheckPassword;
 import operation.user.UpdatePasswordOnly;
 import operation.user.UpdateWithoutPassword;
-import repository.Repository;
-import repository.db.DbRepository;
-import repository.db.impl.DbMovie;
-import repository.db.impl.DbUser;
 /**
  *
  * @author Milan
  */
 public class Controller {
     int test;
-    private Repository dbUser;
-    private Repository dbMovie;
     private static Controller instance;
     private final ArrayList<String> countries;
     
     private Controller(){
-        dbUser = new DbUser();
-        dbMovie = new DbMovie();
         countries = readCoutries();
     }
     

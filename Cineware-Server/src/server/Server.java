@@ -5,11 +5,9 @@
  */
 package server;
 
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import thread.HandleExit;
 import thread.HandleThread;
 
 /**
@@ -20,7 +18,8 @@ public class Server extends Thread {
 
     ServerSocket serverSocket;
     HandleThread[] clients = new HandleThread[10];
-
+    HandleExit[] exits = new HandleExit[10];
+    
     public Server() {
         start();
     }
@@ -32,19 +31,25 @@ public class Server extends Thread {
             for (int i = 0; i < clients.length; i++) {
                 System.out.println("Waiting for connection...");
                 Socket socket = serverSocket.accept();
+                Socket socketForExit = serverSocket.accept();
                 System.out.println("Client connected!");
+                exits[i] = new HandleExit(socketForExit);
                 clients[i] = new HandleThread(socket);
                 clients[i].start();
             }
 
         } catch (Exception ex) {
         }
-        System.out.println("Server stopped.");
+        System.out.println("Server stopped");
     }
 
-    public void close() throws IOException {
-        serverSocket.close();
+    public void close() throws Exception {
+        for(int i = 0;i<exits.length;i++){
+            if(exits[i]!=null)
+                exits[i].exitClient();
+        }
         
+        serverSocket.close();   
     }
 
     

@@ -28,6 +28,7 @@ import java.util.Arrays;
  */
 public class Communcation {
     private Socket socket;
+    private Socket socketForExit;
     private Sender sender;
     private Receiver receiver;
     private static Communcation instance;
@@ -35,6 +36,8 @@ public class Communcation {
     
     private Communcation() throws IOException {
         this.socket = new Socket("localhost", 9000);
+        socketForExit =  new Socket("localhost", 9000);
+        WaitForExit wait = new WaitForExit(socketForExit);
         sender = new Sender(socket);
         receiver = new Receiver(socket);
         gson = new GsonBuilder().setPrettyPrinting().create();

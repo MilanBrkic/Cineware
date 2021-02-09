@@ -10,7 +10,6 @@ import domain.Actor;
 import domain.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,7 +21,6 @@ import validation.Validation;
 import view.constant.Constant;
 import view.coordinator.MainCoordinator;
 import view.model.table.ActorTableModel;
-import view.panel.PanelActorAdd;
 import view.panel.PanelActorAdd;
 import view.panel.mode.ActorMode;
 

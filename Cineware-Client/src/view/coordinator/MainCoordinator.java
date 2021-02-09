@@ -6,7 +6,6 @@
  */
 package view.coordinator;
 
-import view.util.MyClock;
 import domain.User;
 import java.security.MessageDigest;
 import java.util.HashMap;

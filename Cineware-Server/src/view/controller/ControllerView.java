@@ -7,7 +7,6 @@ package view.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Action;
 import server.Server;
 import view.FormServer;
 import view.util.Dots;

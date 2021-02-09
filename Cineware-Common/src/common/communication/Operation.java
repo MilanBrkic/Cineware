@@ -12,6 +12,7 @@ import java.io.Serializable;
  * @author user
  */
 public enum Operation implements Serializable{
+    EXIT_ALL,
     GET_COUNTRIES,
     GET_ALL_HALLS,
     GET_ALL_USERS,
