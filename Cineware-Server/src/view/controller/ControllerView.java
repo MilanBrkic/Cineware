@@ -7,6 +7,16 @@ package view.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import server.Server;
 import view.FormServer;
 import view.util.Dots;
@@ -41,6 +51,7 @@ public class ControllerView {
         form.setLocationRelativeTo(null);
         form.setVisible(true);
         setListeners();
+        setDatabaseText();
         icon.setIcon();
         
     }
@@ -48,6 +59,7 @@ public class ControllerView {
     private void setListeners() {
         startServerListener();
         stopServerListener();
+        saveDatabaseListener();
         
     }
 
@@ -75,6 +87,48 @@ public class ControllerView {
                 try {
                     server.close();
                 } catch (Exception ex) {
+                }
+            }
+        });
+    }
+
+    private void setDatabaseText() {
+        
+        try {
+            FileReader reader = new FileReader("resources/database.properties");
+            Properties prop = new Properties();
+            prop.load(reader);
+            String url = prop.getProperty("url");
+            String user = prop.getProperty("user");
+            String password = prop.getProperty("password");
+            
+            form.getTxtUrl().setText(url);
+            form.getTxtUser().setText(user);
+            form.getTxtPassword().setText(password);
+            
+        } catch (Exception ex) {
+            Logger.getLogger(ControllerView.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void saveDatabaseListener() {
+        form.getBtnSaveDatabase().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String url = "url="+form.getTxtUrl().getText();
+                String user = "user="+form.getTxtUser().getText();
+                String password = "password="+form.getTxtPassword().getText();
+                String all = url+"\n"+user+"\n"+password;
+                try {
+                    File file = new File("resources/database.properties");
+                    PrintWriter myWriter = new PrintWriter(file);
+                    myWriter.write(all);
+                    JOptionPane.showMessageDialog(form, "Database confing changed", "Changed", JOptionPane.INFORMATION_MESSAGE);
+                    myWriter.close();
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(form, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    Logger.getLogger(ControllerView.class.getName()).log(Level.SEVERE, null, ex);
+                    
                 }
             }
         });
