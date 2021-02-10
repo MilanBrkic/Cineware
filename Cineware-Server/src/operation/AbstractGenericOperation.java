@@ -39,7 +39,7 @@ public abstract class AbstractGenericOperation {
         }
     }
 
-    private void startTransaction() throws SQLException {
+    private void startTransaction() throws Exception {
         ((DbRepository) repo).connect();
     }
 
@@ -47,15 +47,15 @@ public abstract class AbstractGenericOperation {
 
     protected abstract void executeOperation(Object params)throws Exception;
 
-    private void commitTransaction() throws SQLException {
+    private void commitTransaction() throws Exception {
         ((DbRepository) repo).commit();
     }
 
-    private void rollbackTransaction() throws SQLException {
+    private void rollbackTransaction() throws Exception {
         ((DbRepository) repo).rollback();
     }
 
-    private void disconnect() throws SQLException {
+    private void disconnect() throws Exception {
         ((DbRepository) repo).disconnect();
     }
 }

@@ -117,7 +117,11 @@ public class ControllerMain {
         menuItemLogOut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MainCoordinator.getInstance().logout();
+                try {
+                    MainCoordinator.getInstance().logout();
+                } catch (Exception ex) {
+                    Logger.getLogger(ControllerMain.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -254,8 +258,9 @@ public class ControllerMain {
             @Override
             public void windowClosing(WindowEvent e) {
                 try {
+                    Communcation.getInstance().logout(MainCoordinator.getInstance().getUser());
                     Communcation.getInstance().closeSocket();
-                } catch (IOException ex) {
+                } catch (Exception ex) {
                     Logger.getLogger(ControllerMain.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

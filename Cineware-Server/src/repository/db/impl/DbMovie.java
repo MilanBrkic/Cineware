@@ -74,7 +74,7 @@ public class DbMovie implements DbRepository<Movie>{
         addActorsForMovies(id,movie.getActors());
     }
     
-    private void addActorsForMovies(int id, ArrayList<Actor> actors) throws SQLException {
+    private void addActorsForMovies(int id, ArrayList<Actor> actors) throws Exception {
         String query = "INSERT INTO movie_actor(movieID,actorID) VALUES(?,?)";
         PreparedStatement ps = connect().prepareStatement(query);
         ps.setInt(1, id);

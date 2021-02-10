@@ -26,7 +26,7 @@ public class DbUser implements DbRepository<User> {
         updateWithoutPassword(user);
     }
 
-    private void updateWithoutPassword(User user) throws SQLException {
+    private void updateWithoutPassword(User user) throws Exception {
         String query = "UPDATE user SET firstname=?, lastname=?, username=?, admin=? WHERE userID=?";
         PreparedStatement ps = connect().prepareStatement(query);
         ps.setString(1, user.getFirstname());
@@ -38,7 +38,7 @@ public class DbUser implements DbRepository<User> {
         ps.close();
     }
 
-    public void updatePasswordOnly(String username, String password) throws SQLException {
+    public void updatePasswordOnly(String username, String password) throws Exception {
         String query = "UPDATE user SET password=? WHERE username=?";
         PreparedStatement ps = connect().prepareStatement(query);
         ps.setString(1, password);
@@ -47,7 +47,7 @@ public class DbUser implements DbRepository<User> {
         ps.close();
     }
 
-    public boolean checkPassword(String username, String password) throws SQLException {
+    public boolean checkPassword(String username, String password) throws Exception {
         String query = "SELECT * FROM user WHERE username='" + username + "'";
         Statement s = connect().createStatement();
         ResultSet rs = s.executeQuery(query);

@@ -19,8 +19,6 @@ import domain.Movie;
 import domain.User;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -152,6 +150,17 @@ public class HandleThread extends Thread {
                             ArrayList<Movie> allMovies = Controller.getInstance().getAllMovies();
                             String jsonAllMovies = gson.toJson(allMovies);
                             response.setResult(jsonAllMovies);
+                            break;
+                        case LOGIN:
+                            String jsonLoggedUser = request.getArguments();
+                            User user = gson.fromJson(jsonLoggedUser, User.class);
+                            Controller.getInstance().newLoggedInUser(user);
+                            break;
+                        case LOGOUT:
+                            String jsonLoggedOutUser = request.getArguments();
+                            User userOut = gson.fromJson(jsonLoggedOutUser, User.class);
+                            Controller.getInstance().loggedOutUser(userOut);
+                            break;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

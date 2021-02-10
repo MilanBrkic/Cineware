@@ -32,5 +32,7 @@ public enum Operation implements Serializable{
     ADD_MOVIE,
     GET_ALL_MOVIES,
     UPDATE_MOVIE,
-    DELETE_MOVIE
+    DELETE_MOVIE,
+    LOGIN,
+    LOGOUT
 }

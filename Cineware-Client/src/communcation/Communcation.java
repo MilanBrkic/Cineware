@@ -52,6 +52,8 @@ public class Communcation {
         socket.close();
     }
     
+    
+    
     public ArrayList<String> getCountries() throws Exception {
         Request request = new Request(Operation.GET_COUNTRIES, null);
         sender.send(request);
@@ -92,7 +94,19 @@ public class Communcation {
         else throw response.getException();
     }
     
+    public void login(User user) throws Exception{
+        String s = gson.toJson(user);
+        Request request = new Request(Operation.LOGIN, s);
+        sender.send(request);
+        receiver.receive();
+    }
     
+    public void logout(User user) throws Exception {
+        String s = gson.toJson(user);
+        Request request = new Request(Operation.LOGOUT, s);
+        sender.send(request);
+        receiver.receive();
+    }
     
     public void addUser(User user) throws  Exception{
         String s = gson.toJson(user);
@@ -269,5 +283,7 @@ public class Communcation {
             return movies;
         }else throw response.getException();
     }
+
+    
     
 }

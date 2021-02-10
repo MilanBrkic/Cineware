@@ -5,20 +5,30 @@
  */
 package view.controller;
 
+import controller.Controller;
+import domain.User;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
 import server.Server;
 import view.FormServer;
+import view.model.ColorColumnCellRenderer;
+import view.model.UserTableModel;
 import view.util.Dots;
 import view.util.IconSetter;
 
@@ -27,40 +37,46 @@ import view.util.IconSetter;
  * @author user
  */
 public class ControllerView {
+
     public static ControllerView instance;
     private FormServer form;
     private Dots dots;
     Server server;
     IconSetter icon;
-    
+    UserTableModel model;
+
     private ControllerView() {
         form = new FormServer();
         icon = new IconSetter(form);
     }
 
     public static ControllerView getInstance() {
-        if(instance==null) instance = new ControllerView();
+        if (instance == null) {
+            instance = new ControllerView();
+        }
         return instance;
     }
 
     public FormServer getForm() {
         return form;
     }
-    
-    public void startForm(){
+
+    public void startForm() {
         form.setLocationRelativeTo(null);
         form.setVisible(true);
         setListeners();
         setDatabaseText();
+        form.setMinimumSize(new Dimension(670, 535));
         icon.setIcon();
-        
+        form.getTableUsers().setModel(new UserTableModel());
+
     }
 
     private void setListeners() {
         startServerListener();
         stopServerListener();
         saveDatabaseListener();
-        
+
     }
 
     private void startServerListener() {
@@ -71,7 +87,14 @@ public class ControllerView {
                 form.getBtnStopServer().setEnabled(true);
                 dots = new Dots(form.getLblServerStatus());
                 server = new Server();
-                
+                try {
+                    fillTable();
+                    colorTable();
+
+                } catch (Exception ex) {
+                    Logger.getLogger(ControllerView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
         });
     }
@@ -84,6 +107,8 @@ public class ControllerView {
                 form.getBtnStopServer().setEnabled(false);
                 form.getLblServerStatus().setText("Server is not running");
                 dots.interrupt();
+                form.getTableUsers().setModel(new UserTableModel());
+
                 try {
                     server.close();
                 } catch (Exception ex) {
@@ -93,7 +118,7 @@ public class ControllerView {
     }
 
     private void setDatabaseText() {
-        
+
         try {
             FileReader reader = new FileReader("resources/database.properties");
             Properties prop = new Properties();
@@ -101,11 +126,11 @@ public class ControllerView {
             String url = prop.getProperty("url");
             String user = prop.getProperty("user");
             String password = prop.getProperty("password");
-            
+
             form.getTxtUrl().setText(url);
             form.getTxtUser().setText(user);
             form.getTxtPassword().setText(password);
-            
+
         } catch (Exception ex) {
             Logger.getLogger(ControllerView.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -115,10 +140,11 @@ public class ControllerView {
         form.getBtnSaveDatabase().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String url = "url="+form.getTxtUrl().getText();
-                String user = "user="+form.getTxtUser().getText();
-                String password = "password="+form.getTxtPassword().getText();
-                String all = url+"\n"+user+"\n"+password;
+                String url = "url=" + form.getTxtUrl().getText();
+                String user = "user=" + form.getTxtUser().getText();
+                String password = "password=" + form.getTxtPassword().getText();
+                String all = url + "\n" + user + "\n" + password;
+
                 try {
                     File file = new File("resources/database.properties");
                     PrintWriter myWriter = new PrintWriter(file);
@@ -128,11 +154,40 @@ public class ControllerView {
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(form, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     Logger.getLogger(ControllerView.class.getName()).log(Level.SEVERE, null, ex);
-                    
+
                 }
             }
         });
     }
+
+    private void fillTable() throws Exception {
+        ArrayList<User> users = Controller.getInstance().getAllUsers();
+        Map<String, String> map = fillMap(users);
+        model = new UserTableModel(users, map);
+        form.getTableUsers().setModel(model);
+    }
+
+    private HashMap<String, String> fillMap(ArrayList<User> users) {
+        Map<String, String> map = new HashMap<>();
+        for (User user : users) {
+            map.put(user.getUsername(), "offline");
+        }
+        return (HashMap<String, String>) map;
+    }
+
+    public void newLoggedInUser(User user) {
+        model.newLoggedInUser(user);
+
+    }
     
+    public void loggedOutUser(User userOut) {
+        model.newLoggedOutUser(userOut);
+    }
     
+    private void colorTable() {
+        form.getTableUsers().getColumnModel().getColumn(1).setCellRenderer(new ColorColumnCellRenderer());
+    }
+
+    
+
 }

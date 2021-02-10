@@ -6,7 +6,9 @@
  */
 package view.coordinator;
 
+import communcation.Communcation;
 import domain.User;
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.Map;
@@ -160,12 +162,14 @@ public class MainCoordinator {
         controllerMain.getForm().repaint();
     }
 
-    public void logout() {
+    public void logout() throws Exception {
+        Communcation.getInstance().logout(getUser());
         setUser(null);
         controllerMain.getForm().dispose();
         controllerMain.getClock().interrupt();
         openFormLogin();
         controllerMain = new ControllerMain(new FormMain());
+        
         
     }
 

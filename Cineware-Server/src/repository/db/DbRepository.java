@@ -13,19 +13,19 @@ import java.sql.SQLException;
  * @author Milan
  */
 public interface DbRepository<T> extends Repository<T>{
-    public default Connection connect() throws SQLException{
+    public default Connection connect() throws Exception{
         return DbConnectionFactory.getInstance().getConnection();
     }
     
-    public default void disconnect()throws SQLException{
+    public default void disconnect()throws Exception{
         DbConnectionFactory.getInstance().getConnection().close();
     }
     
-    public default void commit() throws SQLException{
+    public default void commit() throws Exception{
         DbConnectionFactory.getInstance().getConnection().commit();
     }
     
-    public default void rollback() throws SQLException{
+    public default void rollback() throws Exception{
         DbConnectionFactory.getInstance().getConnection().rollback();
     }
     

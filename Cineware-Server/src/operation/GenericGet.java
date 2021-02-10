@@ -5,8 +5,6 @@
  */
 package operation;
 
-import domain.User;
-
 /**
  *
  * @author user

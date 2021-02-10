@@ -61,6 +61,7 @@ public class ControllerLogin {
                 try {
                     User user = login(username, MainCoordinator.getInstance().encrypt(password));
                     MainCoordinator.getInstance().setUser(user);
+                    Communcation.getInstance().login(user);
                     form.dispose();
                     MainCoordinator.getInstance().openFormMain();
                 } catch (Exception ex) {

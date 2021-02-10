@@ -33,6 +33,7 @@ import operation.movie.GetAllMovies;
 import operation.user.CheckPassword;
 import operation.user.UpdatePasswordOnly;
 import operation.user.UpdateWithoutPassword;
+import view.controller.ControllerView;
 /**
  *
  * @author Milan
@@ -197,6 +198,14 @@ public class Controller {
         AbstractGenericOperation ago = new GetAllMovies();
         ago.execute(new Movie());
         return ((GetAllMovies)ago).getResult();
+    }
+
+    public void newLoggedInUser(User user) {
+        ControllerView.getInstance().newLoggedInUser(user);
+    }
+
+    public void loggedOutUser(User userOut) {
+        ControllerView.getInstance().loggedOutUser(userOut);
     }
     
     
