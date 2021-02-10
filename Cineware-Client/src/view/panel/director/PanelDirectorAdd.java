@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.panel;
+package view.panel.director;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -15,18 +15,20 @@ import view.util.ExitButton;
  *
  * @author Milan
  */
-public class PanelActorAdd extends javax.swing.JPanel {
+public class PanelDirectorAdd extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelDirectorAdd
      */
-    public PanelActorAdd() {
+    public PanelDirectorAdd() {
         initComponents();
     }
 
     public ExitButton getExitButton1() {
         return exitButton1;
     }
+
+    
 
     public JTextField getTxtLastname() {
         return txtLastname;
@@ -59,6 +61,7 @@ public class PanelActorAdd extends javax.swing.JPanel {
     public JButton getBtnEnableChanges() {
         return btnEnableChanges;
     }
+    
 
     
     /**
@@ -83,7 +86,7 @@ public class PanelActorAdd extends javax.swing.JPanel {
         btnDelete = new javax.swing.JButton();
         btnEnableChanges = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder("Actor"));
+        setBorder(javax.swing.BorderFactory.createTitledBorder("Director"));
 
         jLabel1.setText("Firstname:");
 

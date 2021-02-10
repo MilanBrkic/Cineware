@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.controller;
+package view.controller.director;
 
 import communcation.Communcation;
 import domain.Director;
@@ -21,7 +21,7 @@ import validation.Validation;
 import view.constant.Constant;
 import view.coordinator.MainCoordinator;
 import view.model.table.DirectorTableModel;
-import view.panel.PanelDirectorAdd;
+import view.panel.director.PanelDirectorAdd;
 import view.panel.mode.DirectorMode;
 
 /**

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.controller;
+package view.controller.user;
 
 import communcation.Communcation;
 import view.constant.Constant;
@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import validation.Validation;
 
 import view.model.table.UserTableModel;
-import view.panel.PanelUserAdd;
+import view.panel.user.PanelUserAdd;
 import view.panel.mode.UserMode;
 
 /**

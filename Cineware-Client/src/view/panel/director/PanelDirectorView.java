@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.panel;
+package view.panel.director;
 
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -13,17 +13,17 @@ import view.util.ExitButton;
  *
  * @author user
  */
-public class PanelActorView extends javax.swing.JPanel {
+public class PanelDirectorView extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelDirectorView
      */
-    public PanelActorView() {
+    public PanelDirectorView() {
         initComponents();
     }
 
-    public JTable getTableActor() {
-        return tableActor;
+    public JTable getTableDirector() {
+        return tableDirector;
     }
 
     public JButton getBtnDetails() {
@@ -46,13 +46,13 @@ public class PanelActorView extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tableActor = new javax.swing.JTable();
+        tableDirector = new javax.swing.JTable();
         btnDetails = new javax.swing.JButton();
         exitButton1 = new view.util.ExitButton();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Actor View"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Director View"));
 
-        tableActor.setModel(new javax.swing.table.DefaultTableModel(
+        tableDirector.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -63,7 +63,7 @@ public class PanelActorView extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tableActor);
+        jScrollPane1.setViewportView(tableDirector);
 
         btnDetails.setText("Details");
 
@@ -101,7 +101,7 @@ public class PanelActorView extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -111,6 +111,6 @@ public class PanelActorView extends javax.swing.JPanel {
     private view.util.ExitButton exitButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tableActor;
+    private javax.swing.JTable tableDirector;
     // End of variables declaration//GEN-END:variables
 }

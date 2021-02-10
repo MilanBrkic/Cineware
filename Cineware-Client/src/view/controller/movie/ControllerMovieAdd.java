@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.controller;
+package view.controller.movie;
 
 import communcation.Communcation;
 import domain.Actor;
@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import view.coordinator.MainCoordinator;
 import view.model.table.ActorForMovieTableModel;
-import view.panel.PanelMovieAdd;
+import view.panel.movie.PanelMovieAdd;
 import view.panel.mode.ActorMode;
 import view.panel.mode.DirectorMode;
 import view.panel.mode.MovieMode;

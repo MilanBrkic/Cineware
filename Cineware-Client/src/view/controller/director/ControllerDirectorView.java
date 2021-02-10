@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.controller;
+package view.controller.director;
 
 import communcation.Communcation;
 import domain.Director;
@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import view.constant.Constant;
 import view.coordinator.MainCoordinator;
 import view.model.table.DirectorTableModel;
-import view.panel.PanelDirectorView;
+import view.panel.director.PanelDirectorView;
 import view.panel.mode.DirectorMode;
 
 /**

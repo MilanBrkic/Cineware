@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.controller;
+package view.controller.user;
 
 import communcation.Communcation;
 import view.constant.Constant;
@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import view.model.table.UserTableModel;
-import view.panel.PanelUserView;
+import view.panel.user.PanelUserView;
 import view.panel.mode.UserMode;
 
 /**

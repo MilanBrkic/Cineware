@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.panel;
+package view.panel.hall;
 
 import javax.swing.JTable;
 import view.util.ExitButton;

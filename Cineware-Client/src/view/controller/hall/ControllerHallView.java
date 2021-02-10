@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view.controller;
+package view.controller.hall;
 
 import communcation.Communcation;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import view.model.table.HallTableModel;
-import view.panel.PanelHallView;
+import view.panel.hall.PanelHallView;
 
 /**
  *
