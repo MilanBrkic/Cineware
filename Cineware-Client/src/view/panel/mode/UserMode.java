@@ -9,6 +9,6 @@ package view.panel.mode;
  *
  * @author Brka
  */
-public enum UserMode {
+public enum UserMode implements GenericMode{
     ADD, EDIT, EDIT_PASSWORD
 }

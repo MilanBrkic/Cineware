@@ -9,6 +9,6 @@ package view.panel.mode;
  *
  * @author user
  */
-public enum DirectorMode {
+public enum DirectorMode implements GenericMode{
     ADD, EDIT
 }

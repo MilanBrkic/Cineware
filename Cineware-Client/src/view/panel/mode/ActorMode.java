@@ -9,6 +9,6 @@ package view.panel.mode;
  *
  * @author user
  */
-public enum ActorMode {
+public enum ActorMode implements GenericMode{
     ADD, EDIT
 }

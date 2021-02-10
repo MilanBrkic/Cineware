@@ -9,6 +9,6 @@ package view.panel.mode;
  *
  * @author user
  */
-public enum MovieMode implements GenericMode{
-    ADD,EDIT
+public interface GenericMode {
+    
 }
