@@ -47,6 +47,10 @@ public class Communcation {
         if(instance==null) instance=new Communcation();
         return instance;
     }
+
+    
+    
+    
     
     public void closeSocket() throws IOException{
         socket.close();

@@ -20,4 +20,7 @@ public class Constant {
     public static final String ACTOR_DETAILS="ACTOR_DETAILS";
     public static final String ACTOR_TABLE_MODEL="ACTOR_TABLE_MODEL";
     
+    public static final String MOVIE_DETAILS="MOVIE_DETAILS";
+    public static final String MOVIE_TABLE_MODEL="MOVIE_TABLE_MODEL";
+    
 }

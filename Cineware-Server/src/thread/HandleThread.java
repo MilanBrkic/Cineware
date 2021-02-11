@@ -27,13 +27,18 @@ import java.util.logging.Logger;
  * @author user
  */
 public class HandleThread extends Thread {
-
+    
     Socket socket;
     Receiver receiver;
     Sender sender;
     Gson gson;
-    public HandleThread(Socket socket) {
+    HandleThread[] clients;
+    HandleExit[] exits;
+    
+    public HandleThread(Socket socket, HandleThread[] clients, HandleExit[] exits) {
+        this.clients = clients;
         this.socket = socket;
+        this.exits = exits;
         sender = new Sender(socket);
         receiver = new Receiver(socket);
         gson = new GsonBuilder().setPrettyPrinting().create();
@@ -54,6 +59,7 @@ public class HandleThread extends Thread {
                 try {
                     request = (Request) receiver.receive();
                 } catch (Exception e) {
+                    break;
                 }
                 if(request==null) break;
                 
@@ -167,8 +173,16 @@ public class HandleThread extends Thread {
                     response.setException(e);
                 }
                 sender.send(response);
+                
             } catch (Exception ex) {
                 Logger.getLogger(HandleThread.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        for(int i = 0;i<clients.length;i++){
+            if(clients[i]==this){
+                clients[i] = null;
+                exits[i] = null;
             }
         }
     }

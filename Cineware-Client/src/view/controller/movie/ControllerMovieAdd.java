@@ -18,6 +18,7 @@ import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import view.constant.Constant;
 import view.coordinator.MainCoordinator;
 import view.model.table.ActorForMovieTableModel;
 import view.panel.movie.PanelMovieAdd;
@@ -44,6 +45,7 @@ public class ControllerMovieAdd {
     public void openPanel(){
         panel.setVisible(true);
         setExitButton();
+        prepareForm();
         fillForm();
         setListeners();
     }
@@ -55,7 +57,70 @@ public class ControllerMovieAdd {
     private void setExitButton() {
         panel.getExitButton1().setPanel(panel);
     }
-
+    
+    private void prepareForm(){
+        switch (mode) {
+            case ADD:
+                panel.getBtnAdd().setVisible(true);
+                panel.getBtnDeleteMovie().setVisible(false);
+                panel.getBtnEditMovie().setVisible(false);
+                panel.getBtnEnableChanges().setVisible(false);
+                break;
+            case EDIT:
+                panel.getBtnAdd().setVisible(false);
+                panel.getBtnDeleteMovie().setVisible(true);
+                panel.getBtnEditMovie().setVisible(true);
+                panel.getBtnEnableChanges().setVisible(true);
+                panel.getBtnEnableChanges().setEnabled(true);
+                panel.getBtnEditMovie().setEnabled(false);
+                panel.getBtnDeleteMovie().setEnabled(false);
+                fillMovieDetails();
+                disableFields();
+                break;
+        }
+    }
+    
+    private void disableFields() {
+        panel.getBtnAdd().setEnabled(false);
+        panel.getBtnAddNewActor().setEnabled(false);
+        panel.getBtnAddNewDirector().setEnabled(false);
+        panel.getBtnDelete().setEnabled(false);
+        panel.getBtnDeleteMovie().setEnabled(false);
+        panel.getBtnEditMovie().setEnabled(false);
+        panel.getBtnRefreshActors().setEnabled(false);
+        panel.getBtnRefreshDirectors().setEnabled(false);
+        panel.getBtnSaveMovie().setEnabled(false);
+        panel.getTxtDescription().setEnabled(false);
+        panel.getTxtName().setEnabled(false);
+        panel.getTxtRuntime().setEnabled(false);
+        panel.getTxtYear().setEnabled(false);
+        panel.getCmbActor().setEnabled(false);
+        panel.getCmbDirector().setEnabled(false);
+        panel.getCmbGenre().setEnabled(false);
+    }
+    
+    
+    private void fillMovieDetails() {
+        Movie movie = (Movie) MainCoordinator.getInstance().getParams().get(Constant.MOVIE_DETAILS);
+        System.out.println(movie);
+        panel.getTxtName().setName(movie.getName());
+        panel.getTxtDescription().setName(movie.getDescription());
+        panel.getTxtRuntime().setName(String.valueOf(movie.getRuntime()));
+        panel.getTxtYear().setName(String.valueOf(movie.getYear()));
+        
+        Director director = movie.getDirector();
+        panel.getCmbDirector().setSelectedItem(director);
+        
+        Genre genre = movie.getGenre();
+        panel.getCmbGenre().setSelectedItem(genre);
+        
+        ArrayList<Actor> actors = new ArrayList<>();
+        for (Actor actor : actors) {
+            model.add(actor);
+        }
+        
+    }
+    
     private void fillForm() {
         panel.getTxtDescription().setLineWrap(true);
         try {
@@ -73,6 +138,8 @@ public class ControllerMovieAdd {
             JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(ControllerMovieAdd.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
     }
 
     public void fillcmbActor() throws Exception{
@@ -228,10 +295,6 @@ public class ControllerMovieAdd {
         panel.getTxtYear().setText("");
         model.removeAllItems();
         fillcmbActor();
-    }
-
-    
-
-    
+    }  
     
 }

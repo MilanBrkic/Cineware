@@ -12,6 +12,9 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -76,7 +79,8 @@ public class ControllerView {
         startServerListener();
         stopServerListener();
         saveDatabaseListener();
-
+        windowListener();
+        
     }
 
     private void startServerListener() {
@@ -186,6 +190,43 @@ public class ControllerView {
     
     private void colorTable() {
         form.getTableUsers().getColumnModel().getColumn(1).setCellRenderer(new ColorColumnCellRenderer());
+    }
+
+    private void windowListener() {
+        form.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                try {
+                    server.close();
+                } catch (Exception ex) {
+                    Logger.getLogger(ControllerView.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+            }
+        });
     }
 
     

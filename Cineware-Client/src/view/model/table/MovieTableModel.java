@@ -58,6 +58,11 @@ public class MovieTableModel extends AbstractTableModel{
     public String getColumnName(int column) {
         return columnNames[column];
     }
+
+    public ArrayList<Movie> getMovies() {
+        return movies;
+    }
+    
     
     
     

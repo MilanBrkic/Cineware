@@ -6,11 +6,17 @@
 package view.controller.movie;
 
 import communcation.Communcation;
+import domain.Movie;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumnModel;
+import view.constant.Constant;
+import view.coordinator.MainCoordinator;
 import view.model.table.MovieTableModel;
+import view.panel.mode.MovieMode;
 import view.panel.movie.PanelMovieView;
 
 /**
@@ -35,7 +41,7 @@ public class ControllerMovieView {
         setExitButton();
         fillTable();
         panel.setVisible(true);
-        
+        setListeners();
     }
     
     public PanelMovieView getPanel() {
@@ -56,6 +62,25 @@ public class ControllerMovieView {
         columnModel.getColumn(3).setPreferredWidth(5);
         columnModel.getColumn(4).setPreferredWidth(60);
         columnModel.getColumn(5).setPreferredWidth(250);
+    }
+
+    private void setListeners() {
+        setDetailsListener();
+    }
+
+    private void setDetailsListener() {
+        panel.getBtnDetails().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = panel.getTableMovie().getSelectedRow();
+                if(index>=0){
+                    Movie m = model.getMovies().get(index);
+                    MainCoordinator.getInstance().getParams().put(Constant.MOVIE_DETAILS, m);
+                    MainCoordinator.getInstance().getParams().put(Constant.MOVIE_TABLE_MODEL, model);
+                    MainCoordinator.getInstance().openPanelMovieAdd(MovieMode.EDIT);
+                }
+            }
+        });
     }
     
     

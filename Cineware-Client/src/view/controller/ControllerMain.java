@@ -251,15 +251,13 @@ public class ControllerMain {
     }
     
     public void enableAll(){
-        if(MainCoordinator.getInstance().getUser().isAdmin()){
-            for (Supplier<JMenuItem> jmenu : jMenuItemsAdd) {
+        if(MainCoordinator.getInstance().getUser().isAdmin())
+            for (Supplier<JMenuItem> jmenu : jMenuItemsAdd) 
                 jmenu.get().setEnabled(true);
-            }
-        }
         
-        for (Supplier<JMenuItem> jmenu : jMenuItemsView) {
+        for (Supplier<JMenuItem> jmenu : jMenuItemsView) 
                 jmenu.get().setEnabled(true);
-        }
+        
     }
 
     public MyClock getClock() {
