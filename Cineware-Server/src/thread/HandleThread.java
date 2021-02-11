@@ -152,6 +152,16 @@ public class HandleThread extends Thread {
                             Movie addMovie = gson.fromJson(jsonAddMovie, Movie.class);
                             Controller.getInstance().addMovie(addMovie);
                             break;
+                        case UPDATE_MOVIE:
+                            String jsonUpdateMovie = request.getArguments();
+                            Movie updateMovie = gson.fromJson(jsonUpdateMovie, Movie.class);
+                            Controller.getInstance().updateMovie(updateMovie);
+                            break;
+                        case DELETE_MOVIE:
+                            String jsonDeleteMovie = request.getArguments();
+                            Movie deleteMovie = gson.fromJson(jsonDeleteMovie, Movie.class);
+                            Controller.getInstance().deleteMovie(deleteMovie);
+                            break;
                         case GET_ALL_MOVIES:
                             ArrayList<Movie> allMovies = Controller.getInstance().getAllMovies();
                             String jsonAllMovies = gson.toJson(allMovies);

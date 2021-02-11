@@ -113,36 +113,18 @@ public class Communcation {
     }
     
     public void addUser(User user) throws  Exception{
-        String s = gson.toJson(user);
-        Request request = new Request(Operation.ADD_USER, s);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-        if(response.getException()==null){
-            
-        }
-        else throw response.getException();
+        GenericAddUpdateDelete<User> gen = new GenericAddUpdateDelete<>(gson,sender,receiver);
+        gen.execute(user, Operation.ADD_USER);
     }
     
     public void updateUser(User user) throws Exception {
-        String s = gson.toJson(user);
-        Request request = new Request(Operation.UPDATE_USER, s);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-        if(response.getException()==null){
-            
-        }
-        else throw response.getException();
+        GenericAddUpdateDelete<User> gen = new GenericAddUpdateDelete<>(gson,sender,receiver);
+        gen.execute(user, Operation.UPDATE_USER);
     }
     
     public void deleteUser(User user) throws Exception {
-        String s = gson.toJson(user);
-        Request request = new Request(Operation.DELETE_USER, s);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-        if(response.getException()==null){
-            
-        }
-        else throw response.getException();
+        GenericAddUpdateDelete<User> gen = new GenericAddUpdateDelete<>(gson,sender,receiver);
+        gen.execute(user, Operation.DELETE_USER);
     }
     
     public boolean checkPassword(String username,String password) throws Exception{
@@ -177,13 +159,19 @@ public class Communcation {
     //DIRECTOR
     
     public void addDirector(Director director) throws Exception {
-        String s = gson.toJson(director);
-        Request request = new Request(Operation.ADD_DIRECTOR, s);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-        if(response.getException()==null){
-        }
-        else throw response.getException();
+        GenericAddUpdateDelete<Director> gen = new GenericAddUpdateDelete<>(gson,sender,receiver);
+        gen.execute(director, Operation.ADD_DIRECTOR);
+    }
+    
+    
+    public void updateDirector(Director director) throws Exception {
+        GenericAddUpdateDelete<Director> gen = new GenericAddUpdateDelete<>(gson,sender,receiver);
+        gen.execute(director, Operation.UPDATE_DIRECTOR);
+    }
+    
+    public void deleteDirector(Director director) throws Exception {
+        GenericAddUpdateDelete<Director> gen = new GenericAddUpdateDelete<>(gson,sender,receiver);
+        gen.execute(director, Operation.DELETE_DIRECTOR);
     }
     
     public ArrayList<Director> getAllDirectors()throws Exception{
@@ -198,40 +186,26 @@ public class Communcation {
         else throw response.getException();
     }
     
-    public void updateDirector(Director director) throws Exception {
-        String s = gson.toJson(director);
-        Request request = new Request(Operation.UPDATE_DIRECTOR, s);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-        if(response.getException()==null){
-            
-        }
-        else throw response.getException();
-    }
-    
-    public void deleteDirector(Director director) throws Exception {
-        String s = gson.toJson(director);
-        Request request = new Request(Operation.DELETE_DIRECTOR, s);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-        if(response.getException()==null){
-            
-        }
-        else throw response.getException();
-    }
-    
     
     //ACTOR
     
     
     public void addActor(Actor actor) throws Exception {
-        String s = gson.toJson(actor);
-        Request request = new Request(Operation.ADD_ACTOR, s);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-        if(response.getException()==null){
-        }
-        else throw response.getException();
+        GenericAddUpdateDelete<Actor> gen = new GenericAddUpdateDelete<>(gson,sender,receiver);
+        gen.execute(actor, Operation.ADD_ACTOR);
+    }
+    
+    
+    public void updateActor(Actor actor) throws Exception {
+        GenericAddUpdateDelete<Actor> gen = new GenericAddUpdateDelete<>(gson,sender,receiver);
+        gen.execute(actor, Operation.UPDATE_ACTOR);
+    }
+    
+    
+    
+    public void deleteActor(Actor actor) throws Exception {
+        GenericAddUpdateDelete<Actor> gen = new GenericAddUpdateDelete<>(gson,sender,receiver);
+        gen.execute(actor, Operation.DELETE_ACTOR);
     }
     
     public ArrayList<Actor> getAllActors()throws Exception{
@@ -245,37 +219,7 @@ public class Communcation {
         }
         else throw response.getException();
     }
-    
-    public void updateActor(Actor actor) throws Exception {
-        String s = gson.toJson(actor);
-        Request request = new Request(Operation.UPDATE_ACTOR, s);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-        if(response.getException()==null){
-            
-        }
-        else throw response.getException();
-    }
-    
-    public void deleteActor(Actor actor) throws Exception {
-        String s = gson.toJson(actor);
-        Request request = new Request(Operation.DELETE_ACTOR, s);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-        if(response.getException()==null){
-            
-        }
-        else throw response.getException();
-    }
-
-    public void addMovie(Movie movie) throws Exception {
-        String s = gson.toJson(movie);
-        Request request = new Request(Operation.ADD_MOVIE, s);
-        sender.send(request);
-        Response response = (Response) receiver.receive();
-        if(response.getException()==null){
-        }else throw response.getException();
-    }
+ 
 
     public ArrayList<Movie> getAllMovies() throws Exception{
         Request request = new Request(Operation.GET_ALL_MOVIES, null);
@@ -288,6 +232,20 @@ public class Communcation {
         }else throw response.getException();
     }
 
+
+    public void addMovie(Movie movie) throws Exception {
+        GenericAddUpdateDelete<Movie> gen = new GenericAddUpdateDelete<>(gson,sender,receiver);
+        gen.execute(movie, Operation.ADD_MOVIE);
+    }
     
-    
+    public void updateMovie(Movie movie) throws Exception {
+        GenericAddUpdateDelete<Movie> gen = new GenericAddUpdateDelete<>(gson,sender,receiver);
+        gen.execute(movie, Operation.UPDATE_MOVIE);
+    }
+
+    public void deleteMovie(Movie movie) throws Exception {
+       GenericAddUpdateDelete<Movie> gen = new GenericAddUpdateDelete<>(gson,sender,receiver);
+       gen.execute(movie, Operation.DELETE_MOVIE);
+    }
+
 }

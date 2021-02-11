@@ -5,8 +5,10 @@
  */
 package view.model.table;
 
+import communcation.Communcation;
 import domain.Actor;
 import domain.Movie;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
@@ -61,6 +63,11 @@ public class MovieTableModel extends AbstractTableModel{
 
     public ArrayList<Movie> getMovies() {
         return movies;
+    }
+
+    public void refresh() throws Exception {
+        movies = Communcation.getInstance().getAllMovies();
+        fireTableDataChanged();
     }
     
     

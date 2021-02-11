@@ -7,7 +7,6 @@ package server;
 
 import java.net.ServerSocket;
 import java.net.Socket;
-import javax.swing.SpringLayout;
 import thread.HandleExit;
 import thread.HandleThread;
 
@@ -41,7 +40,6 @@ public class Server extends Thread {
                         exits[i] = new HandleExit(socketForExit);
                         clients[i] = new HandleThread(socket, clients, exits);
                         clients[i].start();
-                        print();
                         brojac++;
                     }
                 }

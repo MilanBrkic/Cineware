@@ -6,13 +6,14 @@
 package domain;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**
  *
  * @author user
  */
-public class Movie implements Serializable{
+public class Movie implements GenericEntity{
     private int id;
     private String name;
     private String description;
@@ -153,6 +154,36 @@ public class Movie implements Serializable{
     @Override
     public String toString() {
         return name;
+    }
+
+    @Override
+    public String getTableName() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String columnNamesForInsert() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getInsertValues() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String columnNamesForUpdate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String whereCondition() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<GenericEntity> getFromResultSet(ResultSet rs) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

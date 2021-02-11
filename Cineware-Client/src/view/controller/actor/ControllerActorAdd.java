@@ -42,7 +42,7 @@ public class ControllerActorAdd {
         fillNation();
         prepareForm();
         setExitButton();
-        
+
         setListeners();
         panel.setVisible(true);
     }
@@ -111,9 +111,7 @@ public class ControllerActorAdd {
                     System.out.println(actor);
                     Communcation.getInstance().updateActor(actor);
                     JOptionPane.showMessageDialog(panel, "Actor updated", "Updated", JOptionPane.INFORMATION_MESSAGE);
-                    ActorTableModel model = (ActorTableModel) MainCoordinator.getInstance().getParams().get(Constant.ACTOR_TABLE_MODEL);
-                    model.refresh();
-                    panel.getExitButton1().doClick();
+                    updateTable();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
@@ -122,17 +120,23 @@ public class ControllerActorAdd {
 
     }
 
+    public void updateTable() throws Exception {
+        ActorTableModel model = (ActorTableModel) MainCoordinator.getInstance().getParams().get(Constant.ACTOR_TABLE_MODEL);
+        model.refresh();
+        panel.getExitButton1().doClick();
+    }
+
     private void setDeleteListener() {
         panel.getBtnDelete().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     Actor actor = (Actor) MainCoordinator.getInstance().getParams().get(Constant.ACTOR_DETAILS);
-                    int number = JOptionPane.showConfirmDialog(panel, "Are you sure you what to delete actor "+actor, "Delete", 0);
-                    if(number==0) Communcation.getInstance().deleteActor(actor);
-                    ActorTableModel model = (ActorTableModel) MainCoordinator.getInstance().getParams().get(Constant.ACTOR_TABLE_MODEL);
-                    model.refresh();
-                    panel.getExitButton1().doClick();
+                    int number = JOptionPane.showConfirmDialog(panel, "Are you sure you what to delete actor " + actor, "Delete", 0);
+                    if (number == 0) {
+                        Communcation.getInstance().deleteActor(actor);
+                    }
+                    updateTable();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     Logger.getLogger(ControllerActorAdd.class.getName()).log(Level.SEVERE, null, ex);
@@ -163,16 +167,16 @@ public class ControllerActorAdd {
 
         String country = (String) panel.getCmbNation().getSelectedItem();
         User user = MainCoordinator.getInstance().getUser();
-        
-        Actor actor= null;
-        if(mode==ActorMode.EDIT){
+
+        Actor actor = null;
+        if (mode == ActorMode.EDIT) {
             Actor actorDetails = (Actor) MainCoordinator.getInstance().getParams().get(Constant.ACTOR_DETAILS);
             int id = actorDetails.getId();
-            actor = new Actor(id,firstname, lastname, dayOfBirth, country, user);
-        }else{
+            actor = new Actor(id, firstname, lastname, dayOfBirth, country, user);
+        } else {
             actor = new Actor(firstname, lastname, dayOfBirth, country, user);
         }
-        
+
         return actor;
     }
 
@@ -205,33 +209,32 @@ public class ControllerActorAdd {
                 break;
         }
     }
-    
-    public void toggleEnableFields(){
+
+    public void toggleEnableFields() {
         panel.getTxtFirstname().setEnabled(!panel.getTxtFirstname().isEnabled());
         panel.getTxtLastname().setEnabled(!panel.getTxtLastname().isEnabled());
         panel.getCmbNation().setEnabled(!panel.getCmbNation().isEnabled());
         panel.getPanelDateInput().getCmbDay().setEnabled(!panel.getPanelDateInput().getCmbDay().isEnabled());
         panel.getPanelDateInput().getCmbMonth().setEnabled(!panel.getPanelDateInput().getCmbMonth().isEnabled());
         panel.getPanelDateInput().getCmbYear().setEnabled(!panel.getPanelDateInput().getCmbYear().isEnabled());
-        
+
     }
 
     private void fillPanel() {
         Actor actor = (Actor) MainCoordinator.getInstance().getParams().get(Constant.ACTOR_DETAILS);
         panel.getTxtFirstname().setText(actor.getFirstname());
         panel.getTxtLastname().setText(actor.getLastname());
-        
+
         GregorianCalendar greg = new GregorianCalendar();
         greg.setTime(actor.getDateOfBirth());
         int day = greg.get(GregorianCalendar.DAY_OF_MONTH);
-        int month = greg.get(GregorianCalendar.MONTH)+1;
+        int month = greg.get(GregorianCalendar.MONTH) + 1;
         int year = greg.get(GregorianCalendar.YEAR);
-        
-        
+
         panel.getPanelDateInput().getCmbYear().setSelectedItem(year);
-        panel.getPanelDateInput().getCmbMonth().setSelectedItem(month); 
+        panel.getPanelDateInput().getCmbMonth().setSelectedItem(month);
         panel.getPanelDateInput().getCmbDay().setSelectedItem(day);
-        
+
         String nation = actor.getNationality();
         panel.getCmbNation().setSelectedItem(nation);
     }

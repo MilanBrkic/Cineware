@@ -29,7 +29,9 @@ import operation.actor.GetAllActors;
 import operation.director.GetAllDirectors;
 import operation.director.GetDirector;
 import operation.movie.AddMovie;
+import operation.movie.DeleteMovie;
 import operation.movie.GetAllMovies;
+import operation.movie.UpdateMovie;
 import operation.user.CheckPassword;
 import operation.user.UpdatePasswordOnly;
 import operation.user.UpdateWithoutPassword;
@@ -207,8 +209,16 @@ public class Controller {
     public void loggedOutUser(User userOut) {
         ControllerView.getInstance().loggedOutUser(userOut);
     }
-    
-    
+
+    public void updateMovie(Movie movie) throws Exception {
+        AbstractGenericOperation ago = new UpdateMovie();
+        ago.execute(movie);
+    }
+
+    public void deleteMovie(Movie movie) throws Exception {
+        AbstractGenericOperation ago = new DeleteMovie();
+        ago.execute(movie);
+    }
     
     
     class Countries{

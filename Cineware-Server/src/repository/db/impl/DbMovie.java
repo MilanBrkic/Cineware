@@ -14,15 +14,15 @@ import domain.User;
 import java.util.ArrayList;
 import repository.db.DbRepository;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Date;
+
 /**
  *
  * @author user
  */
-public class DbMovie implements DbRepository<Movie>{
+public class DbMovie implements DbRepository<Movie> {
 
     public ArrayList<Movie> getAll() throws Exception {
         ArrayList<Movie> movies = new ArrayList<>();
@@ -43,8 +43,7 @@ public class DbMovie implements DbRepository<Movie>{
             Movie movie = new Movie(id, name, description, genre, runtime, year, director, actors, user);
             movies.add(movie);
         }
-        
-        
+
         s.close();
         rs.close();
 
@@ -54,7 +53,7 @@ public class DbMovie implements DbRepository<Movie>{
     @Override
     public void add(Movie movie) throws Exception {
         String query = "INSERT INTO movie(name, description, genre, runtime, year, directorID, userID) VALUES(?,?,?,?,?,?,?)";
-        PreparedStatement ps = connect().prepareStatement(query,PreparedStatement.RETURN_GENERATED_KEYS);
+        PreparedStatement ps = connect().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
         ps.setString(1, movie.getName());
         ps.setString(2, movie.getDescription());
         ps.setString(3, movie.getGenre().toString());
@@ -62,18 +61,18 @@ public class DbMovie implements DbRepository<Movie>{
         ps.setInt(5, movie.getYear());
         ps.setInt(6, movie.getDirector().getId());
         ps.setInt(7, movie.getUser().getId());
-        
+
         ps.executeUpdate();
-        
+
         ResultSet rs = ps.getGeneratedKeys();
         rs.next();
         int id = rs.getInt(1);
         System.out.println(id);
         ps.close();
 
-        addActorsForMovies(id,movie.getActors());
+        addActorsForMovies(id, movie.getActors());
     }
-    
+
     private void addActorsForMovies(int id, ArrayList<Actor> actors) throws Exception {
         String query = "INSERT INTO movie_actor(movieID,actorID) VALUES(?,?)";
         PreparedStatement ps = connect().prepareStatement(query);
@@ -84,10 +83,10 @@ public class DbMovie implements DbRepository<Movie>{
         }
         ps.close();
     }
-    
+
     private ArrayList<Actor> getActorsByMovie(int movieID) throws Exception {
         ArrayList<Actor> actors = new ArrayList<>();
-        String query="SELECT a.actorID,a.firstname,a.lastname,a.dateOfBirth, a.nationality,a.userID FROM movie_actor ma INNER JOIN actor a ON a.actorID=ma.actorID WHERE ma.movieID="+movieID;
+        String query = "SELECT a.actorID,a.firstname,a.lastname,a.dateOfBirth, a.nationality,a.userID FROM movie_actor ma INNER JOIN actor a ON a.actorID=ma.actorID WHERE ma.movieID=" + movieID;
         Statement s = connect().createStatement();
         ResultSet rs = s.executeQuery(query);
         while (rs.next()) {
@@ -100,7 +99,7 @@ public class DbMovie implements DbRepository<Movie>{
             Actor actor = new Actor(id, firstname, lastname, date, nationality, user);
             actors.add(actor);
         }
-        
+
         s.close();
         rs.close();
         return actors;
@@ -108,15 +107,38 @@ public class DbMovie implements DbRepository<Movie>{
 
     @Override
     public void update(Movie movie) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        deleteAllActorsFromMovie(movie.getId());
+        addActorsForMovies(movie.getId(), movie.getActors());
+        String query = "UPDATE movie SET name=?, description=?, genre=?, runtime=?, year=?, directorID=?, userID=? WHERE movieID=?";
+        PreparedStatement ps = connect().prepareStatement(query);
+        ps.setString(1, movie.getName());
+        ps.setString(2, movie.getDescription());
+        ps.setString(3, movie.getGenre().toString());
+        ps.setInt(4, movie.getRuntime());
+        ps.setInt(5, movie.getYear());
+        ps.setInt(6, movie.getDirector().getId());
+        ps.setInt(7, movie.getUser().getId());
+        ps.setInt(8, movie.getId());
+        
+        ps.execute();
+        ps.close();
     }
 
     @Override
     public void delete(Movie movie) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        deleteAllActorsFromMovie(movie.getId());
+        String query = "DELETE from movie WHERE movieID="+movie.getId();
+        Statement s = connect().createStatement();
+        s.executeUpdate(query);
+        s.close();
     }
 
-   
+    private void deleteAllActorsFromMovie(int id) throws Exception {
+        String query = "DELETE from movie_actor WHERE movieID="+id;
+        Statement s = connect().createStatement();
+        s.executeUpdate(query);
+        s.close();
+    }
 
     @Override
     public Movie get(Movie t) throws Exception {
@@ -128,8 +150,4 @@ public class DbMovie implements DbRepository<Movie>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
-
-    
-    
 }
