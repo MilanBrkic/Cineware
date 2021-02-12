@@ -27,6 +27,7 @@ import view.panel.mode.ActorMode;
 import view.panel.mode.DirectorMode;
 import view.panel.mode.GenericMode;
 import view.panel.mode.MovieMode;
+import view.panel.mode.ProjectionMode;
 import view.panel.mode.UserMode;
 import view.util.IconSetter;
 
@@ -35,69 +36,70 @@ import view.util.IconSetter;
  * @author Milan
  */
 public class ControllerMain {
+
     private IconSetter icon;
     private FormMain form;
     private JMenuItem menuItemLogOut;
     private MyClock clock;
     private ArrayList<Supplier<JMenuItem>> jMenuItemsAdd = new ArrayList<>();
     private ArrayList<Supplier<JMenuItem>> jMenuItemsView = new ArrayList<>();
-    
+
     public ControllerMain(FormMain form) {
         this.form = form;
         icon = new IconSetter(form);
         clock = new MyClock(form.getLblTime());
         addJMenuItems();
     }
-    
-    public void addJMenuItems(){
+
+    public void addJMenuItems() {
         jMenuItemsAdd.add(() -> form.getMenuItemActorAdd());
-        jMenuItemsAdd.add(()->form.getMenuItemDirectorAdd());
-        jMenuItemsAdd.add(()->form.getMenuItemMovieAdd());
-        jMenuItemsAdd.add(()->form.getMenuItemUserAdd());
-        
+        jMenuItemsAdd.add(() -> form.getMenuItemDirectorAdd());
+        jMenuItemsAdd.add(() -> form.getMenuItemMovieAdd());
+        jMenuItemsAdd.add(() -> form.getMenuItemUserAdd());
+        jMenuItemsAdd.add(() -> form.getMenuItemProjectionAdd());
+
         jMenuItemsView.add(() -> form.getMenuItemUserView());
         jMenuItemsView.add(() -> form.getMenuItemActorView());
         jMenuItemsView.add(() -> form.getMenuItemDirectorView());
         jMenuItemsView.add(() -> form.getMenuItemMovieView());
         jMenuItemsView.add(() -> form.getMenuItemHallView());
+        jMenuItemsView.add(() -> form.getMenuItemProjectionView());
     }
-    
-    public void setIcon(){
+
+    public void setIcon() {
         icon.setIcon();
     }
 
     public FormMain getForm() {
         return form;
     }
-    
-    public void openForm(){
+
+    public void openForm() {
         setSizeAndLocation();
         startClock();
         setIcon();
         setMenuBar();
         setStatusBar();
         setListeners();
-       
-        form.getLblWelcomeUser().setText("Welcome: "+MainCoordinator.getInstance().getUser()); 
+
+        form.getLblWelcomeUser().setText("Welcome: " + MainCoordinator.getInstance().getUser());
         form.setVisible(true);
     }
-    
-    public void startClock(){
+
+    public void startClock() {
         clock.start();
     }
-    
-    
-    
-    public void setMenuBar(){
+
+    public void setMenuBar() {
         form.getJMenuBar().setOpaque(false);
-        if(!MainCoordinator.getInstance().getUser().isAdmin()){
+        if (!MainCoordinator.getInstance().getUser().isAdmin()) {
             for (Supplier<JMenuItem> jmenu : jMenuItemsAdd) {
                 jmenu.get().setEnabled(false);
             }
         }
         addMenuAccount();
     }
-    
+
     private void addMenuAccount() {
         JMenu menu = new JMenu("Account");
         form.returnMenuBar().add(Box.createHorizontalGlue());
@@ -105,35 +107,33 @@ public class ControllerMain {
         menuItemLogOut = new JMenuItem("Log-out");
         menu.add(menuItemLogOut);
     }
-    
-    
-    public void setSizeAndLocation(){
+
+    public void setSizeAndLocation() {
         form.setMinimumSize(new Dimension(600, 400));
         form.setExtendedState(JFrame.MAXIMIZED_BOTH);
         form.setLocationRelativeTo(null);
     }
-    
-    public void setStatusBar(){
-        form.getLblStatusBarUser().setText("User: "+ MainCoordinator.getInstance().getUser());
+
+    public void setStatusBar() {
+        form.getLblStatusBarUser().setText("User: " + MainCoordinator.getInstance().getUser());
     }
-    
-    
+
     public void setIcon(IconSetter icon) {
         this.icon = icon;
     }
 
     private void setListeners() {
         setLogoutListener();
-        setUserListeners();   
+        setUserListeners();
         setHallListeners();
         setDirectorListeners();
         setMovieListeners();
         setActorListeners();
+        setProjectionListeners();
         setWindowListener();
-        
     }
 
-    public void setLogoutListener(){
+    public void setLogoutListener() {
         menuItemLogOut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -145,118 +145,139 @@ public class ControllerMain {
             }
         });
     }
-    
+
     private void setUserListeners() {
         form.getMenuItemUserAdd().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 templateForAdd(() -> form.getMenuItemUserAdd(),
-                                x -> MainCoordinator.getInstance().openPanelUserAdd((UserMode) x),
-                                UserMode.ADD);
+                        x -> MainCoordinator.getInstance().openPanelUserAdd((UserMode) x),
+                        UserMode.ADD);
             }
         });
-        
+
         form.getMenuItemUserView().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                templateForView(()-> form.getMenuItemUserView(),
-                                () -> MainCoordinator.getInstance().openPanelUserView());
+                templateForView(() -> form.getMenuItemUserView(),
+                        () -> MainCoordinator.getInstance().openPanelUserView());
             }
         });
     }
-    
+
     private void setHallListeners() {
         form.getMenuItemHallView().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                templateForView(()-> form.getMenuItemHallView(),
-                                () -> MainCoordinator.getInstance().openPanelHallView());
+                templateForView(() -> form.getMenuItemHallView(),
+                        () -> MainCoordinator.getInstance().openPanelHallView());
             }
         });
     }
-    
+
     private void setDirectorListeners() {
         form.getMenuItemDirectorAdd().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 templateForAdd(() -> form.getMenuItemDirectorAdd(),
-                                x -> MainCoordinator.getInstance().openPanelDirectorAdd((DirectorMode) x),
-                                DirectorMode.ADD);
+                        x -> MainCoordinator.getInstance().openPanelDirectorAdd((DirectorMode) x),
+                        DirectorMode.ADD);
             }
         });
         form.getMenuItemDirectorView().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                templateForView(()-> form.getMenuItemDirectorView(),
-                                () -> MainCoordinator.getInstance().openPanelDirectorView());
+                templateForView(() -> form.getMenuItemDirectorView(),
+                        () -> MainCoordinator.getInstance().openPanelDirectorView());
             }
         });
     }
-    
-    
+
     private void setActorListeners() {
         form.getMenuItemActorAdd().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 templateForAdd(() -> form.getMenuItemActorAdd(),
-                                x -> MainCoordinator.getInstance().openPanelActorAdd((ActorMode) x),
-                                ActorMode.ADD);
+                        x -> MainCoordinator.getInstance().openPanelActorAdd((ActorMode) x),
+                        ActorMode.ADD);
             }
         });
         form.getMenuItemActorView().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                templateForView(()-> form.getMenuItemActorView(),
-                                () -> MainCoordinator.getInstance().openPanelActorView());
+                templateForView(() -> form.getMenuItemActorView(),
+                        () -> MainCoordinator.getInstance().openPanelActorView());
             }
         });
     }
-    
+
     private void setMovieListeners() {
         form.getMenuItemMovieAdd().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 templateForAdd(() -> form.getMenuItemMovieAdd(),
-                                x -> MainCoordinator.getInstance().openPanelMovieAdd((MovieMode) x),
-                                MovieMode.ADD);
+                        x -> MainCoordinator.getInstance().openPanelMovieAdd((MovieMode) x),
+                        MovieMode.ADD);
 
             }
         });
-        
+
         form.getMenuItemMovieView().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                templateForView(()-> form.getMenuItemMovieView(),
-                                () -> MainCoordinator.getInstance().openPanelMovieView());
+                templateForView(() -> form.getMenuItemMovieView(),
+                        () -> MainCoordinator.getInstance().openPanelMovieView());
             }
         });
     }
-    
-    
-    public void templateForView(Supplier<JMenuItem> menuItemView, Runnable openPanel){
+
+    private void setProjectionListeners() {
+        form.getMenuItemProjectionAdd().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                templateForAdd(()-> form.getMenuItemProjectionAdd(),
+                        x -> MainCoordinator.getInstance().openPanelProjectionAdd((ProjectionMode)x),
+                        ProjectionMode.ADD);
+            }
+        });
+        
+        
+        form.getMenuItemProjectionView().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                templateForView(() -> form.getMenuItemProjectionView(),
+                        () -> MainCoordinator.getInstance().openPanelProjectionView());
+            }
+        });
+    }
+
+    public void templateForView(Supplier<JMenuItem> menuItemView, Runnable openPanel) {
         MainCoordinator.getInstance().removeAllPanels();
         enableAll();
         menuItemView.get().setEnabled(false);
         form.getLblWelcomeUser().setVisible(false);
         openPanel.run();
     }
-    
-    public void templateForAdd(Supplier<JMenuItem> menuItemAdd, Consumer<GenericMode> openPanel, GenericMode mode){
+
+    public void templateForAdd(Supplier<JMenuItem> menuItemAdd, Consumer<GenericMode> openPanel, GenericMode mode) {
         MainCoordinator.getInstance().removeAllPanels();
         enableAll();
         menuItemAdd.get().setEnabled(false);
         form.getLblWelcomeUser().setVisible(false);
         openPanel.accept(mode);
     }
-    
-    public void enableAll(){
-        if(MainCoordinator.getInstance().getUser().isAdmin())
-            for (Supplier<JMenuItem> jmenu : jMenuItemsAdd) 
+
+    public void enableAll() {
+        if (MainCoordinator.getInstance().getUser().isAdmin()) {
+            for (Supplier<JMenuItem> jmenu : jMenuItemsAdd) {
                 jmenu.get().setEnabled(true);
-        
-        for (Supplier<JMenuItem> jmenu : jMenuItemsView) 
-                jmenu.get().setEnabled(true);
-        
+            }
+        }
+
+        for (Supplier<JMenuItem> jmenu : jMenuItemsView) {
+            jmenu.get().setEnabled(true);
+        }
+
     }
 
     public MyClock getClock() {
@@ -265,7 +286,6 @@ public class ControllerMain {
 
     private void setWindowListener() {
         form.addWindowListener(new WindowListener() {
-            
 
             @Override
             public void windowClosing(WindowEvent e) {
@@ -302,5 +322,5 @@ public class ControllerMain {
             }
         });
     }
-    
+
 }

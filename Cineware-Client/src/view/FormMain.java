@@ -39,10 +39,13 @@ public class FormMain extends javax.swing.JFrame {
         PanelMain = new javax.swing.JPanel();
         lblWelcomeUser = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
+        menuProjection = new javax.swing.JMenu();
+        menuItemProjectionAdd = new javax.swing.JMenuItem();
+        menuItemProjectionView = new javax.swing.JMenuItem();
+        menuMovie = new javax.swing.JMenu();
         menuItemMovieAdd = new javax.swing.JMenuItem();
         menuItemMovieView = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        menuActor = new javax.swing.JMenu();
         menuItemActorAdd = new javax.swing.JMenuItem();
         menuItemActorView = new javax.swing.JMenuItem();
         menuDirector = new javax.swing.JMenu();
@@ -80,25 +83,35 @@ public class FormMain extends javax.swing.JFrame {
 
         menuBar.setBackground(new java.awt.Color(255, 255, 255));
 
-        jMenu2.setText("Movie");
+        menuProjection.setText("Projection");
+
+        menuItemProjectionAdd.setText("Add");
+        menuProjection.add(menuItemProjectionAdd);
+
+        menuItemProjectionView.setText("View");
+        menuProjection.add(menuItemProjectionView);
+
+        menuBar.add(menuProjection);
+
+        menuMovie.setText("Movie");
 
         menuItemMovieAdd.setText("Add");
-        jMenu2.add(menuItemMovieAdd);
+        menuMovie.add(menuItemMovieAdd);
 
         menuItemMovieView.setText("View");
-        jMenu2.add(menuItemMovieView);
+        menuMovie.add(menuItemMovieView);
 
-        menuBar.add(jMenu2);
+        menuBar.add(menuMovie);
 
-        jMenu1.setText("Actor");
+        menuActor.setText("Actor");
 
         menuItemActorAdd.setText("Add");
-        jMenu1.add(menuItemActorAdd);
+        menuActor.add(menuItemActorAdd);
 
         menuItemActorView.setText("View");
-        jMenu1.add(menuItemActorView);
+        menuActor.add(menuItemActorView);
 
-        menuBar.add(jMenu1);
+        menuBar.add(menuActor);
 
         menuDirector.setText("Director");
 
@@ -196,6 +209,14 @@ public class FormMain extends javax.swing.JFrame {
         return menuItemMovieView;
     }
 
+    public JMenuItem getMenuItemProjectionAdd() {
+        return menuItemProjectionAdd;
+    }
+
+    public JMenuItem getMenuItemProjectionView() {
+        return menuItemProjectionView;
+    }
+
     
 
     
@@ -203,12 +224,11 @@ public class FormMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelMain;
     private javax.swing.JPanel PanelStatusBar;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblStatusBarUser;
     private javax.swing.JLabel lblTime;
     private javax.swing.JLabel lblWelcomeUser;
+    private javax.swing.JMenu menuActor;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuDirector;
     private javax.swing.JMenu menuHall;
@@ -219,8 +239,12 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemHallView;
     private javax.swing.JMenuItem menuItemMovieAdd;
     private javax.swing.JMenuItem menuItemMovieView;
+    private javax.swing.JMenuItem menuItemProjectionAdd;
+    private javax.swing.JMenuItem menuItemProjectionView;
     private javax.swing.JMenuItem menuItemUserAdd;
     private javax.swing.JMenuItem menuItemUserView;
+    private javax.swing.JMenu menuMovie;
+    private javax.swing.JMenu menuProjection;
     private javax.swing.JMenu menuUser;
     // End of variables declaration//GEN-END:variables
 
