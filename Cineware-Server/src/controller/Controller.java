@@ -10,6 +10,7 @@ import domain.Actor;
 import domain.Director;
 import domain.Hall;
 import domain.Movie;
+import domain.Projection;
 import domain.User;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -218,6 +219,11 @@ public class Controller {
     public void deleteMovie(Movie movie) throws Exception {
         AbstractGenericOperation ago = new DeleteMovie();
         ago.execute(movie);
+    }
+
+    public void addProjection(Projection projection) throws Exception {
+        AbstractGenericOperation ago = new GenericAdd<Projection>();
+        ago.execute(projection);
     }
     
     

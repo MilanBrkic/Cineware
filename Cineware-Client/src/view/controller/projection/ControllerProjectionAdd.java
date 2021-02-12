@@ -8,9 +8,9 @@ package view.controller.projection;
 import communcation.Communcation;
 import domain.Hall;
 import domain.Movie;
+import domain.Projection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +18,7 @@ import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import view.coordinator.MainCoordinator;
 import view.panel.mode.ProjectionMode;
 import view.panel.projection.PanelProjectionAdd;
 
@@ -26,6 +27,7 @@ import view.panel.projection.PanelProjectionAdd;
  * @author user
  */
 public class ControllerProjectionAdd {
+
     private PanelProjectionAdd panel;
     private ProjectionMode mode;
 
@@ -33,8 +35,8 @@ public class ControllerProjectionAdd {
         this.panel = panel;
         this.mode = mode;
     }
-    
-    public void openPanel(){
+
+    public void openPanel() {
         panel.setVisible(true);
         setExitButton();
         fillForm();
@@ -52,71 +54,78 @@ public class ControllerProjectionAdd {
     private void setListeners() {
         setAddListener();
     }
-    
-    private void setAddListener(){
+
+    private void setAddListener() {
         panel.getBtnAdd().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     Movie movie = (Movie) panel.getJcmbMovie().getSelectedItem();
-                    
-                    String hourString  = (String) panel.getJcmbHour().getSelectedItem();
-                    if(hourString.charAt(0)=='0') hourString=hourString.substring(1);
+
+                    String hourString = (String) panel.getJcmbHour().getSelectedItem();
+                    if (hourString.charAt(0) == '0') {
+                        hourString = hourString.substring(1);
+                    }
                     int hour = Integer.parseInt(hourString);
-                    
+
                     String minuteString = (String) panel.getJcmbMinute().getSelectedItem();
-                    if(minuteString.charAt(0)=='0') minuteString = minuteString.substring(1);
+                    if (minuteString.charAt(0) == '0') {
+                        minuteString = minuteString.substring(1);
+                    }
                     int minute = Integer.parseInt(minuteString);
-                    
-                    
+
                     int month = (int) panel.getJcmbMonth().getSelectedItem();
                     int day = (int) panel.getJcmbDay().getSelectedItem();
-                    
+
                     Hall hall = (Hall) panel.getJcmbHall().getSelectedItem();
-                    
+
                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd.MM.yyyy");
-                    String dateString = hour+":"+minute+" "+day+"."+month+"."+new GregorianCalendar().get(GregorianCalendar.YEAR);
+                    String dateString = hour + ":" + minute + " " + day + "." + month + "." + new GregorianCalendar().get(GregorianCalendar.YEAR);
                     Date date = sdf.parse(dateString);
                     System.out.println(date);
                     System.out.println(new Date());
-                    if(date.before(new Date())){
+                    if (date.before(new Date())) {
                         throw new Exception("You can not enter a time in past");
                     }
-                    JOptionPane.showMessageDialog(panel, "Projecation has been added","Added" , JOptionPane.INFORMATION_MESSAGE);
+
+                    Projection projection = new Projection(date, hall, movie, MainCoordinator.getInstance().getUser());
+                    Communcation.getInstance().addProjection(projection);
+                    JOptionPane.showMessageDialog(panel, "Projecation has been added", "Added", JOptionPane.INFORMATION_MESSAGE);
+
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(panel, ex.getMessage(),"Error" , JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     ex.printStackTrace();
                 }
             }
         });
     }
-    
+
     private void fillForm() {
-        for(int i = 0;i<=24;i++){
-            if(i<10)
-                panel.getJcmbHour().addItem("0"+i);
-            else
-                panel.getJcmbHour().addItem(i+"");
+        for (int i = 0; i <= 24; i++) {
+            if (i < 10) {
+                panel.getJcmbHour().addItem("0" + i);
+            } else {
+                panel.getJcmbHour().addItem(i + "");
+            }
         }
-        
+
         panel.getJcmbMinute().addItem("00");
         panel.getJcmbMinute().addItem("15");
         panel.getJcmbMinute().addItem("30");
         panel.getJcmbMinute().addItem("45");
-        
-        
+
         try {
             ArrayList<Movie> movies;
             movies = Communcation.getInstance().getAllMovies();
             for (Movie movy : movies) {
                 panel.getJcmbMovie().addItem(movy);
-            
+
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(panel, "Could not load movies", "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(ControllerProjectionAdd.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         try {
             ArrayList<Hall> halls = Communcation.getInstance().getAllHalls();
             for (Hall hall : halls) {
@@ -126,55 +135,50 @@ public class ControllerProjectionAdd {
             JOptionPane.showMessageDialog(panel, "Could not load halls", "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(ControllerProjectionAdd.class.getName()).log(Level.SEVERE, null, e);
         }
-        
+
         fillDate();
-        
+
     }
 
     private void fillDate() {
         GregorianCalendar greg = new GregorianCalendar();
         int day = greg.get(GregorianCalendar.DAY_OF_MONTH);
-        int month = greg.get(GregorianCalendar.MONTH)+1;
-        
+        int month = greg.get(GregorianCalendar.MONTH) + 1;
+
         panel.getJcmbMonth().addItem(month);
-        panel.getJcmbMonth().addItem(month+1);
+        panel.getJcmbMonth().addItem(month + 1);
         firstMonth(month, day);
-        
-        
+
         panel.getJcmbMonth().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int index = panel.getJcmbMonth().getSelectedIndex();
-                if(index>=0){
-                    if(index==0){
+                if (index >= 0) {
+                    if (index == 0) {
                         firstMonth(month, day);
-                    }
-                    else {
+                    } else {
                         secondMonth(day);
                     }
                 }
             }
         });
-        
+
     }
-    
-    
-    public void firstMonth(int month, int day){
+
+    public void firstMonth(int month, int day) {
         panel.getJcmbDay().removeAllItems();
-        int limit = month==2? 28: ((month==4 || month==6 || month==9 || month==11)? 30:31); 
-        
-        for(int i = day;i<=limit;i++){
-            panel.getJcmbDay().addItem(i);
-        }
-    }
-    
-    public void secondMonth(int day){
-        panel.getJcmbDay().removeAllItems();
-        for(int i = 0;i<=day;i++){
+        int limit = month == 2 ? 28 : ((month == 4 || month == 6 || month == 9 || month == 11) ? 30 : 31);
+
+        for (int i = day; i <= limit; i++) {
             panel.getJcmbDay().addItem(i);
         }
     }
 
-    
-    
+    public void secondMonth(int day) {
+        panel.getJcmbDay().removeAllItems();
+        for (int i = 0; i <= day; i++) {
+            panel.getJcmbDay().addItem(i);
+        }
+    }
+
 }

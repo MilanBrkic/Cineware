@@ -23,6 +23,13 @@ public class Projection implements GenericEntity{
 
     public Projection() {
     }
+    
+    public Projection(Date date, Hall hall, Movie movie, User user) {
+        this.date = date;
+        this.hall = hall;
+        this.movie = movie;
+        this.user = user;
+    }
 
     public Projection(int id, Date date, Hall hall, Movie movie, User user) {
         this.id = id;
@@ -104,17 +111,24 @@ public class Projection implements GenericEntity{
 
     @Override
     public String getTableName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "projection";
     }
 
     @Override
     public String columnNamesForInsert() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "projectionID, dateAndTime, hallID, movieID, userID";
     }
 
     @Override
     public String getInsertValues() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder sb = new StringBuilder();
+        sb.append(id).append(", ")
+          .append("'").append(new java.sql.Timestamp(date.getTime())).append("', ")
+          .append(hall.getId()).append(", ")
+          .append(movie.getId()).append(", ")
+          .append(user.getId());
+        
+        return sb.toString();
     }
 
     @Override

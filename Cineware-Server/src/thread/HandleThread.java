@@ -16,6 +16,7 @@ import domain.Actor;
 import domain.Director;
 import domain.Hall;
 import domain.Movie;
+import domain.Projection;
 import domain.User;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -66,6 +67,16 @@ public class HandleThread extends Thread {
                 Response response = new Response();
                 try {
                     switch (request.getOperation()) {
+                        case LOGIN:
+                            String jsonLoggedUser = request.getArguments();
+                            User user = gson.fromJson(jsonLoggedUser, User.class);
+                            Controller.getInstance().newLoggedInUser(user);
+                            break;
+                        case LOGOUT:
+                            String jsonLoggedOutUser = request.getArguments();
+                            User userOut = gson.fromJson(jsonLoggedOutUser, User.class);
+                            Controller.getInstance().loggedOutUser(userOut);
+                            break;
                         case GET_COUNTRIES:
                             ArrayList<String> countries = Controller.getInstance().getCountries();
                             String jsonCountries = gson.toJson(countries);
@@ -167,16 +178,18 @@ public class HandleThread extends Thread {
                             String jsonAllMovies = gson.toJson(allMovies);
                             response.setResult(jsonAllMovies);
                             break;
-                        case LOGIN:
-                            String jsonLoggedUser = request.getArguments();
-                            User user = gson.fromJson(jsonLoggedUser, User.class);
-                            Controller.getInstance().newLoggedInUser(user);
+                        case ADD_PROJECTION:
+                            String jsonAddProjection = request.getArguments();
+                            Projection addProjection = gson.fromJson(jsonAddProjection, Projection.class);
+                            Controller.getInstance().addProjection(addProjection);
                             break;
-                        case LOGOUT:
-                            String jsonLoggedOutUser = request.getArguments();
-                            User userOut = gson.fromJson(jsonLoggedOutUser, User.class);
-                            Controller.getInstance().loggedOutUser(userOut);
+                        case GET_ALL_PROJECTIONS:
                             break;
+                        case UPDATE_PROJECTION:
+                            break;
+                        case DELETE_PROJECTION:
+                            break;
+                            
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

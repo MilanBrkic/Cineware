@@ -12,6 +12,8 @@ import java.io.Serializable;
  * @author user
  */
 public enum Operation implements Serializable{
+    LOGIN,
+    LOGOUT,
     EXIT_ALL,
     GET_COUNTRIES,
     GET_ALL_HALLS,
@@ -33,6 +35,8 @@ public enum Operation implements Serializable{
     GET_ALL_MOVIES,
     UPDATE_MOVIE,
     DELETE_MOVIE,
-    LOGIN,
-    LOGOUT
+    ADD_PROJECTION,
+    GET_ALL_PROJECTIONS,
+    UPDATE_PROJECTION,
+    DELETE_PROJECTION
 }
