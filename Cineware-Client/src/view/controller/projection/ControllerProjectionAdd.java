@@ -11,7 +11,9 @@ import domain.Movie;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -36,6 +38,7 @@ public class ControllerProjectionAdd {
         panel.setVisible(true);
         setExitButton();
         fillForm();
+        setListeners();
     }
 
     private void setExitButton() {
@@ -46,12 +49,54 @@ public class ControllerProjectionAdd {
         return panel;
     }
 
+    private void setListeners() {
+        setAddListener();
+    }
+    
+    private void setAddListener(){
+        panel.getBtnAdd().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Movie movie = (Movie) panel.getJcmbMovie().getSelectedItem();
+                    
+                    String hourString  = (String) panel.getJcmbHour().getSelectedItem();
+                    if(hourString.charAt(0)=='0') hourString=hourString.substring(1);
+                    int hour = Integer.parseInt(hourString);
+                    
+                    String minuteString = (String) panel.getJcmbMinute().getSelectedItem();
+                    if(minuteString.charAt(0)=='0') minuteString = minuteString.substring(1);
+                    int minute = Integer.parseInt(minuteString);
+                    
+                    
+                    int month = (int) panel.getJcmbMonth().getSelectedItem();
+                    int day = (int) panel.getJcmbDay().getSelectedItem();
+                    
+                    Hall hall = (Hall) panel.getJcmbHall().getSelectedItem();
+                    
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd.MM.yyyy");
+                    String dateString = hour+":"+minute+" "+day+"."+month+"."+new GregorianCalendar().get(GregorianCalendar.YEAR);
+                    Date date = sdf.parse(dateString);
+                    System.out.println(date);
+                    System.out.println(new Date());
+                    if(date.before(new Date())){
+                        throw new Exception("You can not enter a time in past");
+                    }
+                    JOptionPane.showMessageDialog(panel, "Projecation has been added","Added" , JOptionPane.INFORMATION_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(panel, ex.getMessage(),"Error" , JOptionPane.ERROR_MESSAGE);
+                    ex.printStackTrace();
+                }
+            }
+        });
+    }
+    
     private void fillForm() {
         for(int i = 0;i<=24;i++){
             if(i<10)
                 panel.getJcmbHour().addItem("0"+i);
             else
-                panel.getJcmbHour().addItem(i);
+                panel.getJcmbHour().addItem(i+"");
         }
         
         panel.getJcmbMinute().addItem("00");
@@ -129,5 +174,7 @@ public class ControllerProjectionAdd {
             panel.getJcmbDay().addItem(i);
         }
     }
+
+    
     
 }
