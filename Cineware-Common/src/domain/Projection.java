@@ -16,28 +16,35 @@ import java.util.Date;
  */
 public class Projection implements GenericEntity{
     private int id;
-    private Date date;
+    private Date startDate;
+    private Date endDate;
     private Hall hall;
     private Movie movie;
     private User user;
 
     public Projection() {
     }
-    
-    public Projection(Date date, Hall hall, Movie movie, User user) {
-        this.date = date;
+
+    public Projection(int id, Date startDate, Date endDate, Hall hall, Movie movie, User user) {
+        this.id = id;
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.hall = hall;
         this.movie = movie;
         this.user = user;
     }
 
-    public Projection(int id, Date date, Hall hall, Movie movie, User user) {
-        this.id = id;
-        this.date = date;
+    
+    
+    public Projection(Date startDate, Date endDate, Hall hall, Movie movie, User user) {
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.hall = hall;
         this.movie = movie;
         this.user = user;
     }
+    
+    
 
     public int getId() {
         return id;
@@ -47,13 +54,23 @@ public class Projection implements GenericEntity{
         this.id = id;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public Date getStartDate() {
+        return startDate;
     }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    
 
     public Hall getHall() {
         return hall;
@@ -106,7 +123,7 @@ public class Projection implements GenericEntity{
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd.MM");
-        return movie+" - "+sdf.format(date);
+        return movie+" - "+sdf.format(startDate);
     }
 
     @Override
@@ -116,17 +133,19 @@ public class Projection implements GenericEntity{
 
     @Override
     public String columnNamesForInsert() {
-        return "projectionID, dateAndTime, hallID, movieID, userID";
+        return "projectionID, startTime,endTime, hallID, movieID, userID";
     }
 
     @Override
     public String getInsertValues() {
         StringBuilder sb = new StringBuilder();
         sb.append(id).append(", ")
-          .append("'").append(new java.sql.Timestamp(date.getTime())).append("', ")
+          .append("'").append(new java.sql.Timestamp(startDate.getTime())).append("', ")
+          .append("'").append(new java.sql.Timestamp(endDate.getTime())).append("', ")
           .append(hall.getId()).append(", ")
           .append(movie.getId()).append(", ")
           .append(user.getId());
+        
         
         return sb.toString();
     }

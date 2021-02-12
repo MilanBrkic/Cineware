@@ -119,7 +119,7 @@ public class DbMovie implements DbRepository<Movie> {
         ps.setInt(6, movie.getDirector().getId());
         ps.setInt(7, movie.getUser().getId());
         ps.setInt(8, movie.getId());
-        
+
         ps.execute();
         ps.close();
     }
@@ -127,14 +127,14 @@ public class DbMovie implements DbRepository<Movie> {
     @Override
     public void delete(Movie movie) throws Exception {
         deleteAllActorsFromMovie(movie.getId());
-        String query = "DELETE from movie WHERE movieID="+movie.getId();
+        String query = "DELETE from movie WHERE movieID=" + movie.getId();
         Statement s = connect().createStatement();
         s.executeUpdate(query);
         s.close();
     }
 
     private void deleteAllActorsFromMovie(int id) throws Exception {
-        String query = "DELETE from movie_actor WHERE movieID="+id;
+        String query = "DELETE from movie_actor WHERE movieID=" + id;
         Statement s = connect().createStatement();
         s.executeUpdate(query);
         s.close();
@@ -142,7 +142,22 @@ public class DbMovie implements DbRepository<Movie> {
 
     @Override
     public Movie get(Movie t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int id = t.getId();
+        String query = "SELECT * from movie where movieID=" + id;
+        Statement s = connect().createStatement();
+        ResultSet rs = s.executeQuery(query);
+        rs.next();
+        
+        String name = rs.getString("name");
+        String description = rs.getString("description");
+        Genre genre = Genre.valueOf(rs.getString("genre"));
+        int runtime = rs.getInt("runtime");
+        int year = rs.getInt("year");
+        Director director = Controller.getInstance().getDirector(rs.getInt("directorID"));
+        User user = Controller.getInstance().getUser(rs.getInt("userID"));
+        ArrayList<Actor> actors = getActorsByMovie(id);
+        Movie movie = new Movie(id, name, description, genre, runtime, year, director, actors, user);
+        return movie;
     }
 
     @Override

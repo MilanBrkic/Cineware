@@ -9,6 +9,7 @@ import communcation.Communcation;
 import domain.Hall;
 import domain.Movie;
 import domain.Projection;
+import domain.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -81,14 +82,18 @@ public class ControllerProjectionAdd {
 
                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd.MM.yyyy");
                     String dateString = hour + ":" + minute + " " + day + "." + month + "." + new GregorianCalendar().get(GregorianCalendar.YEAR);
-                    Date date = sdf.parse(dateString);
-                    System.out.println(date);
-                    System.out.println(new Date());
-                    if (date.before(new Date())) {
+                    Date startDate = sdf.parse(dateString);
+                    System.out.println(startDate);
+                    
+                    if (startDate.before(new Date())) {
                         throw new Exception("You can not enter a time in past");
                     }
-
-                    Projection projection = new Projection(date, hall, movie, MainCoordinator.getInstance().getUser());
+                    
+                    Date endDate = getEndDate(startDate, movie.getRuntime());
+                    System.out.println(endDate);
+                    
+                    User user = MainCoordinator.getInstance().getUser();
+                    Projection projection = new Projection(startDate, endDate, hall, movie, user);
                     Communcation.getInstance().addProjection(projection);
                     JOptionPane.showMessageDialog(panel, "Projecation has been added", "Added", JOptionPane.INFORMATION_MESSAGE);
 
@@ -96,6 +101,23 @@ public class ControllerProjectionAdd {
                     JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     ex.printStackTrace();
                 }
+            }
+
+            private Date getEndDate(Date startDate, int runtime) {
+                GregorianCalendar startGreg = new GregorianCalendar();
+                startGreg.setTime(startDate);
+                
+                int year = startGreg.get(GregorianCalendar.YEAR);
+                int month = startGreg.get(GregorianCalendar.MONTH);
+                int day = startGreg.get(GregorianCalendar.DAY_OF_MONTH);
+                int hour = startGreg.get(GregorianCalendar.HOUR_OF_DAY);
+                int minute = startGreg.get(GregorianCalendar.MINUTE);
+                
+                int movieHour  = runtime/60;
+                int movieMinute = runtime%60;
+                
+                GregorianCalendar endGreg = new GregorianCalendar(year, month, day, hour+movieHour, minute+movieMinute);
+                return endGreg.getTime();
             }
         });
     }

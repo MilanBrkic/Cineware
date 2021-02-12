@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package controller;
+
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import domain.Actor;
@@ -32,104 +33,107 @@ import operation.director.GetDirector;
 import operation.movie.AddMovie;
 import operation.movie.DeleteMovie;
 import operation.movie.GetAllMovies;
+import operation.movie.GetMovie;
 import operation.movie.UpdateMovie;
+import operation.projection.DbProjection;
 import operation.user.CheckPassword;
 import operation.user.UpdatePasswordOnly;
 import operation.user.UpdateWithoutPassword;
+import repository.db.DbRepository;
 import view.controller.ControllerView;
+
 /**
  *
  * @author Milan
  */
 public class Controller {
+
     int test;
     private static Controller instance;
     private final ArrayList<String> countries;
-    
-    private Controller(){
+
+    private Controller() {
         countries = readCoutries();
     }
-    
-    public static Controller getInstance(){
-        if(instance==null) instance = new Controller();
+
+    public static Controller getInstance() {
+        if (instance == null) {
+            instance = new Controller();
+        }
         return instance;
     }
 
     public ArrayList<String> getCountries() {
         return countries;
     }
-       
-    public ArrayList<String> readCoutries(){
+
+    public ArrayList<String> readCoutries() {
         ArrayList<String> list = new ArrayList<>();
         try {
-            
+
             String basePath = new File("").getAbsolutePath();
             String jsonPath = basePath + "\\resources\\countries.json";
-            
+
             Gson gson = new Gson();
             JsonReader reader = new JsonReader(new FileReader(jsonPath));
-            
+
             List<Countries> coutries = Arrays.asList(gson.fromJson(reader, Countries[].class));
-            
+
             for (Countries coutry : coutries) {
                 list.add(coutry.getName().trim());
             }
-            
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
 
-    public ArrayList<Hall> getAllHalls() throws Exception{
+    public ArrayList<Hall> getAllHalls() throws Exception {
         AbstractGenericOperation ago = new GenericGetAll<Hall>();
         ago.execute(new Hall());
-        return ((GenericGetAll)ago).getResult();
+        return ((GenericGetAll) ago).getResult();
     }
 
     public ArrayList<User> getAllUsers() throws Exception {
         AbstractGenericOperation ago = new GenericGetAll<User>();
         ago.execute(new User());
-        return ((GenericGetAll)ago).getResult();
+        return ((GenericGetAll) ago).getResult();
     }
 
-    public void addUser(User user) throws  Exception{
+    public void addUser(User user) throws Exception {
         AbstractGenericOperation ago = new GenericAdd<User>();
         ago.execute(user);
     }
-    
-    
+
     public void updateUser(User user) throws Exception {
         AbstractGenericOperation ago = new UpdateWithoutPassword();
         ago.execute(user);
     }
-    
-    
+
     public void deleteUser(User user) throws Exception {
         AbstractGenericOperation ago = new GenericDelete<User>();
         ago.execute(user);
     }
 
-    public User getUser(int id) throws Exception{
+    public User getUser(int id) throws Exception {
         AbstractGenericOperation ago = new GenericGet<User>();
         User user = new User();
         user.setId(id);
         ago.execute(user);
-        return (User) ((GenericGet)ago).getResult();
+        return (User) ((GenericGet) ago).getResult();
     }
-    
-    
-    public boolean checkPassword(String username,String password) throws Exception{
+
+    public boolean checkPassword(String username, String password) throws Exception {
         AbstractGenericOperation ago = new CheckPassword();
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
         ago.execute(user);
-        return ((CheckPassword)ago).getResult();
+        return ((CheckPassword) ago).getResult();
     }
-    
-    
-    public void updatePasswordOnly(String username, String password) throws Exception{
+
+    public void updatePasswordOnly(String username, String password) throws Exception {
         AbstractGenericOperation ago = new UpdatePasswordOnly();
         User user = new User();
         user.setUsername(username);
@@ -142,56 +146,54 @@ public class Controller {
         AbstractGenericOperation ago = new GenericAdd<Director>();
         ago.execute(director);
     }
-    
-    public ArrayList<Director> getAllDirectors()throws Exception{
-       AbstractGenericOperation ago = new GetAllDirectors();
-       ago.execute(new Director()); 
-       return ((GetAllDirectors) ago).getResult();
+
+    public ArrayList<Director> getAllDirectors() throws Exception {
+        AbstractGenericOperation ago = new GetAllDirectors();
+        ago.execute(new Director());
+        return ((GetAllDirectors) ago).getResult();
     }
-    
+
     public void updateDirector(Director director) throws Exception {
         AbstractGenericOperation ago = new GenericUpdate<Director>();
         ago.execute(director);
     }
-    
+
     public void deleteDirector(Director director) throws Exception {
         AbstractGenericOperation ago = new GenericDelete<Director>();
         ago.execute(director);
     }
-    
-    public Director getDirector(int id)throws Exception{
-       AbstractGenericOperation ago = new GetDirector();
-       Director dir = new Director();
-       dir.setId(id);
-       ago.execute(dir); 
-       return ((GetDirector) ago).getResult();
+
+    public Director getDirector(int id) throws Exception {
+        AbstractGenericOperation ago = new GetDirector();
+        Director dir = new Director();
+        dir.setId(id);
+        ago.execute(dir);
+        return ((GetDirector) ago).getResult();
     }
-    
+
     //actor
-    
     public void addActor(Actor actor) throws Exception {
         AbstractGenericOperation ago = new GenericAdd<Actor>();
         ago.execute(actor);
     }
-    
-    public ArrayList<Actor> getAllActors()throws Exception{
-       AbstractGenericOperation ago = new GetAllActors();
-       ago.execute(new Actor()); 
-       return ((GetAllActors) ago).getResult();
+
+    public ArrayList<Actor> getAllActors() throws Exception {
+        AbstractGenericOperation ago = new GetAllActors();
+        ago.execute(new Actor());
+        return ((GetAllActors) ago).getResult();
     }
-    
+
     public void updateActor(Actor actor) throws Exception {
         AbstractGenericOperation ago = new GenericUpdate<Actor>();
         ago.execute(actor);
     }
-    
+
     public void deleteActor(Actor actor) throws Exception {
         AbstractGenericOperation ago = new GenericDelete<Actor>();
         ago.execute(actor);
     }
-    
-    //movie
 
+    //movie
     public void addMovie(Movie movie) throws Exception {
         AbstractGenericOperation ago = new AddMovie();
         ago.execute(movie);
@@ -200,7 +202,15 @@ public class Controller {
     public ArrayList<Movie> getAllMovies() throws Exception {
         AbstractGenericOperation ago = new GetAllMovies();
         ago.execute(new Movie());
-        return ((GetAllMovies)ago).getResult();
+        return ((GetAllMovies) ago).getResult();
+    }
+
+    public Movie getMovie(int id) throws Exception {
+        AbstractGenericOperation ago = new GetMovie();
+        Movie movie = new Movie();
+        movie.setId(id);
+        ago.execute(movie);
+        return ((GetMovie) ago).getResult();
     }
 
     public void newLoggedInUser(User user) {
@@ -222,12 +232,21 @@ public class Controller {
     }
 
     public void addProjection(Projection projection) throws Exception {
-        AbstractGenericOperation ago = new GenericAdd<Projection>();
-        ago.execute(projection);
+        try {
+            DbProjection rep = new DbProjection();
+            if (!rep.isTheHallOccupied(projection)) {
+                throw new Exception("Hall ocuppied in given time");
+            }
+            AbstractGenericOperation ago = new GenericAdd<Projection>();
+            ago.execute(projection);
+        } catch (Exception e) {
+            throw e;
+        }
+
     }
-    
-    
-    class Countries{
+
+    class Countries {
+
         String name;
 
         public String getName() {
