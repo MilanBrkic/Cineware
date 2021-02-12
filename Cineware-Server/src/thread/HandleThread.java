@@ -184,6 +184,9 @@ public class HandleThread extends Thread {
                             Controller.getInstance().addProjection(addProjection);
                             break;
                         case GET_ALL_PROJECTIONS:
+                            ArrayList<Projection> allProjections = Controller.getInstance().getAllProjections();
+                            String jsonAllProjections = gson.toJson(allProjections);
+                            response.setResult(jsonAllProjections);
                             break;
                         case UPDATE_PROJECTION:
                             break;

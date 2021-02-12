@@ -254,4 +254,15 @@ public class Communcation {
        gen.execute(projection, Operation.ADD_PROJECTION);
     }
 
+    public ArrayList<Projection> getAllProjections() throws Exception {
+        Request request = new Request(Operation.GET_ALL_PROJECTIONS, null);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException()==null){
+            String json = response.getResult();
+            ArrayList<Projection> projections = new ArrayList<>(Arrays.asList(gson.fromJson(json, Projection[].class)));
+            return projections;
+        }else throw response.getException();
+    }
+
 }

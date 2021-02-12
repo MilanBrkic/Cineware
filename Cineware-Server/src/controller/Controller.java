@@ -35,7 +35,8 @@ import operation.movie.DeleteMovie;
 import operation.movie.GetAllMovies;
 import operation.movie.GetMovie;
 import operation.movie.UpdateMovie;
-import operation.projection.DbProjection;
+import operation.projection.GetAllProjections;
+import repository.db.impl.DbProjection;
 import operation.user.CheckPassword;
 import operation.user.UpdatePasswordOnly;
 import operation.user.UpdateWithoutPassword;
@@ -93,6 +94,14 @@ public class Controller {
         AbstractGenericOperation ago = new GenericGetAll<Hall>();
         ago.execute(new Hall());
         return ((GenericGetAll) ago).getResult();
+    }
+    
+    public Hall getHall(int hallID) throws Exception {
+        AbstractGenericOperation ago = new GenericGet<Hall>();
+        Hall hall = new Hall();
+        hall.setId(hallID);
+        ago.execute(hall);
+        return (Hall) ((GenericGet) ago).getResult();
     }
 
     public ArrayList<User> getAllUsers() throws Exception {
@@ -244,6 +253,14 @@ public class Controller {
         }
 
     }
+
+    public ArrayList<Projection> getAllProjections() throws Exception {
+        AbstractGenericOperation ago = new GetAllProjections();
+        ago.execute(new Projection());
+        return ((GetAllProjections) ago).getResult();
+    }
+
+    
 
     class Countries {
 
