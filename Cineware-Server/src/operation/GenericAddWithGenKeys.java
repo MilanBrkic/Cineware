@@ -5,12 +5,14 @@
  */
 package operation;
 
+import domain.GenericEntity;
+import repository.db.impl.DbGeneric;
 
 /**
  *
  * @author user
  */
-public class GenericAdd<T> extends AbstractGenericOperation{
+public class GenericAddWithGenKeys<T> extends AbstractGenericOperation {
 
     @Override
     protected void preconditions(Object params) throws Exception {
@@ -21,7 +23,7 @@ public class GenericAdd<T> extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-       repo.add((T)params);
+        ((DbGeneric)repo).addWithGenKeys((GenericEntity)params);
     }
     
 }

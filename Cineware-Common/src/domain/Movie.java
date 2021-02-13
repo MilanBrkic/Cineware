@@ -5,6 +5,7 @@
  */
 package domain;
 
+import domain.enums.Genre;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.util.ArrayList;

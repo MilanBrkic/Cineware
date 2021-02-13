@@ -5,6 +5,7 @@
  */
 package domain;
 
+import domain.enums.MeasurementUnit;
 import java.math.BigDecimal;
 
 /**
@@ -19,6 +20,13 @@ public class Ticket extends Article{
     public Ticket() {
     }
 
+    public Ticket(BigDecimal price, MeasurementUnit unit, boolean sold, Projection projection, Seat seat) {
+        super(price, unit);
+        this.sold = sold;
+        this.projection = projection;
+        this.seat = seat;
+    }
+    
     public Ticket(int id, BigDecimal price, MeasurementUnit unit, boolean sold, Projection projection, Seat seat) {
         super(id, price, unit);
         this.sold = sold;
@@ -54,6 +62,33 @@ public class Ticket extends Article{
     public String toString() {
         return projection+" "+seat;
     }
+
+    @Override
+    public String getTableName() {
+        return "ticket";
+    }
+
+    @Override
+    public String columnNamesForInsert() {
+        return "articleID, sold, projectionID, seatID";
+    }
+
+    @Override
+    public String getInsertValues() {
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append(id).append(", ")
+          .append(sold).append(", ")
+          .append(projection.getId()).append(", ")
+          .append(seat.getId());
+        
+        
+        return sb.toString();
+    }
+    
+    
+    
+    
     
     
 }

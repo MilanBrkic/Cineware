@@ -5,6 +5,8 @@
  */
 package domain;
 
+import domain.enums.ProductType;
+import domain.enums.MeasurementUnit;
 import java.math.BigDecimal;
 
 /**

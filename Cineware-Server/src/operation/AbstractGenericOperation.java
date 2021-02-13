@@ -32,11 +32,20 @@ public abstract class AbstractGenericOperation {
             rollbackTransaction();
             throw e;
         }
-        finally{
-            if(!(this instanceof Getters)){
-                disconnect();
-            }
+        
+    }
+    
+    public final void executeWithoutCommit(Object params) throws Exception{
+        try {
+            startTransaction();
+            preconditions(params);
+            executeOperation(params);
+        } catch (Exception e) {
+            e.printStackTrace();
+            rollbackTransaction();
+            throw e;
         }
+        
     }
 
     private void startTransaction() throws Exception {

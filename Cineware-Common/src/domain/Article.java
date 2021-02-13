@@ -5,20 +5,28 @@
  */
 package domain;
 
+import domain.enums.MeasurementUnit;
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  *
  * @author user
  */
-public class Article {
-    private int id;
-    private BigDecimal price;
-    private MeasurementUnit unit;
+public class Article implements GenericEntity{
+    protected int id;
+    protected BigDecimal price;
+    protected MeasurementUnit unit;
 
     public Article() {
     }
-
+    
+    public Article(BigDecimal price, MeasurementUnit unit) {
+        this.price = price;
+        this.unit = unit;
+    }
+    
     public Article(int id, BigDecimal price, MeasurementUnit unit) {
         this.id = id;
         this.price = price;
@@ -73,6 +81,41 @@ public class Article {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String getTableName() {
+        return "article";
+    }
+
+    @Override
+    public String columnNamesForInsert() {
+        return "price,measurementUnit";
+    }
+
+    @Override
+    public String getInsertValues() {
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append(price).append(", ")
+          .append("'").append(unit).append("'");
+        
+        return sb.toString();
+    }
+
+    @Override
+    public String columnNamesForUpdate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String whereCondition() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<GenericEntity> getFromResultSet(ResultSet rs) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     

@@ -8,7 +8,7 @@ package repository.db.impl;
 import controller.Controller;
 import domain.Actor;
 import domain.Director;
-import domain.Genre;
+import domain.enums.Genre;
 import domain.Movie;
 import domain.User;
 import java.util.ArrayList;

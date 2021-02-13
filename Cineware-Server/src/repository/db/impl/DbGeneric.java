@@ -60,6 +60,31 @@ public class DbGeneric implements DbRepository<GenericEntity> {
             throw e;
         }
     }
+    
+    public void addWithGenKeys(GenericEntity g) throws Exception {
+        try {
+            Connection connection = DbConnectionFactory.getInstance().getConnection();
+            StringBuilder sb = new StringBuilder();
+            sb.append("INSERT ")
+                    .append(g.getTableName())
+                    .append(" (").append(g.columnNamesForInsert()).append(")")
+                    .append(" VALUES(")
+                    .append(g.getInsertValues())
+                    .append(")");
+            String query = sb.toString();
+            System.out.println(query);
+            Statement s = connection.createStatement();
+            s.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs= s.getGeneratedKeys();
+            rs.next();
+            int id = rs.getInt(1);
+            g.setId(id);
+            s.close();
+
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 
     @Override
     public void update(GenericEntity g) throws Exception {

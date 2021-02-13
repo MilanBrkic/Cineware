@@ -8,10 +8,13 @@ package controller;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 import domain.Actor;
+import domain.Article;
 import domain.Director;
 import domain.Hall;
 import domain.Movie;
 import domain.Projection;
+import domain.Seat;
+import domain.Ticket;
 import domain.User;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -23,11 +26,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import operation.AbstractGenericOperation;
 import operation.GenericAdd;
+import operation.GenericAddWithGenKeys;
 import operation.GenericDelete;
 import operation.GenericGet;
 import operation.GenericGetAll;
 import operation.GenericUpdate;
 import operation.actor.GetAllActors;
+import operation.article.AddArticle;
 import operation.director.GetAllDirectors;
 import operation.director.GetDirector;
 import operation.movie.AddMovie;
@@ -36,6 +41,8 @@ import operation.movie.GetAllMovies;
 import operation.movie.GetMovie;
 import operation.movie.UpdateMovie;
 import operation.projection.GetAllProjections;
+import operation.seat.GetAllByHall;
+import operation.ticket.AddTickets;
 import repository.db.impl.DbProjection;
 import operation.user.CheckPassword;
 import operation.user.UpdatePasswordOnly;
@@ -102,6 +109,12 @@ public class Controller {
         hall.setId(hallID);
         ago.execute(hall);
         return (Hall) ((GenericGet) ago).getResult();
+    }
+    
+    public ArrayList<Seat> getAllByHall(Hall hall) throws Exception{
+        AbstractGenericOperation ago = new GetAllByHall();
+        ago.executeWithoutCommit(hall);
+        return ((GetAllByHall)ago).getResult();
     }
 
     public ArrayList<User> getAllUsers() throws Exception {
@@ -246,8 +259,10 @@ public class Controller {
             if (!rep.isTheHallOccupied(projection)) {
                 throw new Exception("Hall ocuppied in given time");
             }
-            AbstractGenericOperation ago = new GenericAdd<Projection>();
-            ago.execute(projection);
+            AbstractGenericOperation ago = new GenericAddWithGenKeys<Projection>();
+            ago.executeWithoutCommit(projection);
+            
+            addTickets(projection);
         } catch (Exception e) {
             throw e;
         }
@@ -260,6 +275,22 @@ public class Controller {
         return ((GetAllProjections) ago).getResult();
     }
 
+    public int addArticle(Article article) throws Exception{
+        AbstractGenericOperation ago = new AddArticle();
+        ago.executeWithoutCommit(article);
+        return ((AddArticle)ago).getResult();
+    }
+    
+    
+    public void addTicket(Ticket ticket) throws Exception{
+        AbstractGenericOperation ago = new GenericAdd<Ticket>();
+        ago.executeWithoutCommit(ticket);
+    }
+    
+    public void addTickets(Projection projection) throws Exception{
+        AbstractGenericOperation ago = new AddTickets();
+        ago.execute(projection);
+    }
     
 
     class Countries {

@@ -3,13 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package domain;
+package domain.enums;
 
 /**
  *
  * @author user
  */
-public enum ProductType {
-    FOOD,
-    DRINK
+public enum MeasurementUnit {
+    L,
+    G,
+    PCS
 }

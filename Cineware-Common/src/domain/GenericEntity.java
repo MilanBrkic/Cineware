@@ -29,4 +29,6 @@ public interface GenericEntity extends Serializable{
     
     public ArrayList<GenericEntity> getFromResultSet(ResultSet rs) throws Exception;
 
+    public void setId(int id);
+
 }
