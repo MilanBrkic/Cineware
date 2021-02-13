@@ -10,6 +10,7 @@ import domain.Hall;
 import domain.Movie;
 import domain.Projection;
 import domain.User;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -24,12 +25,11 @@ import java.sql.Statement;
  */
 public class DbProjection implements DbRepository<Projection> {
 
-    
     public ArrayList<Projection> getAll() throws Exception {
         String query = "SELECT * FROM projection ORDER BY startTime";
         Statement s = connect().createStatement();
         ResultSet rs = s.executeQuery(query);
-        
+
         ArrayList<Projection> projections = new ArrayList<>();
         while (rs.next()) {
             int id = rs.getInt("projectionID");
@@ -41,16 +41,19 @@ public class DbProjection implements DbRepository<Projection> {
 
             int movieID = rs.getInt("movieID");
             Movie movie = Controller.getInstance().getMovie(movieID);
-            
+
             int hallID = rs.getInt("hallID");
             Hall hall = Controller.getInstance().getHall(hallID);
-            Projection p = new Projection(id, startDate, endDate, hall, movie, user);
+
+            BigDecimal price = rs.getBigDecimal("price");
+
+            Projection p = new Projection(id, startDate, endDate, price, hall, movie, user);
             projections.add(p);
         }
-        
+
         return projections;
     }
-    
+
     public boolean isTheHallOccupied(Projection p) throws Exception {
         Hall hall = p.getHall();
         Date dateStart = p.getStartDate();
@@ -67,11 +70,16 @@ public class DbProjection implements DbRepository<Projection> {
     private boolean overlapping(Projection projection, Date dateStart, Date dateEnd) {
         Date pStart = projection.getStartDate();
         Date pEnd = projection.getEndDate();
-        
-        if((pStart.before(dateStart) && pEnd.after(dateStart)) || (pStart.before(dateEnd) && pEnd.after(dateEnd))){
+
+        if ((pStart.before(dateStart) && pEnd.after(dateStart)) || (pStart.before(dateEnd) && pEnd.after(dateEnd))) {
             return true;
         }
-        else return false;
+        else if(pStart.equals(dateStart) || pEnd.equals(dateEnd)){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     private ArrayList<Projection> getAllSameDaySameHall(Hall hall, Date dateStart) throws Exception {
@@ -89,7 +97,7 @@ public class DbProjection implements DbRepository<Projection> {
         ps.setInt(1, hall.getId());
         ps.setTimestamp(2, new java.sql.Timestamp(dateStart.getTime()));
         ps.setTimestamp(3, new java.sql.Timestamp(dateEnd.getTime()));
-        
+
         ResultSet rs = ps.executeQuery();
 
         ArrayList<Projection> projections = new ArrayList<>();
@@ -103,7 +111,9 @@ public class DbProjection implements DbRepository<Projection> {
 
             int movieID = rs.getInt("movieID");
             Movie movie = Controller.getInstance().getMovie(movieID);
-            Projection p = new Projection(id, startDate, endDate, hall, movie, user);
+            BigDecimal price = rs.getBigDecimal("price");
+
+            Projection p = new Projection(id, startDate, endDate, price, hall, movie, user);
             projections.add(p);
         }
 
@@ -134,7 +144,5 @@ public class DbProjection implements DbRepository<Projection> {
     public Projection get(Projection t) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    
 
 }

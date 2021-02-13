@@ -12,6 +12,7 @@ import domain.Projection;
 import domain.User;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -83,17 +84,24 @@ public class ControllerProjectionAdd {
                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd.MM.yyyy");
                     String dateString = hour + ":" + minute + " " + day + "." + month + "." + new GregorianCalendar().get(GregorianCalendar.YEAR);
                     Date startDate = sdf.parse(dateString);
-                    System.out.println(startDate);
                     
                     if (startDate.before(new Date())) {
                         throw new Exception("You can not enter a time in past");
                     }
                     
                     Date endDate = getEndDate(startDate, movie.getRuntime());
-                    System.out.println(endDate);
                     
                     User user = MainCoordinator.getInstance().getUser();
-                    Projection projection = new Projection(startDate, endDate, hall, movie, user);
+                    
+                    BigDecimal price;
+                    try {
+                        price = new BigDecimal(panel.getTxtPrice().getText());    
+                    } catch (NumberFormatException nfe) {
+                        throw new Exception("The price is not right");
+                    }
+                    
+                    
+                    Projection projection = new Projection(startDate, endDate, price, hall, movie, user);
                     Communcation.getInstance().addProjection(projection);
                     JOptionPane.showMessageDialog(panel, "Projecation has been added", "Added", JOptionPane.INFORMATION_MESSAGE);
 

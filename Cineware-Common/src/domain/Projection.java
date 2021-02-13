@@ -5,6 +5,7 @@
  */
 package domain;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class Projection implements GenericEntity{
     private int id;
     private Date startDate;
     private Date endDate;
+    private BigDecimal price;
     private Hall hall;
     private Movie movie;
     private User user;
@@ -25,25 +27,33 @@ public class Projection implements GenericEntity{
     public Projection() {
     }
 
-    public Projection(int id, Date startDate, Date endDate, Hall hall, Movie movie, User user) {
+    public Projection(Date startDate, Date endDate, BigDecimal price, Hall hall, Movie movie, User user) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.price = price;
+        this.hall = hall;
+        this.movie = movie;
+        this.user = user;
+    }
+    
+    public Projection(int id, Date startDate, Date endDate, BigDecimal price, Hall hall, Movie movie, User user) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.price = price;
         this.hall = hall;
         this.movie = movie;
         this.user = user;
     }
 
-    
-    
-    public Projection(Date startDate, Date endDate, Hall hall, Movie movie, User user) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.hall = hall;
-        this.movie = movie;
-        this.user = user;
+    public BigDecimal getPrice() {
+        return price;
     }
-    
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
     
 
     public int getId() {
@@ -133,7 +143,7 @@ public class Projection implements GenericEntity{
 
     @Override
     public String columnNamesForInsert() {
-        return "projectionID, startTime,endTime, hallID, movieID, userID";
+        return "projectionID, startTime,endTime,price, hallID, movieID, userID";
     }
 
     @Override
@@ -142,6 +152,7 @@ public class Projection implements GenericEntity{
         sb.append(id).append(", ")
           .append("'").append(new java.sql.Timestamp(startDate.getTime())).append("', ")
           .append("'").append(new java.sql.Timestamp(endDate.getTime())).append("', ")
+          .append(price).append(", ")
           .append(hall.getId()).append(", ")
           .append(movie.getId()).append(", ")
           .append(user.getId());
