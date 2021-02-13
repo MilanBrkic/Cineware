@@ -265,4 +265,9 @@ public class Communcation {
         }else throw response.getException();
     }
 
+    public void deleteProjection(Projection projection) throws Exception {
+       GenericAddUpdateDelete<Projection> gen = new GenericAddUpdateDelete<>(gson,sender,receiver);
+       gen.execute(projection, Operation.DELETE_PROJECTION);
+    }
+
 }

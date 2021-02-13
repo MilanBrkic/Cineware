@@ -5,6 +5,7 @@
  */
 package view.model.table;
 
+import communcation.Communcation;
 import domain.Projection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -58,6 +59,13 @@ public class ProjectionTableModel extends AbstractTableModel{
     
     public void add(Projection p){
         projections.add(p);
+        fireTableDataChanged();
+    }
+
+    public void delete(int index) throws Exception {
+        Projection projection = projections.get(index);
+        Communcation.getInstance().deleteProjection(projection);
+        projections.remove(index);
         fireTableDataChanged();
     }
     

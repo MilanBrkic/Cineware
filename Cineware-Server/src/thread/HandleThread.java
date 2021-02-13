@@ -191,6 +191,9 @@ public class HandleThread extends Thread {
                         case UPDATE_PROJECTION:
                             break;
                         case DELETE_PROJECTION:
+                            String jsonDeleteProjection = request.getArguments();
+                            Projection deleteProjection = gson.fromJson(jsonDeleteProjection, Projection.class);
+                            Controller.getInstance().deleteProjection(deleteProjection);
                             break;
                             
                     }

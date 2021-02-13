@@ -291,6 +291,11 @@ public class Controller {
         AbstractGenericOperation ago = new AddTickets();
         ago.execute(projection);
     }
+
+    public void deleteProjection(Projection projection) throws Exception {
+        AbstractGenericOperation ago = new GenericDelete<Ticket>();
+        ago.execute(projection);
+    }
     
 
     class Countries {

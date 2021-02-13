@@ -7,6 +7,8 @@ package view.controller.projection;
 
 import communcation.Communcation;
 import domain.Projection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,6 +47,8 @@ public class ControllerProjectionView {
             JOptionPane.showMessageDialog(panel, "Could not load movies", "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(ControllerProjectionView.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        setDeleteListener();
     }
 
     private void setExitButton() {
@@ -76,22 +80,41 @@ public class ControllerProjectionView {
         for (Projection projection : previous) {
             previousModel.add(projection);
         }
-        
+
         TableColumnModel columnModel = panel.getTablePastProjections().getColumnModel();
 
         columnModel.getColumn(0).setPreferredWidth(150);
         columnModel.getColumn(1).setPreferredWidth(5);
         columnModel.getColumn(2).setPreferredWidth(5);
         columnModel.getColumn(3).setPreferredWidth(50);
-        
-        
-        
+
         TableColumnModel columnModelUpcoming = panel.getTableUpcomingProjections().getColumnModel();
 
         columnModelUpcoming.getColumn(0).setPreferredWidth(150);
         columnModelUpcoming.getColumn(1).setPreferredWidth(5);
         columnModelUpcoming.getColumn(2).setPreferredWidth(5);
         columnModelUpcoming.getColumn(3).setPreferredWidth(50);
+    }
+
+    private void setDeleteListener() {
+        panel.getBtnDelete().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = panel.getTableUpcomingProjections().getSelectedRow();
+                if (index >= 0) {
+                    try {
+                        int number = JOptionPane.showConfirmDialog(panel, "Are you sure you what to delete the projection?", "Delete", 0);
+                        if (number == 0) {
+                            upcomingModel.delete(index);
+                        }
+                    } catch (Exception ex) {
+                        Logger.getLogger(ControllerProjectionView.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(panel, "Row is not selected", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }
 
 }
