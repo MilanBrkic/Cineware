@@ -12,10 +12,12 @@ import domain.Article;
 import domain.Director;
 import domain.Hall;
 import domain.Movie;
+import domain.Product;
 import domain.Projection;
 import domain.Seat;
 import domain.Ticket;
 import domain.User;
+import domain.enums.MeasurementUnit;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -295,6 +297,14 @@ public class Controller {
     public void deleteProjection(Projection projection) throws Exception {
         AbstractGenericOperation ago = new GenericDelete<Ticket>();
         ago.execute(projection);
+    }
+
+    public void addProduct(Product product) throws Exception {
+        Article article = new Article(product.getPrice(), product.getUnit());
+        int id = addArticle(article);
+        product.setId(id);
+        AbstractGenericOperation ago = new GenericAdd<Product>();
+        ago.execute(product);
     }
     
 

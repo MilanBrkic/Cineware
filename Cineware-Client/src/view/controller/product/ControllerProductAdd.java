@@ -83,6 +83,8 @@ public class ControllerProductAdd {
                     Communcation.getInstance().addProduct(product);
                     
                     JOptionPane.showMessageDialog(panel, "Product "+name+" added", "Added", JOptionPane.INFORMATION_MESSAGE);
+                    panel.getTxtName().setText("");
+                    panel.getTxtPrice().setText("");
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     ex.printStackTrace();

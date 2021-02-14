@@ -18,6 +18,7 @@ import domain.Hall;
 import domain.Movie;
 import domain.Projection;
 import domain.User;
+import domain.Product;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -194,6 +195,11 @@ public class HandleThread extends Thread {
                             String jsonDeleteProjection = request.getArguments();
                             Projection deleteProjection = gson.fromJson(jsonDeleteProjection, Projection.class);
                             Controller.getInstance().deleteProjection(deleteProjection);
+                            break;
+                        case ADD_PRODUCT:
+                            String jsonAddProduct = request.getArguments();
+                            Product addProduct = gson.fromJson(jsonAddProduct, Product.class);
+                            Controller.getInstance().addProduct(addProduct);
                             break;
                             
                     }

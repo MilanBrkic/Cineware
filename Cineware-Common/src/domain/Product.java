@@ -64,5 +64,32 @@ public class Product extends Article{
     public String toString() {
         return name;
     }
+
+    @Override
+    public String getTableName() {
+        return "product";
+    }
+
+    @Override
+    public String columnNamesForInsert() {
+        return "articleID, name, type, userID";
+    }
+
+    @Override
+    public String getInsertValues() {
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append(id).append(", ")
+          .append("'").append(name).append("', ")
+          .append("'").append(type).append("', ")
+          .append(user.getId());
+        
+        return sb.toString();
+    }
+    
+    
+    
+    
+    
     
 }
