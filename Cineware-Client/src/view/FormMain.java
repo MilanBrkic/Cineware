@@ -39,6 +39,9 @@ public class FormMain extends javax.swing.JFrame {
         PanelMain = new javax.swing.JPanel();
         lblWelcomeUser = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
+        menuProduct = new javax.swing.JMenu();
+        menuItemProductAdd = new javax.swing.JMenuItem();
+        menuItemProductView = new javax.swing.JMenuItem();
         menuProjection = new javax.swing.JMenu();
         menuItemProjectionAdd = new javax.swing.JMenuItem();
         menuItemProjectionView = new javax.swing.JMenuItem();
@@ -82,6 +85,16 @@ public class FormMain extends javax.swing.JFrame {
         getContentPane().add(PanelMain, java.awt.BorderLayout.CENTER);
 
         menuBar.setBackground(new java.awt.Color(255, 255, 255));
+
+        menuProduct.setText("Product");
+
+        menuItemProductAdd.setText("Add");
+        menuProduct.add(menuItemProductAdd);
+
+        menuItemProductView.setText("View");
+        menuProduct.add(menuItemProductView);
+
+        menuBar.add(menuProduct);
 
         menuProjection.setText("Projection");
 
@@ -163,7 +176,6 @@ public class FormMain extends javax.swing.JFrame {
         return menuBar;
     }
     
-    
 
     public JPanel getPanelMain() {
         return PanelMain;
@@ -217,7 +229,13 @@ public class FormMain extends javax.swing.JFrame {
         return menuItemProjectionView;
     }
 
-    
+    public JMenuItem getMenuItemProductAdd() {
+        return menuItemProductAdd;
+    }
+
+    public JMenuItem getMenuItemProductView() {
+        return menuItemProductView;
+    }
 
     
     
@@ -239,11 +257,14 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemHallView;
     private javax.swing.JMenuItem menuItemMovieAdd;
     private javax.swing.JMenuItem menuItemMovieView;
+    private javax.swing.JMenuItem menuItemProductAdd;
+    private javax.swing.JMenuItem menuItemProductView;
     private javax.swing.JMenuItem menuItemProjectionAdd;
     private javax.swing.JMenuItem menuItemProjectionView;
     private javax.swing.JMenuItem menuItemUserAdd;
     private javax.swing.JMenuItem menuItemUserView;
     private javax.swing.JMenu menuMovie;
+    private javax.swing.JMenu menuProduct;
     private javax.swing.JMenu menuProjection;
     private javax.swing.JMenu menuUser;
     // End of variables declaration//GEN-END:variables

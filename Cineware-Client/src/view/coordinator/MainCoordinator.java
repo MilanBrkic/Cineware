@@ -25,6 +25,8 @@ import view.controller.ControllerLogin;
 import view.controller.ControllerMain;
 import view.controller.movie.ControllerMovieAdd;
 import view.controller.movie.ControllerMovieView;
+import view.controller.product.ControllerProductAdd;
+import view.controller.product.ControllerProductView;
 import view.controller.projection.ControllerProjectionAdd;
 import view.controller.projection.ControllerProjectionView;
 import view.controller.user.ControllerUserAdd;
@@ -41,8 +43,11 @@ import view.panel.user.PanelUserView;
 import view.panel.mode.ActorMode;
 import view.panel.mode.DirectorMode;
 import view.panel.mode.MovieMode;
+import view.panel.mode.ProductMode;
 import view.panel.mode.ProjectionMode;
 import view.panel.mode.UserMode;
+import view.panel.product.PanelProductAdd;
+import view.panel.product.PanelProductView;
 import view.panel.projection.PanelProjectionAdd;
 import view.panel.projection.PanelProjectionView;
 
@@ -156,6 +161,18 @@ public class MainCoordinator {
         ControllerProjectionView projectionView = new ControllerProjectionView(new PanelProjectionView());
         addPanel(projectionView.getPanel());
         projectionView.openPanel();
+    }
+    
+    public void openPanelProductAdd(ProductMode productMode){
+        ControllerProductAdd productAdd = new ControllerProductAdd(new PanelProductAdd(), ProductMode.ADD);
+        addPanel(productAdd.getPanel());
+        productAdd.openPanel();
+    }
+    
+    public void openPanelProductView(){
+        ControllerProductView productView = new ControllerProductView(new PanelProductView());
+        addPanel(productView.getPanel());
+        productView.openPanel();
     }
     
     public void removePanel(JPanel panel){

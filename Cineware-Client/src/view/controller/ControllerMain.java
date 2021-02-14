@@ -27,6 +27,7 @@ import view.panel.mode.ActorMode;
 import view.panel.mode.DirectorMode;
 import view.panel.mode.GenericMode;
 import view.panel.mode.MovieMode;
+import view.panel.mode.ProductMode;
 import view.panel.mode.ProjectionMode;
 import view.panel.mode.UserMode;
 import view.util.IconSetter;
@@ -57,6 +58,7 @@ public class ControllerMain {
         jMenuItemsAdd.add(() -> form.getMenuItemMovieAdd());
         jMenuItemsAdd.add(() -> form.getMenuItemUserAdd());
         jMenuItemsAdd.add(() -> form.getMenuItemProjectionAdd());
+        jMenuItemsAdd.add(() -> form.getMenuItemProductAdd());
 
         jMenuItemsView.add(() -> form.getMenuItemUserView());
         jMenuItemsView.add(() -> form.getMenuItemActorView());
@@ -64,6 +66,7 @@ public class ControllerMain {
         jMenuItemsView.add(() -> form.getMenuItemMovieView());
         jMenuItemsView.add(() -> form.getMenuItemHallView());
         jMenuItemsView.add(() -> form.getMenuItemProjectionView());
+        jMenuItemsAdd.add(() -> form.getMenuItemProductView());
     }
 
     public void setIcon() {
@@ -130,6 +133,7 @@ public class ControllerMain {
         setMovieListeners();
         setActorListeners();
         setProjectionListeners();
+        setProductListeners();
         setWindowListener();
     }
 
@@ -250,6 +254,25 @@ public class ControllerMain {
             }
         });
     }
+    
+    private void setProductListeners() {
+        form.getMenuItemProductAdd().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                templateForAdd(()-> form.getMenuItemProductAdd(),
+                        x -> MainCoordinator.getInstance().openPanelProductAdd((ProductMode)x),
+                        ProductMode.ADD);
+            }
+        });
+        
+        form.getMenuItemProductView().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               templateForView(() -> form.getMenuItemProjectionView(),
+                        () -> MainCoordinator.getInstance().openPanelProductView());
+            }
+        });
+    }
 
     public void templateForView(Supplier<JMenuItem> menuItemView, Runnable openPanel) {
         MainCoordinator.getInstance().removeAllPanels();
@@ -322,5 +345,7 @@ public class ControllerMain {
             }
         });
     }
+
+    
 
 }
