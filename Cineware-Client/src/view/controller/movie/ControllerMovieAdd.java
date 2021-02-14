@@ -26,9 +26,8 @@ import view.coordinator.MainCoordinator;
 import view.model.table.ActorForMovieTableModel;
 import view.model.table.MovieTableModel;
 import view.panel.movie.PanelMovieAdd;
-import view.panel.mode.ActorMode;
-import view.panel.mode.DirectorMode;
-import view.panel.mode.MovieMode;
+import view.panel.mode.Mode;
+
 
 /**
  *
@@ -37,11 +36,11 @@ import view.panel.mode.MovieMode;
 public class ControllerMovieAdd {
 
     PanelMovieAdd panel;
-    MovieMode mode;
+    Mode mode;
     ActorForMovieTableModel model;
     ArrayList<Supplier<JComponent>> componentGetters = new ArrayList<>();
 
-    public ControllerMovieAdd(PanelMovieAdd panel, MovieMode mode) {
+    public ControllerMovieAdd(PanelMovieAdd panel, Mode mode) {
         this.panel = panel;
         this.mode = mode;
         model = new ActorForMovieTableModel(new ArrayList<>());
@@ -277,7 +276,7 @@ public class ControllerMovieAdd {
         User user = MainCoordinator.getInstance().getUser();
 
         Movie movie = null;
-        if (mode == MovieMode.EDIT) {
+        if (mode == Mode.EDIT) {
             Movie movieDetails = (Movie) MainCoordinator.getInstance().getParams().get(Constant.MOVIE_DETAILS);
             int index = movieDetails.getId();
             movie = new Movie(index, name, description, genre, runtime, year, director, actors, user);
@@ -291,7 +290,7 @@ public class ControllerMovieAdd {
         panel.getBtnAddNewDirector().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MainCoordinator.getInstance().openPanelDirectorAdd(DirectorMode.ADD);
+                MainCoordinator.getInstance().openPanelDirectorAdd(Mode.ADD);
 
             }
         });
@@ -312,7 +311,7 @@ public class ControllerMovieAdd {
         panel.getBtnAddNewActor().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MainCoordinator.getInstance().openPanelActorAdd(ActorMode.ADD);
+                MainCoordinator.getInstance().openPanelActorAdd(Mode.ADD);
             }
         });
 

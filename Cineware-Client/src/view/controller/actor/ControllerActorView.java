@@ -17,7 +17,7 @@ import view.constant.Constant;
 import view.coordinator.MainCoordinator;
 import view.model.table.ActorTableModel;
 import view.panel.actor.PanelActorView;
-import view.panel.mode.ActorMode;
+import view.panel.mode.Mode;
 
 /**
  *
@@ -64,7 +64,7 @@ public class ControllerActorView {
                     Actor d = model.getActors().get(index);
                     MainCoordinator.getInstance().getParams().put(Constant.ACTOR_DETAILS, d);
                     MainCoordinator.getInstance().getParams().put(Constant.ACTOR_TABLE_MODEL, model);
-                    MainCoordinator.getInstance().openPanelActorAdd(ActorMode.EDIT);
+                    MainCoordinator.getInstance().openPanelActorAdd(Mode.EDIT);
                 }
             }
         });

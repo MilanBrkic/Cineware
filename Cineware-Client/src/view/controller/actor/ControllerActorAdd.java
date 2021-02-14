@@ -22,7 +22,7 @@ import view.constant.Constant;
 import view.coordinator.MainCoordinator;
 import view.model.table.ActorTableModel;
 import view.panel.actor.PanelActorAdd;
-import view.panel.mode.ActorMode;
+import view.panel.mode.Mode;
 
 /**
  *
@@ -31,9 +31,9 @@ import view.panel.mode.ActorMode;
 public class ControllerActorAdd {
 
     PanelActorAdd panel;
-    ActorMode mode;
+    Mode mode;
 
-    public ControllerActorAdd(PanelActorAdd panel, ActorMode mode) {
+    public ControllerActorAdd(PanelActorAdd panel, Mode mode) {
         this.panel = panel;
         this.mode = mode;
     }
@@ -169,7 +169,7 @@ public class ControllerActorAdd {
         User user = MainCoordinator.getInstance().getUser();
 
         Actor actor = null;
-        if (mode == ActorMode.EDIT) {
+        if (mode == Mode.EDIT) {
             Actor actorDetails = (Actor) MainCoordinator.getInstance().getParams().get(Constant.ACTOR_DETAILS);
             int id = actorDetails.getId();
             actor = new Actor(id, firstname, lastname, dayOfBirth, country, user);

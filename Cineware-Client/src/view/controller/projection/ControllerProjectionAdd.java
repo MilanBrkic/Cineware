@@ -21,7 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import view.coordinator.MainCoordinator;
-import view.panel.mode.ProjectionMode;
+import view.panel.mode.Mode;
 import view.panel.projection.PanelProjectionAdd;
 
 /**
@@ -31,9 +31,9 @@ import view.panel.projection.PanelProjectionAdd;
 public class ControllerProjectionAdd {
 
     private PanelProjectionAdd panel;
-    private ProjectionMode mode;
+    private Mode mode;
 
-    public ControllerProjectionAdd(PanelProjectionAdd panel, ProjectionMode mode) {
+    public ControllerProjectionAdd(PanelProjectionAdd panel, Mode mode) {
         this.panel = panel;
         this.mode = mode;
     }

@@ -23,13 +23,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import view.FormMain;
-import view.panel.mode.ActorMode;
-import view.panel.mode.DirectorMode;
-import view.panel.mode.GenericMode;
-import view.panel.mode.MovieMode;
-import view.panel.mode.ProductMode;
-import view.panel.mode.ProjectionMode;
-import view.panel.mode.UserMode;
+import view.panel.mode.Mode;
 import view.util.IconSetter;
 
 /**
@@ -155,8 +149,8 @@ public class ControllerMain {
             @Override
             public void actionPerformed(ActionEvent e) {
                 templateForAdd(() -> form.getMenuItemUserAdd(),
-                        x -> MainCoordinator.getInstance().openPanelUserAdd((UserMode) x),
-                        UserMode.ADD);
+                        x -> MainCoordinator.getInstance().openPanelUserAdd((Mode) x),
+                        Mode.ADD);
             }
         });
 
@@ -184,8 +178,8 @@ public class ControllerMain {
             @Override
             public void actionPerformed(ActionEvent e) {
                 templateForAdd(() -> form.getMenuItemDirectorAdd(),
-                        x -> MainCoordinator.getInstance().openPanelDirectorAdd((DirectorMode) x),
-                        DirectorMode.ADD);
+                        x -> MainCoordinator.getInstance().openPanelDirectorAdd((Mode) x),
+                        Mode.ADD);
             }
         });
         form.getMenuItemDirectorView().addActionListener(new ActionListener() {
@@ -202,8 +196,8 @@ public class ControllerMain {
             @Override
             public void actionPerformed(ActionEvent e) {
                 templateForAdd(() -> form.getMenuItemActorAdd(),
-                        x -> MainCoordinator.getInstance().openPanelActorAdd((ActorMode) x),
-                        ActorMode.ADD);
+                        x -> MainCoordinator.getInstance().openPanelActorAdd((Mode) x),
+                        Mode.ADD);
             }
         });
         form.getMenuItemActorView().addActionListener(new ActionListener() {
@@ -220,8 +214,8 @@ public class ControllerMain {
             @Override
             public void actionPerformed(ActionEvent e) {
                 templateForAdd(() -> form.getMenuItemMovieAdd(),
-                        x -> MainCoordinator.getInstance().openPanelMovieAdd((MovieMode) x),
-                        MovieMode.ADD);
+                        x -> MainCoordinator.getInstance().openPanelMovieAdd((Mode) x),
+                        Mode.ADD);
 
             }
         });
@@ -240,8 +234,8 @@ public class ControllerMain {
             @Override
             public void actionPerformed(ActionEvent e) {
                 templateForAdd(()-> form.getMenuItemProjectionAdd(),
-                        x -> MainCoordinator.getInstance().openPanelProjectionAdd((ProjectionMode)x),
-                        ProjectionMode.ADD);
+                        x -> MainCoordinator.getInstance().openPanelProjectionAdd((Mode)x),
+                        Mode.ADD);
             }
         });
         
@@ -260,15 +254,15 @@ public class ControllerMain {
             @Override
             public void actionPerformed(ActionEvent e) {
                 templateForAdd(()-> form.getMenuItemProductAdd(),
-                        x -> MainCoordinator.getInstance().openPanelProductAdd((ProductMode)x),
-                        ProductMode.ADD);
+                        x -> MainCoordinator.getInstance().openPanelProductAdd((Mode)x),
+                        Mode.ADD);
             }
         });
         
         form.getMenuItemProductView().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               templateForView(() -> form.getMenuItemProjectionView(),
+               templateForView(() -> form.getMenuItemProductView(),
                         () -> MainCoordinator.getInstance().openPanelProductView());
             }
         });
@@ -282,7 +276,7 @@ public class ControllerMain {
         openPanel.run();
     }
 
-    public void templateForAdd(Supplier<JMenuItem> menuItemAdd, Consumer<GenericMode> openPanel, GenericMode mode) {
+    public void templateForAdd(Supplier<JMenuItem> menuItemAdd, Consumer<Mode> openPanel, Mode mode) {
         MainCoordinator.getInstance().removeAllPanels();
         enableAll();
         menuItemAdd.get().setEnabled(false);

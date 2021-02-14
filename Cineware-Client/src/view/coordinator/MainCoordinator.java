@@ -36,16 +36,11 @@ import view.panel.actor.PanelActorView;
 import view.panel.director.PanelDirectorAdd;
 import view.panel.director.PanelDirectorView;
 import view.panel.hall.PanelHallView;
+import view.panel.mode.Mode;
 import view.panel.movie.PanelMovieAdd;
 import view.panel.movie.PanelMovieView;
 import view.panel.user.PanelUserAdd;
 import view.panel.user.PanelUserView;
-import view.panel.mode.ActorMode;
-import view.panel.mode.DirectorMode;
-import view.panel.mode.MovieMode;
-import view.panel.mode.ProductMode;
-import view.panel.mode.ProjectionMode;
-import view.panel.mode.UserMode;
 import view.panel.product.PanelProductAdd;
 import view.panel.product.PanelProductView;
 import view.panel.projection.PanelProjectionAdd;
@@ -94,7 +89,7 @@ public class MainCoordinator {
     
 
     
-    public void openPanelUserAdd(UserMode mode){
+    public void openPanelUserAdd(Mode mode){
         ControllerUserAdd userAdd = new ControllerUserAdd(new PanelUserAdd(), mode);
         addPanel(userAdd.getPanel());
         userAdd.openPanel();
@@ -115,7 +110,7 @@ public class MainCoordinator {
         hallView.openPanel();
     }
     
-     public void openPanelDirectorAdd(DirectorMode mode) {
+     public void openPanelDirectorAdd(Mode mode) {
         ControllerDirectorAdd directorAdd = new ControllerDirectorAdd(new PanelDirectorAdd(), mode);
         addPanel(directorAdd.getPanel());
         directorAdd.openPanel();
@@ -127,7 +122,7 @@ public class MainCoordinator {
         directorView.openPanel();
     }
     
-    public void openPanelActorAdd(ActorMode mode) {
+    public void openPanelActorAdd(Mode mode) {
         ControllerActorAdd actorAdd = new ControllerActorAdd(new PanelActorAdd(), mode);
         addPanel(actorAdd.getPanel());
         actorAdd.openPanel();
@@ -139,7 +134,7 @@ public class MainCoordinator {
         actorView.openPanel();
     }
     
-    public void openPanelMovieAdd(MovieMode movieMode) {
+    public void openPanelMovieAdd(Mode movieMode) {
         ControllerMovieAdd movieAdd = new ControllerMovieAdd(new PanelMovieAdd(), movieMode);
         addPanel(movieAdd.getPanel());
         movieAdd.openPanel();
@@ -151,7 +146,7 @@ public class MainCoordinator {
         movieView.openPanel();
     }
     
-    public void openPanelProjectionAdd(ProjectionMode projectionMode){
+    public void openPanelProjectionAdd(Mode projectionMode){
         ControllerProjectionAdd projectionAdd = new ControllerProjectionAdd(new PanelProjectionAdd(), projectionMode);
         addPanel(projectionAdd.getPanel());
         projectionAdd.openPanel();
@@ -163,8 +158,8 @@ public class MainCoordinator {
         projectionView.openPanel();
     }
     
-    public void openPanelProductAdd(ProductMode productMode){
-        ControllerProductAdd productAdd = new ControllerProductAdd(new PanelProductAdd(), ProductMode.ADD);
+    public void openPanelProductAdd(Mode productMode){
+        ControllerProductAdd productAdd = new ControllerProductAdd(new PanelProductAdd(),productMode);
         addPanel(productAdd.getPanel());
         productAdd.openPanel();
     }

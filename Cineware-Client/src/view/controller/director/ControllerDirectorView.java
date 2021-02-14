@@ -17,7 +17,7 @@ import view.constant.Constant;
 import view.coordinator.MainCoordinator;
 import view.model.table.DirectorTableModel;
 import view.panel.director.PanelDirectorView;
-import view.panel.mode.DirectorMode;
+import view.panel.mode.Mode;
 
 /**
  *
@@ -64,7 +64,7 @@ public class ControllerDirectorView {
                     Director d = model.getDirectors().get(index);
                     MainCoordinator.getInstance().getParams().put(Constant.DIRECTOR_DETAILS, d);
                     MainCoordinator.getInstance().getParams().put(Constant.DIRECTOR_TABLE_MODEL, model);
-                    MainCoordinator.getInstance().openPanelDirectorAdd(DirectorMode.EDIT);
+                    MainCoordinator.getInstance().openPanelDirectorAdd(Mode.EDIT);
                 }
             }
         });

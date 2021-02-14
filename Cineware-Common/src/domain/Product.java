@@ -16,14 +16,24 @@ import java.math.BigDecimal;
 public class Product extends Article{
     private String name;
     private ProductType type;
-
+    private User user;
+    
     public Product() {
     }
 
-    public Product(int id, BigDecimal price, MeasurementUnit unit, String name, ProductType type) {
+    public Product(BigDecimal price, MeasurementUnit unit, String name, ProductType type, User user) {
+        super(price, unit);
+        this.name = name;
+        this.type = type;
+        this.user = user;
+    }
+    
+    
+    public Product(int id, BigDecimal price, MeasurementUnit unit, String name, ProductType type, User user) {
         super(id, price, unit);
         this.name = name;
         this.type = type;
+        this.user = user;        
     }
 
     public String getName() {
@@ -34,6 +44,14 @@ public class Product extends Article{
         this.name = name;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
     public ProductType getType() {
         return type;
     }
@@ -46,8 +64,5 @@ public class Product extends Article{
     public String toString() {
         return name;
     }
-    
-    
-    
     
 }

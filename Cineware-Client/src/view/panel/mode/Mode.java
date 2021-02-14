@@ -9,6 +9,6 @@ package view.panel.mode;
  *
  * @author user
  */
-public enum ProjectionMode implements GenericMode{
-    ADD,EDIT
+public enum Mode {
+    ADD,EDIT,EDIT_PASSWORD
 }

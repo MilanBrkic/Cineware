@@ -22,7 +22,7 @@ import view.constant.Constant;
 import view.coordinator.MainCoordinator;
 import view.model.table.DirectorTableModel;
 import view.panel.director.PanelDirectorAdd;
-import view.panel.mode.DirectorMode;
+import view.panel.mode.Mode;
 
 /**
  *
@@ -31,9 +31,9 @@ import view.panel.mode.DirectorMode;
 public class ControllerDirectorAdd {
 
     PanelDirectorAdd panel;
-    DirectorMode mode;
+    Mode mode;
 
-    public ControllerDirectorAdd(PanelDirectorAdd panel, DirectorMode mode) {
+    public ControllerDirectorAdd(PanelDirectorAdd panel, Mode mode) {
         this.panel = panel;
         this.mode = mode;
     }
@@ -165,7 +165,7 @@ public class ControllerDirectorAdd {
         User user = MainCoordinator.getInstance().getUser();
         
         Director director= null;
-        if(mode==DirectorMode.EDIT){
+        if(mode==Mode.EDIT){
             Director directorDetails = (Director) MainCoordinator.getInstance().getParams().get(Constant.DIRECTOR_DETAILS);
             int id = directorDetails.getId();
             director = new Director(id,firstname, lastname, dayOfBirth, country, user);

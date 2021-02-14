@@ -16,8 +16,8 @@ import javax.swing.JOptionPane;
 import validation.Validation;
 
 import view.model.table.UserTableModel;
+import view.panel.mode.Mode;
 import view.panel.user.PanelUserAdd;
-import view.panel.mode.UserMode;
 
 /**
  *
@@ -26,9 +26,9 @@ import view.panel.mode.UserMode;
 public class ControllerUserAdd {
 
     PanelUserAdd panel;
-    UserMode mode;
+    Mode mode;
 
-    public ControllerUserAdd(PanelUserAdd panel, UserMode mode) {
+    public ControllerUserAdd(PanelUserAdd panel, Mode mode) {
         this.panel = panel;
         this.mode = mode;
     }

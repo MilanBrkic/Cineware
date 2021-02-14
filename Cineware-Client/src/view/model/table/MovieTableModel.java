@@ -40,7 +40,7 @@ public class MovieTableModel extends AbstractTableModel{
         Movie movie = movies.get(rowIndex);
         switch(columnIndex){
             case 0: return movie.getName();
-            case 1: return movie.getGenre();
+            case 1: return movie.getGenre().toString();
             case 2: return movie.getRuntime();
             case 3: return movie.getYear();
             case 4: return movie.getDirector().toString();

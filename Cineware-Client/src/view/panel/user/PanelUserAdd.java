@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
-import view.panel.mode.UserMode;
 import view.util.ExitButton;
 
 /**

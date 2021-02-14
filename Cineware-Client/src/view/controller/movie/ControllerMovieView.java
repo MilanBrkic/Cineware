@@ -16,7 +16,7 @@ import javax.swing.table.TableColumnModel;
 import view.constant.Constant;
 import view.coordinator.MainCoordinator;
 import view.model.table.MovieTableModel;
-import view.panel.mode.MovieMode;
+import view.panel.mode.Mode;
 import view.panel.movie.PanelMovieView;
 
 /**
@@ -77,7 +77,7 @@ public class ControllerMovieView {
                     Movie m = model.getMovies().get(index);
                     MainCoordinator.getInstance().getParams().put(Constant.MOVIE_DETAILS, m);
                     MainCoordinator.getInstance().getParams().put(Constant.MOVIE_TABLE_MODEL, model);
-                    MainCoordinator.getInstance().openPanelMovieAdd(MovieMode.EDIT);
+                    MainCoordinator.getInstance().openPanelMovieAdd(Mode.EDIT);
                 }
             }
         });

@@ -16,6 +16,7 @@ import domain.Actor;
 import domain.Director;
 import domain.Hall;
 import domain.Movie;
+import domain.Product;
 import domain.Projection;
 import domain.User;
 import java.io.IOException;
@@ -268,6 +269,11 @@ public class Communcation {
     public void deleteProjection(Projection projection) throws Exception {
        GenericAddUpdateDelete<Projection> gen = new GenericAddUpdateDelete<>(gson,sender,receiver);
        gen.execute(projection, Operation.DELETE_PROJECTION);
+    }
+
+    public void addProduct(Product product) throws Exception {
+        GenericAddUpdateDelete<Product> gen = new GenericAddUpdateDelete<>(gson,sender,receiver);
+       gen.execute(product, Operation.ADD_PRODUCT);
     }
 
 }

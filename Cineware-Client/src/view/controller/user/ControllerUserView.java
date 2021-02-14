@@ -15,8 +15,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import view.model.table.UserTableModel;
+import view.panel.mode.Mode;
 import view.panel.user.PanelUserView;
-import view.panel.mode.UserMode;
 
 /**
  *
@@ -58,15 +58,15 @@ public class ControllerUserView {
                     if(MainCoordinator.getInstance().getUser().isAdmin()) {
                         if(user.getUsername().equals(MainCoordinator.getInstance().getUser().getUsername())){    
                             if(adminUserOptionPane()==1){
-                                MainCoordinator.getInstance().openPanelUserAdd(UserMode.EDIT_PASSWORD);
+                                MainCoordinator.getInstance().openPanelUserAdd(Mode.EDIT_PASSWORD);
                                 return;
                             }
                         }
-                        MainCoordinator.getInstance().openPanelUserAdd(UserMode.EDIT);
+                        MainCoordinator.getInstance().openPanelUserAdd(Mode.EDIT);
                     }
                     else if(user.equals(MainCoordinator.getInstance().getUser())){
                                                
-                        MainCoordinator.getInstance().openPanelUserAdd(UserMode.EDIT_PASSWORD);
+                        MainCoordinator.getInstance().openPanelUserAdd(Mode.EDIT_PASSWORD);
                     }
                     else JOptionPane.showMessageDialog(panel, "Non admin can only see details of his account", "Error", JOptionPane.ERROR_MESSAGE);
                     
