@@ -42,6 +42,9 @@ public class PanelProductAdd extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         cmbType = new javax.swing.JComboBox();
         btnAdd = new javax.swing.JButton();
+        btnEnableChanges = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Product"));
 
@@ -54,6 +57,12 @@ public class PanelProductAdd extends javax.swing.JPanel {
         jLabel4.setText("Type:");
 
         btnAdd.setText("Add");
+
+        btnEnableChanges.setText("Enable changes");
+
+        btnEdit.setText("Edit");
+
+        btnDelete.setText("Delete");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -85,8 +94,14 @@ public class PanelProductAdd extends javax.swing.JPanel {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnDelete)
+                .addGap(18, 18, 18)
+                .addComponent(btnEdit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnEnableChanges)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                .addGap(21, 21, 21))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,7 +124,11 @@ public class PanelProductAdd extends javax.swing.JPanel {
                     .addComponent(jLabel4)
                     .addComponent(cmbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(btnAdd)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd)
+                    .addComponent(btnEnableChanges)
+                    .addComponent(btnEdit)
+                    .addComponent(btnDelete))
                 .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -137,11 +156,26 @@ public class PanelProductAdd extends javax.swing.JPanel {
     public ExitButton getExitButton1() {
         return exitButton1;
     }
+
+    public JButton getBtnEdit() {
+        return btnEdit;
+    }
+
+    public JButton getBtnDelete() {
+        return btnDelete;
+    }
+
+    public JButton getBtnEnableChanges() {
+        return btnEnableChanges;
+    }
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnEnableChanges;
     private javax.swing.JComboBox cmbType;
     private javax.swing.JComboBox cmbUnit;
     private view.util.ExitButton exitButton1;

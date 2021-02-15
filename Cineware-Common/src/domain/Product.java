@@ -76,6 +76,18 @@ public class Product extends Article{
     }
 
     @Override
+    public String columnNamesForUpdate() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("name='").append(name).append("', ")
+           .append("type='").append(type).append("', ")
+           .append("userID=").append(user.getId());
+        
+        return sb.toString();
+    }
+
+    
+    
+    @Override
     public String getInsertValues() {
         StringBuilder sb = new StringBuilder();
         

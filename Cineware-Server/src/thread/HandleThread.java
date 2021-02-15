@@ -207,8 +207,14 @@ public class HandleThread extends Thread {
                             response.setResult(jsonAllProducts);
                             break;
                         case UPDATE_PRODUCT:
+                            String jsonUpdateProduct = request.getArguments();
+                            Product updateProduct = gson.fromJson(jsonUpdateProduct, Product.class);
+                            Controller.getInstance().updateProduct(updateProduct);
                             break;
                         case DELETE_PRODUCT:
+                            String jsonDeleteProduct = request.getArguments();
+                            Product deleteProduct = gson.fromJson(jsonDeleteProduct, Product.class);
+                            Controller.getInstance().deleteProduct(deleteProduct);
                             break;
                             
                     }

@@ -6,6 +6,7 @@
 package view.controller.product;
 
 import communcation.Communcation;
+import domain.Product;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -13,7 +14,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumnModel;
+import view.constant.Constant;
+import view.coordinator.MainCoordinator;
 import view.model.table.ProductTableModel;
+import view.panel.mode.Mode;
 import view.panel.product.PanelProductView;
 
 /**
@@ -64,6 +68,7 @@ public class ControllerProductView {
 
     private void setListeners() {
         setSearchListener();
+        setProductListener();
     }
 
     private void setSearchListener() {
@@ -71,7 +76,23 @@ public class ControllerProductView {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String sort = panel.getTxtSearch().getText();
-                model.sort(sort);
+                model.setSortValue(sort);
+                model.sort();
+            }
+        });
+    }
+
+    private void setProductListener() {
+        panel.getBtnDetails().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = panel.getTableProduct().getSelectedRow();
+                if(index>=0){
+                    Product p = model.getProducts().get(index);
+                    MainCoordinator.getInstance().getParams().put(Constant.PRODUCT_DETAILS, p);
+                    MainCoordinator.getInstance().getParams().put(Constant.PRODUCT_TABLE_MODEL, model);
+                    MainCoordinator.getInstance().openPanelProductAdd(Mode.EDIT);
+                }
             }
         });
     }

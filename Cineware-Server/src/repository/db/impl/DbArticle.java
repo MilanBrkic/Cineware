@@ -40,7 +40,7 @@ public class DbArticle implements DbRepository<Article>{
     }
 
     @Override
-    public void update(Article t) throws Exception {
+    public void update(Article a) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

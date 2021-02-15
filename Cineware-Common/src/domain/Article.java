@@ -105,12 +105,16 @@ public class Article implements GenericEntity{
 
     @Override
     public String columnNamesForUpdate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder sb = new StringBuilder();
+        sb.append("price=").append(price).append(", ")
+           .append("measurementUnit='").append(unit).append("'");
+        
+        return sb.toString();
     }
 
     @Override
     public String whereCondition() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "articleID="+id;
     }
 
     @Override

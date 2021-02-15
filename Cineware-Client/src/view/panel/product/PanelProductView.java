@@ -120,7 +120,7 @@ public class PanelProductView extends javax.swing.JPanel {
         return txtSearch;
     }
     
-    
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDetails;

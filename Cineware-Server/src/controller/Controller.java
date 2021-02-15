@@ -21,6 +21,7 @@ import domain.enums.MeasurementUnit;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -312,6 +313,21 @@ public class Controller {
         AbstractGenericOperation ago = new GetAllProduct();
         ago.execute(new Product());
         return ((GetAllProduct) ago).getResult();
+    }
+
+  
+
+    public void updateProduct(Product product) throws Exception {
+        Article article = new Article(product.getId(), product.getPrice(), product.getUnit());
+        AbstractGenericOperation ago = new GenericUpdate<Article>();
+        ago.executeWithoutCommit(article);
+        ago = new GenericUpdate<Product>();
+        ago.execute(product);
+        
+    }
+
+    public void deleteProduct(Product deleteProduct) {
+        
     }
     
 

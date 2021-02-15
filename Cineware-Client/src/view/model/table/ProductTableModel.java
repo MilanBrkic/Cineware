@@ -5,7 +5,9 @@
  */
 package view.model.table;
 
+import communcation.Communcation;
 import domain.Product;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
@@ -16,7 +18,7 @@ import javax.swing.table.AbstractTableModel;
 public class ProductTableModel extends AbstractTableModel{
     ArrayList<Product> productsCopy;
     ArrayList<Product> products;
-    
+    String sortValue = "";
     String[] columnNames = {"Name", "Type", "Unit", "User", "Price"};
     
     
@@ -59,15 +61,34 @@ public class ProductTableModel extends AbstractTableModel{
         return columnNames[column];
     }
     
-    public void sort(String sort){
+    public void sort(){
         productsCopy = new ArrayList<>();
         for (Product product : products) {
-            if(product.getName().contains(sort)){
+            if(product.getName().contains(sortValue)){
                 productsCopy.add(product);
             }
         }
-        
         fireTableDataChanged();
     }
+
+    public void setSortValue(String sortValue) {
+        this.sortValue = sortValue;
+    }
+    
+    
+
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
+
+    public void refresh() throws Exception {
+        products = Communcation.getInstance().getAllProducts();
+        sort();
+    }
+
+  
+
+    
     
 }
+
