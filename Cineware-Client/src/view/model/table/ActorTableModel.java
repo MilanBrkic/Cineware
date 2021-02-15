@@ -21,6 +21,7 @@ public class ActorTableModel extends AbstractTableModel{
 
     public ActorTableModel(ArrayList<Actor> actors) {
         this.actors = actors;
+
     }
         
     
@@ -56,12 +57,14 @@ public class ActorTableModel extends AbstractTableModel{
     public ArrayList<Actor> getActors() {
         return actors;
     }
+
+    
+    
     
     public void refresh() throws  Exception{
         actors = Communcation.getInstance().getAllActors();
         fireTableDataChanged();
     }
     
-    
-    
+
 }

@@ -66,6 +66,7 @@ public class ControllerMovieView {
 
     private void setListeners() {
         setDetailsListener();
+        setSearchListener();
     }
 
     private void setDetailsListener() {
@@ -79,6 +80,17 @@ public class ControllerMovieView {
                     MainCoordinator.getInstance().getParams().put(Constant.MOVIE_TABLE_MODEL, model);
                     MainCoordinator.getInstance().openPanelMovieAdd(Mode.EDIT);
                 }
+            }
+        });
+    }
+
+    private void setSearchListener() {
+        panel.getBtnSearch().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String sort = panel.getTxtSearch().getText();
+                model.setSortValue(sort);
+                model.sort();
             }
         });
     }
