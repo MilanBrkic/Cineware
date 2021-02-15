@@ -323,11 +323,12 @@ public class Controller {
         ago.executeWithoutCommit(article);
         ago = new GenericUpdate<Product>();
         ago.execute(product);
-        
     }
 
-    public void deleteProduct(Product deleteProduct) {
-        
+    public void deleteProduct(Product product) throws Exception {
+        Article article = new Article(product.getId(), product.getPrice(), product.getUnit());
+        AbstractGenericOperation ago = new GenericDelete<Article>();
+        ago.execute(article);
     }
     
 
