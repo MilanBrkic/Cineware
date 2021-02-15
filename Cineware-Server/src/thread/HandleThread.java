@@ -201,6 +201,15 @@ public class HandleThread extends Thread {
                             Product addProduct = gson.fromJson(jsonAddProduct, Product.class);
                             Controller.getInstance().addProduct(addProduct);
                             break;
+                        case GET_ALL_PRODUCTS:
+                            ArrayList<Product> allProducts = Controller.getInstance().getAllProducts();
+                            String jsonAllProducts = gson.toJson(allProducts);
+                            response.setResult(jsonAllProducts);
+                            break;
+                        case UPDATE_PRODUCT:
+                            break;
+                        case DELETE_PRODUCT:
+                            break;
                             
                     }
                 } catch (Exception e) {

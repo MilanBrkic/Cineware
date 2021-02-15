@@ -276,4 +276,15 @@ public class Communcation {
        gen.execute(product, Operation.ADD_PRODUCT);
     }
 
+    public ArrayList<Product> getAllProducts() throws Exception {
+        Request request = new Request(Operation.GET_ALL_PRODUCTS, null);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException()==null){
+            String json = response.getResult();
+            ArrayList<Product> products = new ArrayList<>(Arrays.asList(gson.fromJson(json, Product[].class)));
+            return products;
+        }else throw response.getException();
+    }
+
 }

@@ -42,6 +42,7 @@ import operation.movie.DeleteMovie;
 import operation.movie.GetAllMovies;
 import operation.movie.GetMovie;
 import operation.movie.UpdateMovie;
+import operation.product.GetAllProduct;
 import operation.projection.GetAllProjections;
 import operation.seat.GetAllByHall;
 import operation.ticket.AddTickets;
@@ -305,6 +306,12 @@ public class Controller {
         product.setId(id);
         AbstractGenericOperation ago = new GenericAdd<Product>();
         ago.execute(product);
+    }
+
+    public ArrayList<Product> getAllProducts() throws Exception {
+        AbstractGenericOperation ago = new GetAllProduct();
+        ago.execute(new Product());
+        return ((GetAllProduct) ago).getResult();
     }
     
 
