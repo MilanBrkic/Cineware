@@ -63,6 +63,8 @@ public class Ticket extends Article{
         return projection+" "+seat;
     }
 
+    
+    
     @Override
     public String getTableName() {
         return "ticket";

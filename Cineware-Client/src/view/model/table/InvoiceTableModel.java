@@ -8,6 +8,7 @@ package view.model.table;
 import communcation.Communcation;
 import domain.Invoice;
 import domain.InvoiceItem;
+import domain.Product;
 import domain.Projection;
 import domain.Seat;
 import domain.Ticket;
@@ -74,6 +75,7 @@ public class InvoiceTableModel extends AbstractTableModel {
 
     public Invoice getInvoice() {
         return invoice;
+
     }
 
     public void add(InvoiceItem item) {
@@ -86,36 +88,55 @@ public class InvoiceTableModel extends AbstractTableModel {
         ArrayList<Ticket> tickets = Communcation.getInstance().getAllTicketsFromProjection(projection);
         int num = 0;
         for (int i = 0; i < quantity; i++) {
-            while(true){
-                if(tickets.size()<=num){
+            while (true) {
+                if (tickets.size() <= num) {
                     fireTableDataChanged();
 
                     throw new Exception("Projection full");
                 }
-                if(!map.containsKey(projection)) break;
-                
-                if(!map.get(projection).contains(tickets.get(num))){
+                if (!map.containsKey(projection)) {
+                    break;
+                }
+
+                if (!map.get(projection).contains(tickets.get(num))) {
                     break;
                 }
                 num++;
             }
             Ticket ticket = tickets.get(num);
-            InvoiceItem item = new InvoiceItem(invoice, invoice.getItems().size()+1, price, 1, MeasurementUnit.PCS, ticket, price);
+            InvoiceItem item = new InvoiceItem(invoice, invoice.getItems().size() + 1, price, 1, MeasurementUnit.PCS, ticket, price);
             invoice.getItems().add(item);
             invoice.setTotal(invoice.getTotal().add(item.getTotal()));
             if (!map.containsKey(projection)) {
                 map.put(projection, new ArrayList<>());
             }
             map.get(projection).add(ticket);
-            
-            
+
         }
-        
+
         fireTableDataChanged();
     }
 
-    private Exception Exception(String projection_full) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void remove(int index) {
+        InvoiceItem item = invoice.getItems().get(index);
+        if(item.getArticle() instanceof Ticket){
+            Projection projection = ((Ticket)item.getArticle()).getProjection();
+            map.get(projection).remove(item.getArticle());
+        }
+        
+        invoice.getItems().remove(index);
+        regroupNumbers();
     }
+
+    private void regroupNumbers() {
+        int number = 1;
+        for (InvoiceItem item : invoice.getItems()) {
+            item.setOrderNumber(number);
+            number++;
+        }
+        fireTableDataChanged();
+    }
+
+   
 
 }

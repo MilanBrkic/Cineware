@@ -97,6 +97,7 @@ public class ControllerInvoiceAdd {
     private void setListeners() {
         setProductListener();
         setProjectionListener();
+        setInvoiceItemRemove();
     }
 
     private void setProductListener() {
@@ -161,6 +162,24 @@ public class ControllerInvoiceAdd {
                     panel.getLblTotal().setText(model.getInvoice().getTotal().toString());
                     JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 
+                }
+            }
+        });
+    }
+
+    private void setInvoiceItemRemove() {
+        panel.getBtnRemoveInvoiceItem().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = panel.getTableInvoiceItem().getSelectedRow();
+                if(index>=0){
+                    int number = JOptionPane.showConfirmDialog(panel, "Are you sure you what to delete invoice item", "Delete", 0);
+                    if (number == 0) {
+                        model.remove(index);
+                    }
+                }
+                else{
+                    JOptionPane.showMessageDialog(panel, "Not selected", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
