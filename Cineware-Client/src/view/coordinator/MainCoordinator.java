@@ -23,6 +23,7 @@ import view.controller.director.ControllerDirectorView;
 import view.controller.hall.ControllerHallView;
 import view.controller.ControllerLogin;
 import view.controller.ControllerMain;
+import view.controller.invoice.ControllerInvoiceAdd;
 import view.controller.movie.ControllerMovieAdd;
 import view.controller.movie.ControllerMovieView;
 import view.controller.product.ControllerProductAdd;
@@ -36,6 +37,7 @@ import view.panel.actor.PanelActorView;
 import view.panel.director.PanelDirectorAdd;
 import view.panel.director.PanelDirectorView;
 import view.panel.hall.PanelHallView;
+import view.panel.invoice.PanelInvoiceAdd;
 import view.panel.mode.Mode;
 import view.panel.movie.PanelMovieAdd;
 import view.panel.movie.PanelMovieView;
@@ -170,6 +172,12 @@ public class MainCoordinator {
         productView.openPanel();
     }
     
+     public void openPanelInvoiceAdd(Mode mode) {
+         ControllerInvoiceAdd invoiceAdd = new ControllerInvoiceAdd(new PanelInvoiceAdd());
+         addPanel(invoiceAdd.getPanel());
+         invoiceAdd.openPanel();
+    }
+    
     public void removePanel(JPanel panel){
         controllerMain.getForm().getPanelMain().remove(panel);
         controllerMain.getForm().invalidate();
@@ -240,6 +248,8 @@ public class MainCoordinator {
             }
             return "";
         }
+
+   
 
     
 

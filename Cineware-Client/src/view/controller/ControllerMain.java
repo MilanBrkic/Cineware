@@ -53,6 +53,7 @@ public class ControllerMain {
         jMenuItemsAdd.add(() -> form.getMenuItemUserAdd());
         jMenuItemsAdd.add(() -> form.getMenuItemProjectionAdd());
         jMenuItemsAdd.add(() -> form.getMenuItemProductAdd());
+        jMenuItemsAdd.add(() -> form.getMenuItemInvoiceAdd());
 
         jMenuItemsView.add(() -> form.getMenuItemUserView());
         jMenuItemsView.add(() -> form.getMenuItemActorView());
@@ -61,6 +62,7 @@ public class ControllerMain {
         jMenuItemsView.add(() -> form.getMenuItemHallView());
         jMenuItemsView.add(() -> form.getMenuItemProjectionView());
         jMenuItemsAdd.add(() -> form.getMenuItemProductView());
+        jMenuItemsAdd.add(() -> form.getMenuItemInvoiceView());
     }
 
     public void setIcon() {
@@ -128,6 +130,7 @@ public class ControllerMain {
         setActorListeners();
         setProjectionListeners();
         setProductListeners();
+        setInoviceListeners();
         setWindowListener();
     }
 
@@ -267,6 +270,24 @@ public class ControllerMain {
             }
         });
     }
+    
+    private void setInoviceListeners() {
+        form.getMenuItemInvoiceAdd().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                templateForAdd(()-> form.getMenuItemInvoiceAdd(),
+                        x -> MainCoordinator.getInstance().openPanelInvoiceAdd((Mode)x),
+                        Mode.ADD);
+            }
+        });
+        
+        form.getMenuItemInvoiceView().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+    }
+    
 
     public void templateForView(Supplier<JMenuItem> menuItemView, Runnable openPanel) {
         MainCoordinator.getInstance().removeAllPanels();
@@ -339,6 +360,8 @@ public class ControllerMain {
             }
         });
     }
+
+    
 
     
 

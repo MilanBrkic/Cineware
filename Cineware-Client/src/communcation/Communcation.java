@@ -18,6 +18,7 @@ import domain.Hall;
 import domain.Movie;
 import domain.Product;
 import domain.Projection;
+import domain.Ticket;
 import domain.User;
 import java.io.IOException;
 import java.net.Socket;
@@ -293,6 +294,20 @@ public class Communcation {
     public void deleteProduct(Product product) throws Exception {
         GenericAddUpdateDelete<Product> gen = new GenericAddUpdateDelete<>(gson, sender, receiver);
         gen.execute(product, Operation.DELETE_PRODUCT);
+    }
+
+    public ArrayList<Ticket> getAllTicketsFromProjection(Projection projection) throws Exception {
+        String jsonTickets = gson.toJson(projection);
+        Request request = new Request(Operation.GET_TICKETS_FROM_PROJECTION, jsonTickets);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() == null) {
+            String json = response.getResult();
+            ArrayList<Ticket> tickets = new ArrayList<>(Arrays.asList(gson.fromJson(json, Ticket[].class)));
+            return tickets;
+        } else {
+            throw response.getException();
+        }
     }
 
 }

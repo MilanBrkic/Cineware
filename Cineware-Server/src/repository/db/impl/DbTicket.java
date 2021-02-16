@@ -15,7 +15,8 @@ import domain.Ticket;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import repository.db.DbRepository;
-
+import java.sql.Statement;
+import java.sql.ResultSet;
 /**
  *
  * @author user
@@ -38,6 +39,30 @@ public class DbTicket implements DbRepository<Ticket>{
         }
     }
     
+    
+    public ArrayList<Ticket> getAllTicketsFromProjection(Projection projection) throws Exception {
+        String query = "SELECT  a.articleID, a.price, a.measurementUnit, t.sold, t.seatID " +
+                       " FROM article a " +
+                       " INNER JOIN ticket t " +
+                       " ON a.articleID=t.articleID " +
+                       " WHERE projectionID="+projection.getId();
+        ArrayList<Ticket> tickets = new ArrayList<>();
+        Statement s = connect().createStatement();
+        ResultSet rs = s.executeQuery(query);
+        while(rs.next()){
+            int id = rs.getInt("articleID");
+            BigDecimal price = rs.getBigDecimal("price");
+            MeasurementUnit unit = MeasurementUnit.PCS;
+            boolean sold = rs.getBoolean("sold");
+            
+            Seat seat = Controller.getInstance().getSeat(rs.getInt("seatId"));
+            
+            Ticket ticket = new Ticket(id, price, unit, sold, projection, seat);
+            tickets.add(ticket);
+        }
+        
+        return tickets;
+    }
     
     
     @Override

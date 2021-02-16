@@ -46,7 +46,9 @@ import operation.movie.UpdateMovie;
 import operation.product.GetAllProduct;
 import operation.projection.GetAllProjections;
 import operation.seat.GetAllByHall;
+import operation.seat.GetSeat;
 import operation.ticket.AddTickets;
+import operation.ticket.GetAllTicketsFromProjection;
 import repository.db.impl.DbProjection;
 import operation.user.CheckPassword;
 import operation.user.UpdatePasswordOnly;
@@ -119,6 +121,14 @@ public class Controller {
         AbstractGenericOperation ago = new GetAllByHall();
         ago.executeWithoutCommit(hall);
         return ((GetAllByHall)ago).getResult();
+    }
+    
+    public Seat getSeat(int id) throws Exception{
+        AbstractGenericOperation ago = new GetSeat();
+        Seat s = new Seat();
+        s.setId(id);
+        ago.executeWithoutCommit(s);
+        return ((GetSeat)ago).getResult();
     }
 
     public ArrayList<User> getAllUsers() throws Exception {
@@ -329,6 +339,12 @@ public class Controller {
         Article article = new Article(product.getId(), product.getPrice(), product.getUnit());
         AbstractGenericOperation ago = new GenericDelete<Article>();
         ago.execute(article);
+    }
+
+    public ArrayList<Ticket> getAllTicketsFromProjection(Projection projection) throws Exception {
+        AbstractGenericOperation ago = new GetAllTicketsFromProjection();
+        ago.execute(projection);
+        return ((GetAllTicketsFromProjection)ago).getResult();
     }
     
 

@@ -39,6 +39,9 @@ public class FormMain extends javax.swing.JFrame {
         PanelMain = new javax.swing.JPanel();
         lblWelcomeUser = new javax.swing.JLabel();
         menuBar = new javax.swing.JMenuBar();
+        menuInvoice = new javax.swing.JMenu();
+        menuItemInvoiceAdd = new javax.swing.JMenuItem();
+        menuItemInvoiceView = new javax.swing.JMenuItem();
         menuProduct = new javax.swing.JMenu();
         menuItemProductAdd = new javax.swing.JMenuItem();
         menuItemProductView = new javax.swing.JMenuItem();
@@ -85,6 +88,16 @@ public class FormMain extends javax.swing.JFrame {
         getContentPane().add(PanelMain, java.awt.BorderLayout.CENTER);
 
         menuBar.setBackground(new java.awt.Color(255, 255, 255));
+
+        menuInvoice.setText("Invoice");
+
+        menuItemInvoiceAdd.setText("Add");
+        menuInvoice.add(menuItemInvoiceAdd);
+
+        menuItemInvoiceView.setText("View");
+        menuInvoice.add(menuItemInvoiceView);
+
+        menuBar.add(menuInvoice);
 
         menuProduct.setText("Product");
 
@@ -237,6 +250,14 @@ public class FormMain extends javax.swing.JFrame {
         return menuItemProductView;
     }
 
+    public JMenuItem getMenuItemInvoiceAdd() {
+        return menuItemInvoiceAdd;
+    }
+
+    public JMenuItem getMenuItemInvoiceView() {
+        return menuItemInvoiceView;
+    }
+
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -250,11 +271,14 @@ public class FormMain extends javax.swing.JFrame {
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuDirector;
     private javax.swing.JMenu menuHall;
+    private javax.swing.JMenu menuInvoice;
     private javax.swing.JMenuItem menuItemActorAdd;
     private javax.swing.JMenuItem menuItemActorView;
     private javax.swing.JMenuItem menuItemDirectorAdd;
     private javax.swing.JMenuItem menuItemDirectorView;
     private javax.swing.JMenuItem menuItemHallView;
+    private javax.swing.JMenuItem menuItemInvoiceAdd;
+    private javax.swing.JMenuItem menuItemInvoiceView;
     private javax.swing.JMenuItem menuItemMovieAdd;
     private javax.swing.JMenuItem menuItemMovieView;
     private javax.swing.JMenuItem menuItemProductAdd;

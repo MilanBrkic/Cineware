@@ -19,6 +19,7 @@ import domain.Movie;
 import domain.Projection;
 import domain.User;
 import domain.Product;
+import domain.Ticket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -215,6 +216,13 @@ public class HandleThread extends Thread {
                             String jsonDeleteProduct = request.getArguments();
                             Product deleteProduct = gson.fromJson(jsonDeleteProduct, Product.class);
                             Controller.getInstance().deleteProduct(deleteProduct);
+                            break;
+                        case GET_TICKETS_FROM_PROJECTION:
+                            String jsonProjection = request.getArguments();
+                            Projection projection = gson.fromJson(jsonProjection, Projection.class);
+                            ArrayList<Ticket> tickets = Controller.getInstance().getAllTicketsFromProjection(projection);
+                            String jsonTickets = gson.toJson(tickets);
+                            response.setResult(jsonTickets);
                             break;
                             
                     }

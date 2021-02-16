@@ -5,6 +5,7 @@
  */
 package repository.db.impl;
 
+import controller.Controller;
 import domain.Hall;
 import domain.Seat;
 import java.util.ArrayList;
@@ -57,8 +58,21 @@ public class DbSeat implements DbRepository<Seat>{
     }
 
     @Override
-    public Seat get(Seat t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Seat get(Seat seat) throws Exception {
+        int id = seat.getId();
+        String query = "SELECT * from seat WHERE seatID="+id;
+        Statement s = connect().createStatement();
+        ResultSet rs = s.executeQuery(query);
+        
+        if(rs.next()){
+            int number = rs.getInt("number");
+            char row = rs.getString("row").charAt(0);
+            Hall hall = Controller.getInstance().getHall(rs.getInt("hallID"));
+            
+            Seat seatara = new Seat(id, hall, number, row);
+            return seatara;
+        }
+        return null;
     }
     
 }
