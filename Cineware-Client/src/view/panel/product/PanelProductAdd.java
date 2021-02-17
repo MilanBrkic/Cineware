@@ -56,12 +56,20 @@ public class PanelProductAdd extends javax.swing.JPanel {
 
         jLabel4.setText("Type:");
 
+        btnAdd.setBackground(new java.awt.Color(0, 0, 0));
+        btnAdd.setForeground(new java.awt.Color(240, 240, 240));
         btnAdd.setText("Add");
 
+        btnEnableChanges.setBackground(new java.awt.Color(0, 0, 0));
+        btnEnableChanges.setForeground(new java.awt.Color(240, 240, 240));
         btnEnableChanges.setText("Enable changes");
 
+        btnEdit.setBackground(new java.awt.Color(0, 0, 0));
+        btnEdit.setForeground(new java.awt.Color(240, 240, 240));
         btnEdit.setText("Edit");
 
+        btnDelete.setBackground(new java.awt.Color(0, 0, 0));
+        btnDelete.setForeground(new java.awt.Color(240, 240, 240));
         btnDelete.setText("Delete");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

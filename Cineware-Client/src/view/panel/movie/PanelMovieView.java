@@ -77,8 +77,12 @@ public class PanelMovieView extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tableMovie);
 
+        btnDetails.setBackground(new java.awt.Color(0, 0, 0));
+        btnDetails.setForeground(new java.awt.Color(240, 240, 240));
         btnDetails.setText("Details");
 
+        btnSearch.setBackground(new java.awt.Color(0, 0, 0));
+        btnSearch.setForeground(new java.awt.Color(240, 240, 240));
         btnSearch.setText("Search");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

@@ -84,12 +84,16 @@ public class PanelInvoiceAdd extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tableInvoiceItem);
 
+        btnRemoveInvoiceItem.setBackground(new java.awt.Color(0, 0, 0));
+        btnRemoveInvoiceItem.setForeground(new java.awt.Color(240, 240, 240));
         btnRemoveInvoiceItem.setText("Remove");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Product"));
 
         jLabel4.setText("Product:");
 
+        btnAddProduct.setBackground(new java.awt.Color(0, 0, 0));
+        btnAddProduct.setForeground(new java.awt.Color(240, 240, 240));
         btnAddProduct.setText("Add");
 
         jLabel5.setText("Price:");
@@ -107,12 +111,14 @@ public class PanelInvoiceAdd extends javax.swing.JPanel {
                     .addComponent(jLabel5)
                     .addComponent(jLabel6))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cmbProduct, 0, 224, Short.MAX_VALUE)
-                    .addComponent(txtPriceProduct)
-                    .addComponent(txtQuantityProduct))
-                .addGap(18, 18, 18)
-                .addComponent(btnAddProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtPriceProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE)
+                            .addComponent(txtQuantityProduct))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAddProduct, javax.swing.GroupLayout.DEFAULT_SIZE, 63, Short.MAX_VALUE))
+                    .addComponent(cmbProduct, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -139,6 +145,8 @@ public class PanelInvoiceAdd extends javax.swing.JPanel {
 
         jLabel7.setText("Projection:");
 
+        btnAddTicket.setBackground(new java.awt.Color(0, 0, 0));
+        btnAddTicket.setForeground(new java.awt.Color(240, 240, 240));
         btnAddTicket.setText("Add");
 
         jLabel8.setText("Quantity:");
@@ -155,8 +163,7 @@ public class PanelInvoiceAdd extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(cmbProjection, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(cmbProjection, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
@@ -188,6 +195,8 @@ public class PanelInvoiceAdd extends javax.swing.JPanel {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
+        btnSave.setBackground(new java.awt.Color(0, 0, 0));
+        btnSave.setForeground(new java.awt.Color(240, 240, 240));
         btnSave.setText("Save");
 
         lblTotal.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N

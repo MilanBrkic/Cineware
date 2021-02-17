@@ -90,6 +90,8 @@ public class PanelProjectionView extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tableUpcomingProjections);
 
+        btnDelete.setBackground(new java.awt.Color(0, 0, 0));
+        btnDelete.setForeground(new java.awt.Color(240, 240, 240));
         btnDelete.setText("Delete");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);

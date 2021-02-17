@@ -67,6 +67,8 @@ public class PanelUserView extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tableUser);
 
+        btnDetails.setBackground(new java.awt.Color(0, 0, 0));
+        btnDetails.setForeground(new java.awt.Color(240, 240, 240));
         btnDetails.setText("Details");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

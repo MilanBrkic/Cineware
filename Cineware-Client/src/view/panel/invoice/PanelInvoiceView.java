@@ -44,6 +44,8 @@ public class PanelInvoiceView extends javax.swing.JPanel {
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Invoice View"));
 
+        btnSearch.setBackground(new java.awt.Color(0, 0, 0));
+        btnSearch.setForeground(new java.awt.Color(240, 240, 240));
         btnSearch.setText("Search");
 
         tableInvoice.setModel(new javax.swing.table.DefaultTableModel(
@@ -59,6 +61,8 @@ public class PanelInvoiceView extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tableInvoice);
 
+        btnStorno.setBackground(new java.awt.Color(0, 0, 0));
+        btnStorno.setForeground(new java.awt.Color(240, 240, 240));
         btnStorno.setText("Storno");
 
         jLabel1.setText("Total:");

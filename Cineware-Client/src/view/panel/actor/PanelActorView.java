@@ -65,6 +65,8 @@ public class PanelActorView extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tableActor);
 
+        btnDetails.setBackground(new java.awt.Color(0, 0, 0));
+        btnDetails.setForeground(new java.awt.Color(240, 240, 240));
         btnDetails.setText("Details");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -101,7 +103,7 @@ public class PanelActorView extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

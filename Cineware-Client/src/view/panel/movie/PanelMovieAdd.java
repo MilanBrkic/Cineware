@@ -176,8 +176,12 @@ public class PanelMovieAdd extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tableActor);
 
+        btnAdd.setBackground(new java.awt.Color(0, 0, 0));
+        btnAdd.setForeground(new java.awt.Color(240, 240, 240));
         btnAdd.setText("Add");
 
+        btnDelete.setBackground(new java.awt.Color(0, 0, 0));
+        btnDelete.setForeground(new java.awt.Color(240, 240, 240));
         btnDelete.setText("Delete");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -209,22 +213,38 @@ public class PanelMovieAdd extends javax.swing.JPanel {
                 .addGap(65, 65, 65))
         );
 
+        btnSaveMovie.setBackground(new java.awt.Color(0, 0, 0));
+        btnSaveMovie.setForeground(new java.awt.Color(240, 240, 240));
         btnSaveMovie.setText("Save Movie");
 
         jLabel6.setText("Year:");
 
+        btnAddNewDirector.setBackground(new java.awt.Color(0, 0, 0));
+        btnAddNewDirector.setForeground(new java.awt.Color(240, 240, 240));
         btnAddNewDirector.setText("Add new Director");
 
+        btnRefreshDirectors.setBackground(new java.awt.Color(0, 0, 0));
+        btnRefreshDirectors.setForeground(new java.awt.Color(240, 240, 240));
         btnRefreshDirectors.setText("Refresh Directors");
 
+        btnAddNewActor.setBackground(new java.awt.Color(0, 0, 0));
+        btnAddNewActor.setForeground(new java.awt.Color(240, 240, 240));
         btnAddNewActor.setText("Add new Actor");
 
+        btnRefreshActors.setBackground(new java.awt.Color(0, 0, 0));
+        btnRefreshActors.setForeground(new java.awt.Color(240, 240, 240));
         btnRefreshActors.setText("Refresh Actors");
 
+        btnEnableChanges.setBackground(new java.awt.Color(0, 0, 0));
+        btnEnableChanges.setForeground(new java.awt.Color(240, 240, 240));
         btnEnableChanges.setText("Enable changes");
 
+        btnEditMovie.setBackground(new java.awt.Color(0, 0, 0));
+        btnEditMovie.setForeground(new java.awt.Color(240, 240, 240));
         btnEditMovie.setText("Edit Movie");
 
+        btnDeleteMovie.setBackground(new java.awt.Color(0, 0, 0));
+        btnDeleteMovie.setForeground(new java.awt.Color(240, 240, 240));
         btnDeleteMovie.setText("Delete Movie");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

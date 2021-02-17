@@ -74,6 +74,8 @@ public class PanelProjectionAdd extends javax.swing.JPanel {
 
         jLabel9.setText(":");
 
+        btnAdd.setBackground(new java.awt.Color(0, 0, 0));
+        btnAdd.setForeground(new java.awt.Color(240, 240, 240));
         btnAdd.setText("Add");
 
         jLabel10.setText("Price:");

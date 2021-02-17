@@ -73,6 +73,8 @@ public class PanelUserAdd extends javax.swing.JPanel {
 
         jLabel5.setText("Admin:");
 
+        btnAdd.setBackground(new java.awt.Color(0, 0, 0));
+        btnAdd.setForeground(new java.awt.Color(240, 240, 240));
         btnAdd.setText("Add");
 
         radioGroup.add(radioYes);
@@ -82,12 +84,20 @@ public class PanelUserAdd extends javax.swing.JPanel {
         radioNo.setSelected(true);
         radioNo.setText("No");
 
+        btnEdit.setBackground(new java.awt.Color(0, 0, 0));
+        btnEdit.setForeground(new java.awt.Color(240, 240, 240));
         btnEdit.setText("Edit");
 
+        btnDelete.setBackground(new java.awt.Color(0, 0, 0));
+        btnDelete.setForeground(new java.awt.Color(240, 240, 240));
         btnDelete.setText("Delete");
 
+        btnEnableChanges.setBackground(new java.awt.Color(0, 0, 0));
+        btnEnableChanges.setForeground(new java.awt.Color(240, 240, 240));
         btnEnableChanges.setText("Enable changes");
 
+        btnCancel.setBackground(new java.awt.Color(0, 0, 0));
+        btnCancel.setForeground(new java.awt.Color(240, 240, 240));
         btnCancel.setText("Cancel");
 
         txtID.setEditable(false);

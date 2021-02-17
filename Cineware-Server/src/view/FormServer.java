@@ -57,8 +57,12 @@ public class FormServer extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Server"));
 
+        btnStartServer.setBackground(new java.awt.Color(0, 0, 0));
+        btnStartServer.setForeground(new java.awt.Color(240, 240, 240));
         btnStartServer.setText("Start Server");
 
+        btnStopServer.setBackground(new java.awt.Color(0, 0, 0));
+        btnStopServer.setForeground(new java.awt.Color(240, 240, 240));
         btnStopServer.setText("Stop Server");
         btnStopServer.setEnabled(false);
 
@@ -100,6 +104,8 @@ public class FormServer extends javax.swing.JFrame {
 
         jLabel4.setText("Password:");
 
+        btnSaveDatabase.setBackground(new java.awt.Color(0, 0, 0));
+        btnSaveDatabase.setForeground(new java.awt.Color(240, 240, 240));
         btnSaveDatabase.setText("Save");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
