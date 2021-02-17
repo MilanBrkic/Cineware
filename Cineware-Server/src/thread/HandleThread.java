@@ -13,6 +13,7 @@ import common.communication.Response;
 import common.communication.Sender;
 import controller.Controller;
 import domain.Actor;
+import domain.Article;
 import domain.Director;
 import domain.Hall;
 import domain.Invoice;
@@ -226,8 +227,7 @@ public class HandleThread extends Thread {
                             response.setResult(jsonTickets);
                             break;
                         case ADD_INVOICE:
-                            String jsonAddInvoice = request.getArguments();
-                            Invoice addInvoice = gson.fromJson(jsonAddInvoice, Invoice.class);
+                            Invoice addInvoice = (Invoice) request.getObject();
                             Controller.getInstance().addInvoice(addInvoice);
                             break;
                             

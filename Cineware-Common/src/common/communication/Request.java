@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class Request implements Serializable{
     Operation operation;
     String arguments;
-
+    Object object;
     public Request() {
     }
 
@@ -38,6 +38,17 @@ public class Request implements Serializable{
     public void setArguments(String arguments) {
         this.arguments = arguments;
     }
+
+    public void setObject(Object object) {
+        this.object = object;
+    }
+
+    public Object getObject() {
+        return object;
+    }
     
+    
+    
+            
     
 }

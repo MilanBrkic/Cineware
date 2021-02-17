@@ -94,6 +94,12 @@ public class InvoiceTableModel extends AbstractTableModel {
 
                     throw new Exception("Projection full");
                 }
+                
+                if(tickets.get(num).isSold()){
+                    num++;
+                    continue;
+                }
+                
                 if (!map.containsKey(projection)) {
                     break;
                 }
@@ -137,6 +143,15 @@ public class InvoiceTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
 
+    public Map<Projection, ArrayList<Ticket>> getMap() {
+        return map;
+    }
+
+    public void setMap(Map<Projection, ArrayList<Ticket>> map) {
+        this.map = map;
+    }
+
    
+    
 
 }

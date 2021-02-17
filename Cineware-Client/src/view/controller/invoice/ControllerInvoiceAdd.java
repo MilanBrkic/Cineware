@@ -19,6 +19,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -84,6 +85,10 @@ public class ControllerInvoiceAdd {
             JOptionPane.showMessageDialog(panel, "Can't load projection table", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
+        setColumnSizes();
+    }
+
+    public void setColumnSizes() {
         TableColumnModel columnModel = panel.getTableInvoiceItem().getColumnModel();
 
         columnModel.getColumn(0).setPreferredWidth(5);
@@ -92,7 +97,6 @@ public class ControllerInvoiceAdd {
         columnModel.getColumn(3).setPreferredWidth(5);
         columnModel.getColumn(4).setPreferredWidth(5);
         columnModel.getColumn(5).setPreferredWidth(5);
-
     }
 
     private void setListeners() {
@@ -151,12 +155,13 @@ public class ControllerInvoiceAdd {
         panel.getBtnAddTicket().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                BigDecimal price = new BigDecimal(panel.getTxtPriceTicket().getText());
-                int quantity = Integer.parseInt(panel.getTxtQuantityTicket().getText());
-                Projection projection = (Projection) panel.getCmbProjection().getSelectedItem();
-                BigDecimal total = price.multiply(new BigDecimal(quantity));
-
                 try {
+
+                    BigDecimal price = new BigDecimal(panel.getTxtPriceTicket().getText());
+                    int quantity = Integer.parseInt(panel.getTxtQuantityTicket().getText());
+                    Projection projection = (Projection) panel.getCmbProjection().getSelectedItem();
+                    BigDecimal total = price.multiply(new BigDecimal(quantity));
+
                     model.addTicket(price, quantity, projection, total);
                     panel.getLblTotal().setText(model.getInvoice().getTotal().toString());
                 } catch (Exception ex) {
@@ -225,7 +230,8 @@ public class ControllerInvoiceAdd {
             private void clearFields() {
                 model = new InvoiceTableModel(new Invoice());
                 panel.getTableInvoiceItem().setModel(model);
-                
+                model.setMap(new HashMap<>());
+
                 panel.getCmbProduct().setSelectedItem(-1);
                 panel.getCmbProjection().setSelectedItem(-1);
                 panel.getTxtNumber().setText("");
@@ -233,6 +239,8 @@ public class ControllerInvoiceAdd {
                 panel.getTxtQuantityTicket().setText("");
                 panel.getTxtPriceProduct().setText("");
                 panel.getTxtPriceTicket().setText("");
+                panel.getLblTotal().setText("0");
+                setColumnSizes();
             }
         });
     }

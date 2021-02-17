@@ -51,6 +51,7 @@ import operation.seat.GetAllByHall;
 import operation.seat.GetSeat;
 import operation.ticket.AddTickets;
 import operation.ticket.GetAllTicketsFromProjection;
+import operation.ticket.SetTicketToSold;
 import repository.db.impl.DbProjection;
 import operation.user.CheckPassword;
 import operation.user.UpdatePasswordOnly;
@@ -357,6 +358,10 @@ public class Controller {
         for (InvoiceItem item : invoice.getItems()) {
             item.setId(invoice.getId());
             addInvoiceItem(item);
+            
+            if(item.getArticle() instanceof Ticket){
+                setTicketToSold((Ticket)item.getArticle());
+            }
         }
         
         DbConnectionFactory.getInstance().getConnection().commit();
@@ -365,6 +370,11 @@ public class Controller {
     private void addInvoiceItem(InvoiceItem item) throws Exception {
         AbstractGenericOperation ago = new GenericAdd<InvoiceItem>();
         ago.executeWithoutCommit(item);
+    }
+
+    private void setTicketToSold(Ticket ticket) throws Exception {
+        AbstractGenericOperation ago = new SetTicketToSold();
+        ago.executeWithoutCommit(ticket);
     }
 
     

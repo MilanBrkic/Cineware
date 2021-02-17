@@ -319,6 +319,7 @@ public class Communcation {
         }
         String s = gson.toJson(invoice);
         Request request = new Request( Operation.ADD_INVOICE, s);
+        request.setObject(invoice);
         sender.send(request);
         Response response = (Response) receiver.receive();
         if(response.getException()==null){
