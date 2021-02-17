@@ -16,7 +16,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumnModel;
+import view.constant.Constant;
+import view.coordinator.MainCoordinator;
 import view.model.table.ProjectionTableModel;
+import view.panel.mode.Mode;
 import view.panel.projection.PanelProjectionView;
 
 /**
@@ -47,8 +50,8 @@ public class ControllerProjectionView {
             JOptionPane.showMessageDialog(panel, "Could not load movies", "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(ControllerProjectionView.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        setDeleteListener();
+        setListeners();
+        
     }
 
     private void setExitButton() {
@@ -96,6 +99,13 @@ public class ControllerProjectionView {
         columnModelUpcoming.getColumn(3).setPreferredWidth(50);
     }
 
+    
+    private void setListeners() {
+        setDeleteListener();
+        setUpdateListener();
+    }
+
+    
     private void setDeleteListener() {
         panel.getBtnDelete().addActionListener(new ActionListener() {
             @Override
@@ -117,4 +127,20 @@ public class ControllerProjectionView {
         });
     }
 
+    private void setUpdateListener() {
+        panel.getBtnDetails().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = panel.getTableUpcomingProjections().getSelectedRow();
+                if(index>=0){
+                    Projection projection = upcomingModel.getProjections().get(index);
+                    MainCoordinator.getInstance().getParams().put(Constant.PROJECTION_DETAILS, projection);
+                    MainCoordinator.getInstance().getParams().put(Constant.PROJECTION_TABLE_MODEL, upcomingModel);
+                    MainCoordinator.getInstance().openPanelProjectionAdd(Mode.EDIT);
+                }
+            }
+        });
+    }
+
+    
 }

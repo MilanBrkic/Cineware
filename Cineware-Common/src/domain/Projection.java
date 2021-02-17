@@ -15,7 +15,8 @@ import java.util.Date;
  *
  * @author user
  */
-public class Projection implements GenericEntity{
+public class Projection implements GenericEntity {
+
     private int id;
     private Date startDate;
     private Date endDate;
@@ -35,7 +36,7 @@ public class Projection implements GenericEntity{
         this.movie = movie;
         this.user = user;
     }
-    
+
     public Projection(int id, Date startDate, Date endDate, BigDecimal price, Hall hall, Movie movie, User user) {
         this.id = id;
         this.startDate = startDate;
@@ -53,8 +54,6 @@ public class Projection implements GenericEntity{
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-
-    
 
     public int getId() {
         return id;
@@ -79,8 +78,6 @@ public class Projection implements GenericEntity{
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
-
-    
 
     public Hall getHall() {
         return hall;
@@ -129,13 +126,11 @@ public class Projection implements GenericEntity{
         }
         return true;
     }
-    
-    
 
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm dd.MM");
-        return movie+" - "+sdf.format(startDate);
+        return movie + " - " + sdf.format(startDate);
     }
 
     @Override
@@ -152,31 +147,38 @@ public class Projection implements GenericEntity{
     public String getInsertValues() {
         StringBuilder sb = new StringBuilder();
         sb.append(id).append(", ")
-          .append("'").append(new java.sql.Timestamp(startDate.getTime())).append("', ")
-          .append("'").append(new java.sql.Timestamp(endDate.getTime())).append("', ")
-          .append(price).append(", ")
-          .append(hall.getId()).append(", ")
-          .append(movie.getId()).append(", ")
-          .append(user.getId());
-        
-        
+                .append("'").append(new java.sql.Timestamp(startDate.getTime())).append("', ")
+                .append("'").append(new java.sql.Timestamp(endDate.getTime())).append("', ")
+                .append(price).append(", ")
+                .append(hall.getId()).append(", ")
+                .append(movie.getId()).append(", ")
+                .append(user.getId());
+
         return sb.toString();
     }
 
     @Override
     public String columnNamesForUpdate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder sb = new StringBuilder();
+        sb.append("projectionID=").append(id).append(", ")
+          .append("startTime=").append("'").append(new java.sql.Timestamp(startDate.getTime())).append("', ")
+          .append("endTime=").append("'").append(new java.sql.Timestamp(endDate.getTime())).append("', ")
+          .append("price=").append(price).append(", ")
+          .append("hallID=").append(hall.getId()).append(", ")
+          .append("movieID=").append(movie.getId()).append(", ")
+          .append("userID=").append(user.getId());
+        
+        return sb.toString();
     }
 
     @Override
     public String whereCondition() {
-        return "projectionID="+id;
+        return "projectionID=" + id;
     }
 
     @Override
     public ArrayList<GenericEntity> getFromResultSet(ResultSet rs) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
 }

@@ -193,6 +193,9 @@ public class HandleThread extends Thread {
                             response.setResult(jsonAllProjections);
                             break;
                         case UPDATE_PROJECTION:
+                            String jsonUpdateProjection = request.getArguments();
+                            Projection updateProjection = gson.fromJson(jsonUpdateProjection, Projection.class);
+                            Controller.getInstance().updateProjection(updateProjection);
                             break;
                         case DELETE_PROJECTION:
                             String jsonDeleteProjection = request.getArguments();

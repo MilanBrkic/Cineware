@@ -66,6 +66,20 @@ public class DbProjection implements DbRepository<Projection> {
         }
         return true;
     }
+    
+    public boolean isTheHallOccupiedForUpdate(Projection p) throws Exception {
+        Hall hall = p.getHall();
+        Date dateStart = p.getStartDate();
+        Date dateEnd = p.getEndDate();
+        ArrayList<Projection> projections = getAllSameDaySameHall(hall, dateStart);
+        for (Projection projection : projections) {
+            if(projection.getId()==p.getId()) continue;
+            if (overlapping(projection, dateStart, dateEnd)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     private boolean overlapping(Projection projection, Date dateStart, Date dateEnd) {
         Date pStart = projection.getStartDate();

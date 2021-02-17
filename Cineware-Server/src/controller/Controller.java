@@ -116,7 +116,7 @@ public class Controller {
         ago.execute(new Hall());
         return ((GenericGetAll) ago).getResult();
     }
-    
+
     public Hall getHall(int hallID) throws Exception {
         AbstractGenericOperation ago = new GenericGet<Hall>();
         Hall hall = new Hall();
@@ -124,19 +124,19 @@ public class Controller {
         ago.execute(hall);
         return (Hall) ((GenericGet) ago).getResult();
     }
-    
-    public ArrayList<Seat> getAllByHall(Hall hall) throws Exception{
+
+    public ArrayList<Seat> getAllByHall(Hall hall) throws Exception {
         AbstractGenericOperation ago = new GetAllByHall();
         ago.executeWithoutCommit(hall);
-        return ((GetAllByHall)ago).getResult();
+        return ((GetAllByHall) ago).getResult();
     }
-    
-    public Seat getSeat(int id) throws Exception{
+
+    public Seat getSeat(int id) throws Exception {
         AbstractGenericOperation ago = new GetSeat();
         Seat s = new Seat();
         s.setId(id);
         ago.executeWithoutCommit(s);
-        return ((GetSeat)ago).getResult();
+        return ((GetSeat) ago).getResult();
     }
 
     public ArrayList<User> getAllUsers() throws Exception {
@@ -283,7 +283,7 @@ public class Controller {
             }
             AbstractGenericOperation ago = new GenericAddWithGenKeys<Projection>();
             ago.executeWithoutCommit(projection);
-            
+
             addTickets(projection);
         } catch (Exception e) {
             throw e;
@@ -291,44 +291,53 @@ public class Controller {
 
     }
 
+    public void updateProjection(Projection projection) throws Exception {
+        DbProjection rep = new DbProjection();
+        if (!rep.isTheHallOccupiedForUpdate(projection)) {
+            throw new Exception("Hall ocuppied in given time");
+        }
+        
+        AbstractGenericOperation ago = new GenericUpdate<Projection>();
+        ago.execute(projection);
+    }
     public ArrayList<Projection> getAllProjections() throws Exception {
         AbstractGenericOperation ago = new GetAllProjections();
         ago.execute(new Projection());
         return ((GetAllProjections) ago).getResult();
     }
 
-    public Projection getProjection(int id) throws Exception{
+    public Projection getProjection(int id) throws Exception {
         AbstractGenericOperation ago = new GetProjection();
-        Projection projection  = new Projection();
+        Projection projection = new Projection();
         projection.setId(id);
         ago.execute(projection);
-        return ((GetProjection)ago).getResult();
+        return ((GetProjection) ago).getResult();
     }
-    
-    public int addArticle(Article article) throws Exception{
+
+    public int addArticle(Article article) throws Exception {
         AbstractGenericOperation ago = new AddArticle();
         ago.executeWithoutCommit(article);
-        return ((AddArticle)ago).getResult();
+        return ((AddArticle) ago).getResult();
     }
-    
-    
-    public void addTicket(Ticket ticket) throws Exception{
+
+    public void addTicket(Ticket ticket) throws Exception {
         AbstractGenericOperation ago = new GenericAdd<Ticket>();
         ago.executeWithoutCommit(ticket);
     }
-    
-    public void addTickets(Projection projection) throws Exception{
+
+    public void addTickets(Projection projection) throws Exception {
         AbstractGenericOperation ago = new AddTickets();
         ago.execute(projection);
     }
 
-    public Ticket getTicket(int id) throws Exception{
+    public Ticket getTicket(int id) throws Exception {
         AbstractGenericOperation ago = new GetTicket();
         Ticket ticket = new Ticket();
         ticket.setId(id);
         ago.execute(ticket);
-        return ((GetTicket)ago).getResult();
+        return ((GetTicket) ago).getResult();
     }
+
     public void deleteProjection(Projection projection) throws Exception {
         AbstractGenericOperation ago = new GenericDelete<Ticket>();
         ago.execute(projection);
@@ -348,14 +357,13 @@ public class Controller {
         return ((GetAllProduct) ago).getResult();
     }
 
-    public Product getProduct(int id) throws Exception{
+    public Product getProduct(int id) throws Exception {
         AbstractGenericOperation ago = new GetProduct();
         Product product = new Product();
         product.setId(id);
         ago.execute(product);
-        return ((GetProduct)ago).getResult();
+        return ((GetProduct) ago).getResult();
     }
-  
 
     public void updateProduct(Product product) throws Exception {
         Article article = new Article(product.getId(), product.getPrice(), product.getUnit());
@@ -374,22 +382,22 @@ public class Controller {
     public ArrayList<Ticket> getAllTicketsFromProjection(Projection projection) throws Exception {
         AbstractGenericOperation ago = new GetAllTicketsFromProjection();
         ago.execute(projection);
-        return ((GetAllTicketsFromProjection)ago).getResult();
+        return ((GetAllTicketsFromProjection) ago).getResult();
     }
 
     public void addInvoice(Invoice invoice) throws Exception {
         AbstractGenericOperation ago = new GenericAddWithGenKeys<Invoice>();
         ago.executeWithoutCommit(invoice);
-        
+
         for (InvoiceItem item : invoice.getItems()) {
             item.setId(invoice.getId());
             addInvoiceItem(item);
-            
-            if(item.getArticle() instanceof Ticket){
-                setTicketToSold((Ticket)item.getArticle());
+
+            if (item.getArticle() instanceof Ticket) {
+                setTicketToSold((Ticket) item.getArticle());
             }
         }
-        
+
         DbConnectionFactory.getInstance().getConnection().commit();
     }
 
@@ -406,14 +414,13 @@ public class Controller {
     public ArrayList<Invoice> getAllInvoices() throws Exception {
         AbstractGenericOperation ago = new GetAllInvoices();
         ago.execute(new Invoice());
-        return ((GetAllInvoices)ago).getResult();
+        return ((GetAllInvoices) ago).getResult();
     }
 
     public void stornoInvoice(Invoice stornoInvoice) throws Exception {
         addInvoice(stornoInvoice);
     }
 
-    
     
 
     class Countries {

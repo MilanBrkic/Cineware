@@ -26,4 +26,7 @@ public class Constant {
     public static final String PRODUCT_DETAILS="PRODUCT_DETAILS";
     public static final String PRODUCT_TABLE_MODEL="PRODUCT_TABLE_MODEL";
     
+    public static final String PROJECTION_DETAILS="PROJECTION_DETAILS";
+    public static final String PROJECTION_TABLE_MODEL="PROJECTION_TABLE_MODEL";
+    
 }

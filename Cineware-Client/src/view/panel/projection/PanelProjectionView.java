@@ -39,6 +39,7 @@ public class PanelProjectionView extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tableUpcomingProjections = new javax.swing.JTable();
         btnDelete = new javax.swing.JButton();
+        btnDetails = new javax.swing.JButton();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Projection View"));
         setToolTipText("");
@@ -94,6 +95,10 @@ public class PanelProjectionView extends javax.swing.JPanel {
         btnDelete.setForeground(new java.awt.Color(240, 240, 240));
         btnDelete.setText("Delete");
 
+        btnDetails.setBackground(new java.awt.Color(0, 0, 0));
+        btnDetails.setForeground(new java.awt.Color(240, 240, 240));
+        btnDetails.setText("Details");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -102,8 +107,10 @@ public class PanelProjectionView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnDelete)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,7 +118,8 @@ public class PanelProjectionView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnDetails)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnDelete))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
@@ -131,7 +139,7 @@ public class PanelProjectionView extends javax.swing.JPanel {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 8, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -161,13 +169,15 @@ public class PanelProjectionView extends javax.swing.JPanel {
     public JButton getBtnDelete() {
         return btnDelete;
     }
-    
-    
-    
+
+    public JButton getBtnDetails() {
+        return btnDetails;
+    }
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnDetails;
     private view.util.ExitButton exitButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

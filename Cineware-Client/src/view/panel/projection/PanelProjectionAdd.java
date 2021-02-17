@@ -34,6 +34,7 @@ public class PanelProjectionAdd extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jRadioButton1 = new javax.swing.JRadioButton();
         exitButton1 = new view.util.ExitButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -53,6 +54,10 @@ public class PanelProjectionAdd extends javax.swing.JPanel {
         btnAdd = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtPrice = new javax.swing.JTextField();
+        btnEnableChanges = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+
+        jRadioButton1.setText("jRadioButton1");
 
         setBorder(javax.swing.BorderFactory.createTitledBorder("Projection"));
 
@@ -80,6 +85,14 @@ public class PanelProjectionAdd extends javax.swing.JPanel {
 
         jLabel10.setText("Price:");
 
+        btnEnableChanges.setBackground(new java.awt.Color(0, 0, 0));
+        btnEnableChanges.setForeground(new java.awt.Color(240, 240, 240));
+        btnEnableChanges.setText("Enable changes");
+
+        btnEdit.setBackground(new java.awt.Color(0, 0, 0));
+        btnEdit.setForeground(new java.awt.Color(240, 240, 240));
+        btnEdit.setText("Edit");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,7 +100,12 @@ public class PanelProjectionAdd extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnEnableChanges)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(exitButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
             .addGroup(layout.createSequentialGroup()
@@ -180,7 +198,10 @@ public class PanelProjectionAdd extends javax.swing.JPanel {
                     .addComponent(jLabel10)
                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
-                .addComponent(btnAdd)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd)
+                    .addComponent(btnEnableChanges)
+                    .addComponent(btnEdit))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -221,12 +242,19 @@ public class PanelProjectionAdd extends javax.swing.JPanel {
         return txtPrice;
     }
 
-    
-    
+    public JButton getBtnEdit() {
+        return btnEdit;
+    }
+
+    public JButton getBtnEnableChanges() {
+        return btnEnableChanges;
+    }
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnEnableChanges;
     private view.util.ExitButton exitButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -238,6 +266,7 @@ public class PanelProjectionAdd extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JComboBox jcmbDay;
     private javax.swing.JComboBox jcmbHall;
     private javax.swing.JComboBox jcmbHour;

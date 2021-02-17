@@ -9,16 +9,18 @@ import communcation.Communcation;
 import domain.Projection;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author user
  */
-public class ProjectionTableModel extends AbstractTableModel{
+public class ProjectionTableModel extends AbstractTableModel {
+
     private ArrayList<Projection> projections;
-    String[] columnNames = {"Movie", "Date", "Time","Hall"};
-    
+    String[] columnNames = {"Movie", "Date", "Time", "Hall"};
+
     public ProjectionTableModel(ArrayList<Projection> projections) {
         this.projections = projections;
     }
@@ -36,8 +38,8 @@ public class ProjectionTableModel extends AbstractTableModel{
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         Projection p = projections.get(rowIndex);
-        
-        switch(columnIndex){
+
+        switch (columnIndex) {
             case 0:
                 return p.getMovie().toString();
             case 1:
@@ -48,7 +50,8 @@ public class ProjectionTableModel extends AbstractTableModel{
                 return sdf2.format(p.getStartDate());
             case 3:
                 return p.getHall().toString();
-            default: return "n/a";
+            default:
+                return "n/a";
         }
     }
 
@@ -56,8 +59,8 @@ public class ProjectionTableModel extends AbstractTableModel{
     public String getColumnName(int column) {
         return columnNames[column];
     }
-    
-    public void add(Projection p){
+
+    public void add(Projection p) {
         projections.add(p);
         fireTableDataChanged();
     }
@@ -68,5 +71,23 @@ public class ProjectionTableModel extends AbstractTableModel{
         projections.remove(index);
         fireTableDataChanged();
     }
-    
+
+    public ArrayList<Projection> getProjections() {
+        return projections;
+    }
+
+    public void refresh() throws Exception {
+        Date date = new Date();
+        ArrayList<Projection> projectionsTemp = Communcation.getInstance().getAllProjections();
+        projections = new ArrayList<>();
+        for (Projection projection : projectionsTemp) {
+            if (date.before(projection.getStartDate())) {
+                projections.add(projection);
+            }
+        }
+        
+        fireTableDataChanged();
+
+    }
+
 }
