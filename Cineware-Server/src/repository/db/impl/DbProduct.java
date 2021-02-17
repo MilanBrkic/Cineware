@@ -51,6 +51,35 @@ public class DbProduct implements DbRepository<Product>{
         
         return products;
     }
+    
+    @Override
+    public Product get(Product p) throws Exception {
+        int id = p.getId();
+        String query = "SELECT a.articleID, a.price, a.measurementUnit, p.name, p.type, p.userID " +
+                       "FROM article a " +
+                       "INNER JOIN product p " +
+                       "ON a.articleID=p.articleID"+
+                       " WHERE p.articleID="+id;
+        
+        Statement s = connect().createStatement();
+        ResultSet rs = s.executeQuery(query);
+        Product product = null;
+        if(rs.next()){
+            BigDecimal price = rs.getBigDecimal("price");
+            MeasurementUnit unit = MeasurementUnit.valueOf(rs.getString("measurementUnit"));
+            String name = rs.getString("name");
+            ProductType type = ProductType.valueOf(rs.getString("type"));
+            int userId =  rs.getInt("userID");
+            
+            User user = Controller.getInstance().getUser(userId);
+            
+            product = new Product(id, price, unit, name, type, user);
+        }
+        
+        rs.close();
+        s.close();
+        return product;
+    }
 
     @Override
     public void add(Product t) throws Exception {
@@ -67,9 +96,6 @@ public class DbProduct implements DbRepository<Product>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public Product get(Product t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
     
 }

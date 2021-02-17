@@ -41,6 +41,15 @@ public class Invoice implements GenericEntity{
         this.items = new ArrayList<>();
         this.user = user;
     }
+    
+    public Invoice(int id, String number, Date date, BigDecimal total, User user, ArrayList<InvoiceItem> items) {
+        this.id = id;
+        this.number = number;
+        this.date = date;
+        this.total = total;
+        this.items = items;
+        this.user = user;
+    }
 
     public int getId() {
         return id;

@@ -3,43 +3,42 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package operation.projection;
+package operation.ticket;
 
-import domain.Projection;
-import java.util.ArrayList;
+import domain.Ticket;
 import operation.AbstractGenericOperation;
-import repository.db.impl.DbProjection;
+import repository.db.impl.DbTicket;
 
 /**
  *
  * @author user
  */
-public class GetAllProjections extends AbstractGenericOperation{
+public class GetTicket extends AbstractGenericOperation{
 
-    ArrayList<Projection> result;
+    Ticket result;
 
-    public GetAllProjections() {
-        repo = new DbProjection();
+    public GetTicket() {
+        repo = new DbTicket();
     }
     
     
     
     @Override
     protected void preconditions(Object params) throws Exception {
-        if(params==null || !(params instanceof Projection)){
-            throw new Exception("Invalid projection data");
+        if(params==null || !(params instanceof Ticket)){
+            throw new Exception("Invalid ticket data");
         }
     }
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = ((DbProjection)repo).getAll();
+        result = ((DbTicket)repo).get((Ticket)params);
     }
 
-    public ArrayList<Projection> getResult() {
+    public Ticket getResult() {
         return result;
     }
- 
+    
     
     
 }

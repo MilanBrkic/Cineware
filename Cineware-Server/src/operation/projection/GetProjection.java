@@ -6,7 +6,6 @@
 package operation.projection;
 
 import domain.Projection;
-import java.util.ArrayList;
 import operation.AbstractGenericOperation;
 import repository.db.impl.DbProjection;
 
@@ -14,32 +13,31 @@ import repository.db.impl.DbProjection;
  *
  * @author user
  */
-public class GetAllProjections extends AbstractGenericOperation{
+public class GetProjection extends AbstractGenericOperation{
 
-    ArrayList<Projection> result;
+    Projection result;
 
-    public GetAllProjections() {
+    public GetProjection() {
         repo = new DbProjection();
     }
     
     
-    
     @Override
     protected void preconditions(Object params) throws Exception {
-        if(params==null || !(params instanceof Projection)){
+         if(params==null || !(params instanceof Projection)){
             throw new Exception("Invalid projection data");
         }
     }
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = ((DbProjection)repo).getAll();
+        result = ((DbProjection)repo).get((Projection)params);
     }
 
-    public ArrayList<Projection> getResult() {
+    public Projection getResult() {
         return result;
     }
- 
+    
     
     
 }

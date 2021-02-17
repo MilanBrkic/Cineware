@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumnModel;
 import view.coordinator.MainCoordinator;
-import view.model.table.InvoiceTableModel;
+import view.model.table.InvoiceItemTableModel;
 import view.panel.invoice.PanelInvoiceAdd;
 
 /**
@@ -35,11 +35,11 @@ import view.panel.invoice.PanelInvoiceAdd;
 public class ControllerInvoiceAdd {
 
     PanelInvoiceAdd panel;
-    InvoiceTableModel model;
+    InvoiceItemTableModel model;
 
     public ControllerInvoiceAdd(PanelInvoiceAdd panel) {
         this.panel = panel;
-        model = new InvoiceTableModel(new Invoice());
+        model = new InvoiceItemTableModel(new Invoice());
         panel.getTableInvoiceItem().setModel(model);
     }
 
@@ -92,7 +92,7 @@ public class ControllerInvoiceAdd {
         TableColumnModel columnModel = panel.getTableInvoiceItem().getColumnModel();
 
         columnModel.getColumn(0).setPreferredWidth(5);
-        columnModel.getColumn(1).setPreferredWidth(200);
+        columnModel.getColumn(1).setPreferredWidth(250);
         columnModel.getColumn(2).setPreferredWidth(5);
         columnModel.getColumn(3).setPreferredWidth(5);
         columnModel.getColumn(4).setPreferredWidth(5);
@@ -228,7 +228,7 @@ public class ControllerInvoiceAdd {
             }
 
             private void clearFields() {
-                model = new InvoiceTableModel(new Invoice());
+                model = new InvoiceItemTableModel(new Invoice());
                 panel.getTableInvoiceItem().setModel(model);
                 model.setMap(new HashMap<>());
 

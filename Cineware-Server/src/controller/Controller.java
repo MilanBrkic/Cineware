@@ -40,17 +40,21 @@ import operation.actor.GetAllActors;
 import operation.article.AddArticle;
 import operation.director.GetAllDirectors;
 import operation.director.GetDirector;
+import operation.invoice.GetAllInvoices;
 import operation.movie.AddMovie;
 import operation.movie.DeleteMovie;
 import operation.movie.GetAllMovies;
 import operation.movie.GetMovie;
 import operation.movie.UpdateMovie;
 import operation.product.GetAllProduct;
+import operation.product.GetProduct;
 import operation.projection.GetAllProjections;
+import operation.projection.GetProjection;
 import operation.seat.GetAllByHall;
 import operation.seat.GetSeat;
 import operation.ticket.AddTickets;
 import operation.ticket.GetAllTicketsFromProjection;
+import operation.ticket.GetTicket;
 import operation.ticket.SetTicketToSold;
 import repository.db.impl.DbProjection;
 import operation.user.CheckPassword;
@@ -293,6 +297,14 @@ public class Controller {
         return ((GetAllProjections) ago).getResult();
     }
 
+    public Projection getProjection(int id) throws Exception{
+        AbstractGenericOperation ago = new GetProjection();
+        Projection projection  = new Projection();
+        projection.setId(id);
+        ago.execute(projection);
+        return ((GetProjection)ago).getResult();
+    }
+    
     public int addArticle(Article article) throws Exception{
         AbstractGenericOperation ago = new AddArticle();
         ago.executeWithoutCommit(article);
@@ -310,6 +322,13 @@ public class Controller {
         ago.execute(projection);
     }
 
+    public Ticket getTicket(int id) throws Exception{
+        AbstractGenericOperation ago = new GetTicket();
+        Ticket ticket = new Ticket();
+        ticket.setId(id);
+        ago.execute(ticket);
+        return ((GetTicket)ago).getResult();
+    }
     public void deleteProjection(Projection projection) throws Exception {
         AbstractGenericOperation ago = new GenericDelete<Ticket>();
         ago.execute(projection);
@@ -329,6 +348,13 @@ public class Controller {
         return ((GetAllProduct) ago).getResult();
     }
 
+    public Product getProduct(int id) throws Exception{
+        AbstractGenericOperation ago = new GetProduct();
+        Product product = new Product();
+        product.setId(id);
+        ago.execute(product);
+        return ((GetProduct)ago).getResult();
+    }
   
 
     public void updateProduct(Product product) throws Exception {
@@ -375,6 +401,12 @@ public class Controller {
     private void setTicketToSold(Ticket ticket) throws Exception {
         AbstractGenericOperation ago = new SetTicketToSold();
         ago.executeWithoutCommit(ticket);
+    }
+
+    public ArrayList<Invoice> getAllInvoices() throws Exception {
+        AbstractGenericOperation ago = new GetAllInvoices();
+        ago.execute(new Invoice());
+        return ((GetAllInvoices)ago).getResult();
     }
 
     

@@ -313,7 +313,6 @@ public class Communcation {
     }
 
     public void addInvoice(Invoice invoice) throws Exception {
-        System.out.println(invoice.getId()+" "+invoice.getNumber()+" "+invoice.getDate()+" "+invoice.getTotal()+" "+invoice.getUser().toString());
         for (InvoiceItem item : invoice.getItems()) {
             System.out.println(item.getArticle().toString());
         }
@@ -327,6 +326,18 @@ public class Communcation {
         }
         else throw response.getException();
         
+    }
+
+    public ArrayList<Invoice> getAllInvoices() throws Exception {
+        Request request = new Request(Operation.GET_ALL_INVOICES, null);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() == null) {
+            ArrayList<Invoice> invoices = (ArrayList<Invoice>) response.getResultObject();
+            return invoices;
+        } else {
+            throw response.getException();
+        }
     }
 
 }

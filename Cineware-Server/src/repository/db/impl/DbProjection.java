@@ -141,8 +141,29 @@ public class DbProjection implements DbRepository<Projection> {
     }
 
     @Override
-    public Projection get(Projection t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Projection get(Projection p) throws Exception {
+        int id = p.getId();
+        String query = "SELECT * FROM projection WHERE projectionID="+id;
+        Statement s = connect().createStatement();
+        ResultSet rs = s.executeQuery(query);
+        Projection projection = null;
+        if(rs.next()){
+            Date startDate = new Date(rs.getTimestamp("startTime").getTime());
+            Date endDate = new Date(rs.getTimestamp("endTime").getTime());;
+
+            int userID = rs.getInt("userID");
+            User user = Controller.getInstance().getUser(userID);
+
+            int movieID = rs.getInt("movieID");
+            Movie movie = Controller.getInstance().getMovie(movieID);
+            BigDecimal price = rs.getBigDecimal("price");
+            
+            Hall hall = Controller.getInstance().getHall(rs.getInt("hallID"));
+
+            projection = new Projection(id, startDate, endDate, price, hall, movie, user);
+        }
+        
+        return projection;
     }
 
 }

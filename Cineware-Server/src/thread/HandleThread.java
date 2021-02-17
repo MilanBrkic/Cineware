@@ -230,6 +230,10 @@ public class HandleThread extends Thread {
                             Invoice addInvoice = (Invoice) request.getObject();
                             Controller.getInstance().addInvoice(addInvoice);
                             break;
+                        case GET_ALL_INVOICES:
+                            ArrayList<Invoice> allInvoices = Controller.getInstance().getAllInvoices();
+                            response.setResultObject(allInvoices);
+                            break;
                             
                     }
                 } catch (Exception e) {

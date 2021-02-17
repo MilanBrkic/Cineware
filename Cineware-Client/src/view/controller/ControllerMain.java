@@ -284,6 +284,8 @@ public class ControllerMain {
         form.getMenuItemInvoiceView().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                templateForView(() -> form.getMenuItemInvoiceView(),
+                        () -> MainCoordinator.getInstance().openPanelInvoiceView());
             }
         });
     }

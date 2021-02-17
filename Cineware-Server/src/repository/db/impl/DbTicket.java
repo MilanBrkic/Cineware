@@ -74,6 +74,13 @@ public class DbTicket implements DbRepository<Ticket>{
         s.close();
     }
     
+    public void setTicketToNotSold(Ticket ticket) throws Exception{
+        String query = "UPDATE ticket SET sold=false WHERE articleID="+ticket.getId();
+        System.out.println(query);
+        Statement s = connect().createStatement();
+        s.executeUpdate(query);
+        s.close();
+    }
     
     @Override
     public ArrayList<Ticket> getAll(Ticket t) throws Exception {
@@ -97,7 +104,30 @@ public class DbTicket implements DbRepository<Ticket>{
 
     @Override
     public Ticket get(Ticket t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int id = t.getId();
+        String query = "SELECT  a.articleID, a.price, t.sold, t.seatID, t.projectionID " +
+                       " FROM article a " +
+                       " INNER JOIN ticket t " +
+                       " ON a.articleID=t.articleID " +
+                       " WHERE t.articleID="+id;
+        
+        Statement s = connect().createStatement();
+        ResultSet rs = s.executeQuery(query);
+        Ticket ticket = null;
+        if(rs.next()){
+            BigDecimal price = rs.getBigDecimal("price");
+            MeasurementUnit unit = MeasurementUnit.PCS;
+            boolean sold = rs.getBoolean("sold");
+            
+            Seat seat = Controller.getInstance().getSeat(rs.getInt("seatID"));
+            
+            Projection projection = Controller.getInstance().getProjection(rs.getInt("projectionID"));
+            ticket = new Ticket(id, price, unit, sold, projection, seat);
+        }
+        
+        s.close();
+        rs.close();
+        return ticket;
     }
     
 }

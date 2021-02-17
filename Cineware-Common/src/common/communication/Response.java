@@ -13,6 +13,7 @@ import java.io.Serializable;
  */
 public class Response implements Serializable{
     String result;
+    Object resultObject;
     Exception exception;
 
     public Response() {
@@ -37,6 +38,14 @@ public class Response implements Serializable{
 
     public void setException(Exception exception) {
         this.exception = exception;
+    }
+
+    public Object getResultObject() {
+        return resultObject;
+    }
+
+    public void setResultObject(Object resultObject) {
+        this.resultObject = resultObject;
     }
 
     

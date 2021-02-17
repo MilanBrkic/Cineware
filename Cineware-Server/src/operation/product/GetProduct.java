@@ -3,43 +3,42 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package operation.projection;
+package operation.product;
 
-import domain.Projection;
-import java.util.ArrayList;
+import domain.Product;
 import operation.AbstractGenericOperation;
-import repository.db.impl.DbProjection;
+import repository.db.impl.DbProduct;
 
 /**
  *
  * @author user
  */
-public class GetAllProjections extends AbstractGenericOperation{
+public class GetProduct extends AbstractGenericOperation{
 
-    ArrayList<Projection> result;
+    Product result;
 
-    public GetAllProjections() {
-        repo = new DbProjection();
+    public GetProduct() {
+        repo = new DbProduct();
     }
     
     
     
     @Override
     protected void preconditions(Object params) throws Exception {
-        if(params==null || !(params instanceof Projection)){
-            throw new Exception("Invalid projection data");
+        if(params==null || !(params instanceof Product)){
+            throw new Exception("Invalid product data");
         }
     }
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = ((DbProjection)repo).getAll();
+        result = ((DbProduct)repo).get((Product)params);
     }
 
-    public ArrayList<Projection> getResult() {
+    public Product getResult() {
         return result;
     }
- 
+    
     
     
 }

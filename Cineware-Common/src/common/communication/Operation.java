@@ -46,4 +46,5 @@ public enum Operation implements Serializable{
     GET_TICKETS_FROM_PROJECTION,
     ADD_INVOICE,
     STORNO_INVOICE,
+    GET_ALL_INVOICES
 }
