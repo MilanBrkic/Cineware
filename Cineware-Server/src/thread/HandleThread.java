@@ -15,6 +15,7 @@ import controller.Controller;
 import domain.Actor;
 import domain.Director;
 import domain.Hall;
+import domain.Invoice;
 import domain.Movie;
 import domain.Projection;
 import domain.User;
@@ -223,6 +224,11 @@ public class HandleThread extends Thread {
                             ArrayList<Ticket> tickets = Controller.getInstance().getAllTicketsFromProjection(projection);
                             String jsonTickets = gson.toJson(tickets);
                             response.setResult(jsonTickets);
+                            break;
+                        case ADD_INVOICE:
+                            String jsonAddInvoice = request.getArguments();
+                            Invoice addInvoice = gson.fromJson(jsonAddInvoice, Invoice.class);
+                            Controller.getInstance().addInvoice(addInvoice);
                             break;
                             
                     }

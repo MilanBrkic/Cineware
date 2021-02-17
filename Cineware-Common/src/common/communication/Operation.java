@@ -43,5 +43,7 @@ public enum Operation implements Serializable{
     GET_ALL_PRODUCTS,
     DELETE_PRODUCT,
     UPDATE_PRODUCT, 
-    GET_TICKETS_FROM_PROJECTION
+    GET_TICKETS_FROM_PROJECTION,
+    ADD_INVOICE,
+    STORNO_INVOICE,
 }

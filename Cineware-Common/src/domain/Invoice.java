@@ -42,6 +42,12 @@ public class Invoice implements GenericEntity{
         this.user = user;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    
+    
     public String getNumber() {
         return number;
     }
@@ -110,17 +116,25 @@ public class Invoice implements GenericEntity{
     
     @Override
     public String getTableName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "invoice";
     }
 
     @Override
     public String columnNamesForInsert() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "invoiceID, number, date, total, userID";
     }
 
     @Override
     public String getInsertValues() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append(id).append(", ")
+          .append("'").append(number).append("', ")
+          .append("'").append(new java.sql.Date(date.getTime())).append("', ")
+          .append(total).append(", ")
+          .append(user.getId());
+        
+        return sb.toString();
     }
 
     @Override
@@ -140,7 +154,7 @@ public class Invoice implements GenericEntity{
 
     @Override
     public void setId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.id = id;
     }
     
 }

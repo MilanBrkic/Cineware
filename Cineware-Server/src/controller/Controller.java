@@ -11,6 +11,8 @@ import domain.Actor;
 import domain.Article;
 import domain.Director;
 import domain.Hall;
+import domain.Invoice;
+import domain.InvoiceItem;
 import domain.Movie;
 import domain.Product;
 import domain.Projection;
@@ -53,6 +55,7 @@ import repository.db.impl.DbProjection;
 import operation.user.CheckPassword;
 import operation.user.UpdatePasswordOnly;
 import operation.user.UpdateWithoutPassword;
+import repository.db.DbConnectionFactory;
 import repository.db.DbRepository;
 import view.controller.ControllerView;
 
@@ -346,6 +349,25 @@ public class Controller {
         ago.execute(projection);
         return ((GetAllTicketsFromProjection)ago).getResult();
     }
+
+    public void addInvoice(Invoice invoice) throws Exception {
+        AbstractGenericOperation ago = new GenericAddWithGenKeys<Invoice>();
+        ago.executeWithoutCommit(invoice);
+        
+        for (InvoiceItem item : invoice.getItems()) {
+            item.setId(invoice.getId());
+            addInvoiceItem(item);
+        }
+        
+        DbConnectionFactory.getInstance().getConnection().commit();
+    }
+
+    private void addInvoiceItem(InvoiceItem item) throws Exception {
+        AbstractGenericOperation ago = new GenericAdd<InvoiceItem>();
+        ago.executeWithoutCommit(item);
+    }
+
+    
     
 
     class Countries {

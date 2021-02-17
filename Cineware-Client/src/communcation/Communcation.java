@@ -15,6 +15,8 @@ import common.communication.Sender;
 import domain.Actor;
 import domain.Director;
 import domain.Hall;
+import domain.Invoice;
+import domain.InvoiceItem;
 import domain.Movie;
 import domain.Product;
 import domain.Projection;
@@ -308,6 +310,22 @@ public class Communcation {
         } else {
             throw response.getException();
         }
+    }
+
+    public void addInvoice(Invoice invoice) throws Exception {
+        System.out.println(invoice.getId()+" "+invoice.getNumber()+" "+invoice.getDate()+" "+invoice.getTotal()+" "+invoice.getUser().toString());
+        for (InvoiceItem item : invoice.getItems()) {
+            System.out.println(item.getArticle().toString());
+        }
+        String s = gson.toJson(invoice);
+        Request request = new Request( Operation.ADD_INVOICE, s);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException()==null){
+            
+        }
+        else throw response.getException();
+        
     }
 
 }

@@ -11,11 +11,11 @@ import domain.Invoice;
 import domain.InvoiceItem;
 import domain.Product;
 import domain.Projection;
-import domain.Ticket;
 import domain.enums.MeasurementUnit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableColumnModel;
+import view.coordinator.MainCoordinator;
 import view.model.table.InvoiceTableModel;
 import view.panel.invoice.PanelInvoiceAdd;
 
@@ -98,6 +99,7 @@ public class ControllerInvoiceAdd {
         setProductListener();
         setProjectionListener();
         setInvoiceItemRemove();
+        setSaveListener();
     }
 
     private void setProductListener() {
@@ -172,15 +174,65 @@ public class ControllerInvoiceAdd {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int index = panel.getTableInvoiceItem().getSelectedRow();
-                if(index>=0){
+                if (index >= 0) {
                     int number = JOptionPane.showConfirmDialog(panel, "Are you sure you what to delete invoice item", "Delete", 0);
                     if (number == 0) {
                         model.remove(index);
                     }
-                }
-                else{
+                } else {
                     JOptionPane.showMessageDialog(panel, "Not selected", "Error", JOptionPane.ERROR_MESSAGE);
                 }
+            }
+        });
+    }
+
+    private void setSaveListener() {
+        panel.getBtnSave().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Invoice invoice = model.getInvoice();
+
+                    String number = panel.getTxtNumber().getText();
+                    if (number.isEmpty()) {
+                        throw new Exception("Number can't be empty");
+                    }
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy.");
+                    Date date = null;
+                    try {
+                        date = sdf.parse(panel.getTxtnDate().getText());
+                        invoice.setDate(date);
+                    } catch (ParseException ex) {
+                        throw ex;
+                    }
+
+                    invoice.setDate(date);
+                    invoice.setNumber(number);
+                    invoice.setUser(MainCoordinator.getInstance().getUser());
+
+                    Communcation.getInstance().addInvoice(invoice);
+                    JOptionPane.showMessageDialog(panel, "Invoice added", "Added", JOptionPane.INFORMATION_MESSAGE);
+
+                    clearFields();
+                } catch (Exception exc) {
+                    exc.printStackTrace();
+                    JOptionPane.showMessageDialog(panel, exc.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+            }
+
+            private void clearFields() {
+                model = new InvoiceTableModel(new Invoice());
+                panel.getTableInvoiceItem().setModel(model);
+                
+                panel.getCmbProduct().setSelectedItem(-1);
+                panel.getCmbProjection().setSelectedItem(-1);
+                panel.getTxtNumber().setText("");
+                panel.getTxtQuantityProduct().setText("");
+                panel.getTxtQuantityTicket().setText("");
+                panel.getTxtPriceProduct().setText("");
+                panel.getTxtPriceTicket().setText("");
             }
         });
     }

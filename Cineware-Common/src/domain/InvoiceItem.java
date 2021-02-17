@@ -16,7 +16,8 @@ import java.util.Objects;
  * @author user
  */
 public class InvoiceItem implements GenericEntity{
-    Invoice invoice;
+    int InvoiceId;
+    transient Invoice invoice;
     int orderNumber;
     BigDecimal price;
     int quantity;
@@ -125,17 +126,27 @@ public class InvoiceItem implements GenericEntity{
     
     @Override
     public String getTableName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "invoice_item";
     }
 
     @Override
     public String columnNamesForInsert() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "invoiceID, orderNumber, price, quantity, unit, articleID, total";
     }
 
     @Override
     public String getInsertValues() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append(InvoiceId).append(", ")
+          .append(orderNumber).append(", ")
+          .append(price).append(", ")
+          .append(quantity).append(", ")
+          .append("'").append(unit).append("', ")
+          .append(article.getId()).append(", ")
+          .append(total);
+        
+        return sb.toString();
     }
 
     @Override
@@ -155,7 +166,7 @@ public class InvoiceItem implements GenericEntity{
 
     @Override
     public void setId(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        InvoiceId = id;
     }
     
 }
