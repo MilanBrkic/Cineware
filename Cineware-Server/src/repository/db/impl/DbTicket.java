@@ -67,7 +67,7 @@ public class DbTicket implements DbRepository<Ticket>{
     }
     
     public void setTicketToSold(Ticket ticket) throws Exception{
-        String query = "UPDATE ticket SET sold=true WHERE articleID="+ticket.getId();
+        String query = "UPDATE ticket SET sold= not sold WHERE articleID="+ticket.getId();
         System.out.println(query);
         Statement s = connect().createStatement();
         s.executeUpdate(query);

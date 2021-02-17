@@ -234,6 +234,10 @@ public class HandleThread extends Thread {
                             ArrayList<Invoice> allInvoices = Controller.getInstance().getAllInvoices();
                             response.setResultObject(allInvoices);
                             break;
+                        case STORNO_INVOICE:
+                            Invoice stornoInvoice = (Invoice) request.getObject();
+                            Controller.getInstance().stornoInvoice(stornoInvoice);
+                            break;
                             
                     }
                 } catch (Exception e) {

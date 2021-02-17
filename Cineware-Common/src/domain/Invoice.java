@@ -130,15 +130,14 @@ public class Invoice implements GenericEntity{
 
     @Override
     public String columnNamesForInsert() {
-        return "invoiceID, number, date, total, userID";
+        return "number, date, total, userID";
     }
 
     @Override
     public String getInsertValues() {
         StringBuilder sb = new StringBuilder();
         
-        sb.append(id).append(", ")
-          .append("'").append(number).append("', ")
+        sb.append("'").append(number).append("', ")
           .append("'").append(new java.sql.Date(date.getTime())).append("', ")
           .append(total).append(", ")
           .append(user.getId());

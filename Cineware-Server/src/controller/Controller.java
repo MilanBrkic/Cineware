@@ -409,6 +409,10 @@ public class Controller {
         return ((GetAllInvoices)ago).getResult();
     }
 
+    public void stornoInvoice(Invoice stornoInvoice) throws Exception {
+        addInvoice(stornoInvoice);
+    }
+
     
     
 

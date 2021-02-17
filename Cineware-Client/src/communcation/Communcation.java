@@ -313,9 +313,7 @@ public class Communcation {
     }
 
     public void addInvoice(Invoice invoice) throws Exception {
-        for (InvoiceItem item : invoice.getItems()) {
-            System.out.println(item.getArticle().toString());
-        }
+        
         String s = gson.toJson(invoice);
         Request request = new Request( Operation.ADD_INVOICE, s);
         request.setObject(invoice);
@@ -338,6 +336,18 @@ public class Communcation {
         } else {
             throw response.getException();
         }
+    }
+
+    public void stornoInvoice(Invoice invoice) throws Exception {
+        String s = gson.toJson(invoice);
+        Request request = new Request( Operation.STORNO_INVOICE, s);
+        request.setObject(invoice);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if(response.getException()==null){
+            
+        }
+        else throw response.getException();
     }
 
 }
