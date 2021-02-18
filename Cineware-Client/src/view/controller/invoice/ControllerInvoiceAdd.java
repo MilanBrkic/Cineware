@@ -218,7 +218,7 @@ public class ControllerInvoiceAdd {
 
                     Communcation.getInstance().addInvoice(invoice);
                     JOptionPane.showMessageDialog(panel, "Invoice added", "Added", JOptionPane.INFORMATION_MESSAGE);
-
+                    
                     clearFields();
                 } catch (Exception exc) {
                     exc.printStackTrace();

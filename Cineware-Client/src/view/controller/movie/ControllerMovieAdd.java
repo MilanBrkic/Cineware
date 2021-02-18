@@ -258,16 +258,16 @@ public class ControllerMovieAdd {
         int year = 0;
         String yearString = panel.getTxtYear().getText();
         if (yearString.isEmpty()) {
-            error += "Year can not be empty";
+            error += "Year can not be empty\n";
         } else {
             year = Integer.parseInt(yearString);
             int limit = new GregorianCalendar().get(GregorianCalendar.YEAR);
             if (year < 1900 || year > limit) {
-                error += "Year must be berween 1900 and " + limit;
+                error += "Year must be berween 1900 and " + limit+"\n";
             }
         }
         if (error != "") {
-            throw new Exception(error);
+            throw new Exception(error+"Movie can not be saved");
         }
 
         Genre genre = (Genre) panel.getCmbGenre().getSelectedItem();
@@ -378,8 +378,11 @@ public class ControllerMovieAdd {
                     int number = JOptionPane.showConfirmDialog(panel, "Are you sure you what to delete movie " + movie, "Delete", 0);
                     if (number == 0) {
                         Communcation.getInstance().deleteMovie(movie);
+                        JOptionPane.showMessageDialog(panel, "Movie deleted", "Deleted", JOptionPane.INFORMATION_MESSAGE);
+                        updateTable();
+                        
                     }
-                    updateTable();
+                    else JOptionPane.showMessageDialog(panel, "Movie could not be deleted", "Error", JOptionPane.ERROR_MESSAGE);
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                     Logger.getLogger(ControllerActorAdd.class.getName()).log(Level.SEVERE, null, ex);

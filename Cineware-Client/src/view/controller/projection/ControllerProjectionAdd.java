@@ -88,7 +88,7 @@ public class ControllerProjectionAdd {
                     JOptionPane.showMessageDialog(panel, "Projecation has been added", "Added", JOptionPane.INFORMATION_MESSAGE);
 
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(panel, ex.getMessage()+"\nProjection could not be added", "Error", JOptionPane.ERROR_MESSAGE);
                     ex.printStackTrace();
                 }
             }
@@ -327,7 +327,7 @@ public class ControllerProjectionAdd {
                     model.refresh();
                     panel.getExitButton1().doClick();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(panel, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(panel, ex.getMessage()+"\nProjection could not be updated", "Error", JOptionPane.ERROR_MESSAGE);
                     ex.printStackTrace();
                 }
             }

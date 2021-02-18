@@ -79,6 +79,12 @@ public class ControllerInvoiceView {
                 model.setSortValue(sort);
                 model.sort();
                 fillTotal();
+                if(model.getInvoicesCopy().size()!=0){
+                    JOptionPane.showMessageDialog(panel, "Invoices found by the given value", "Found", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(panel, "Invoices could not be found by given value", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }
@@ -96,6 +102,7 @@ public class ControllerInvoiceView {
                         Communcation.getInstance().stornoInvoice(invoice);
                         model.refresh();
                         fillTotal();
+                        JOptionPane.showMessageDialog(panel, "Invoice is storned", "Storned", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, "Invoice not storned\n"+ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                         Logger.getLogger(ControllerInvoiceView.class.getName()).log(Level.SEVERE, null, ex);

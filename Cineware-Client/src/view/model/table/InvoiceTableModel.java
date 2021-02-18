@@ -124,6 +124,11 @@ public class InvoiceTableModel extends AbstractTableModel{
         if(number>=2) return true;
         else return false;
     }
+
+    public ArrayList<Invoice> getInvoicesCopy() {
+        return invoicesCopy;
+    }
+    
     
     
 }

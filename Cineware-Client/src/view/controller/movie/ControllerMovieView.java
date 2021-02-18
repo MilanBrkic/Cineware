@@ -79,6 +79,10 @@ public class ControllerMovieView {
                     MainCoordinator.getInstance().getParams().put(Constant.MOVIE_DETAILS, m);
                     MainCoordinator.getInstance().getParams().put(Constant.MOVIE_TABLE_MODEL, model);
                     MainCoordinator.getInstance().openPanelMovieAdd(Mode.EDIT);
+                    JOptionPane.showMessageDialog(panel, "Movie found by the given value", "Found", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(panel, "Movie could not be found by given value", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -91,6 +95,12 @@ public class ControllerMovieView {
                 String sort = panel.getTxtSearch().getText();
                 model.setSortValue(sort);
                 model.sort();
+                if(model.getMovies().size()!=0){
+                    JOptionPane.showMessageDialog(panel, "Movies found by the given value", "Found", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(panel, "Movies could not be found by given value", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }

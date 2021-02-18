@@ -103,6 +103,8 @@ public class ControllerProjectionView {
     private void setListeners() {
         setDeleteListener();
         setUpdateListener();
+        setSearchListener();
+        
     }
 
     
@@ -117,11 +119,12 @@ public class ControllerProjectionView {
                         if (number == 0) {
                             upcomingModel.delete(index);
                         }
+                        JOptionPane.showMessageDialog(panel, "Projection deleted", "Deleted", JOptionPane.INFORMATION_MESSAGE);
                     } catch (Exception ex) {
                         Logger.getLogger(ControllerProjectionView.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(panel, "Row is not selected", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(panel, "Row is not selected\nCould not delete projection", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -137,6 +140,27 @@ public class ControllerProjectionView {
                     MainCoordinator.getInstance().getParams().put(Constant.PROJECTION_DETAILS, projection);
                     MainCoordinator.getInstance().getParams().put(Constant.PROJECTION_TABLE_MODEL, upcomingModel);
                     MainCoordinator.getInstance().openPanelProjectionAdd(Mode.EDIT);
+                    JOptionPane.showMessageDialog(panel, "Projection found by the given value", "Found", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(panel, "Projection could not be found by given value", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+    }
+
+    private void setSearchListener() {
+        panel.getBtnSearch().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String sort = panel.getTxtSearch().getText();
+                upcomingModel.setSortValue(sort);
+                upcomingModel.sort();
+                if(upcomingModel.getProjections().size()!=0){
+                    JOptionPane.showMessageDialog(panel, "Projections found by the given value", "Found", JOptionPane.INFORMATION_MESSAGE);
+                }
+                else{
+                    JOptionPane.showMessageDialog(panel, "Projections could not be found by given value", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
