@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -81,6 +82,8 @@ public class FormMain extends javax.swing.JFrame {
         PanelStatusBar.add(lblTime, java.awt.BorderLayout.LINE_END);
 
         getContentPane().add(PanelStatusBar, java.awt.BorderLayout.PAGE_END);
+
+        PanelMain.setAutoscrolls(true);
 
         lblWelcomeUser.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         PanelMain.add(lblWelcomeUser);
@@ -258,6 +261,12 @@ public class FormMain extends javax.swing.JFrame {
         return menuItemInvoiceView;
     }
 
+    
+
+    
+
+    
+    
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
