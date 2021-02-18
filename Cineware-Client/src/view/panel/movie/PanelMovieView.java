@@ -62,7 +62,7 @@ public class PanelMovieView extends javax.swing.JPanel {
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Movie View"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Movie View", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
         tableMovie.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

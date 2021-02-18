@@ -83,7 +83,7 @@ public class PanelActorAdd extends javax.swing.JPanel {
         btnDelete = new javax.swing.JButton();
         btnEnableChanges = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder("Actor"));
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actor", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
         jLabel1.setText("Firstname:");
 
@@ -170,7 +170,7 @@ public class PanelActorAdd extends javax.swing.JPanel {
                     .addComponent(btnEdit)
                     .addComponent(btnDelete)
                     .addComponent(btnEnableChanges))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

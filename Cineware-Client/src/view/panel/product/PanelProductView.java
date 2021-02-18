@@ -39,7 +39,7 @@ public class PanelProductView extends javax.swing.JPanel {
         txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder("Product View"));
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Product View", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
         tableProduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,7 +100,7 @@ public class PanelProductView extends javax.swing.JPanel {
                                     .addComponent(btnSearch))))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     

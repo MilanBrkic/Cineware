@@ -62,7 +62,7 @@ public class PanelInvoiceAdd extends javax.swing.JPanel {
         btnSave = new javax.swing.JButton();
         lblTotal = new javax.swing.JLabel();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder("Invoice"));
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Invoice", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
         jLabel1.setText("Number:");
 

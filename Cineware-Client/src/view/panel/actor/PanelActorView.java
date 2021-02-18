@@ -50,7 +50,7 @@ public class PanelActorView extends javax.swing.JPanel {
         btnDetails = new javax.swing.JButton();
         exitButton1 = new view.util.ExitButton();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Actor View"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Actor View", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
         tableActor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

@@ -43,7 +43,7 @@ public class PanelHallView extends javax.swing.JPanel {
         tableHall = new javax.swing.JTable();
         exitButton1 = new view.util.ExitButton();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder("Hall View"));
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hall View", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
         tableHall.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         tableHall.setModel(new javax.swing.table.DefaultTableModel(
@@ -77,7 +77,7 @@ public class PanelHallView extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(exitButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(4, 4, 4)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents

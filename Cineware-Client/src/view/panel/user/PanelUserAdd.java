@@ -61,7 +61,7 @@ public class PanelUserAdd extends javax.swing.JPanel {
         jLabel9.setForeground(new java.awt.Color(255, 0, 0));
         jLabel9.setText("jLabel6");
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder("User"));
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "User", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
         jLabel1.setText("Firstname:");
 

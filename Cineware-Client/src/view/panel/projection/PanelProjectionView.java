@@ -41,7 +41,7 @@ public class PanelProjectionView extends javax.swing.JPanel {
         btnDelete = new javax.swing.JButton();
         btnDetails = new javax.swing.JButton();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder("Projection View"));
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Projection View", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
         setToolTipText("");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Previous Projections"));

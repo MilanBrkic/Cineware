@@ -50,7 +50,7 @@ public class PanelUserView extends javax.swing.JPanel {
         btnDetails = new javax.swing.JButton();
         exitButton1 = new view.util.ExitButton();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder("User View"));
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "User View", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
         setToolTipText("");
 
         tableUser.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N

@@ -42,7 +42,7 @@ public class PanelInvoiceView extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
 
-        setBorder(javax.swing.BorderFactory.createTitledBorder("Invoice View"));
+        setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Invoice View", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
         btnSearch.setBackground(new java.awt.Color(0, 0, 0));
         btnSearch.setForeground(new java.awt.Color(240, 240, 240));
@@ -112,7 +112,7 @@ public class PanelInvoiceView extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

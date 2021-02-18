@@ -145,7 +145,7 @@ public class PanelMovieAdd extends javax.swing.JPanel {
         btnEditMovie = new javax.swing.JButton();
         btnDeleteMovie = new javax.swing.JButton();
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Movie"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Movie", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
         jLabel1.setText("Name:");
 
