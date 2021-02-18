@@ -1,2 +1,2 @@
 # Cineware
-Cinema informationa system
+Cinema information system
