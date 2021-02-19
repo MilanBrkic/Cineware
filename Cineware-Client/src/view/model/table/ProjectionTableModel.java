@@ -91,7 +91,7 @@ public class ProjectionTableModel extends AbstractTableModel {
             }
         }
 
-        fireTableDataChanged();
+        sort();
 
     }
 

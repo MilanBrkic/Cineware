@@ -95,7 +95,26 @@ public class DbInvoice implements DbRepository<Invoice>{
 
     @Override
     public Invoice get(Invoice t) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int id = t.getId();
+        String query = "SELECT * FROM invoice WHERE invoiceID="+id;
+        Statement s = connect().createStatement();
+        ResultSet rs = s.executeQuery(query);
+        
+        Invoice invoice = null;
+        if(rs.next()){
+            String number = rs.getString("number");
+            Date date = new Date(rs.getDate("date").getTime());
+            BigDecimal total = rs.getBigDecimal("total");
+            User user = Controller.getInstance().getUser(rs.getInt("userID"));
+            
+            
+            invoice = new Invoice(id, number, date, total, user,null);
+            ArrayList<InvoiceItem> items = getInvoiceItems(invoice);
+            invoice.setItems(items);
+            
+        }
+        
+        return invoice;
     }
 
     

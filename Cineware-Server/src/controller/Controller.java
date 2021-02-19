@@ -40,7 +40,10 @@ import operation.actor.GetAllActors;
 import operation.article.AddArticle;
 import operation.director.GetAllDirectors;
 import operation.director.GetDirector;
+import operation.invoice.AddInvoice;
 import operation.invoice.GetAllInvoices;
+import operation.invoice.GetInvoice;
+import operation.invoice.StornoInvoice;
 import operation.movie.AddMovie;
 import operation.movie.DeleteMovie;
 import operation.movie.GetAllMovies;
@@ -48,8 +51,11 @@ import operation.movie.GetMovie;
 import operation.movie.UpdateMovie;
 import operation.product.GetAllProduct;
 import operation.product.GetProduct;
+import operation.projection.AddProjection;
+import operation.projection.DeleteProjection;
 import operation.projection.GetAllProjections;
 import operation.projection.GetProjection;
+import operation.projection.UpdateProjection;
 import operation.seat.GetAllByHall;
 import operation.seat.GetSeat;
 import operation.ticket.AddTickets;
@@ -276,28 +282,12 @@ public class Controller {
     }
 
     public void addProjection(Projection projection) throws Exception {
-        try {
-            DbProjection rep = new DbProjection();
-            if (!rep.isTheHallOccupied(projection)) {
-                throw new Exception("Hall ocuppied in given time");
-            }
-            AbstractGenericOperation ago = new GenericAddWithGenKeys<Projection>();
-            ago.executeWithoutCommit(projection);
-
-            addTickets(projection);
-        } catch (Exception e) {
-            throw e;
-        }
-
+        AbstractGenericOperation ago = new AddProjection();
+        ago.execute((Projection)projection);
     }
 
     public void updateProjection(Projection projection) throws Exception {
-        DbProjection rep = new DbProjection();
-        if (!rep.isTheHallOccupiedForUpdate(projection)) {
-            throw new Exception("Hall ocuppied in given time");
-        }
-        
-        AbstractGenericOperation ago = new GenericUpdate<Projection>();
+        AbstractGenericOperation ago = new UpdateProjection();
         ago.execute(projection);
     }
     public ArrayList<Projection> getAllProjections() throws Exception {
@@ -339,7 +329,7 @@ public class Controller {
     }
 
     public void deleteProjection(Projection projection) throws Exception {
-        AbstractGenericOperation ago = new GenericDelete<Ticket>();
+        AbstractGenericOperation ago = new DeleteProjection();
         ago.execute(projection);
     }
 
@@ -386,31 +376,16 @@ public class Controller {
     }
 
     public void addInvoice(Invoice invoice) throws Exception {
-        AbstractGenericOperation ago = new GenericAddWithGenKeys<Invoice>();
-        ago.executeWithoutCommit(invoice);
-
-        for (InvoiceItem item : invoice.getItems()) {
-            item.setId(invoice.getId());
-            addInvoiceItem(item);
-
-            if (item.getArticle() instanceof Ticket) {
-                setTicketToSold((Ticket) item.getArticle());
-            }
-        }
-
-        DbConnectionFactory.getInstance().getConnection().commit();
+        AbstractGenericOperation ago = new AddInvoice();
+        ago.execute(invoice);
     }
 
-    private void addInvoiceItem(InvoiceItem item) throws Exception {
-        AbstractGenericOperation ago = new GenericAdd<InvoiceItem>();
-        ago.executeWithoutCommit(item);
+    public Invoice getInvoice(Invoice invoice) throws Exception{
+        AbstractGenericOperation ago = new GetInvoice();
+        ago.execute(invoice);
+        return ((GetInvoice)ago).getResult();
     }
-
-    private void setTicketToSold(Ticket ticket) throws Exception {
-        AbstractGenericOperation ago = new SetTicketToSold();
-        ago.executeWithoutCommit(ticket);
-    }
-
+    
     public ArrayList<Invoice> getAllInvoices() throws Exception {
         AbstractGenericOperation ago = new GetAllInvoices();
         ago.execute(new Invoice());
@@ -418,7 +393,8 @@ public class Controller {
     }
 
     public void stornoInvoice(Invoice stornoInvoice) throws Exception {
-        addInvoice(stornoInvoice);
+        AbstractGenericOperation ago = new StornoInvoice();
+        ago.execute(stornoInvoice);
     }
 
     
