@@ -30,7 +30,7 @@ CREATE TABLE `actor` (
   PRIMARY KEY (`actorID`),
   KEY `userID` (`userID`),
   CONSTRAINT `actor_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `actor` */
 
@@ -47,7 +47,9 @@ insert  into `actor`(`actorID`,`firstname`,`lastname`,`dateOfBirth`,`nationality
 (12,'Viktor','Savic','1983-09-14','Serbia',10),
 (13,'Michelle','Monaghan','1976-03-23','United States',1),
 (14,'James','Marsden','1973-09-18','United States',1),
-(15,'Cillian','Murphy','1976-05-25','Ireland',1);
+(15,'Cillian','Murphy','1976-05-25','Ireland',1),
+(20,'Albrecht','Schuch','1985-08-21','Germany',1),
+(21,'Welket','Bungue','1988-02-07','Guinea-Bissau',1);
 
 /*Table structure for table `article` */
 
@@ -58,7 +60,7 @@ CREATE TABLE `article` (
   `price` decimal(10,0) DEFAULT NULL,
   `measurementUnit` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`articleID`)
-) ENGINE=InnoDB AUTO_INCREMENT=626 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=769 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `article` */
 
@@ -672,7 +674,150 @@ insert  into `article`(`articleID`,`price`,`measurementUnit`) values
 (622,320,'PCS'),
 (623,320,'PCS'),
 (624,320,'PCS'),
-(625,320,'PCS');
+(625,320,'PCS'),
+(626,220,'PCS'),
+(627,220,'PCS'),
+(628,220,'PCS'),
+(629,220,'PCS'),
+(630,220,'PCS'),
+(631,220,'PCS'),
+(632,220,'PCS'),
+(633,220,'PCS'),
+(634,220,'PCS'),
+(635,220,'PCS'),
+(636,220,'PCS'),
+(637,220,'PCS'),
+(638,220,'PCS'),
+(639,220,'PCS'),
+(640,220,'PCS'),
+(641,220,'PCS'),
+(642,220,'PCS'),
+(643,220,'PCS'),
+(644,220,'PCS'),
+(645,220,'PCS'),
+(646,220,'PCS'),
+(647,220,'PCS'),
+(648,220,'PCS'),
+(649,220,'PCS'),
+(650,220,'PCS'),
+(651,220,'PCS'),
+(652,220,'PCS'),
+(653,220,'PCS'),
+(654,220,'PCS'),
+(655,220,'PCS'),
+(656,220,'PCS'),
+(657,220,'PCS'),
+(658,220,'PCS'),
+(659,220,'PCS'),
+(660,220,'PCS'),
+(661,220,'PCS'),
+(662,220,'PCS'),
+(663,220,'PCS'),
+(664,220,'PCS'),
+(665,220,'PCS'),
+(666,350,'PCS'),
+(667,350,'PCS'),
+(668,350,'PCS'),
+(669,350,'PCS'),
+(670,350,'PCS'),
+(671,350,'PCS'),
+(672,350,'PCS'),
+(673,350,'PCS'),
+(674,350,'PCS'),
+(675,350,'PCS'),
+(676,350,'PCS'),
+(677,350,'PCS'),
+(678,350,'PCS'),
+(679,350,'PCS'),
+(680,350,'PCS'),
+(681,350,'PCS'),
+(682,350,'PCS'),
+(683,350,'PCS'),
+(684,350,'PCS'),
+(685,350,'PCS'),
+(686,350,'PCS'),
+(687,350,'PCS'),
+(688,350,'PCS'),
+(689,350,'PCS'),
+(690,350,'PCS'),
+(691,250,'PCS'),
+(692,250,'PCS'),
+(693,250,'PCS'),
+(694,250,'PCS'),
+(695,250,'PCS'),
+(696,250,'PCS'),
+(697,250,'PCS'),
+(698,250,'PCS'),
+(699,250,'PCS'),
+(700,250,'PCS'),
+(701,250,'PCS'),
+(702,250,'PCS'),
+(703,250,'PCS'),
+(704,250,'PCS'),
+(705,250,'PCS'),
+(706,250,'PCS'),
+(707,250,'PCS'),
+(708,250,'PCS'),
+(709,250,'PCS'),
+(710,250,'PCS'),
+(711,250,'PCS'),
+(712,250,'PCS'),
+(713,250,'PCS'),
+(714,250,'PCS'),
+(715,250,'PCS'),
+(716,250,'PCS'),
+(717,250,'PCS'),
+(718,250,'PCS'),
+(719,350,'PCS'),
+(720,350,'PCS'),
+(721,350,'PCS'),
+(722,350,'PCS'),
+(723,350,'PCS'),
+(724,350,'PCS'),
+(725,350,'PCS'),
+(726,350,'PCS'),
+(727,350,'PCS'),
+(728,350,'PCS'),
+(729,350,'PCS'),
+(730,350,'PCS'),
+(731,350,'PCS'),
+(732,350,'PCS'),
+(733,350,'PCS'),
+(734,350,'PCS'),
+(735,350,'PCS'),
+(736,350,'PCS'),
+(737,350,'PCS'),
+(738,350,'PCS'),
+(739,350,'PCS'),
+(740,350,'PCS'),
+(741,350,'PCS'),
+(742,350,'PCS'),
+(743,350,'PCS'),
+(744,250,'PCS'),
+(745,250,'PCS'),
+(746,250,'PCS'),
+(747,250,'PCS'),
+(748,250,'PCS'),
+(749,250,'PCS'),
+(750,250,'PCS'),
+(751,250,'PCS'),
+(752,250,'PCS'),
+(753,250,'PCS'),
+(754,250,'PCS'),
+(755,250,'PCS'),
+(756,250,'PCS'),
+(757,250,'PCS'),
+(758,250,'PCS'),
+(759,250,'PCS'),
+(760,250,'PCS'),
+(761,250,'PCS'),
+(762,250,'PCS'),
+(763,250,'PCS'),
+(764,250,'PCS'),
+(765,250,'PCS'),
+(766,250,'PCS'),
+(767,250,'PCS'),
+(768,250,'PCS');
 
 /*Table structure for table `director` */
 
@@ -688,7 +833,7 @@ CREATE TABLE `director` (
   PRIMARY KEY (`directorID`),
   KEY `userID` (`userID`),
   CONSTRAINT `director_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `director` */
 
@@ -703,7 +848,8 @@ insert  into `director`(`directorID`,`firstname`,`lastname`,`dateOfBirth`,`natio
 (10,'Ridley','Scott','1937-11-30','United Kingdom',1),
 (11,'Christopher','Nolan','1970-07-30','United Kingdom',1),
 (13,'Clint','Eastwood','1930-05-31','United States',1),
-(17,'David','Fincher','1962-08-28','United States',1);
+(17,'David','Fincher','1962-08-28','United States',1),
+(20,'Burhan','Qurbani','1980-11-15','Germany',1);
 
 /*Table structure for table `hall` */
 
@@ -737,7 +883,7 @@ CREATE TABLE `invoice` (
   PRIMARY KEY (`invoiceID`),
   KEY `userID` (`userID`),
   CONSTRAINT `invoice_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `invoice` */
 
@@ -751,7 +897,14 @@ insert  into `invoice`(`invoiceID`,`number`,`date`,`total`,`userID`) values
 (20,1,'2021-02-17',-580,1),
 (21,6,'2021-02-17',-740,1),
 (22,7,'2021-02-17',1290,1),
-(23,7,'2021-02-17',-1290,1);
+(23,7,'2021-02-17',-1290,1),
+(24,8,'2021-02-18',1370,1),
+(25,9,'2021-02-18',2330,1),
+(26,8,'2021-02-18',-1370,1),
+(27,10,'2021-02-19',900,1),
+(28,10,'2021-02-19',-900,1),
+(29,11,'2021-02-20',620,1),
+(30,11,'2021-02-20',-620,1);
 
 /*Table structure for table `invoice_item` */
 
@@ -816,7 +969,37 @@ insert  into `invoice_item`(`invoiceID`,`orderNumber`,`price`,`quantity`,`unit`,
 (23,2,-160,1,'PCS',334,-160),
 (23,3,-380,1,'G',335,-380),
 (23,4,-100,2,'L',336,-200),
-(23,5,-400,1,'PCS',521,-400);
+(23,5,-400,1,'PCS',521,-400),
+(24,1,120,2,'L',330,240),
+(24,2,210,1,'PCS',561,210),
+(24,3,210,1,'PCS',562,210),
+(24,4,210,1,'PCS',563,210),
+(24,5,500,1,'PCS',337,500),
+(25,1,150,3,'PCS',333,450),
+(25,2,160,1,'PCS',334,160),
+(25,3,380,2,'G',335,760),
+(25,4,320,1,'PCS',586,320),
+(25,5,320,1,'PCS',587,320),
+(25,6,320,1,'PCS',588,320),
+(26,1,-120,2,'L',330,-240),
+(26,2,-210,1,'PCS',561,-210),
+(26,3,-210,1,'PCS',562,-210),
+(26,4,-210,1,'PCS',563,-210),
+(26,5,-500,1,'PCS',337,-500),
+(27,1,120,2,'L',330,240),
+(27,2,220,1,'PCS',626,220),
+(27,3,220,1,'PCS',627,220),
+(27,4,220,1,'PCS',628,220),
+(28,1,-120,2,'L',330,-240),
+(28,2,-220,1,'PCS',626,-220),
+(28,3,-220,1,'PCS',627,-220),
+(28,4,-220,1,'PCS',628,-220),
+(29,1,120,1,'L',330,120),
+(29,2,250,1,'PCS',744,250),
+(29,3,250,1,'PCS',745,250),
+(30,1,-120,1,'L',330,-120),
+(30,2,-250,1,'PCS',744,-250),
+(30,3,-250,1,'PCS',745,-250);
 
 /*Table structure for table `movie` */
 
@@ -836,7 +1019,7 @@ CREATE TABLE `movie` (
   KEY `userID` (`userID`),
   CONSTRAINT `movie_ibfk_1` FOREIGN KEY (`directorID`) REFERENCES `director` (`directorID`),
   CONSTRAINT `movie_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `movie` */
 
@@ -848,7 +1031,8 @@ insert  into `movie`(`movieID`,`name`,`description`,`genre`,`runtime`,`year`,`di
 (12,'The Best of Me','A pair of former high school sweethearts reunite after many years when they return to visit their small hometown.','Romance',118,2014,9,1),
 (13,'The Martian','An astronaut becomes stranded on Mars after his team assume him dead, and must rely on his ingenuity to find a way to signal to Earth that he is alive.','SciFi',144,2015,10,1),
 (14,'Inception','A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.','Action',148,2010,11,1),
-(15,'Fight Club','An insomniac office worker and a devil-may-care soapmaker form an underground fight club that evolves into something much, much more.','Drama',139,1999,17,1);
+(15,'Fight Club','An insomniac office worker and a devil-may-care soapmaker form an underground fight club that evolves into something much, much more.','Drama',139,1999,17,1),
+(19,'Berlin Alexanderplatz','A modern adaptation of one of the greatest twentieth-century novels.','Drama',183,2020,20,1);
 
 /*Table structure for table `movie_actor` */
 
@@ -863,7 +1047,7 @@ CREATE TABLE `movie_actor` (
   KEY `movie_actor_ibfk_1` (`movieID`),
   CONSTRAINT `movie_actor_ibfk_1` FOREIGN KEY (`movieID`) REFERENCES `movie` (`movieID`) ON DELETE CASCADE,
   CONSTRAINT `movie_actor_ibfk_2` FOREIGN KEY (`actorID`) REFERENCES `actor` (`actorID`)
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `movie_actor` */
 
@@ -886,7 +1070,9 @@ insert  into `movie_actor`(`id`,`movieID`,`actorID`) values
 (49,11,1),
 (50,11,12),
 (51,11,11),
-(52,11,10);
+(52,11,10),
+(53,19,21),
+(54,19,20);
 
 /*Table structure for table `product` */
 
@@ -932,7 +1118,7 @@ CREATE TABLE `projection` (
   CONSTRAINT `projection_ibfk_1` FOREIGN KEY (`hallID`) REFERENCES `hall` (`hallID`),
   CONSTRAINT `projection_ibfk_2` FOREIGN KEY (`movieID`) REFERENCES `movie` (`movieID`),
   CONSTRAINT `projection_ibfk_3` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `projection` */
 
@@ -954,9 +1140,12 @@ insert  into `projection`(`projectionID`,`startTime`,`endTime`,`price`,`hallID`,
 (49,'2021-02-17 22:15:00','2021-02-18 00:37:00',320,2,9,1),
 (50,'2021-02-18 20:00:00','2021-02-18 22:41:00',250,4,8,1),
 (51,'2021-02-18 14:00:00','2021-02-18 16:28:00',480,4,14,1),
-(52,'2021-02-19 19:45:00','2021-02-19 22:04:00',220,2,15,1),
-(53,'2021-03-06 17:30:00','2021-03-06 19:49:00',210,2,15,1),
-(54,'2021-02-19 16:00:00','2021-02-19 18:24:00',320,3,13,1);
+(53,'2021-03-06 17:45:00','2021-03-06 20:04:00',210,2,15,1),
+(54,'2021-02-19 15:15:00','2021-02-19 17:39:00',320,3,13,1),
+(55,'2021-02-19 20:00:00','2021-02-19 23:03:00',220,3,19,1),
+(56,'2021-02-23 14:00:00','2021-02-23 16:19:00',350,1,15,1),
+(58,'2021-02-22 15:15:00','2021-02-22 17:37:00',350,1,9,1),
+(59,'2021-02-21 17:00:00','2021-02-21 19:21:00',250,1,11,1);
 
 /*Table structure for table `seat` */
 
@@ -1547,34 +1736,6 @@ insert  into `ticket`(`articleID`,`sold`,`projectionID`,`seatID`) values
 (530,0,51,106),
 (531,0,51,107),
 (532,0,51,108),
-(533,0,52,29),
-(534,0,52,30),
-(535,0,52,31),
-(536,0,52,32),
-(537,0,52,33),
-(538,0,52,34),
-(539,0,52,35),
-(540,0,52,36),
-(541,0,52,37),
-(542,0,52,38),
-(543,0,52,39),
-(544,0,52,40),
-(545,0,52,41),
-(546,0,52,42),
-(547,0,52,43),
-(548,0,52,44),
-(549,0,52,45),
-(550,0,52,46),
-(551,0,52,47),
-(552,0,52,48),
-(553,0,52,49),
-(554,0,52,50),
-(555,0,52,51),
-(556,0,52,52),
-(557,0,52,53),
-(558,0,52,54),
-(559,0,52,55),
-(560,0,52,56),
 (561,0,53,4),
 (562,0,53,5),
 (563,0,53,6),
@@ -1600,9 +1761,9 @@ insert  into `ticket`(`articleID`,`sold`,`projectionID`,`seatID`) values
 (583,0,53,26),
 (584,0,53,27),
 (585,0,53,28),
-(586,0,54,57),
-(587,0,54,58),
-(588,0,54,59),
+(586,1,54,57),
+(587,1,54,58),
+(588,1,54,59),
 (589,0,54,60),
 (590,0,54,61),
 (591,0,54,62),
@@ -1639,7 +1800,122 @@ insert  into `ticket`(`articleID`,`sold`,`projectionID`,`seatID`) values
 (622,0,54,93),
 (623,0,54,94),
 (624,0,54,95),
-(625,0,54,96);
+(625,0,54,96),
+(626,0,55,57),
+(627,0,55,58),
+(628,0,55,59),
+(629,0,55,60),
+(630,0,55,61),
+(631,0,55,62),
+(632,0,55,63),
+(633,0,55,64),
+(634,0,55,65),
+(635,0,55,66),
+(636,0,55,67),
+(637,0,55,68),
+(638,0,55,69),
+(639,0,55,70),
+(640,0,55,71),
+(641,0,55,72),
+(642,0,55,73),
+(643,0,55,74),
+(644,0,55,75),
+(645,0,55,76),
+(646,0,55,77),
+(647,0,55,78),
+(648,0,55,79),
+(649,0,55,80),
+(650,0,55,81),
+(651,0,55,82),
+(652,0,55,83),
+(653,0,55,84),
+(654,0,55,85),
+(655,0,55,86),
+(656,0,55,87),
+(657,0,55,88),
+(658,0,55,89),
+(659,0,55,90),
+(660,0,55,91),
+(661,0,55,92),
+(662,0,55,93),
+(663,0,55,94),
+(664,0,55,95),
+(665,0,55,96),
+(666,0,56,4),
+(667,0,56,5),
+(668,0,56,6),
+(669,0,56,7),
+(670,0,56,8),
+(671,0,56,9),
+(672,0,56,10),
+(673,0,56,11),
+(674,0,56,12),
+(675,0,56,13),
+(676,0,56,14),
+(677,0,56,15),
+(678,0,56,16),
+(679,0,56,17),
+(680,0,56,18),
+(681,0,56,19),
+(682,0,56,20),
+(683,0,56,21),
+(684,0,56,22),
+(685,0,56,23),
+(686,0,56,24),
+(687,0,56,25),
+(688,0,56,26),
+(689,0,56,27),
+(690,0,56,28),
+(719,0,58,4),
+(720,0,58,5),
+(721,0,58,6),
+(722,0,58,7),
+(723,0,58,8),
+(724,0,58,9),
+(725,0,58,10),
+(726,0,58,11),
+(727,0,58,12),
+(728,0,58,13),
+(729,0,58,14),
+(730,0,58,15),
+(731,0,58,16),
+(732,0,58,17),
+(733,0,58,18),
+(734,0,58,19),
+(735,0,58,20),
+(736,0,58,21),
+(737,0,58,22),
+(738,0,58,23),
+(739,0,58,24),
+(740,0,58,25),
+(741,0,58,26),
+(742,0,58,27),
+(743,0,58,28),
+(744,0,59,4),
+(745,0,59,5),
+(746,0,59,6),
+(747,0,59,7),
+(748,0,59,8),
+(749,0,59,9),
+(750,0,59,10),
+(751,0,59,11),
+(752,0,59,12),
+(753,0,59,13),
+(754,0,59,14),
+(755,0,59,15),
+(756,0,59,16),
+(757,0,59,17),
+(758,0,59,18),
+(759,0,59,19),
+(760,0,59,20),
+(761,0,59,21),
+(762,0,59,22),
+(763,0,59,23),
+(764,0,59,24),
+(765,0,59,25),
+(766,0,59,26),
+(767,0,59,27),
+(768,0,59,28);
 
 /*Table structure for table `user` */
 
