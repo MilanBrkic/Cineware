@@ -12,18 +12,15 @@ import domain.Article;
 import domain.Director;
 import domain.Hall;
 import domain.Invoice;
-import domain.InvoiceItem;
 import domain.Movie;
 import domain.Product;
 import domain.Projection;
 import domain.Seat;
 import domain.Ticket;
 import domain.User;
-import domain.enums.MeasurementUnit;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +28,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import operation.AbstractGenericOperation;
 import operation.GenericAdd;
-import operation.GenericAddWithGenKeys;
 import operation.GenericDelete;
 import operation.GenericGet;
 import operation.GenericGetAll;
@@ -40,6 +36,7 @@ import operation.actor.GetAllActors;
 import operation.article.AddArticle;
 import operation.director.GetAllDirectors;
 import operation.director.GetDirector;
+import operation.hall.GetAllHalls;
 import operation.invoice.AddInvoice;
 import operation.invoice.GetAllInvoices;
 import operation.invoice.GetInvoice;
@@ -61,13 +58,9 @@ import operation.seat.GetSeat;
 import operation.ticket.AddTickets;
 import operation.ticket.GetAllTicketsFromProjection;
 import operation.ticket.GetTicket;
-import operation.ticket.SetTicketToSold;
-import repository.db.impl.DbProjection;
 import operation.user.CheckPassword;
 import operation.user.UpdatePasswordOnly;
 import operation.user.UpdateWithoutPassword;
-import repository.db.DbConnectionFactory;
-import repository.db.DbRepository;
 import view.controller.ControllerView;
 
 /**
@@ -118,9 +111,9 @@ public class Controller {
     }
 
     public ArrayList<Hall> getAllHalls() throws Exception {
-        AbstractGenericOperation ago = new GenericGetAll<Hall>();
+        AbstractGenericOperation ago = new GetAllHalls();
         ago.execute(new Hall());
-        return ((GenericGetAll) ago).getResult();
+        return ((GetAllHalls) ago).getResult();
     }
 
     public Hall getHall(int hallID) throws Exception {

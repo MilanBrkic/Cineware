@@ -14,6 +14,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import operation.AbstractGenericOperation;
+import operation.GenericGet;
 import repository.db.DbRepository;
 
 /**
@@ -41,8 +43,10 @@ public class DbProduct implements DbRepository<Product>{
             MeasurementUnit unit = MeasurementUnit.valueOf(rs.getString("measurementUnit"));
             String name = rs.getString("name");
             ProductType type = ProductType.valueOf(rs.getString("type"));
+
             int userId =  rs.getInt("userID");
             
+      
             User user = Controller.getInstance().getUser(userId);
             
             Product product = new Product(id, price, unit, name, type, user);
