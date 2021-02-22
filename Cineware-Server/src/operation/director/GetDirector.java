@@ -6,10 +6,9 @@
 package operation.director;
 
 import domain.Director;
-import java.util.ArrayList;
+import domain.User;
 import operation.AbstractGenericOperation;
 import operation.Getters;
-import repository.db.impl.DbDirector;
 
 /**
  *
@@ -19,9 +18,7 @@ public class GetDirector extends AbstractGenericOperation implements Getters<Dir
 
     private Director result;
 
-    public GetDirector() {
-        repo = new DbDirector();
-    }
+    
     
     
     
@@ -34,7 +31,8 @@ public class GetDirector extends AbstractGenericOperation implements Getters<Dir
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = ((DbDirector)repo).get((Director) params);
+        result = (Director) repo.get((Director)params, null,null);
+        result.setUser((User) repo.get(result.getUser(),null,null));
     }
 
     @Override

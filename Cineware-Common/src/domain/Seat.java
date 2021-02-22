@@ -7,6 +7,7 @@ package domain;
 
 import java.io.Serializable;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -99,8 +100,19 @@ public class Seat implements GenericEntity{
     }
 
     @Override
-    public ArrayList<GenericEntity> getFromResultSet(ResultSet rs) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<GenericEntity> getFromResultSet(ResultSet rs) throws SQLException {
+        ArrayList<GenericEntity>  seats = new ArrayList<>();
+        while(rs.next()){
+            int id = rs.getInt("seatID");
+            int number = rs.getInt("number");
+            char row  = rs.getString("row").charAt(0);
+            Hall hall = new Hall();
+            hall.setId(rs.getInt("hallID"));
+            Seat seat = new Seat(id, hall, number, row);
+            seats.add(seat);
+        }
+        
+        return seats;
     }
     
     

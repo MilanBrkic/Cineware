@@ -6,9 +6,9 @@
 package operation.actor;
 
 import domain.Actor;
+import domain.User;
 import java.util.ArrayList;
 import operation.AbstractGenericOperation;
-import repository.db.impl.DbActor;
 
 /**
  *
@@ -17,11 +17,6 @@ import repository.db.impl.DbActor;
 public class GetAllActors extends AbstractGenericOperation{
     private ArrayList<Actor> result;
     
-    public GetAllActors() {
-        repo = new DbActor();
-        result = new ArrayList<>();
-    }
-
     
     @Override
     protected void preconditions(Object params) throws Exception {
@@ -32,7 +27,11 @@ public class GetAllActors extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = ((DbActor)repo).getAll();
+        result = repo.getAll(new Actor(), null, "lastname", null);
+        for (Actor actor : result) {
+            actor.setUser((User) repo.get(actor.getUser(),null,null));
+        }
+        
     }
 
     public ArrayList<Actor> getResult() {

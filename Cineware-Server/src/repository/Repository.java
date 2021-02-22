@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author Milan
  */
 public interface Repository<T> {
-    public ArrayList<T> getAll(T t) throws Exception;
+    public ArrayList<T> getAll(T t,String where, String orderby, String innerJoin) throws Exception;
     
     
     public void add(T t) throws Exception;
@@ -21,7 +21,7 @@ public interface Repository<T> {
     
     public void delete(T t)throws Exception;
     
-    public T get(T t) throws Exception;
+    public T get(T t,String innerJoin ,String where) throws Exception;
     
     
    

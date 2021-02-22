@@ -24,7 +24,7 @@ public class GenericGetAll<T> extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = repo.getAll((T)params);
+        result = repo.getAll((T)params,null,null,null);
     }
 
     public ArrayList<T> getResult() {

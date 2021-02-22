@@ -34,7 +34,7 @@ public class GetAllInvoices extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = ((DbInvoice)repo).getAll((Invoice) params);
+        result = ((DbInvoice)repo).getAll((Invoice) params,null,null, null);
     }
 
     public ArrayList<Invoice> getResult() {

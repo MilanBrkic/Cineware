@@ -18,7 +18,7 @@ import java.sql.ResultSet;
 public class DbArticle implements DbRepository<Article>{
 
     @Override
-    public ArrayList<Article> getAll(Article t) throws Exception {
+    public ArrayList<Article> getAll(Article t,String where,String orderby, String innerJoin) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
@@ -50,7 +50,7 @@ public class DbArticle implements DbRepository<Article>{
     }
 
     @Override
-    public Article get(Article t) throws Exception {
+    public Article get(Article a,String innerJoin,String where) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

@@ -47,20 +47,7 @@ public class DbUser implements DbRepository<User> {
         ps.close();
     }
 
-    public boolean checkPassword(String username, String password) throws Exception {
-        String query = "SELECT * FROM user WHERE username='" + username + "'";
-        Statement s = connect().createStatement();
-        ResultSet rs = s.executeQuery(query);
-        boolean rez = false;
-        rs.next();
-        if (rs.getString("password").equals(password)) {
-            rez = true;
-        }
-        rs.close();
-        s.close();
-        return rez;
-    }
-
+    
     
     
     
@@ -77,12 +64,12 @@ public class DbUser implements DbRepository<User> {
     }
     
     @Override
-    public User get(User t) throws Exception {
+    public User get(User t,String innerJoin,String where) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public ArrayList<User> getAll(User t) throws Exception {
+    public ArrayList<User> getAll(User t,String where,String orderby, String innerJoin) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

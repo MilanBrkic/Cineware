@@ -27,7 +27,7 @@ import java.util.Date;
 public class DbInvoice implements DbRepository<Invoice>{
 
     @Override
-    public ArrayList<Invoice> getAll(Invoice t) throws Exception {
+    public ArrayList<Invoice> getAll(Invoice t,String where,String orderby, String innerJoin) throws Exception {
         String query = "SELECT * FROM invoice";
         Statement s = connect().createStatement();
         ResultSet rs = s.executeQuery(query);
@@ -94,7 +94,7 @@ public class DbInvoice implements DbRepository<Invoice>{
     }
 
     @Override
-    public Invoice get(Invoice t) throws Exception {
+    public Invoice get(Invoice t,String innerJoin,String where) throws Exception {
         int id = t.getId();
         String query = "SELECT * FROM invoice WHERE invoiceID="+id;
         Statement s = connect().createStatement();

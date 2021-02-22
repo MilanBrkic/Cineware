@@ -5,8 +5,10 @@
  */
 package operation.movie;
 
+import domain.Actor;
 import domain.Director;
 import domain.Movie;
+import domain.User;
 import operation.AbstractGenericOperation;
 import operation.Getters;
 import repository.db.impl.DbMovie;
@@ -19,20 +21,20 @@ public class GetMovie extends AbstractGenericOperation implements Getters<Movie>
 
     Movie result;
 
-    public GetMovie() {
-        repo = new DbMovie();
-    }
-
     @Override
     protected void preconditions(Object params) throws Exception {
         if (params == null || !(params instanceof Movie)) {
-            throw new Exception("Invalid director data");
+            throw new Exception("Invalid movie data");
         }
     }
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = (Movie) repo.get((Movie) params);
+        result = (Movie) repo.get((Movie) params, null,null);
+        result.setUser((User) repo.get(result.getUser(), null,null));
+        result.setDirector((Director) repo.get(result.getDirector(), null,null));
+        String innerJoin = "movie_actor ma INNER JOIN actor a ON a.actorID=ma.actorID";
+        result.setActors(repo.getAll(new Actor(), "movieID=" + result.getId(), null, innerJoin));
     }
 
     @Override

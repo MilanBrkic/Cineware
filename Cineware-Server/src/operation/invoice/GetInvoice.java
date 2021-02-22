@@ -26,7 +26,7 @@ public class GetInvoice extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = (Invoice) ((DbGeneric)repo).get((Invoice)params);
+        result = (Invoice) ((DbGeneric)repo).get((Invoice)params,null,null);
     }
 
     public Invoice getResult() {

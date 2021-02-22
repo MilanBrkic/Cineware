@@ -134,7 +134,7 @@ public class Controller {
         AbstractGenericOperation ago = new GetSeat();
         Seat s = new Seat();
         s.setId(id);
-        ago.executeWithoutCommit(s);
+        ago.execute(s);
         return ((GetSeat) ago).getResult();
     }
 

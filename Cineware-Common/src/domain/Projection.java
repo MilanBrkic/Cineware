@@ -178,7 +178,31 @@ public class Projection implements GenericEntity {
 
     @Override
     public ArrayList<GenericEntity> getFromResultSet(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<GenericEntity> projections = new ArrayList<>();
+        while (rs.next()) {
+            int id = rs.getInt("projectionID");
+            Date startDate = new Date(rs.getTimestamp("startTime").getTime());
+            Date endDate = new Date(rs.getTimestamp("endTime").getTime());;
+
+            User user = new User();
+            int userID = rs.getInt("userID");
+            user.setId(userID);
+
+            Movie movie = new Movie();
+            int movieID = rs.getInt("movieID");
+            movie.setId(movieID);
+
+            Hall hall = new Hall();
+            int hallID = rs.getInt("hallID");
+            hall.setId(hallID);
+
+            BigDecimal price = rs.getBigDecimal("price");
+
+            Projection p = new Projection(id, startDate, endDate, price, hall, movie, user);
+            projections.add(p);
+        }
+
+        return projections;
     }
 
 }

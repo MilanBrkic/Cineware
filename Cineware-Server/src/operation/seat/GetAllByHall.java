@@ -20,22 +20,23 @@ public class GetAllByHall extends AbstractGenericOperation implements Getters<Ar
 
     ArrayList<Seat> result;
 
-    public GetAllByHall() {
-        repo = new DbSeat();
-    }
-    
+
     
     
     @Override
     protected void preconditions(Object params) throws Exception {
         if(params==null || !(params instanceof Hall)){
-            throw new Exception("Invalid seat data");
+            throw new Exception("Invalid hall data");
         }
     }
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = ((DbSeat)repo).getAllByHall((Hall)params);
+        Hall hall = (Hall) params;
+        result = repo.getAll(new Seat(), "hallID="+hall.getId(),null, null);
+        for (Seat seat : result) {
+            seat.setHall(hall);
+        }
     }
 
     @Override

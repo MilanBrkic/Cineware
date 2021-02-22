@@ -159,7 +159,7 @@ public class Movie implements GenericEntity{
 
     @Override
     public String getTableName() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "movie";
     }
 
     @Override
@@ -179,12 +179,30 @@ public class Movie implements GenericEntity{
 
     @Override
     public String whereCondition() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "movieID="+id;
     }
 
     @Override
     public ArrayList<GenericEntity> getFromResultSet(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<GenericEntity> movies = new ArrayList<>();
+
+        while (rs.next()) {
+            int id = rs.getInt("movieID");
+            String name = rs.getString("name");
+            String description = rs.getString("description");
+            Genre genre = Genre.valueOf(rs.getString("genre"));
+            int runtime = rs.getInt("runtime");
+            int year = rs.getInt("year");
+            Director director = new Director();
+            director.setId(rs.getInt("directorID"));
+            User user = new User();
+            user.setId(rs.getInt("userID"));
+            ArrayList<Actor> actors = new ArrayList<>();
+            Movie movie = new Movie(id, name, description, genre, runtime, year, director, actors, user);
+            movies.add(movie);
+        }
+
+        return movies;
     }
     
     

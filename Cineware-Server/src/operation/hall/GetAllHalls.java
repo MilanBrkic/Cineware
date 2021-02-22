@@ -26,7 +26,7 @@ public class GetAllHalls extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = repo.getAll((Hall)params);
+        result = repo.getAll((Hall)params, null,null, null);
     }
 
     public ArrayList<Hall> getResult() {

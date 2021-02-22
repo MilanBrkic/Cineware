@@ -17,10 +17,6 @@ import repository.db.impl.DbProduct;
 public class GetAllProduct extends AbstractGenericOperation{
     ArrayList<Product> result;
 
-    public GetAllProduct() {
-        repo = new DbProduct();
-    }
-    
     
     @Override
     protected void preconditions(Object params) throws Exception {
@@ -31,7 +27,9 @@ public class GetAllProduct extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = repo.getAll(params);
+        String innerJoin = "article a INNER JOIN product p ON a.articleID=p.articleID";
+        result = repo.getAll(params, null, null, innerJoin);
+        //todo
     }
 
     public ArrayList<Product> getResult() {

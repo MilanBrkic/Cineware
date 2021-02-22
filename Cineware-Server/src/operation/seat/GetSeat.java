@@ -5,7 +5,9 @@
  */
 package operation.seat;
 
+import domain.Hall;
 import domain.Seat;
+import java.util.ArrayList;
 import operation.AbstractGenericOperation;
 import repository.db.impl.DbSeat;
 
@@ -17,9 +19,6 @@ import repository.db.impl.DbSeat;
 public class GetSeat extends AbstractGenericOperation{
     Seat result;
 
-    public GetSeat() {
-        repo = new DbSeat();
-    }
     
     
     @Override
@@ -31,7 +30,12 @@ public class GetSeat extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = (Seat) repo.get((Seat) params);
+        Seat seat = (Seat) repo.get((Seat) params,null,null);
+        Hall hall = new Hall();
+        hall.setId(seat.getHall().getId());
+        hall = (Hall) repo.get(hall,null,null);
+        seat.setHall(hall);
+        result = seat;
     }
 
     public Seat getResult() {

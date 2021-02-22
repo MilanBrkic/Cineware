@@ -17,11 +17,6 @@ public class GetTicket extends AbstractGenericOperation{
 
     Ticket result;
 
-    public GetTicket() {
-        repo = new DbTicket();
-    }
-    
-    
     
     @Override
     protected void preconditions(Object params) throws Exception {
@@ -32,7 +27,9 @@ public class GetTicket extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = ((DbTicket)repo).get((Ticket)params);
+        String innerJoin = "article a INNER JOIN ticket t ON a.articleID=t.articleID";
+        result = (Ticket) repo.get((Ticket)params,innerJoin,null);
+        //todo
     }
 
     public Ticket getResult() {

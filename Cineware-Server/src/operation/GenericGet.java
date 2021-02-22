@@ -21,7 +21,7 @@ public class GenericGet<T> extends AbstractGenericOperation implements Getters<T
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = (T) repo.get((T)params);
+        result = (T) repo.get((T)params,null ,null);
     }
 
     @Override

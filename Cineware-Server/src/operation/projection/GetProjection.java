@@ -5,7 +5,10 @@
  */
 package operation.projection;
 
+import domain.Hall;
+import domain.Movie;
 import domain.Projection;
+import domain.User;
 import operation.AbstractGenericOperation;
 import repository.db.impl.DbProjection;
 
@@ -13,31 +16,27 @@ import repository.db.impl.DbProjection;
  *
  * @author user
  */
-public class GetProjection extends AbstractGenericOperation{
+public class GetProjection extends AbstractGenericOperation {
 
     Projection result;
 
-    public GetProjection() {
-        repo = new DbProjection();
-    }
-    
-    
     @Override
     protected void preconditions(Object params) throws Exception {
-         if(params==null || !(params instanceof Projection)){
+        if (params == null || !(params instanceof Projection)) {
             throw new Exception("Invalid projection data");
         }
     }
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = ((DbProjection)repo).get((Projection)params);
+        result = (Projection) repo.get((Projection) params, null,null);
+        result.setMovie((Movie) repo.get(result.getMovie(), null,null));
+        result.setUser((User) repo.get(result.getUser(), null,null));
+        result.setHall((Hall) repo.get(result.getHall(), null,null));
     }
 
     public Projection getResult() {
         return result;
     }
-    
-    
-    
+
 }

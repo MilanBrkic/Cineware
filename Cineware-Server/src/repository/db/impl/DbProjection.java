@@ -135,7 +135,7 @@ public class DbProjection implements DbRepository<Projection> {
     }
 
     @Override
-    public ArrayList<Projection> getAll(Projection t) throws Exception {
+    public ArrayList<Projection> getAll(Projection t,String where,String orderby, String innerJoin) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -155,7 +155,7 @@ public class DbProjection implements DbRepository<Projection> {
     }
 
     @Override
-    public Projection get(Projection p) throws Exception {
+    public Projection get(Projection p,String innerJoin,String where) throws Exception {
         int id = p.getId();
         String query = "SELECT * FROM projection WHERE projectionID="+id;
         Statement s = connect().createStatement();

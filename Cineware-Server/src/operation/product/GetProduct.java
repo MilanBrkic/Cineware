@@ -32,7 +32,7 @@ public class GetProduct extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = ((DbProduct)repo).get((Product)params);
+        result = ((DbProduct)repo).get((Product)params,null, null);
     }
 
     public Product getResult() {

@@ -141,7 +141,7 @@ public class DbMovie implements DbRepository<Movie> {
     }
 
     @Override
-    public Movie get(Movie t) throws Exception {
+    public Movie get(Movie t,String innerJoin,String where) throws Exception {
         int id = t.getId();
         String query = "SELECT * from movie where movieID=" + id;
         Statement s = connect().createStatement();
@@ -161,7 +161,7 @@ public class DbMovie implements DbRepository<Movie> {
     }
 
     @Override
-    public ArrayList<Movie> getAll(Movie t) throws Exception {
+    public ArrayList<Movie> getAll(Movie t,String where,String orderby, String innerJoin) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

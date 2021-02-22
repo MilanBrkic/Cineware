@@ -17,9 +17,7 @@ public class CheckPassword extends AbstractGenericOperation{
 
     private boolean result;
 
-    public CheckPassword() {
-        repo = new DbUser();
-    }
+    
 
     @Override
     protected void preconditions(Object params) throws Exception {
@@ -33,7 +31,11 @@ public class CheckPassword extends AbstractGenericOperation{
         User user = (User) params;
         String username = user.getUsername();
         String password = user.getPassword();
-        result = ((DbUser)repo).checkPassword(username, password);
+        User user1 = (User) repo.get(new User(),null ,"username='"+username+"'");
+        if(user.getPassword().equals(password)){
+            result = true;
+        }
+        else result = false;
     }
     
     

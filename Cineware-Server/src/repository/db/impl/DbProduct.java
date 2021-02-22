@@ -27,7 +27,7 @@ public class DbProduct implements DbRepository<Product>{
     
     
     @Override
-    public ArrayList<Product> getAll(Product p) throws Exception {
+    public ArrayList<Product> getAll(Product p,String where,String orderby, String innerJoin) throws Exception {
         String query = "SELECT a.articleID, a.price, a.measurementUnit, p.name, p.type, p.userID " +
                        "FROM article a " +
                        "INNER JOIN product p " +
@@ -57,7 +57,7 @@ public class DbProduct implements DbRepository<Product>{
     }
     
     @Override
-    public Product get(Product p) throws Exception {
+    public Product get(Product p,String innerJoin,String where) throws Exception {
         int id = p.getId();
         String query = "SELECT a.articleID, a.price, a.measurementUnit, p.name, p.type, p.userID " +
                        "FROM article a " +

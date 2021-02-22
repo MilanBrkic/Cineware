@@ -83,7 +83,7 @@ public class DbTicket implements DbRepository<Ticket>{
     }
     
     @Override
-    public ArrayList<Ticket> getAll(Ticket t) throws Exception {
+    public ArrayList<Ticket> getAll(Ticket t,String where,String orderby, String innerJoin) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -103,7 +103,7 @@ public class DbTicket implements DbRepository<Ticket>{
     }
 
     @Override
-    public Ticket get(Ticket t) throws Exception {
+    public Ticket get(Ticket t,String innerJoin,String where) throws Exception {
         int id = t.getId();
         String query = "SELECT  a.articleID, a.price, t.sold, t.seatID, t.projectionID " +
                        " FROM article a " +

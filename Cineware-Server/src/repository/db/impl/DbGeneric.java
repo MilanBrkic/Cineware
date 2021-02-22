@@ -19,24 +19,35 @@ import repository.db.DbConnectionFactory;
  */
 public class DbGeneric implements DbRepository<GenericEntity> {
 
-
-    
     @Override
-    public ArrayList<GenericEntity> getAll(GenericEntity g) throws Exception {
+    public ArrayList<GenericEntity> getAll(GenericEntity g, String where, String orderby, String innerJoin) throws Exception {
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT * FROM ")
-          .append(g.getTableName());
-        
+        sb.append("SELECT * FROM ");
+
+        if (innerJoin != null) {
+            sb.append(innerJoin);
+        } else {
+            sb.append(g.getTableName());
+        }
+
+        if (where != null) {
+            sb.append(" WHERE ")
+                    .append(where);
+        }
+        if (orderby != null) {
+            sb.append(" ORDER BY ")
+                    .append(orderby);
+        }
+
         String query = sb.toString();
         Statement s = connect().createStatement();
         ResultSet rs = s.executeQuery(query);
-        
+
         ArrayList<GenericEntity> lista = new ArrayList<>(g.getFromResultSet(rs));
         s.close();
         rs.close();
         return lista;
     }
-    
 
     @Override
     public void add(GenericEntity g) throws Exception {
@@ -60,7 +71,7 @@ public class DbGeneric implements DbRepository<GenericEntity> {
             throw e;
         }
     }
-    
+
     public void addWithGenKeys(GenericEntity g) throws Exception {
         try {
             Connection connection = DbConnectionFactory.getInstance().getConnection();
@@ -75,7 +86,7 @@ public class DbGeneric implements DbRepository<GenericEntity> {
             System.out.println(query);
             Statement s = connection.createStatement();
             s.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
-            ResultSet rs= s.getGeneratedKeys();
+            ResultSet rs = s.getGeneratedKeys();
             rs.next();
             int id = rs.getInt(1);
             g.setId(id);
@@ -130,25 +141,34 @@ public class DbGeneric implements DbRepository<GenericEntity> {
     }
 
     @Override
-    public GenericEntity get(GenericEntity g) throws Exception {
+    public GenericEntity get(GenericEntity g, String innerJoin, String where) throws Exception {
         //SELECT * FROM user where userID="+id
         Connection connection = DbConnectionFactory.getInstance().getConnection();
         StringBuilder sb = new StringBuilder();
-        sb.append("SELECT * FROM ")
-          .append(g.getTableName())
-          .append(" WHERE ")
-          .append(g.whereCondition());
+        sb.append("SELECT * FROM ");
+
+        if (innerJoin != null) {
+            sb.append(innerJoin);
+        } else {
+            sb.append(g.getTableName());
+        }
         
+        sb.append(" WHERE ");
+        
+        if (where != null) {
+            sb.append(where);
+        } else {
+            sb.append(g.whereCondition());
+        }
+
         String query = sb.toString();
         Statement s = connection.createStatement();
         ResultSet rs = s.executeQuery(query);
-        
+
         ArrayList<GenericEntity> lista = new ArrayList<>(g.getFromResultSet(rs));
         s.close();
         rs.close();
-        return lista.get(0); 
+        return lista.get(0);
     }
-
-    
 
 }

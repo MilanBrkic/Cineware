@@ -5,7 +5,10 @@
  */
 package operation.projection;
 
+import domain.Hall;
+import domain.Movie;
 import domain.Projection;
+import domain.User;
 import java.util.ArrayList;
 import operation.AbstractGenericOperation;
 import repository.db.impl.DbProjection;
@@ -18,11 +21,6 @@ public class GetAllProjections extends AbstractGenericOperation{
 
     ArrayList<Projection> result;
 
-    public GetAllProjections() {
-        repo = new DbProjection();
-    }
-    
-    
     
     @Override
     protected void preconditions(Object params) throws Exception {
@@ -33,13 +31,15 @@ public class GetAllProjections extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = ((DbProjection)repo).getAll();
+        result = repo.getAll(new Projection(), null, "startTime", null);
+        for (Projection projection : result) {
+            projection.setMovie((Movie) repo.get(projection.getMovie(), null,null));
+            projection.setUser((User)repo.get(projection.getUser(), null,null));
+            projection.setHall((Hall) repo.get(projection.getHall(), null,null));
+        }
     }
 
     public ArrayList<Projection> getResult() {
         return result;
     }
- 
-    
-    
 }

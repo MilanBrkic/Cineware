@@ -7,6 +7,7 @@ package domain;
 
 import java.io.Serializable;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -39,7 +40,20 @@ public class Actor extends MoviePerson{
     }
 
     @Override
-    public ArrayList<GenericEntity> getFromResultSet(ResultSet rs) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ArrayList<GenericEntity> getFromResultSet(ResultSet rs) throws Exception {
+        ArrayList<GenericEntity> actors = new ArrayList<>();
+
+        while (rs.next()) {
+            int id = rs.getInt("actorID");
+            String firstname = rs.getString("firstname");
+            String lastname = rs.getString("lastname");
+            Date date = new Date(rs.getDate("dateOfBirth").getTime());
+            String nationality = rs.getString("nationality");
+            User user = new User();
+            user.setId(rs.getInt("userID"));
+            Actor actor = new Actor(id, firstname, lastname, date, nationality, user);
+            actors.add(actor);
+        }
+        return actors;
     }
 }
