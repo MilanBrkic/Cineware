@@ -7,12 +7,15 @@ package domain;
 
 import domain.enums.MeasurementUnit;
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  *
  * @author user
  */
-public class Ticket extends Article{
+public class Ticket extends Article {
+
     private boolean sold;
     private Projection projection;
     private Seat seat;
@@ -26,7 +29,7 @@ public class Ticket extends Article{
         this.projection = projection;
         this.seat = seat;
     }
-    
+
     public Ticket(int id, BigDecimal price, MeasurementUnit unit, boolean sold, Projection projection, Seat seat) {
         super(id, price, unit);
         this.sold = sold;
@@ -60,11 +63,9 @@ public class Ticket extends Article{
 
     @Override
     public String toString() {
-        return projection+" "+seat;
+        return projection + " " + seat;
     }
 
-    
-    
     @Override
     public String getTableName() {
         return "ticket";
@@ -78,19 +79,42 @@ public class Ticket extends Article{
     @Override
     public String getInsertValues() {
         StringBuilder sb = new StringBuilder();
-        
+
         sb.append(id).append(", ")
-          .append(sold).append(", ")
-          .append(projection.getId()).append(", ")
-          .append(seat.getId());
-        
-        
+                .append(sold).append(", ")
+                .append(projection.getId()).append(", ")
+                .append(seat.getId());
+
         return sb.toString();
     }
+
+    @Override
+    public String whereCondition() {
+        return "a.articleID="+id;
+    }
+
     
     
-    
-    
-    
-    
+    @Override
+    public ArrayList<GenericEntity> getFromResultSet(ResultSet rs) throws Exception {
+        ArrayList<GenericEntity> tickets = new ArrayList<>();
+        while (rs.next()) {
+            int id = rs.getInt("articleID");
+            BigDecimal price = rs.getBigDecimal("price");
+            MeasurementUnit unit = MeasurementUnit.PCS;
+            boolean sold = rs.getBoolean("sold");
+
+            Seat seat = new Seat();
+            seat.setId(rs.getInt("seatID"));
+            
+            Projection projection = new Projection();
+            projection.setId(rs.getInt("projectionID"));
+
+            Ticket ticket = new Ticket(id, price, unit, sold, projection, seat);
+            tickets.add(ticket);
+        }
+
+        return tickets;
+    }
+
 }

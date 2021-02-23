@@ -6,6 +6,7 @@
 package operation.product;
 
 import domain.Product;
+import domain.User;
 import java.util.ArrayList;
 import operation.AbstractGenericOperation;
 import repository.db.impl.DbProduct;
@@ -28,8 +29,10 @@ public class GetAllProduct extends AbstractGenericOperation{
     @Override
     protected void executeOperation(Object params) throws Exception {
         String innerJoin = "article a INNER JOIN product p ON a.articleID=p.articleID";
-        result = repo.getAll(params, null, null, innerJoin);
-        //todo
+        result = repo.getAll((Product)params, null, null, innerJoin);
+        for (Product product : result) {
+           product.setUser((User) repo.get(product.getUser(), null, null));
+        }
     }
 
     public ArrayList<Product> getResult() {

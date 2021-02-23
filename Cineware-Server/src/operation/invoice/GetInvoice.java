@@ -7,7 +7,6 @@ package operation.invoice;
 
 import domain.Invoice;
 import operation.AbstractGenericOperation;
-import repository.db.impl.DbGeneric;
 
 /**
  *
@@ -20,13 +19,13 @@ public class GetInvoice extends AbstractGenericOperation{
     @Override
     protected void preconditions(Object params) throws Exception {
         if(params==null || !(params instanceof Invoice)){
-            throw new Exception("Invalid ticket data");
+            throw new Exception("Invalid invoice data");
         }
     }
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = (Invoice) ((DbGeneric)repo).get((Invoice)params,null,null);
+        result = (Invoice) repo.get((Invoice)params,null,null);
     }
 
     public Invoice getResult() {

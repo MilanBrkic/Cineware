@@ -162,12 +162,14 @@ public class DbGeneric implements DbRepository<GenericEntity> {
         }
 
         String query = sb.toString();
+        System.out.println(query);
         Statement s = connection.createStatement();
         ResultSet rs = s.executeQuery(query);
 
         ArrayList<GenericEntity> lista = new ArrayList<>(g.getFromResultSet(rs));
         s.close();
         rs.close();
+        if(lista.size()==0) return null;
         return lista.get(0);
     }
 

@@ -8,6 +8,8 @@ package domain;
 import domain.enums.ProductType;
 import domain.enums.MeasurementUnit;
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  *
@@ -85,6 +87,11 @@ public class Product extends Article{
         return sb.toString();
     }
 
+    @Override
+    public String whereCondition() {
+        return "p.articleID="+id;
+    }
+    
     
     
     @Override
@@ -97,6 +104,29 @@ public class Product extends Article{
           .append(user.getId());
         
         return sb.toString();
+    }
+
+    @Override
+    public ArrayList<GenericEntity> getFromResultSet(ResultSet rs) throws Exception {
+        ArrayList<GenericEntity> products = new ArrayList<>();
+        while(rs.next()){
+            int id = rs.getInt("articleID");
+            BigDecimal price = rs.getBigDecimal("price");
+            MeasurementUnit unit = MeasurementUnit.valueOf(rs.getString("measurementUnit"));
+            String name = rs.getString("name");
+            ProductType type = ProductType.valueOf(rs.getString("type"));
+
+            int userId =  rs.getInt("userID");
+            
+      
+            User user = new User();
+            user.setId(userId);
+            
+            Product product = new Product(id, price, unit, name, type, user);
+            products.add(product);
+        }
+        
+        return products;
     }
     
     

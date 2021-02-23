@@ -6,10 +6,10 @@
 package operation.ticket;
 
 import domain.Projection;
+import domain.Seat;
 import domain.Ticket;
 import java.util.ArrayList;
 import operation.AbstractGenericOperation;
-import repository.db.impl.DbTicket;
 
 /**
  *
@@ -17,11 +17,6 @@ import repository.db.impl.DbTicket;
  */
 public class GetAllTicketsFromProjection extends AbstractGenericOperation{
     ArrayList<Ticket> result;
-    
-    
-    public GetAllTicketsFromProjection() {
-        repo = new DbTicket();
-    }
     
     @Override
     protected void preconditions(Object params) throws Exception {
@@ -32,13 +27,17 @@ public class GetAllTicketsFromProjection extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = ((DbTicket)repo).getAllTicketsFromProjection((Projection)params);
+        Projection projection = (Projection) params;
+        String innerJoin = "article a INNER JOIN ticket t ON a.articleID=t.articleID";
+        String where = "t.projectionID="+projection.getId();
+        result = repo.getAll(new Ticket(), where, null, innerJoin);
+        for (Ticket ticket : result) {
+            ticket.setProjection(projection);
+            ticket.setSeat((Seat) repo.get(ticket.getSeat(), null, null));
+        }
     }
 
     public ArrayList<Ticket> getResult() {
         return result;
-    }
-    
-    
-    
+    }    
 }

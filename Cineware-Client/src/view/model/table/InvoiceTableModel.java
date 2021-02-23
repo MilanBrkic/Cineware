@@ -24,7 +24,7 @@ public class InvoiceTableModel extends AbstractTableModel{
     ArrayList<Invoice> invoicesCopy;
     String sortValue = "";
     
-    String[] columnNames = {"Number", "Date", "Total", "User"};
+    String[] columnNames = {"Number", "Date", "User", "Total"};
     
     
 

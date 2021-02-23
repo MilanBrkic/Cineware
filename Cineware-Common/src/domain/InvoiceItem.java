@@ -161,7 +161,23 @@ public class InvoiceItem implements GenericEntity{
 
     @Override
     public ArrayList<GenericEntity> getFromResultSet(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<GenericEntity> items = new ArrayList<>();
+        while(rs.next()){
+            int number = rs.getInt("orderNumber");
+            BigDecimal price =rs.getBigDecimal("price");
+            int quantity = rs.getInt("quantity");
+            MeasurementUnit unit = MeasurementUnit.valueOf(rs.getString("unit"));
+            BigDecimal total = rs.getBigDecimal("total");
+            int articleID = rs.getInt("articleID");
+            Ticket ticket = new Ticket();
+            ticket.setId(articleID);
+            
+            InvoiceItem item = new InvoiceItem(invoice, number, price, quantity, unit, ticket, total);
+            
+            items.add(item);
+        }
+        
+        return items;
     }
 
     @Override
