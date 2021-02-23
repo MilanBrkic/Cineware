@@ -30,7 +30,7 @@ public class UpdateWithoutPassword extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        ((DbUser)repo).update((User)params);
+        ((DbUser)repo).update((User)params, null, null);
     }
     
 }

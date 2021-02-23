@@ -19,7 +19,7 @@ public class GenericUpdate<T> extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        repo.update((T) params);
+        repo.update((T) params, null, null);
     }
     
 

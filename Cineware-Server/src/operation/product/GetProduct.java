@@ -17,9 +17,6 @@ public class GetProduct extends AbstractGenericOperation{
 
     Product result;
 
-    public GetProduct() {
-        repo = new DbProduct();
-    }
     
     
     
@@ -32,7 +29,10 @@ public class GetProduct extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        result = ((DbProduct)repo).get((Product)params,null, null);
+        Product product = (Product) params;
+        String innerJoin = "article a INNER JOIN product p ON a.articleID=p.articleID";
+                    
+        result = (Product) repo.get(product,innerJoin, null);
     }
 
     public Product getResult() {

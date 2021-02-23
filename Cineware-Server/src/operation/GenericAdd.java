@@ -21,7 +21,7 @@ public class GenericAdd<T> extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-       repo.add((T)params);
+       repo.add((T)params,null,null,null);
     }
     
 }

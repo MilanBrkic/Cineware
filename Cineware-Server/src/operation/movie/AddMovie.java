@@ -5,6 +5,7 @@
  */
 package operation.movie;
 
+import domain.Actor;
 import domain.Movie;
 import operation.AbstractGenericOperation;
 import repository.Repository;
@@ -16,9 +17,7 @@ import repository.db.impl.DbMovie;
  */
 public class AddMovie extends AbstractGenericOperation{
 
-    public AddMovie() {
-        repo = new DbMovie();
-    }
+    
     
     
     
@@ -31,7 +30,13 @@ public class AddMovie extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        ((DbMovie)repo).add((Movie) params);
+        Movie movie = (Movie) params;
+        repo.addWithGenKeys(movie,null,null,null);
+        for (Actor actor : movie.getActors()) {
+            String values = movie.getId()+", "+actor.getId();
+            repo.add(actor, "movie_actor", "movieID,actorID", values);
+        }
+        
     }
 
     

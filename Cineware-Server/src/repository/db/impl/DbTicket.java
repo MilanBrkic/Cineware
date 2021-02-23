@@ -88,12 +88,12 @@ public class DbTicket implements DbRepository<Ticket>{
     }
 
     @Override
-    public void add(Ticket t) throws Exception {
+    public void add(Ticket t, String table, String columns, String values) throws Exception {
        
     }
 
     @Override
-    public void update(Ticket t) throws Exception {
+    public void update(Ticket t, String values, String where) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -128,6 +128,11 @@ public class DbTicket implements DbRepository<Ticket>{
         s.close();
         rs.close();
         return ticket;
+    }
+
+    @Override
+    public void addWithGenKeys(Ticket t, String table, String columns, String values) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

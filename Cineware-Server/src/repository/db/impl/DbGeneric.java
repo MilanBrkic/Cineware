@@ -50,16 +50,23 @@ public class DbGeneric implements DbRepository<GenericEntity> {
     }
 
     @Override
-    public void add(GenericEntity g) throws Exception {
+    public void add(GenericEntity g, String table, String columns, String values) throws Exception {
         try {
             Connection connection = DbConnectionFactory.getInstance().getConnection();
             StringBuilder sb = new StringBuilder();
-            sb.append("INSERT ")
-                    .append(g.getTableName())
-                    .append(" (").append(g.columnNamesForInsert()).append(")")
-                    .append(" VALUES(")
-                    .append(g.getInsertValues())
-                    .append(")");
+            sb.append("INSERT INTO ");
+                    if(table!=null) sb.append(table);
+                    else sb.append(g.getTableName());
+                    
+                    sb.append("(");
+                    if(columns!=null) sb.append(columns);
+                    else sb.append(g.columnNamesForInsert());
+                    sb.append(")");
+                    
+                    sb.append(" VALUES(");
+                    if(values!=null) sb.append(values);
+                    else sb.append(g.getInsertValues());
+                    sb.append(")");
             String query = sb.toString();
             System.out.println(query);
             Statement s = connection.createStatement();
@@ -72,16 +79,24 @@ public class DbGeneric implements DbRepository<GenericEntity> {
         }
     }
 
-    public void addWithGenKeys(GenericEntity g) throws Exception {
+    @Override
+    public void addWithGenKeys(GenericEntity g, String table, String columns, String values) throws Exception {
         try {
             Connection connection = DbConnectionFactory.getInstance().getConnection();
             StringBuilder sb = new StringBuilder();
-            sb.append("INSERT ")
-                    .append(g.getTableName())
-                    .append(" (").append(g.columnNamesForInsert()).append(")")
-                    .append(" VALUES(")
-                    .append(g.getInsertValues())
-                    .append(")");
+            sb.append("INSERT INTO ");
+                    if(table!=null) sb.append(table);
+                    else sb.append(g.getTableName());
+                    
+                    sb.append("(");
+                    if(columns!=null) sb.append(columns);
+                    else sb.append(g.columnNamesForInsert());
+                    sb.append(")");
+                    
+                    sb.append(" VALUES(");
+                    if(values!=null) sb.append(values);
+                    else sb.append(g.getInsertValues());
+                    sb.append(")");
             String query = sb.toString();
             System.out.println(query);
             Statement s = connection.createStatement();
@@ -98,16 +113,20 @@ public class DbGeneric implements DbRepository<GenericEntity> {
     }
 
     @Override
-    public void update(GenericEntity g) throws Exception {
+    public void update(GenericEntity g, String values, String where) throws Exception {
         try {
             Connection connection = DbConnectionFactory.getInstance().getConnection();
             StringBuilder sb = new StringBuilder();
             sb.append("UPDATE ")
                     .append(g.getTableName())
-                    .append(" SET ")
-                    .append(g.columnNamesForUpdate())
-                    .append(" WHERE ")
-                    .append(g.whereCondition());
+                    .append(" SET ");
+                    if(values!=null) sb.append(values);
+                    else sb.append(g.columnNamesForUpdate());
+                    sb.append(" WHERE ");
+                    
+                    if(where!=null) sb.append(where);
+                    else sb.append(g.whereCondition());
+                    
             String query = sb.toString();
             System.out.println(query);
             Statement s = connection.createStatement();

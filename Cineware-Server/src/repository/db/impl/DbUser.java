@@ -22,7 +22,7 @@ public class DbUser implements DbRepository<User> {
     
 
     @Override
-    public void update(User user) throws Exception {
+    public void update(User user, String values, String where) throws Exception {
         updateWithoutPassword(user);
     }
 
@@ -53,7 +53,7 @@ public class DbUser implements DbRepository<User> {
     
 
    @Override
-    public void add(User user) throws Exception {
+    public void add(User user, String table, String columns, String values) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         
     }
@@ -70,6 +70,11 @@ public class DbUser implements DbRepository<User> {
 
     @Override
     public ArrayList<User> getAll(User t,String where,String orderby, String innerJoin) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void addWithGenKeys(User t, String table, String columns, String values) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

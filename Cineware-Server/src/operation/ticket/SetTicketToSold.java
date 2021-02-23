@@ -30,7 +30,8 @@ public class SetTicketToSold extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        ((DbTicket)repo).setTicketToSold((Ticket)params);
+        Ticket ticket = (Ticket) params;
+        repo.update(ticket, "sold= not sold", "articleID="+ticket.getId());
     }
     
 }

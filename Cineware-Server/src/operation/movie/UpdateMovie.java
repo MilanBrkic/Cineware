@@ -30,7 +30,7 @@ public class UpdateMovie extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        repo.update((Movie)params);
+        repo.update((Movie)params, null, null);
     }
     
 }

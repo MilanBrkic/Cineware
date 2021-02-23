@@ -164,12 +164,21 @@ public class Movie implements GenericEntity{
 
     @Override
     public String columnNamesForInsert() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return "name, description, genre, runtime, year, directorID, userID";
     }
 
     @Override
     public String getInsertValues() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        StringBuilder sb = new StringBuilder();
+        sb.append("'").append(name).append("', ")
+          .append("'").append(description).append("', ")
+          .append("'").append(genre).append("', ")
+          .append(runtime).append(", ")
+          .append(year).append(", ")
+          .append(director.getId()).append(", ")
+          .append(user.getId());
+        
+        return sb.toString();
     }
 
     @Override

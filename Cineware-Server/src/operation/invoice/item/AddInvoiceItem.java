@@ -24,7 +24,7 @@ public class AddInvoiceItem extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        ((DbGeneric)repo).add((InvoiceItem)params);
+        repo.add((InvoiceItem)params,null,null,null);
     }
     
 }

@@ -79,12 +79,12 @@ public class DbInvoice implements DbRepository<Invoice>{
     }
 
     @Override
-    public void add(Invoice t) throws Exception {
+    public void add(Invoice t, String table, String columns, String values) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(Invoice t) throws Exception {
+    public void update(Invoice t, String values, String where) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -115,6 +115,11 @@ public class DbInvoice implements DbRepository<Invoice>{
         }
         
         return invoice;
+    }
+
+    @Override
+    public void addWithGenKeys(Invoice t, String table, String columns, String values) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     

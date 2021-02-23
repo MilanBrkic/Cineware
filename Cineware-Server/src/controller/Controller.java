@@ -46,6 +46,7 @@ import operation.movie.DeleteMovie;
 import operation.movie.GetAllMovies;
 import operation.movie.GetMovie;
 import operation.movie.UpdateMovie;
+import operation.product.AddProduct;
 import operation.product.GetAllProduct;
 import operation.product.GetProduct;
 import operation.projection.AddProjection;
@@ -327,10 +328,7 @@ public class Controller {
     }
 
     public void addProduct(Product product) throws Exception {
-        Article article = new Article(product.getPrice(), product.getUnit());
-        int id = addArticle(article);
-        product.setId(id);
-        AbstractGenericOperation ago = new GenericAdd<Product>();
+        AbstractGenericOperation ago = new AddProduct();
         ago.execute(product);
     }
 

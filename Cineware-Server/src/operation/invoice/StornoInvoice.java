@@ -6,7 +6,10 @@
 package operation.invoice;
 
 import domain.Invoice;
+import domain.InvoiceItem;
+import domain.Ticket;
 import operation.AbstractGenericOperation;
+import repository.db.impl.DbGeneric;
 
 /**
  *
@@ -23,8 +26,18 @@ public class StornoInvoice extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        AbstractGenericOperation ago = new AddInvoice();
-        ago.execute((Invoice)params);
+        Invoice invoice = (Invoice) params;
+
+        repo.addWithGenKeys(invoice, null, null, null);
+        for (InvoiceItem item : invoice.getItems()) {
+            item.setId(invoice.getId());
+            repo.add(item,null,null,null);
+
+            if (item.getArticle() instanceof Ticket) {
+                repo.update((Ticket)item.getArticle(), "sold= not sold", "articleID="+item.getArticle().getId());
+
+            }
+        }
     }
     
 }

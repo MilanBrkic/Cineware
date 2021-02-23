@@ -35,12 +35,12 @@ public class DbArticle implements DbRepository<Article>{
     }
     
     @Override
-    public void add(Article t) throws Exception {
+    public void add(Article t, String table, String columns, String values) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(Article a) throws Exception {
+    public void update(Article a, String values, String where) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -53,5 +53,12 @@ public class DbArticle implements DbRepository<Article>{
     public Article get(Article a,String innerJoin,String where) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void addWithGenKeys(Article t, String table, String columns, String values) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
     
 }

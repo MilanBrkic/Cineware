@@ -51,7 +51,7 @@ public class DbMovie implements DbRepository<Movie> {
     }
 
     @Override
-    public void add(Movie movie) throws Exception {
+    public void add(Movie movie, String table, String columns, String values) throws Exception {
         String query = "INSERT INTO movie(name, description, genre, runtime, year, directorID, userID) VALUES(?,?,?,?,?,?,?)";
         PreparedStatement ps = connect().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
         ps.setString(1, movie.getName());
@@ -106,7 +106,7 @@ public class DbMovie implements DbRepository<Movie> {
     }
 
     @Override
-    public void update(Movie movie) throws Exception {
+    public void update(Movie movie, String values, String where) throws Exception {
         deleteAllActorsFromMovie(movie.getId());
         addActorsForMovies(movie.getId(), movie.getActors());
         String query = "UPDATE movie SET name=?, description=?, genre=?, runtime=?, year=?, directorID=?, userID=? WHERE movieID=?";
@@ -162,6 +162,11 @@ public class DbMovie implements DbRepository<Movie> {
 
     @Override
     public ArrayList<Movie> getAll(Movie t,String where,String orderby, String innerJoin) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void addWithGenKeys(Movie t, String table, String columns, String values) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

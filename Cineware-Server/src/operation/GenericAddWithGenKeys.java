@@ -23,7 +23,7 @@ public class GenericAddWithGenKeys<T> extends AbstractGenericOperation {
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        ((DbGeneric)repo).addWithGenKeys((GenericEntity)params);
+        ((DbGeneric)repo).addWithGenKeys((GenericEntity)params,null,null,null);
     }
     
 }

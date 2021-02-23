@@ -86,17 +86,22 @@ public class DbProduct implements DbRepository<Product>{
     }
 
     @Override
-    public void add(Product t) throws Exception {
+    public void add(Product t, String table, String columns, String values) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(Product t) throws Exception {
+    public void update(Product t, String values, String where) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void delete(Product t) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void addWithGenKeys(Product t, String table, String columns, String values) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

@@ -5,8 +5,14 @@
  */
 package operation.ticket;
 
+import domain.Article;
+import domain.Hall;
 import domain.Projection;
+import domain.Seat;
 import domain.Ticket;
+import domain.enums.MeasurementUnit;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import operation.AbstractGenericOperation;
 import repository.db.impl.DbTicket;
 
@@ -32,7 +38,28 @@ public class AddTickets extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        ((DbTicket)repo).addTickets((Projection)params);
+        Projection p = (Projection) params;
+        Hall hall = p.getHall();
+        BigDecimal price = p.getPrice();
+        MeasurementUnit unit = MeasurementUnit.PCS;
+        Article article = new Article(price, unit);
+        ArrayList<Seat> seats = getAllByHall(hall);
+        boolean sold = false;
+
+        for (Seat seat : seats) {
+            repo.addWithGenKeys(article, null, null, null);
+
+            Ticket ticket = new Ticket(article.getId(), price, unit, sold, p, seat);
+            repo.add(ticket, null, null, null);
+        }
+    }
+    
+    private ArrayList<Seat> getAllByHall(Hall hall) throws Exception {
+        ArrayList<Seat> seats = repo.getAll(new Seat(), "hallID=" + hall.getId(), null, null);
+        for (Seat seat : seats) {
+            seat.setHall(hall);
+        }
+        return seats;
     }
     
 }

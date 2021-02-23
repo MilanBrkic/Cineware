@@ -17,33 +17,30 @@ import repository.db.impl.DbGeneric;
  *
  * @author user
  */
-public class AddInvoice extends AbstractGenericOperation{
+public class AddInvoice extends AbstractGenericOperation {
 
-    
-    
-    
     @Override
     protected void preconditions(Object params) throws Exception {
-        if(params==null || !(params instanceof Invoice)){
+        if (params == null || !(params instanceof Invoice)) {
             throw new Exception("Invalid ticket data");
         }
     }
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        ((DbGeneric)repo).addWithGenKeys((Invoice)params);
         Invoice invoice = (Invoice) params;
+
+        repo.addWithGenKeys(invoice, null, null, null);
         for (InvoiceItem item : invoice.getItems()) {
             item.setId(invoice.getId());
-            AbstractGenericOperation ago = new AddInvoiceItem();
-            ago.executeWithoutCommit(item);
+            repo.add(item,null,null,null);
 
             if (item.getArticle() instanceof Ticket) {
-                AbstractGenericOperation ago2 = new SetTicketToSold();
-                ago2.executeWithoutCommit((Ticket) item.getArticle());
+                repo.update((Ticket)item.getArticle(), "sold= not sold", "articleID="+item.getArticle().getId());
+
             }
         }
 
     }
-    
+
 }

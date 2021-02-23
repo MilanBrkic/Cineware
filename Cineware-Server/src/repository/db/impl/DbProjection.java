@@ -140,12 +140,12 @@ public class DbProjection implements DbRepository<Projection> {
     }
 
     @Override
-    public void add(Projection t) throws Exception {
+    public void add(Projection t, String table, String columns, String values) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(Projection t) throws Exception {
+    public void update(Projection t, String values, String where) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -178,6 +178,11 @@ public class DbProjection implements DbRepository<Projection> {
         }
         
         return projection;
+    }
+
+    @Override
+    public void addWithGenKeys(Projection t, String table, String columns, String values) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

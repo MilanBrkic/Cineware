@@ -31,7 +31,7 @@ public class UpdateProjection extends AbstractGenericOperation{
                 throw new Exception("Hall ocuppied in given time");
             }
 
-            repo.update(projection);
+            repo.update(projection, null, null);
     }
     
 }
