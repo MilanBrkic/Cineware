@@ -29,36 +29,28 @@ import java.util.logging.Logger;
 import operation.AbstractGenericOperation;
 import operation.GenericAdd;
 import operation.GenericDelete;
-import operation.GenericGet;
 import operation.GenericGetAll;
 import operation.GenericUpdate;
 import operation.actor.GetAllActors;
 import operation.article.AddArticle;
 import operation.director.GetAllDirectors;
-import operation.director.GetDirector;
 import operation.hall.GetAllHalls;
 import operation.invoice.AddInvoice;
 import operation.invoice.GetAllInvoices;
-import operation.invoice.GetInvoice;
 import operation.invoice.StornoInvoice;
 import operation.movie.AddMovie;
 import operation.movie.DeleteMovie;
 import operation.movie.GetAllMovies;
-import operation.movie.GetMovie;
 import operation.movie.UpdateMovie;
 import operation.product.AddProduct;
 import operation.product.GetAllProduct;
-import operation.product.GetProduct;
+import operation.product.UpdateProduct;
 import operation.projection.AddProjection;
 import operation.projection.DeleteProjection;
 import operation.projection.GetAllProjections;
-import operation.projection.GetProjection;
 import operation.projection.UpdateProjection;
 import operation.seat.GetAllByHall;
-import operation.seat.GetSeat;
-import operation.ticket.AddTickets;
 import operation.ticket.GetAllTicketsFromProjection;
-import operation.ticket.GetTicket;
 import operation.user.CheckPassword;
 import operation.user.UpdatePasswordOnly;
 import operation.user.UpdateWithoutPassword;
@@ -117,13 +109,7 @@ public class Controller {
         return ((GetAllHalls) ago).getResult();
     }
 
-    public Hall getHall(int hallID) throws Exception {
-        AbstractGenericOperation ago = new GenericGet<Hall>();
-        Hall hall = new Hall();
-        hall.setId(hallID);
-        ago.execute(hall);
-        return (Hall) ((GenericGet) ago).getResult();
-    }
+    
 
     public ArrayList<Seat> getAllByHall(Hall hall) throws Exception {
         AbstractGenericOperation ago = new GetAllByHall();
@@ -131,13 +117,7 @@ public class Controller {
         return ((GetAllByHall) ago).getResult();
     }
 
-    public Seat getSeat(int id) throws Exception {
-        AbstractGenericOperation ago = new GetSeat();
-        Seat s = new Seat();
-        s.setId(id);
-        ago.execute(s);
-        return ((GetSeat) ago).getResult();
-    }
+    
 
     public ArrayList<User> getAllUsers() throws Exception {
         AbstractGenericOperation ago = new GenericGetAll<User>();
@@ -160,13 +140,7 @@ public class Controller {
         ago.execute(user);
     }
 
-    public User getUser(int id) throws Exception {
-        AbstractGenericOperation ago = new GenericGet<User>();
-        User user = new User();
-        user.setId(id);
-        ago.execute(user);
-        return (User) ((GenericGet) ago).getResult();
-    }
+    
 
     public boolean checkPassword(String username, String password) throws Exception {
         AbstractGenericOperation ago = new CheckPassword();
@@ -207,13 +181,7 @@ public class Controller {
         ago.execute(director);
     }
 
-    public Director getDirector(int id) throws Exception {
-        AbstractGenericOperation ago = new GetDirector();
-        Director dir = new Director();
-        dir.setId(id);
-        ago.execute(dir);
-        return ((GetDirector) ago).getResult();
-    }
+    
 
     //actor
     public void addActor(Actor actor) throws Exception {
@@ -249,13 +217,7 @@ public class Controller {
         return ((GetAllMovies) ago).getResult();
     }
 
-    public Movie getMovie(int id) throws Exception {
-        AbstractGenericOperation ago = new GetMovie();
-        Movie movie = new Movie();
-        movie.setId(id);
-        ago.execute(movie);
-        return ((GetMovie) ago).getResult();
-    }
+    
 
     public void newLoggedInUser(User user) {
         ControllerView.getInstance().newLoggedInUser(user);
@@ -290,13 +252,7 @@ public class Controller {
         return ((GetAllProjections) ago).getResult();
     }
 
-    public Projection getProjection(int id) throws Exception {
-        AbstractGenericOperation ago = new GetProjection();
-        Projection projection = new Projection();
-        projection.setId(id);
-        ago.execute(projection);
-        return ((GetProjection) ago).getResult();
-    }
+    
 
     public int addArticle(Article article) throws Exception {
         AbstractGenericOperation ago = new AddArticle();
@@ -304,24 +260,7 @@ public class Controller {
         return ((AddArticle) ago).getResult();
     }
 
-    public void addTicket(Ticket ticket) throws Exception {
-        AbstractGenericOperation ago = new GenericAdd<Ticket>();
-        ago.executeWithoutCommit(ticket);
-    }
-
-    public void addTickets(Projection projection) throws Exception {
-        AbstractGenericOperation ago = new AddTickets();
-        ago.execute(projection);
-    }
-
-    public Ticket getTicket(int id) throws Exception {
-        AbstractGenericOperation ago = new GetTicket();
-        Ticket ticket = new Ticket();
-        ticket.setId(id);
-        ago.execute(ticket);
-        return ((GetTicket) ago).getResult();
-    }
-
+    
     public void deleteProjection(Projection projection) throws Exception {
         AbstractGenericOperation ago = new DeleteProjection();
         ago.execute(projection);
@@ -338,19 +277,10 @@ public class Controller {
         return ((GetAllProduct) ago).getResult();
     }
 
-    public Product getProduct(int id) throws Exception {
-        AbstractGenericOperation ago = new GetProduct();
-        Product product = new Product();
-        product.setId(id);
-        ago.execute(product);
-        return ((GetProduct) ago).getResult();
-    }
+    
 
     public void updateProduct(Product product) throws Exception {
-        Article article = new Article(product.getId(), product.getPrice(), product.getUnit());
-        AbstractGenericOperation ago = new GenericUpdate<Article>();
-        ago.executeWithoutCommit(article);
-        ago = new GenericUpdate<Product>();
+        AbstractGenericOperation ago = new UpdateProduct();
         ago.execute(product);
     }
 
@@ -371,11 +301,6 @@ public class Controller {
         ago.execute(invoice);
     }
 
-    public Invoice getInvoice(Invoice invoice) throws Exception{
-        AbstractGenericOperation ago = new GetInvoice();
-        ago.execute(invoice);
-        return ((GetInvoice)ago).getResult();
-    }
     
     public ArrayList<Invoice> getAllInvoices() throws Exception {
         AbstractGenericOperation ago = new GetAllInvoices();

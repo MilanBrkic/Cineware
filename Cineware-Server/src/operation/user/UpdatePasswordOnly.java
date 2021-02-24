@@ -7,7 +7,6 @@ package operation.user;
 
 import domain.User;
 import operation.AbstractGenericOperation;
-import repository.db.impl.DbUser;
 
 /**
  *
@@ -15,10 +14,6 @@ import repository.db.impl.DbUser;
  */
 public class UpdatePasswordOnly extends AbstractGenericOperation{
 
-    public UpdatePasswordOnly() {
-        repo = new DbUser();
-    }
-    
     @Override
     protected void preconditions(Object params) throws Exception {
         if(params==null || !(params instanceof User)){
@@ -31,7 +26,9 @@ public class UpdatePasswordOnly extends AbstractGenericOperation{
         User user = (User) params;
         String username = user.getUsername();
         String password = user.getPassword();
-        ((DbUser)repo).updatePasswordOnly(username, password);
+        String where = "username='"+username+"'";
+        String values = "password='"+password+"'";
+       
+        repo.update(user, values, where);
     }
-    
 }

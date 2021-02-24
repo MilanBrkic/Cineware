@@ -139,15 +139,18 @@ public class DbGeneric implements DbRepository<GenericEntity> {
     }
 
     @Override
-    public void delete(GenericEntity g) throws Exception {
+    public void delete(GenericEntity g,String table, String where) throws Exception {
         //"DELETE FROM director where directorID=" + director.getId()
         try {
             Connection connection = DbConnectionFactory.getInstance().getConnection();
             StringBuilder sb = new StringBuilder();
-            sb.append("DELETE FROM ")
-                    .append(g.getTableName())
-                    .append(" WHERE ")
-                    .append(g.whereCondition());
+            sb.append("DELETE FROM ");
+                    if(table!=null) sb.append(table);
+                    else sb.append(g.getTableName());
+                    sb.append(" WHERE ");
+                    if(where!=null) sb.append(where);
+                    else sb.append(g.whereCondition());
+                    
             String query = sb.toString();
             System.out.println(query);
             Statement s = connection.createStatement();

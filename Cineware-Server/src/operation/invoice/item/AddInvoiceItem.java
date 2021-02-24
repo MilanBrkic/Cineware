@@ -7,7 +7,6 @@ package operation.invoice.item;
 
 import domain.InvoiceItem;
 import operation.AbstractGenericOperation;
-import repository.db.impl.DbGeneric;
 
 /**
  *

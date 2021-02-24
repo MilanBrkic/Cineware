@@ -23,7 +23,7 @@ public class DeleteProjection extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        repo.delete((Projection)params);
+        repo.delete((Projection)params,null,null);
     }
     
 }

@@ -5,9 +5,9 @@
  */
 package operation.movie;
 
+import domain.Actor;
 import domain.Movie;
 import operation.AbstractGenericOperation;
-import repository.db.impl.DbMovie;
 
 /**
  *
@@ -15,12 +15,6 @@ import repository.db.impl.DbMovie;
  */
 public class UpdateMovie extends AbstractGenericOperation{
 
-    public UpdateMovie() {
-        repo = new DbMovie();
-    }
-
-    
-    
     @Override
     protected void preconditions(Object params) throws Exception {
         if(params==null || !(params instanceof Movie)){
@@ -30,7 +24,16 @@ public class UpdateMovie extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        repo.update((Movie)params, null, null);
+        Movie movie = (Movie) params;
+        repo.update(movie, null, null);
+        String table = "movie_actor";
+        String where = "movieID="+movie.getId();
+        repo.delete(new Actor(), table, where);
+        for (Actor actor : movie.getActors()) {
+            String values = movie.getId()+", "+actor.getId();
+            repo.add(actor, table, "movieID,actorID", values);
+        }
+        
     }
     
 }

@@ -7,19 +7,12 @@ package operation.user;
 
 import domain.User;
 import operation.AbstractGenericOperation;
-import repository.db.impl.DbUser;
 
 /**
  *
  * @author user
  */
 public class UpdateWithoutPassword extends AbstractGenericOperation{
-
-    public UpdateWithoutPassword() {
-        repo = new DbUser();
-    }
-    
-    
 
     @Override
     protected void preconditions(Object params) throws Exception {
@@ -30,7 +23,14 @@ public class UpdateWithoutPassword extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        ((DbUser)repo).update((User)params, null, null);
+        User user = (User) params;
+        StringBuilder sb = new StringBuilder();
+        sb.append("firstname='").append(user.getFirstname()).append("', ")
+          .append("lastname='").append(user.getLastname()).append("', ")
+          .append("username='").append(user.getUsername()).append("', ")
+          .append("admin=").append(user.isAdmin());
+        String values = sb.toString();
+        repo.update(user, values, null);
     }
     
 }

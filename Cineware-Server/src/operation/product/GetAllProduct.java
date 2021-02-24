@@ -9,7 +9,6 @@ import domain.Product;
 import domain.User;
 import java.util.ArrayList;
 import operation.AbstractGenericOperation;
-import repository.db.impl.DbProduct;
 
 /**
  *

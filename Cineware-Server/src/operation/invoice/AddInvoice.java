@@ -9,9 +9,6 @@ import domain.Invoice;
 import domain.InvoiceItem;
 import domain.Ticket;
 import operation.AbstractGenericOperation;
-import operation.invoice.item.AddInvoiceItem;
-import operation.ticket.SetTicketToSold;
-import repository.db.impl.DbGeneric;
 
 /**
  *

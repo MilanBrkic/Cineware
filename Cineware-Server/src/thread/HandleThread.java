@@ -13,7 +13,6 @@ import common.communication.Response;
 import common.communication.Sender;
 import controller.Controller;
 import domain.Actor;
-import domain.Article;
 import domain.Director;
 import domain.Hall;
 import domain.Invoice;

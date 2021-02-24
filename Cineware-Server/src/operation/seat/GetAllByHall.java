@@ -10,7 +10,6 @@ import domain.Seat;
 import java.util.ArrayList;
 import operation.AbstractGenericOperation;
 import operation.Getters;
-import repository.db.impl.DbSeat;
 
 /**
  *

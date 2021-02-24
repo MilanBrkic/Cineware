@@ -11,7 +11,6 @@ import domain.Movie;
 import domain.User;
 import operation.AbstractGenericOperation;
 import operation.Getters;
-import repository.db.impl.DbMovie;
 
 /**
  *

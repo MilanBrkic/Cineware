@@ -5,7 +5,6 @@
  */
 package operation.projection;
 
-import controller.Controller;
 import domain.Article;
 import domain.Hall;
 import domain.Projection;
@@ -55,9 +54,6 @@ public class AddProjection extends AbstractGenericOperation {
         Date dateEnd = p.getEndDate();
         ArrayList<Projection> projections = getAllSameDaySameHall(hall, dateStart);
         for (Projection projection : projections) {
-            if (projection.getId() == p.getId()) {
-                continue;
-            }
             if (overlapping(projection, dateStart, dateEnd)) {
                 return false;
             }

@@ -21,7 +21,7 @@ public class GenericDelete<T> extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        repo.delete((T)params);
+        repo.delete((T)params,null,null);
     }
     
 }

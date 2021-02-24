@@ -7,7 +7,6 @@ package operation.product;
 
 import domain.Product;
 import operation.AbstractGenericOperation;
-import repository.db.impl.DbProduct;
 
 /**
  *

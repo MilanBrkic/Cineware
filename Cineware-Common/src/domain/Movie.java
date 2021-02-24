@@ -183,7 +183,16 @@ public class Movie implements GenericEntity{
 
     @Override
     public String columnNamesForUpdate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        UPDATE movie SET name=?, description=?, genre=?, runtime=?, year=?, directorID=?, userID=? WHERE movieID=?
+        StringBuilder sb = new StringBuilder();
+        sb.append("name='").append(name).append("', ")
+          .append("description='").append(description).append("', ")
+          .append("genre='").append(genre).append("', ")
+          .append("runtime=").append(runtime).append(", ")
+          .append("year=").append(year).append(", ")
+          .append("userID=").append(user.getId());
+                
+        return sb.toString();
     }
 
     @Override

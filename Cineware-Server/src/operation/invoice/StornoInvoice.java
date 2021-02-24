@@ -9,7 +9,6 @@ import domain.Invoice;
 import domain.InvoiceItem;
 import domain.Ticket;
 import operation.AbstractGenericOperation;
-import repository.db.impl.DbGeneric;
 
 /**
  *

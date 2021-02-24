@@ -19,7 +19,7 @@ public interface Repository<T> {
     
     public void update(T t, String values, String where)throws Exception;
     
-    public void delete(T t)throws Exception;
+    public void delete(T t,String table, String where)throws Exception;
     
     public T get(T t,String innerJoin ,String where) throws Exception;
     

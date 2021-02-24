@@ -5,7 +5,6 @@
  */
 package main;
 
-import server.Server;
 import view.controller.ControllerView;
 
 /**

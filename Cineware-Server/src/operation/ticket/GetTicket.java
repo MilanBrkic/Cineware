@@ -9,7 +9,6 @@ import domain.Projection;
 import domain.Seat;
 import domain.Ticket;
 import operation.AbstractGenericOperation;
-import repository.db.impl.DbTicket;
 
 /**
  *

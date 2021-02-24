@@ -5,20 +5,16 @@
  */
 package operation.movie;
 
+import domain.Actor;
 import domain.Movie;
 import operation.AbstractGenericOperation;
-import repository.db.impl.DbMovie;
-
 /**
  *
  * @author user
  */
 public class DeleteMovie extends AbstractGenericOperation{
 
-    public DeleteMovie() {
-        repo = new DbMovie();
-    }
-
+    
     
     
     @Override
@@ -30,7 +26,11 @@ public class DeleteMovie extends AbstractGenericOperation{
 
     @Override
     protected void executeOperation(Object params) throws Exception {
-        repo.delete((Movie) params);
+        Movie movie = (Movie) params;
+        repo.delete(movie,null,null);
+        String table = "movie_actor";
+        String where = "movieID="+movie.getId();
+        repo.delete(new Actor(), table, where);
     }
     
 }

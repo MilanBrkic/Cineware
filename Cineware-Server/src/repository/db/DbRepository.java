@@ -7,7 +7,6 @@ package repository.db;
 
 import repository.Repository;
 import java.sql.Connection;
-import java.sql.SQLException;
 /**
  *
  * @author Milan

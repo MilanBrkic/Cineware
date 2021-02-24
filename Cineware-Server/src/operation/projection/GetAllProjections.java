@@ -11,7 +11,6 @@ import domain.Projection;
 import domain.User;
 import java.util.ArrayList;
 import operation.AbstractGenericOperation;
-import repository.db.impl.DbProjection;
 
 /**
  *

@@ -7,7 +7,6 @@ package operation.user;
 
 import domain.User;
 import operation.AbstractGenericOperation;
-import repository.db.impl.DbUser;
 
 /**
  *

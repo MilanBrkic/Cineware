@@ -7,9 +7,7 @@ package operation.seat;
 
 import domain.Hall;
 import domain.Seat;
-import java.util.ArrayList;
 import operation.AbstractGenericOperation;
-import repository.db.impl.DbSeat;
 
 
 /**

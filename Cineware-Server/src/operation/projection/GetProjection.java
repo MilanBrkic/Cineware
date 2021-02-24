@@ -10,7 +10,6 @@ import domain.Movie;
 import domain.Projection;
 import domain.User;
 import operation.AbstractGenericOperation;
-import repository.db.impl.DbProjection;
 
 /**
  *

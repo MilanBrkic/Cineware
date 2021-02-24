@@ -8,8 +8,6 @@ package operation.movie;
 import domain.Actor;
 import domain.Movie;
 import operation.AbstractGenericOperation;
-import repository.Repository;
-import repository.db.impl.DbMovie;
 
 /**
  *
@@ -17,9 +15,6 @@ import repository.db.impl.DbMovie;
  */
 public class AddMovie extends AbstractGenericOperation{
 
-    
-    
-    
     
     @Override
     protected void preconditions(Object params) throws Exception {

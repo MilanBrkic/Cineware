@@ -5,7 +5,6 @@
  */
 package operation.invoice;
 
-import domain.Article;
 import domain.Invoice;
 import domain.InvoiceItem;
 import domain.Product;
@@ -13,8 +12,6 @@ import domain.Ticket;
 import domain.User;
 import java.util.ArrayList;
 import operation.AbstractGenericOperation;
-import repository.Repository;
-import repository.db.impl.DbInvoice;
 
 /**
  *
